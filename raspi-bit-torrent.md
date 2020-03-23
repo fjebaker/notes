@@ -91,9 +91,9 @@ to save your fingers.
 You can easily find a reference manual on the available commands. I found the most useful are
 ```
 tsm -a "[uri]"			# append uri to queue
-tsm -l 					# list current torrents
+tsm -l 				# list current torrents
 tsm -t {id}	-s/S 		# torrent with {id} should be {-s}topped or {-S}tarted.
-tsm -t all {command}	# apply command to all torrents in list
+tsm -t all {command}		# apply command to all torrents in list
 tsm -t all -r 			# remove all torrents
 ```
 NB: removing all torrents only removes their index from the daemon; the downloaded files will have to manually deleted.
