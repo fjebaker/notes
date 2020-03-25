@@ -143,4 +143,4 @@ content += "\n\n{}".format(youtubeURL)
 wh = DiscordWebhook(url=URL, content=content)
 resp = wh.execute()
 ```
-![Louis Theroux does Sputnik](https://github.com/dustpancake/blob/master/webhooks/louis-theroux-does-sputnik.jpg "Louis Theroux does Sputnik")
+![Louis Theroux does Sputnik](https://github.com/Dustpancake/Dust-Notes/blob/master/webhooks/louis-theroux-does-sputnik.jpg "Louis Theroux does Sputnik")
