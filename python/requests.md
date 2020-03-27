@@ -7,7 +7,7 @@ Sessioning is an easy way to ensure that metadata like cookies, or referer heade
 We can define a session, and mount transport adapters with
 ```python
 session = requests.Session()
-adapter = requests.adapters.HTTPAdapter(pool_connections=10, pool_maxsize=10, max_restries=10)
+adapter = requests.adapters.HTTPAdapter(pool_connections=10, pool_maxsize=10, max_retries=10)
 session.mount('https://', adapter)	# example, but http and https are included in HTTPAdapter
 session.mount('http://', adapter)
 ```
@@ -18,7 +18,7 @@ In order to stream bytes instead of downloading the full file we can use the `st
 with requests.get(url, stream=True) as r:
 	r.raise_for_status()		# raises if bad status code
 	with open(filename, 'wb') as f:
-		for chunk in r.iter_content(chunk_size=8192)	# 2^13
+		for chunk in r.iter_content(chunk_size=8192):	# 2^13
 			if chunk:			# ensures content available, not just keep alive resp
 				f.write(chunk)
 ```
