@@ -31,7 +31,7 @@ ffmpeg -i [url to m3u8 file] -c copy -bsf:a aac_adtstoasc output.mp4
 ```
 Can also include comma seperated string list of headers using the `-headers` flag.
 
-### The `-map` flag:
+### The `-map` flag
 Different streams from input files can be mux'd together into the output file. To do this, we first need to identify the audio and video streams available in the input:
 
 ```
