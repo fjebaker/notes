@@ -9,8 +9,7 @@
 	4. [Running as an application](#example-app)
 3. [Flushing wrapper cache](#wrapper-cache)
 
-
-#### A note on installation
+#### Notes on installation
 Working on OSX, I installed gradle from brew
 ```
 brew install gradle
