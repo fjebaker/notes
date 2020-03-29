@@ -9,6 +9,14 @@ Series of notes adapted from different books and blogs so that I can easily refe
 	2. [Function declarations](#toc-sub-tag-2)
 	3. [Parameters and arguments](#toc-sub-tag-3)
 	4. [The `this` implicit argument](#toc-sub-tag-4)
+	5. [Closures](#toc-sub-tag-5)
+		1. [Mimicking private variables](#toc-sub-tag-6)
+		2. [Closures in callbacks](#toc-sub-tag-7)
+2. [Generators and promises](#toc-sub-tag-8)
+	1. [Generators](#toc-sub-tag-9)
+	2. [Promises](#toc-sub-tag-10)
+	3. [Combining generators with promises](#toc-sub-tag-11)
+3. [Objects and prototypes](#toc-sub-tag-12)
 <!--END TOC-->
 
 ## Functions <a name="toc-sub-tag-0"></a>
@@ -159,3 +167,153 @@ Note we can also use `bind` to create a *new* function, with its context bound t
 ```js
 button.clicked.bind(button);	// context of this is now button
 ```
+
+### Closures <a name="toc-sub-tag-5"></a>
+The concept of *closure* allows a function to access the namespace in the scope of the function definition. The closure encompasses variables and definitions in the scope and ensures they are available if needed, even once program execution has left the scope.
+
+#### Mimicking private variables <a name="toc-sub-tag-6"></a>
+Let us suppose we wanted to create read only access to a variable in a definition
+```js
+function Counter() {
+	var count = 0;						// scoped variable
+	this.getCount = function() {
+		return count;
+	};
+	this.nudge = function() {
+		count++;
+	};
+}
+
+var c = new Counter();
+console.log(c.getCount());				// 0
+c.nudge();								// c.count++;
+console.log(c.getCount());				// 1
+```
+Note, `Counter.getCount` and `Counter.nudge` could also be defined with arrow notation. It is crucial to use the function constructor, so that a new context for the object is created.
+
+#### Closures in callbacks <a name="toc-sub-tag-7"></a>
+Were a function called at an unspecified time later on, closures provide a intuitive way of avoiding nasty pitfalls.
+
+For example, were we to use the built-in `setInterval` to periodically call some callback function, we can use closure to provide the necessary control statements as to give the periodic function a simple interface
+```js
+function periodicLog() {
+	var tick = 1;
+	var timer = setInterval(function () {
+		if (tick <= 10) {
+			console.log(`- tick number ${tick++}`)
+		} else {
+			clearInterval(timer);
+		}
+	}, 100);
+}
+periodicLog();	// outputs a tick every 100 ms
+```
+Or creating unique instances of the function also provides each instance with its own set of parameters, allowing complex properties to easily be abstracted.
+
+## Generators and promises <a name="toc-sub-tag-8"></a>
+Leading into the notion of asynchronous programming, JS is a single threaded language, thus any waiting will deactivate the UI until the function call ends. Asynchronous function calls and callbacks can extend the function and interaction of our program considerably.
+
+### Generators <a name="toc-sub-tag-9"></a>
+Much like Pythonic generators, JS generators are state yielding functions
+```js 
+function* generator() {
+	for (var i = 1; i <= 10; i++) {
+		yield "+".repeat(i);
+	}
+}
+
+for (let val of generator()) {
+	console.log(val);
+}
+```
+The generator can be controlled through an iterator object
+```js
+const plusCount = generator();
+const item1 = plusCount.next();
+```
+The `plusCount` iterator instance includes several properties, an important one is `plusCount.done` which returns `true` if the generator yields have been expired. Generators may also then be traversed with
+```js
+let item;
+while(!(item = plusCount.next()).done) {
+	console.log(item);
+}
+```
+Here `item` is a JS object, with a `value` and a `done` attribute. The for-of loops are syntactic sugar over the above, in the same fashion as Python for-in loops, or C++ `for (int i : array)`.
+
+Yield statements in JS can also be used to yield another generator. Consider the example
+```js
+function* generator() {
+	for (var i = 1; i <= 10; i++) {
+		yield "+".repeat(i);
+	}
+	yield* backGenerator();
+}
+
+function* backGenerator() {
+	for (var i = 10; i >= 1; i--) {
+		yield "+".repeat(i)
+	}
+}
+```
+Now, once `generator` has completed the for loop, it yields an instance of `backGenerator` which allows the iteration to continue seamlessly.
+
+Generators have great application for streaming data, yielding unique identification codes, or traversing the DOM.
+
+Generators may also have data send back to them, just like with Python's `x = yield` statement and `send()` method.
+
+The sending syntax in JS is
+```js
+function* generator() {
+	for (var i = 1; i <= 10; i++) {
+		i += yield "+".repeat(i);
+	}
+}
+
+let plusCount = generator();
+let item;
+while(!(item = plusCount.next(3)).done) {	// here we send 3
+	console.log(item);
+}
+```
+
+Or we can use `.throw(/* what */)` to throw an exception in the iterator at `yield`.
+
+Note that generators still have access to the `return` keyword, allowing them to give a value to their instance upon completion.
+
+### Promises <a name="toc-sub-tag-10"></a>
+Promises are the main driver behind writing succinct asynchronous code. They provide an implementation for allowing function chains to be established off of the basis of a result or error case. A promise may be defined
+```js 
+const p = new Promise((resolve, reject) => {
+	/* ... */
+});
+
+p.then(
+	(/* results of Promise lambda */) => { /* ... */},
+	(/* error case */) => { /* ... */}
+);
+```
+The error callback of `p` may also be chained instead with `.catch(callback)` instead of providing a second argument to `.then()`.
+
+Promises also allow multiple asynchronous tasks to be fed together, using the `.all()` method. For, e.g. parallel gathering of information, we can write 
+```js
+Promise.all([
+		makeRequest(url1),
+		makeRequest(url2),
+		//...,
+		makeRequest(urlN)
+	])
+	.then(results => {
+		console.log("url1 : " + results[0])
+		/* etc */
+	})
+	.catch(error => {
+		/* error handle */
+});
+```
+
+Similar syntax is also used to obtain the first result of a series of asynchronous tasks using `.race()`. The `result` argument is now just the result of a single function, instead of the list of inputs.
+
+### Combining generators with promises <a name="toc-sub-tag-11"></a>
+
+
+## Objects and prototypes <a name="toc-sub-tag-12"></a>
