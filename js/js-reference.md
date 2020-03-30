@@ -17,6 +17,12 @@ Series of notes adapted from different books and blogs so that I can easily refe
 	2. [Promises](#toc-sub-tag-10)
 	3. [Combining generators with promises](#toc-sub-tag-11)
 3. [Object orientation and prototypes](#toc-sub-tag-12)
+	1. [Inheritance with `.setPrototypeOf()`](#toc-sub-tag-13)
+	2. [Constructors](#toc-sub-tag-14)
+		1. [Instance prototype properties](#toc-sub-tag-15)
+		2. [Object typing with constructors](#toc-sub-tag-16)
+	3. [Achieving inheritance](#toc-sub-tag-17)
+	4. [Configuring object properties](#toc-sub-tag-18)
 <!--END TOC-->
 
 ## Functions <a name="toc-sub-tag-0"></a>
@@ -357,3 +363,112 @@ JS introduces the `async` and `await` keywords to help integrate promises and ge
 ```
 
 ## Object orientation and prototypes <a name="toc-sub-tag-12"></a>
+Prototypes in JS are objects to which the property lookup is delegated, allowing properties and functionality to automatically be accessible to other objects. They can be thought of as classes in other object orientated languages. Prototypes allow for inheritance within JS.
+
+### Inheritance with `.setPrototypeOf()` <a name="toc-sub-tag-13"></a>
+We can mimic inheritance using the `Object.setPrototypeOf()` method
+```js
+const assert = require('assert')
+
+const athlete = { instruct: true };
+const scientist = { research: true };
+const politican = { lie: true };
+
+assert("research" in scientist, "Scientist can research.");
+assert(!("research" in athlete), "Athlete cannot research.");
+// set prototype
+Object.setPrototypeOf(athlete, scientist);
+
+assert("research" in athlete, "Athlete can now research.");
+
+Object.setPrototypeOf(athlete, politican);
+assert("lie" in athlete, "Athlete can now lie.");
+```
+The calling order in the case of same identifier is always the inheriting object's attribute/method, then that of the prototype, and further up the chain.
+
+### Constructors <a name="toc-sub-tag-14"></a>
+We can prototype methods using a function constructor and the `new` keyword
+```js
+function SomeObject() {}	// no implementation
+SomeObject.prototype.action = function() {
+	console.log("Hello World"); 
+};
+
+const instance = new SomeObject();
+instance.action();
+```
+
+#### Instance prototype properties <a name="toc-sub-tag-15"></a>
+Here is an example of initialization precedence
+```js
+function SomeObject() {
+	this.acted = false;
+	this.action = function() {
+		console.log(!this.acted);
+	};
+}
+
+SomeObject.prototype.action = function() {
+	console.log(this.acted);
+};
+
+const instance = new SomeObject();
+instance.action();					
+```
+In this case, `.action()` will result in `true` being printed. 
+
+Since JS is a dynamic language, prototype changes defined or altered after an object has been instantiated still apply to that instance. Consider the snippet following on from the last
+```js
+SomeObject.prototype.action = () => {
+	console.log("Altered action!");
+};
+
+instance.action();		// Altered action!
+
+// Completely override the prototype object
+SomeObject.prototype = {
+	action : () => {
+		console.log("New prototype, who this?")
+	}
+}
+
+instance.action();		// still Altered action!
+
+// New instance has the new prototype
+(new SomeObject())		// New prototype, who this?
+	.action();
+```
+The `instance` still holds reference to the old prototype, but once the prototype has been overridden, becomes inaccessible.
+
+#### Object typing with constructors <a name="toc-sub-tag-16"></a>
+Prototypes also store information on how the instance was constructed. For instance, we can access the constructor function using the `.constructor` property of the instance
+```js
+function SomeObject() {}
+const instance = new SomeObject();
+console.log(instance.constructor);			// [Function: SomeObject]
+```
+The instance also returns true for `ininstanceof SomeObject` calls. We can also create new instances of `SomeObject` by calling
+```js
+const newInstance = new instance.constructor();
+console.log(newInstance === instance)		// false
+```
+
+### Achieving inheritance <a name="toc-sub-tag-17"></a>
+We already saw how inheritance can be mimicked using the `.setPrototypeOf()` method, but we can also achieve inheritance with objects or instances. The common idiom is to write
+```js
+function Super() {}
+Super.prototype.action = function() { console.log("Action from Super.") };
+
+function SomeObject() {}
+SomeObject.prototype = new Super();
+(new SomeObject).action();				// Action from Super.
+```
+Note if the `new` keyword were not used, the prototype is not properly endowed into Super, and similarly, as the constructor is an empty function, the prototype of the instance would be `undefined`.
+
+The problem with this implementation is that the check
+```js
+(new SomeObject).constructor === SomeObject;
+```
+will fail, as it will yield Super instead. We will come back to a solution to this later, but for now we need to examine the JS object properties in order to find an appropriate solution.
+
+### Configuring object properties <a name="toc-sub-tag-18"></a>
