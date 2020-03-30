@@ -16,7 +16,7 @@ Series of notes adapted from different books and blogs so that I can easily refe
 	1. [Generators](#toc-sub-tag-9)
 	2. [Promises](#toc-sub-tag-10)
 	3. [Combining generators with promises](#toc-sub-tag-11)
-3. [Objects and prototypes](#toc-sub-tag-12)
+3. [Object orientation and prototypes](#toc-sub-tag-12)
 <!--END TOC-->
 
 ## Functions <a name="toc-sub-tag-0"></a>
@@ -314,6 +314,46 @@ Promise.all([
 Similar syntax is also used to obtain the first result of a series of asynchronous tasks using `.race()`. The `result` argument is now just the result of a single function, instead of the list of inputs.
 
 ### Combining generators with promises <a name="toc-sub-tag-11"></a>
+We can combine generators with promises and the concept of closure to write strong asynchronous code. Note, this is **not** a production grade implementation, and indeed the `async()` demonstrated has default language implementations
 
+```js
+async(function*() {
+	try {
+		const key = yield somePromise();
+		const val = yield someIndex(key);
+		// all information received
+	} catch (e) {
+		// error handling
+	}
+});
 
-## Objects and prototypes <a name="toc-sub-tag-12"></a>
+function async(generator) {
+	var itt = generator();
+
+	function handle(ittResult) {
+		if (ittResult.done) return;
+
+		const ittVal = ittResult.value;
+		if (ittVal instanceof Promise)
+			ittVal.then(res => handle(itt.next(res)))
+				  .catch(err => itt.throw(err));
+	}
+	try {
+		handle(itt.next())
+	} catch (e) { itt.throw(err); }
+}
+```
+JS introduces the `async` and `await` keywords to help integrate promises and generators, such that our above code may be rewritten using the new syntax 
+```js
+(async function() {
+	try {
+		const key = await somePromise();
+		const val = await someIndex(key);
+		// all information received
+	} catch (e) {
+		// error handling
+	}
+})();
+```
+
+## Object orientation and prototypes <a name="toc-sub-tag-12"></a>
