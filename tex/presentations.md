@@ -67,7 +67,7 @@ Definitions are a special type of block, which have a different colour profile. 
 % ...
 \end{block}
 ```
-#### Lists <a name="toc-sub-tag-5"></a>
+#### Lists <a name="toc-sub-tag-5"></a>
 Similar to regular LaTeX, we can define a list with bullet-points as
 ```
 \begin{itemize}
