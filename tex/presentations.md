@@ -10,6 +10,7 @@ I have my master's thesis *viva voce* tomorrow, and need to prepare a short \~10
 		3. [Lists](#toc-sub-tag-5)
 		4. [Columns](#toc-sub-tag-6)
 2. [Themes](#toc-sub-tag-7)
+3. [Formatting table of contents](#toc-sub-tag-8)
 <!--END TOC-->
 ## The `beamer` package <a name="toc-sub-tag-0"></a>
 The general format of the document will be
@@ -20,21 +21,21 @@ The general format of the document will be
 \author{Fergus Baker}%
 \institute{Royal Holloway University of London}%
 
-% DOC START
+% -------------------------------------------- DOC START
 \begin{document}
 
-% TITLE FRAME
+% -------------------------------------------- TITLE FRAME
 \begin{frame}
 \titlepage
 \end{frame}
 
-% SLIDES
+% -------------------------------------------- SLIDE
 \begin{frame}
 \frametitle{First slide}
 Slide content
 \end{frame}
 
-% DOC END
+% -------------------------------------------- DOC END
 \end{document}
 ```
 We define slides using the `frame` objects. Each slide is rendered with a task-bar at the bottom of the page for navigation. The document may be compiled easily with `pdflatex`.
@@ -107,7 +108,7 @@ Right Column.
 \end{frame}
 ```
 ## Themes <a name="toc-sub-tag-7"></a>
-For my purpose, I slighty modified the `Antibes` theme for `beamer`; I wanted the infobar at the top only to display the title and section (but not the subsection). Following some examples from online
+For my purpose, I slightly modified the `Antibes` theme for `beamer`; I wanted the infobar at the top only to display the title and section (but not the subsection). Following some examples from online
 ```
 \makeatletter
 \setbeamertemplate{headline}
@@ -136,3 +137,21 @@ For my purpose, I slighty modified the `Antibes` theme for `beamer`; I wanted th
 }
 \makeatother
 ```
+
+## Formatting table of contents <a name="toc-sub-tag-8"></a>
+I wanted my table of contents to split over two columns, so that the full text could be displayed on one side. To achieve this, I use
+```
+% -------------------------------------------- TOC FRAME
+\begin{frame}
+    \frametitle{Outline}
+    \begin{columns}[t]
+        \begin{column}{.65\textwidth}
+            \tableofcontents[sections={1-4}]
+        \end{column}
+        \begin{column}{.35\textwidth}
+            \tableofcontents[sections={5-7}]
+        \end{column}
+    \end{columns}
+\end{frame}
+```
+where the numbers and column widths can be adjusted.
