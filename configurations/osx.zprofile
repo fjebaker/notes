@@ -1,0 +1,6 @@
+TIMEFMT=$'\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
+alias ls='ls -GF'
+alias ll='ls -l'
+alias la='ls -a'
+alias subl='open -a Sublime\ Text'
+alias firefox='open -a Firefox'
