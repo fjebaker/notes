@@ -15,7 +15,7 @@ VPC, or virtual private cloud, is a network controller for a configurable pool o
 ## Components and uses <a name="toc-sub-tag-0"></a>
 
 ### ACL <a name="toc-sub-tag-1"></a>
-The access control list (ACL) is essentially just a firewall, in the sense that you can configure a series of input and output rules to navigate traffic. It is a very course system, dealing mainly with submask accesses.
+The access control list (ACL) is essentially just a firewall, in the sense that you can configure a series of input and output rules to navigate traffic. It is a very coarse system, dealing mainly with submask accesses.
 
 ### Security groups <a name="toc-sub-tag-2"></a>
 Security groups are fine tuned for each machine behind the ACL, able to expose and configure access for individual ports and IP addresses. It is a binary firewall, in the sense that it can either ACCEPT or DROP requests. For specialized use, such as allowing existing connections to still work, it may still be useful to use `iptables` on the machine.
