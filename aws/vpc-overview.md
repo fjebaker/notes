@@ -21,10 +21,10 @@ The access control list (ACL) is essentially just a firewall, in the sense that 
 Security groups are fine tuned for each machine behind the ACL, able to expose and configure access for individual ports and IP addresses. It is a binary firewall, in the sense that it can either ACCEPT or DROP requests. For specialized use, such as allowing existing connections to still work, it may still be useful to use `iptables` on the machine.
 
 ### Internet gateway <a name="toc-sub-tag-3"></a>
-The internet gateway is the route of access from the VPC into the public domain. It is essentially the bottleneck, and provides public domain or ip address where the VPC is accessible.
+The internet gateway is the route of access from the VPC into the public domain. It is essentially the bottleneck, and provides public domain or an ip address where the VPC is accessible.
 
 ### NAT <a name="toc-sub-tag-4"></a>
-The network address table (NAT) maps internal addresses to external addresses, so that addresses do not have to be reconfigured is the gateway is reconfigured.
+The network address table (NAT) maps internal addresses to external addresses, so that addresses do not have to be reconfigured if the gateway is reconfigured.
 
 ### Route tables <a name="toc-sub-tag-5"></a>
 Route tables allow the configuration of the different protocol routes for the whole of the VPC; for both individual IP addresses and submasks.
