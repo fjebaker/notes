@@ -8,7 +8,7 @@ Unlike webhooks, discord bots are invited into servers, and managed through a sp
 		1. [Application features](#toc-sub-tag-2)
 		2. [Bot features](#toc-sub-tag-3)
 	2. [Adding a bot to the server](#toc-sub-tag-4)
-		3. [Generating OAuth2 URIs](#toc-sub-tag-5)
+		1. [Generating OAuth2 URIs](#toc-sub-tag-5)
 2. [Using python to handle application functionality](#toc-sub-tag-6)
 	1. [Connecting to a Discord server](#toc-sub-tag-7)
 	2. [Utility functions](#toc-sub-tag-8)
@@ -16,10 +16,10 @@ Unlike webhooks, discord bots are invited into servers, and managed through a sp
 		1. [Messages](#toc-sub-tag-10)
 		2. [Direct messaging channels](#toc-sub-tag-11)
 	4. [Connecting a bot](#toc-sub-tag-12)
-		3. [Attaching a bot](#toc-sub-tag-13)
-		4. [Bot commands](#toc-sub-tag-14)
-		5. [Converting commands](#toc-sub-tag-15)
-		6. [Command predicates](#toc-sub-tag-16)
+		1. [Attaching a bot](#toc-sub-tag-13)
+		2. [Bot commands](#toc-sub-tag-14)
+		3. [Converting commands](#toc-sub-tag-15)
+		4. [Command predicates](#toc-sub-tag-16)
 <!--END TOC-->
 
 ## Using the developer portal to create a bot <a name="toc-sub-tag-0"></a>
