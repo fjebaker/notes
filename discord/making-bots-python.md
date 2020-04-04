@@ -23,16 +23,16 @@ Unlike webhooks, discord bots are invited into servers, and managed through a sp
 <!--END TOC-->
 
 ## Using the developer portal to create a bot <a name="toc-sub-tag-0"></a>
-In order to develop a bot, we need to register the correct authentication tokens, through OAuth2. To do this we 
+In order to develop a bot, we need to register the correct authentication tokens on the developer portal, through OAuth2. To do this we, on the main dashboard of the portal
 
 - select *New Application*
 - give the application a name
 - navigate to the *Bot* tab on the hamburger menu, and attach a bot to the application
 
-OAuth2 protocol generates limited access tokens based on the permissions granted to the application/bot.
+OAuth2 protocol generates limited-access tokens based on the permissions granted to the application/bot.
 
 ### Overview of the portal <a name="toc-sub-tag-1"></a>
-The following explains some of the details which may be adjusted in the developer portal.
+The following explains some of the details which may be configured in the developer portal.
 
 #### Application features <a name="toc-sub-tag-2"></a>
 TODO; what is the client ID, what is the client secret?
@@ -44,18 +44,19 @@ TODO; what are all the setting available?
 
 
 ### Adding a bot to the server <a name="toc-sub-tag-4"></a>
-In order to add our bot to the server, we require a key from the OAuth2 URI generator
+To add our bot to the server, we require a key from the OAuth2 URI generator.
 
 #### Generating OAuth2 URIs <a name="toc-sub-tag-5"></a>
-From the hamburger menu, select OAuth2. This dashboard is a wrapper for the OAuth2 API, and manages and generates credential tokens. For our bot we want to add user access to the discord API for our bot. To do this, scroll down as select
+From the hamburger menu, select OAuth2. This dashboard is a wrapper for the OAuth2 API, and manages and generates credential tokens. 
+
+For our bot we want to add user access to the discord API; to do this, scroll down and select
 
 - *bot* from *SCOPES*
 - *Administrator* from *BOT PERMISSIONS*
 
-**NB:** for deployment, best not to select *Administrator* but tailor your needs specifically for the bot. Discord now generates the authorization URL, with the correct scope and permissions for our development bot.
+**NB:** for deployment, best not to select *Administrator* but tailor your needs specifically for the bot. Discord now generates the authorization URI, with the correct scope and permissions for our development bot.
 
-Select *Copy* and paste it into the browser in order to invite a bot to your server.
-
+Select *Copy* and paste it into the browser in order to invite the application/bot to your server.
 
 ## Using python to handle application functionality <a name="toc-sub-tag-6"></a>
 The environment requires the `discord.py` API packages
