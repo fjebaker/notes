@@ -1,0 +1,63 @@
+% Scientific Article template, created by Fergus Baker
+\documentclass[12pt, bibliography=numbered]{article}%
+\usepackage{hyperref}%
+\usepackage{cite}%
+\usepackage{authblk}%
+\usepackage{amsmath}%
+\usepackage{amssymb}%
+\usepackage[left=2.0cm, right=2.0cm, top=1.7cm, bottom=2.3cm]{geometry}%
+\usepackage[tableposition=top]{caption}%
+\usepackage{subfig}%
+%-------------------------------- DOCUMENT START ------------------------------------------------%
+\begin{document}%
+\begin{titlepage}%
+    \begin{center}%
+        \vspace*{0.1cm}
+ 
+        \Huge
+        \textbf{Title}
+ 
+        \vspace{0.1cm}
+        \LARGE
+        Type of Project
+ 
+        \vspace{0.5cm}
+ 
+        \textbf{Name}\\
+        \vspace{0.5cm}
+        \normalsize
+        Supervised by\\ Supervisor
+        \vspace{0.7cm}
+        \begin{abstract}
+        Sample.
+        \end{abstract}
+        \vfill
+ 
+        Degree programme
+ 
+        \vspace{0.1cm}
+ 
+        \includegraphics[width=0.4\textwidth]{graphics/royalholloway}
+ 
+        \Large
+        Department\\
+        University\\
+        Country\\
+        Day$^\mathrm{th}$ Month Year
+ 
+    \end{center}%
+\end{titlepage}%
+\thispagestyle{empty}
+\clearpage\mbox{}\clearpage
+\setcounter{page}{1}
+\tableofcontents%
+\pagebreak
+%-------------------------------- SECTION -------------------------------------------------------%
+\section{Introduction}
+
+%-------------------------------- DOCUMENT END --------------------------------------------------%
+\clearpage
+\bibliography{bib}{}%
+\bibliographystyle{ieeetr}%
+\end{document}%
+
