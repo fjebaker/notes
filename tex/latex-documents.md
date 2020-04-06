@@ -6,7 +6,10 @@ For my degree, and generally, I write a lot of articles in LaTeX. Often I find m
 1. [Templates](#toc-sub-tag-0)
 2. [Listings](#toc-sub-tag-1)
 3. [Commonly used snippets](#toc-sub-tag-2)
-	1. [Figures](#toc-sub-tag-3)
+	1. [Creating lists](#toc-sub-tag-3)
+	2. [Figures](#toc-sub-tag-4)
+4. [Meta formatting](#toc-sub-tag-5)
+	1. [Table of contents and appendix](#toc-sub-tag-6)
 <!--END TOC-->
 
 ## Templates <a name="toc-sub-tag-0"></a>
@@ -56,7 +59,25 @@ or used inline with
 ## Commonly used snippets <a name="toc-sub-tag-2"></a>
 I often find myself create a document fully of generic LaTeX extract for e.g. equations or figures, so that I can easily insert new items.
 
-### Figures <a name="toc-sub-tag-3"></a>
+### Creating lists <a name="toc-sub-tag-3"></a>
+For numerical lists, we can use
+```tex
+\begin{enumerate}
+	\item first item
+	\item second item
+\end{enumerate}
+```
+If we require this to start at a specific number, e.g. 3, use `\setcounter{enumi}{3}`, and for alphabetical counters, use `enumii` in the setcounter prearg.
+
+Bullet point lists are create in a similar fashion, with 
+```tex
+\begin{itemize}
+	\item first item
+	\item second item
+\end{itemize}
+```
+
+### Figures <a name="toc-sub-tag-4"></a>
 Single figures I include with the generic
 ```tex
 \begin{figure}[h!]
@@ -80,3 +101,14 @@ For figures with multiple subfigures, I use the `subfig` package, and the generi
 \end{figure}
 ```
 I use `\hspace` to bad out the figure so that the figures are spaced nicely across the breadth of the page; these values are obviously tailored towards the specific images. If the subfigures do not require a caption, remove the `subcaption` text, but leave empty square brackets, else no alphabetical reference the subfigure will be rendered.
+
+## Meta formatting <a name="toc-sub-tag-5"></a>
+Formatting the overall look and feel of the document often requires changes in the preamble. Solutions to problems I often face are included here
+
+### Table of contents and appendix <a name="toc-sub-tag-6"></a>
+So that the appendix references in the ToC are preceded by 'Appendix A', and not just 'A', the following packages should be included
+```tex
+\usepackage{tocloft}%
+\usepackage[titletoc]{appendix}%
+\usepackage{appendix}%
+```
