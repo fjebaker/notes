@@ -66,3 +66,9 @@ ffmpeg -i s0q0.m4s -i s1q1.m4s -c copy -map 0:a:0 -map 1:v:0 -shortest out.mp4
 ```
 
 The `-shortest` flag ensures that if the timestamps for the two inputs are slightly different, we reduce the output to the length of the shortest.
+
+### Embedding subtitles
+For a given `.srt` file, the subtitles can be embedded into an `.mp4` using
+```
+ffmpeg -i [videos].mp4 -i [subtitles].srt -c:v copy -c:a copy -c:s mov_text -metadata:s:s:0 language=eng out.mp4
+```
