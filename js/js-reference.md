@@ -472,3 +472,98 @@ The problem with this implementation is that the check
 will fail, as it will yield Super instead. We will come back to a solution to this later, but for now we need to examine the JS object properties in order to find an appropriate solution.
 
 ### Configuring object properties <a name="toc-sub-tag-18"></a>
+JS describes every object property with a descriptor, which is controlled with the keys
+
+- `configurable`: if `true`, property's descriptor can be changed or deleted. else cannot do either
+- `enumerable`: if `true`, property show up during `for-in` loops
+- `value`: specifies the value of the property (default is `undefined`)
+- `writable`: if `true`, property can be changed using an assignment
+- `get`: defines getter function (cannot be defined in conjunction with `value` and `writable`)
+- `set`: defines a setter function (same restrictions as `get`)
+
+A default property, such as
+```js
+someInstance.prop = "someValue";
+```
+has `configurable`, `enumerable`, and `writable` set to `true`, the `value` is `someValue`, and the getter and setter functions would be `undefined`. We can fine tune properties using the `Object.defineProperty` method; for example
+```js
+var SomeObject = {};
+Object.defineProperty(SomeObject, "prop", {
+	configurable: false,
+	enumerable: false,
+	value: "someValue",
+	writable: true
+});
+```
+To solve the issue of losing the original prototype (i.e. the constructor property), we can instead define the `constructor` value after altering the prototype; as above, we have
+```js
+function Super() {}
+function SomeObject() {}
+SomeObject.prototype = new Super();
+```
+but now add
+```js
+Object.defineProperty(SomeObject.prototype, "constructor", {
+	enumerable: false,
+	value: SomeObject,
+	writable: true
+});
+
+var someInstance = new SomeObject();
+```
+Now the check
+```js
+(new SomeObject).constructor === SomeObject;
+```
+will pass.
+
+### JS `class` keyword
+Recent versions of JS also include the familiar `class` keyword to abstract a lot of the inheritance features. A traditional class may then be defined 
+```js
+class SomeClass {
+	constructor(someProperty) {
+		this.prop = someProperty;
+	}
+
+	someMethod() {
+		return this.prop;
+	}
+
+}
+```
+Here, the `class` keyword acts to abstract the syntax of defining prototype attributes, i.e., the above is equivalent to
+```js
+function SomeClass (someProperty) {
+	this.prop = someProperty;
+}
+SomeClass.prototype.someMethod = function() {
+	return this.prop;
+};
+```
+The JS classes open up use of `static` methods. We can declare a method as `static` by simply using it as a keyword
+```js
+class SomeClass {
+	constructor (prop) {
+		this.prop = prop;
+	}
+	static someStaticMethod(instance1, instance2) {
+		return instance1.prop - instance2.prop;
+	}
+}
+```
+In JS, `static` methods are not 'known' by class instances, but instead accessed through the class object
+```js
+var someInstance = new SomeClass(2);
+var someOtherInstance = new SomeClass(1);
+
+var diff = SomeClass.someStaticMethod(someInstance, someOtherInstance);	// 1
+```
+Additionally, inheritance is a lot easier to implement. We can use the familiar Java `extends` keyword, such as
+```js
+class SomeExtendedClass extends SomeClass {
+	constructor(prop, newprop) {
+		super(prop);
+		this.newprop = newprop;
+	}
+}
+```
