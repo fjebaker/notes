@@ -24,6 +24,8 @@ Series of notes adapted from different books and blogs so that I can easily refe
 	3. [Achieving inheritance](#toc-sub-tag-17)
 	4. [Configuring object properties](#toc-sub-tag-18)
 	5. [JS `class` keyword](#toc-sub-tag-19)
+	6. [Getters and setters](#toc-sub-tag-20)
+	7. [Proxies and access control](#toc-sub-tag-21)
 <!--END TOC-->
 
 ## Functions <a name="toc-sub-tag-0"></a>
@@ -568,3 +570,53 @@ class SomeExtendedClass extends SomeClass {
 	}
 }
 ```
+### Getters and setters <a name="toc-sub-tag-20"></a>
+Also included in modern JS version are the keywords `get` and `set` used to define getters and setters for object properties. We can use them
+```js
+const someCollection = {
+	anArray = ["value1", "value2", "value3"],
+	get firstItem() {
+		return this.anArray[0];
+	}
+
+	set firstItem(val) {
+		this.anArray[0] = val;
+	}
+};
+```
+This implementation also works for the `class` method. An alternative way to define getters and setters uses the `Object.defineProperty` method
+```js
+function SomeObject() {
+	let _counter = 0;
+
+	Object.defineProperty(this, 'counter', {
+		get: () => {
+			return _counter;
+		},
+		set: (val) => {
+			_counter += val;
+		}
+	});
+}
+```
+
+### Proxies and access control <a name="toc-sub-tag-21"></a>
+Proxies allow us to execute additional routines when interacting with an object. They are, in many ways, generalizations of getters and setters. There exist many traps we can set up using the `Proxy` built in, such as
+- `apply`, activated when calling a function
+- `construct`, activated when using the new operator
+- `get` and `set`, used as surrogates for getters and setters
+- `getPrototypeOf`, `setPrototypeOf`, which are pretty self-explanatory
+- `enumerate`, activated in `for-in` statements.
+A full list of traps can be found in the [Mozilla reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
+For example, using the `apply` trap, we can write
+```js
+const sum = function(arg1, arg2) { return arg1 + arg2; };
+const proxySum = new Proxy(sum, {
+	apply: (target, thisArg, argumentsList) => {
+		return 0;
+	}
+});
+console.log(proxySum);			// [Function: sum]
+console.log(proxySum(1, 2));	// 0
+```
+Proxies are a fantastic way of implementing logging or performance checking code. The cost of proxies is performance, however, and can incur a considerable speed decrease for the additional control.
