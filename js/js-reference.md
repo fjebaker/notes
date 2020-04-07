@@ -23,6 +23,7 @@ Series of notes adapted from different books and blogs so that I can easily refe
 		2. [Object typing with constructors](#toc-sub-tag-16)
 	3. [Achieving inheritance](#toc-sub-tag-17)
 	4. [Configuring object properties](#toc-sub-tag-18)
+	5. [JS `class` keyword](#toc-sub-tag-19)
 <!--END TOC-->
 
 ## Functions <a name="toc-sub-tag-0"></a>
@@ -517,7 +518,7 @@ Now the check
 ```
 will pass.
 
-### JS `class` keyword
+### JS `class` keyword <a name="toc-sub-tag-19"></a>
 Recent versions of JS also include the familiar `class` keyword to abstract a lot of the inheritance features. A traditional class may then be defined 
 ```js
 class SomeClass {
