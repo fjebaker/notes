@@ -1,4 +1,4 @@
-# PlatformIO notes
+# PlatformIO notes
 Notes for using the PlatformIO CLI.
 
 <!--BEGIN TOC-->
