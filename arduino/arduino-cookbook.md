@@ -1,4 +1,4 @@
-# Arduino cookbook
+# Arduino cookbook
 I tend to like doing things on the command line, so I will be using the [PlatformIO](https://platformio.org/) open source IoT tool.
 
 #### Configuring PlatformIO <a name="toc-sub-tag-0"></a>
