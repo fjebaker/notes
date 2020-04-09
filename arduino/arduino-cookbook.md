@@ -12,6 +12,10 @@ I will probably end up making another document on using PlatformIO, but for the 
 2. [Serial data](#toc-sub-tag-4)
 	1. [Writing to serial](#toc-sub-tag-5)
 	2. [Reading from serial](#toc-sub-tag-6)
+3. [Detailed notes](#toc-sub-tag-7)
+	1. [Serial communication](#toc-sub-tag-8)
+	2. [A note on USB translation](#toc-sub-tag-9)
+	3. [The `Serial` module](#toc-sub-tag-10)
 <!--END TOC-->
 
 ## Interacting with pins <a name="toc-sub-tag-1"></a>
@@ -25,11 +29,11 @@ library.
 The most basic circuit we can construct is an LED bridging a pin to ground; the code to interact with such a circuit is
 ```cpp
 void setup() {
-  pinMode(LED_PIN, OUTPUT);
+	pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);	// or LOW or whatever you like
+	digitalWrite(LED_BUILTIN, HIGH);	// or LOW or whatever you like
 }
 ```
 ### Servo <a name="toc-sub-tag-3"></a>
@@ -89,5 +93,48 @@ void loop() {
 	if (readString.length() > 0) {
 		// do something with the string
 	}
+}
+```
+
+## Detailed notes <a name="toc-sub-tag-7"></a>
+These are notes I am making whilst reading some literature on the arduino MCUs.
+
+### Serial communication <a name="toc-sub-tag-8"></a>
+Standard MCUs come with TX (transmit) and RX (receive) digital pins. Serial data is not the same as USB data; these pins are 'multiplexed' into the USB connections, but a separate IC decodes and translates between the two. Some micro-controllers, such as the arduino Leonardo 32U4 MCU, have built in USB controllers.
+
+### A note on USB translation <a name="toc-sub-tag-9"></a>
+On some MCU with USB-to-serial translation, this task is undertaken by a FTDI chip. This is often the case on smaller MC, such as the Nano.
+
+Other MCUs, such as the Uno, have IC other than FTDI chips handling the translation, such as the Atmel 8U2 or 16U2.
+
+And finally, some MCUs are even able to act as USB hosts, such as the Due, or Mega ADK. The ADK comes with Android Open Accessory Protocol (AOA) facilitating communication between arduino and android devices.
+
+### The `Serial` module <a name="toc-sub-tag-10"></a>
+All of the printing functions allow different representations of data types. These include
+
+Data types |  Code  | Output
+:--- | :--- | :---
+Decimal | `println(23);` | 23
+Hexadecimal | `println(23, HEX);` | 17
+Octal | `println(23, OCT);` | 27
+Binary | `println(23, BIN);` | 00010111
+
+There are also several 'probing' functions to ascertain the presence of serial data and retrieve it
+
+- `Serial.available()` returns number of chars / bytes currently stored in the incoming serial buffer.
+- `Serial.read()` returns and removes one byte of data from the serial buffer.
+- `Serial.parseInt()` returns and removes the first valid integer (i.e. up until first non-numeric char).
+- `Serial.find(target[, length])` reads data from buffer until character is found, or length is reached. Returns `true` or `false`.
+- `Serial.readStringUntil(terminator)` reads buffer into a `String` until a terminator character is found.
+
+Serial data can also be triggered using a timer interrupt and the `Serial.serialEvent()` function, such as using
+```cpp
+void serialEvent() {
+	// Only triggered at the end of a loop cycle
+	String inputString = "";
+	while (Serial.available()) {
+	inputString += (char)Serial.read();
+	}
+	Serial.print("TRIGGER: buffer contains '"); Serial.print(inputString); Serial.print("'\n");
 }
 ```
