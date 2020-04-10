@@ -49,5 +49,5 @@ target_link_libraries(md5 ${CONAN_LIBS})
 and finally build
 ```bash
 cmake .. -G "Unix Makefiles"
-cmake --build
+cmake --build .
 ```
