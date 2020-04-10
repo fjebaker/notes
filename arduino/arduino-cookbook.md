@@ -17,6 +17,9 @@ I will probably end up making another document on using PlatformIO, but for the 
 		1. [A note on USB translation](#toc-sub-tag-9)
 		2. [The `Serial` module](#toc-sub-tag-10)
 3. [Interrupts](#toc-sub-tag-11)
+	1. [Software interrupts](#toc-sub-tag-12)
+	2. [Hardware interrupts](#toc-sub-tag-13)
+4. [The EEPROM](#toc-sub-tag-14)
 <!--END TOC-->
 
 ## Interacting with pins <a name="toc-sub-tag-1"></a>
@@ -167,10 +170,10 @@ Routines using interrupts are known as *interrupt service routines* (ISRs). For 
 
 ISRs should be short and fast, can only be executed one at a time, and are executed sequentially as to the order they occur in. Global variables are commonly used to pass information from the main code execution to the ISR and back -- it is therefore best that they are declared as `volatile`.
 
-### Software interrupts
+### Software interrupts <a name="toc-sub-tag-12"></a>
 To my knowledge, only hack implementation of software interrupts exist on most MCUs.
 
-### Hardware interrupts
+### Hardware interrupts <a name="toc-sub-tag-13"></a>
 We can define a hardware interrupt using the `attachInterrupt()` syntax, defining a pin number, and ISR, and the triggering mode
 ```cpp
 attachInterrupt(
@@ -188,3 +191,7 @@ and the available modes are
 - **LOW**: triggering when pin is low
 - **CHANGE**: triggering when the voltage value changes
 - **FALLING**: triggering when the pin goes from high to low
+
+
+## The EEPROM <a name="toc-sub-tag-14"></a>
+TODO
