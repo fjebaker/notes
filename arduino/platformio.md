@@ -6,6 +6,10 @@ Notes for using the PlatformIO CLI.
 1. [Getting started](#toc-sub-tag-2)
 2. [Serial communication](#toc-sub-tag-3)
 	1. [USB device debugging on OSX](#toc-sub-tag-4)
+3. [Distribution](#toc-sub-tag-5)
+	1. [Specifying dependencies](#toc-sub-tag-6)
+	2. [Unit testing](#toc-sub-tag-7)
+	3. [Build flags](#toc-sub-tag-8)
 <!--END TOC-->
 
 ### Configuring PlatformIO <a name="toc-sub-tag-0"></a>
@@ -87,3 +91,23 @@ ls /dev/tty*
 ls /dev/cu.*
 ```
 outputs.
+
+## Distribution <a name="toc-sub-tag-5"></a>
+PlatformIO can also act as a distribution tool if the environments are correctly defined.
+
+### Specifying dependencies <a name="toc-sub-tag-6"></a>
+We can specify the dependencies for a specific environment, e.g. `[env:uno]` with
+```
+lib_deps =
+  arduino
+  SomePackageName
+```
+or for all environments under the `[common_env_data]` section.
+
+More information can be seen here in the [PlatformIO Docs](https://docs.platformio.org/en/latest/projectconf/index.html).
+
+### Unit testing <a name="toc-sub-tag-7"></a>
+TODO
+
+### Build flags <a name="toc-sub-tag-8"></a>
+TODO
