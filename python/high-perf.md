@@ -8,6 +8,12 @@ Python is a language that I find is easy to learn, but difficult to master. Thes
 	2. [`collections.Counter`](#toc-sub-tag-2)
 	3. [`collections.deque`](#toc-sub-tag-3)
 	4. [`collections.defaultdict`](#toc-sub-tag-4)
+	5. [`collections.namedtuple`](#toc-sub-tag-5)
+	6. [`collections.enum`](#toc-sub-tag-6)
+	7. [`collections.OrderedDict`](#toc-sub-tag-7)
+	8. [`heapq`](#toc-sub-tag-8)
+	9. [`bisect`](#toc-sub-tag-9)
+2. [Some notes on list comprehension](#toc-sub-tag-10)
 <!--END TOC-->
 
 ## Advanced collections <a name="toc-sub-tag-0"></a>
@@ -151,5 +157,185 @@ pprint.pprint(graph)
 #              'c': ['a'],
 #              'd': ['a', 'b', 'c']})
 ```
-It's trivial to see how a `Counter` could be implemented with `defaultdict`, but the version included in `collections` is far more extensive.
+It's trivial to see how a `Counter` could be implemented with `defaultdict`, but the version included in `collections` is far more extensive. Note that the default value must be a callable object (e.g. `int`). This means trees could be very easily defined as
+```python
+import collections
 
+def tree():
+	return collections.defaultdict(tree)
+```
+and used
+```python
+import json
+
+colours = tree()
+colours['other']['black'] = 0x000000
+colours['other']['white'] = 0xFFFFFF
+colours['primary']['red'] = 0xFF0000
+colours['primary']['red'] = 0x00FF00
+colours['primary']['blue'] = 0x0000FF
+
+print(json.dumps(colours, sort_keys=True, indent=4))
+
+# {
+#     "other": {
+#         "black": 0,
+#         "white": 16777215
+#     },
+#     "primary": {
+#         "blue": 255,
+#         "red": 65280
+#     }
+# }
+```
+Such a data structure is able to generate itself recursively.
+
+### `collections.namedtuple` <a name="toc-sub-tag-5"></a>
+This collection is essentially a tuple with field names; it lends itself to describing coordinates well
+```python
+import collections
+
+Point = collections.namedtuple('Point', ['x', 'y', 'z'])
+point_a = Point(1, 2, 3)
+print(point_a)
+# Point(x=1, y=2, z=3)
+
+point_b = Point(x=4, z=5, y=6)
+print(point_b)
+# Point(x=4, y=6, z=5)
+```
+Properties can be accessed by index or by name
+```
+print(point_a.x == point_a[0])
+# True
+```
+
+### `collections.enum` <a name="toc-sub-tag-6"></a>
+Essentially a Python implementation of Clang familiar `enum`, allowing constants without magic numbers. For example
+```python
+import enum
+
+class Colour(enum.Enum):
+	red = 1
+	green = 3
+	blue = 2
+
+print(Colour.red == Colour['red'])	# True
+print(Colour.red == Colour(1))		# True
+
+print(Colour.red == 1)				# False
+print(Colour.red.value == 1)		# True
+```
+As you might expect, `enums` are iterable 
+```python
+for colour in Colour:
+	print(colour)
+
+# Colour.red
+# Colour.green
+# Colour.blue
+```
+and have value as well as text representation
+```python
+cols = dict()
+cols[Colour.green] = 0x00FF00
+
+print(cols)
+```
+Derived classes also support type inheritance, such as
+```python
+import enum
+
+class Simple(enum.Enum):
+	PROP = 'prop'
+
+print(Simple.PROP == 'prop')	# False
+
+class Derived(str, enum.Enum):
+	PROP = 'prop'
+
+print(Derived.PROP == 'prop')	# True
+```
+
+### `collections.OrderedDict` <a name="toc-sub-tag-7"></a>
+To put simply, a dictionary where the insertion order is important. By contrast, `dict` will return keys in the order of hash, whereas `OrderedDict` returns the keys in order of insertion
+```python
+import collections
+spam = collections.OrderedDict()
+spam['a'] = 1
+spam['c'] = 3
+spam['b'] = 2
+print(spam)
+# OrderedDict([('a', 1), ('c', 3), ('b', 2)])
+
+print(collections.OrderedDict(sorted(spam.items())))
+# OrderedDict([('a', 1), ('b', 2), ('c', 3)])
+```
+It is implemented by a `dict` in combination with a doubly linked list for keeping track of the order. Another `dict` is used to keep track of reverse relation. Within this, `set` and `get` are O(1) but the object requires more memory than conventional dictionaries, and as such don't scale very efficiently.
+
+### `heapq` <a name="toc-sub-tag-8"></a>
+Essentially an ordered list, and very useful for creating priority queues, able to make the smallest (or largest) item in the list easily obtainable
+```python
+import heapq
+
+heap = [1, 3, 4, 7, 2, 4, 3]
+heapq.heapify(heap)
+print(heap)
+# [1, 2, 3, 7, 3, 4, 4]
+```
+A heap is a binary tree for which the parent nodes has a value less than or equal to any of its children. We can visualize it by iterating through our object
+```python
+while heap:
+	heapq.heappop(heap), heap
+
+# 1 [2, 3, 3, 7, 4, 4]
+# 2 [3, 3, 4, 7, 4]
+# 3 [3, 4, 4, 7]
+# 3 [4, 4, 7]
+# 4 [4, 7]
+# 4 [7]
+# 7 []
+```
+
+### `bisect` <a name="toc-sub-tag-9"></a>
+A sorted list; where `heapq` makes obtaining the smallest (or largest) item easy, `bisect` inserts items so that the overall list stays sorted. As such, finding in `bisect` is fast, whereas adding and removing in `heapq` is fast. Adding new elements to a `bisect` is an O(n) operation, and creating a sorted list using bisect takes O(n^2), compared to e.g. `heapq` with O(n log(n)). The primary use of `bisect` is then to extend an already ordered structure, as opposed to creating a new one
+```python
+import bisect
+
+# regular sort
+sorted_list = []
+sorted_list.append(5)
+sorted_list.append(3)
+sorted_list.append(1)
+sorted_list.append(2)	# each operation so far is O(1)
+sorted_list.sort()		# O(n * log(n)) = O(8)
+
+print(sorted_list)
+# [1, 2, 3, 5]
+
+# bisect
+sorted_list = []
+bisect.insort(sorted_list, 5)	# O(n) = O(1)
+bisect.insort(sorted_list, 3)	# O(2)
+bisect.insort(sorted_list, 1)	# ...
+bisect.insort(sorted_list, 2)	# O(4)
+
+print(sorted_list)
+# [1, 2, 3, 5]
+```
+Searching in such a data structure is likewise very fast; e.g. `bisect_left` finds the position at which a number is supposed to be
+```python
+import bisect
+
+sorted_list = [1, 2, 3, 5]
+
+def contains(sorted_list, value):
+	i = bisect.bisect_left(sorted_list, value)
+	return i < len(sorted_list) and sorted_list[i] == value
+
+contains(sorted_list, 2)	# True
+contains(sorted_list, 4)	# False
+```
+The implementation details for such a search is a binary search algorithm.
+
+## Some notes on list comprehension <a name="toc-sub-tag-10"></a>
