@@ -92,7 +92,7 @@ static PyObject* sum_of_squares(PyObject* self, PyObject* args) {
 	return PyLong_FromLong(sum);	// return a python object
 }
 ```
-### Making the extension accessible <a name="toc-sub-tag-3"></a>
+### Making the extension accessible <a name="toc-sub-tag-3"></a>
 Our function alone wont be of much use if not included into a module. To define the API of our module, a little extra work in C is required
 ```C
 static PyMethodDef test_methods[] = {	// define the available methods
