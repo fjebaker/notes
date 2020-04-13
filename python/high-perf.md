@@ -13,7 +13,8 @@ Python is a language that I find is easy to learn, but difficult to master. Thes
 	7. [`collections.OrderedDict`](#toc-sub-tag-7)
 	8. [`heapq`](#toc-sub-tag-8)
 	9. [`bisect`](#toc-sub-tag-9)
-2. [Some notes on list comprehension](#toc-sub-tag-10)
+2. [Some notes on comprehensions](#toc-sub-tag-10)
+3. [Some peculiarities of lambda functions](#toc-sub-tag-11)
 <!--END TOC-->
 
 ## Advanced collections <a name="toc-sub-tag-0"></a>
@@ -338,4 +339,87 @@ contains(sorted_list, 4)	# False
 ```
 The implementation details for such a search is a binary search algorithm.
 
-## Some notes on list comprehension <a name="toc-sub-tag-10"></a>
+## Some notes on comprehensions <a name="toc-sub-tag-10"></a>
+Pythonic list and dictionary comprehension are powerful ways of generating complex data structures and algorithms, but at the cost of readability. They are analogous to simple for loops
+```python
+some_list = []
+for i in range(10):
+	some_list.append(i)
+
+comp_list = [i for i in range(10)]
+
+print(some_list == comp_list)		# True
+```
+They can however very quickly become counter intuitive. For example, filtering can be applied
+```python
+[i for i in range(100) if i % 2 == 1]	# odd numbers
+```
+functions may be executed within them, although complications arise if used with PRNGs
+```python
+import random
+[random.random() for _ in range(10) if random.random() >= 0.5]		# may yield values less than 0.5
+[x for x in [random.random() for _ in range(10)] if x >= 0.5]		# may not produce 10 items
+[x for _ in range(10) for x in [random.random()] if x >= 0.5]		# obtains desired result
+```	
+The last line in the above extract is analogous to nested for loops. For example
+```python
+items = []
+for i in range(5):
+	for j in range(3, 5):
+		results.append((i, j))
+```
+may be written with list comprehension as
+```python
+[(i, j) for i in range(5) for j in range(3, 5)]
+```
+The same syntax exists for dictionary comprehension too
+```python
+{i : i**2 for i in range(10) if i % 2 == 1}		# odd squares indexed by their root
+```
+The two may be used in one another also
+```python
+import random
+[{i : x for x in range(i)} for i in range(10)]
+# [{}, {1: 0}, {2: 1}, {3: 2}, {4: 3}, {5: 4}, {6: 5}, {7: 6}, {8: 7}, {9: 8}]
+```
+God knows why you would want that, but you have it.
+
+Finally, you also have set comprehension
+```python
+{i * j for i in range(5) for j in range(6)}
+# {0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 20}
+```
+
+## Some peculiarities of lambda functions <a name="toc-sub-tag-11"></a>
+Lambda functions can be nested, such as to provide quick methods for providing callback functions or even decorators. For example
+```python
+square_result = lambda func: lambda val: func(val)**2
+
+def func(x): return 4 * x
+func(3)			# 12
+
+@square_result
+def func(x): return 4 * x
+func(3)			# 144
+```
+Lambda functions can also be called recursively
+```python
+factorial = lambda x: 1 if x == 1 else x * factorial(x-1)
+factorial(4)	# 24
+```
+
+Finally, if you wanted to be a real snide prick, you can implement quicksort in a few lines using the famous Y from lambda-calculus
+```python
+Y = lambda f: lambda *args: f(Y(f))(*args)
+
+quicksort = Y(lambda f: lambda x: (
+		f([i for i in x if i < x[0]]) +
+		[y for y in x if x[0] == y] + 
+		f([i for i in x if i > x[0]])
+	) if x else []
+)
+
+quicksort([1, 7, 5, 6, 2, 3, 9, 7, 8, 2, 4, 5, 2, 1, 6, 2])
+# [1, 1, 2, 2, 2, 2, 3, 4, 5, 5, 6, 6, 7, 7, 8, 9]
+```
+<!-- PAUSED ON PAGE 89 (115 in previw) -->
