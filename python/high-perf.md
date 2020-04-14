@@ -422,4 +422,6 @@ quicksort = Y(lambda f: lambda x: (
 quicksort([1, 7, 5, 6, 2, 3, 9, 7, 8, 2, 4, 5, 2, 1, 6, 2])
 # [1, 1, 2, 2, 2, 2, 3, 4, 5, 5, 6, 6, 7, 7, 8, 9]
 ```
+
+## Using `itertools`
 <!-- PAUSED ON PAGE 89 (115 in previw) -->
