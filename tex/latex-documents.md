@@ -16,6 +16,7 @@ For my degree, and generally, I write a lot of articles in LaTeX. Often I find m
 List of templates for different LaTeX document types (this will grow as I update my notes)
 
 - [Scientific articles](https://github.com/Dustpancake/Dust-Notes/blob/master/tex/templates/article.tex)
+- [Scientific `baposter`](https://github.com/Dustpancake/Dust-Notes/blob/master/tex/templates/baposter.tex)
 
 ## Listings <a name="toc-sub-tag-1"></a>
 Using code snippets is something often required in scientific writing. My general format for listings is

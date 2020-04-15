@@ -1,0 +1,39 @@
+\documentclass[a0paper,portrait]{baposter}%
+\usepackage[font=small,labelfont=bf]{caption}%
+\usepackage{booktabs}%
+\usepackage{relsize}%
+\usepackage{xcolor}%
+\usepackage{pgf}%
+\usepackage{cite}%
+
+\definecolor{bordercol}{RGB}{40,40,40}% border content boxes
+\definecolor{headercol1}{RGB}{233,98,40}% header content boxes (left side)
+\definecolor{headercol2}{RGB}{233,98,40}% header content boxes (right side)
+\definecolor{headerfontcol}{RGB}{255,255,255}% header text in the content boxes
+\definecolor{boxcolor}{RGB}{240,243,245}% background content boxes
+
+\begin{document}
+
+\begin{poster}{grid=false, borderColor=bordercol, headerColorOne=headercol1, headerColorTwo=headercol2, headerFontColor=headerfontcol, boxColorOne=boxcolor, headershape=roundedright, headerfont=\Large\sf\bf, textborder=rectangle, background=user, headerborder=open, boxshade=plain}{}
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND AUTHOR NAME
+%----------------------------------------------------------------------------------------
+%
+{\sf\bf TITLE}
+{AUTHOR NAME\\
+INSTITUTION}
+{\includegraphics[scale=0.15]{INSTITUTION LOGO}}
+
+%----------------------------------------------------------------------------------------
+%	SAMPLE
+%----------------------------------------------------------------------------------------
+
+\headerbox{SAMPLE}{name=sample,column=0,row=0}{
+Sample
+}
+
+%----------------------------------------------------------------------------------------
+
+\end{poster}
+\end{document}
