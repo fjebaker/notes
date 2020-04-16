@@ -11,7 +11,7 @@ The method for configuring the raspi as a torrenting node over vpn is based off 
 
 #### Installing pre-requisites
 All of the prerequisites are installed with
-```
+```bash
 sudo apt-get update
 sudo apt-get install openvpn transmission-daemon transmission-common transmission-cli
 # for the URI forwarding terminal browser, also need
@@ -36,6 +36,27 @@ and thus, create a `.secrets` file in `/etc/openvpn/`, storing the login details
 ```
 NB: the line break is essential. With this, OpenVPN will automatically login and start routing all (except LAN) traffic through the VPN on startup.
 
+Next, we need to enable the `AUTOSTART="all"` flag in 
+```
+/etc/default/openvpn
+```
+You'll need root privileges again to edit this.
+
+Finally we need to configure the new DNS servers. Chances are, your VPN provider either has statically assigned name servers in their `.ovpn` files, or [provides you with relevant IP addresses](https://support.nordvpn.com/Other/1047409702/What-are-your-DNS-server-addresses.htm); if not, a simple Google search will yield free public DNS servers.
+
+On some distributions, editing `/etc/resolv.conf` is enough to reconfigure the DNS servers (note this has to be done as root, first executing `chattr -i /etc/resolv.conf`); but that does not seem to work for me anymore. The configuration file gets rewritten by some network daemon, thus doesn't hold permanently (if at all). Instead, we edit
+```bash
+/etc/dhcpcd.conf
+```
+and add the line
+```
+static domain_name_servers=DNS_IP1 [DNS_IP2 ...]
+```
+with the relevant DNS IP addresses. Finally, restart the DHCP service and (re)start OpenVPN
+```bash
+sudo service dhcpcd restart
+sudo service openvpn (re)start
+```
 You can verify the VPN is working using, e.g.
 ```
 pi@eidolon:~ $ curl ipinfo.io
@@ -51,6 +72,7 @@ pi@eidolon:~ $ curl ipinfo.io
   "readme": "https://ipinfo.io/missingauth"
 }
 ```
+Something I've noticed with the automated start of OpenVPN is that having multiple `.conf` files in `/etc/openvpn/` can cause some anomalous behaviour, especially on more recent versions of linux, including a highly annoying systemd password manager writing to `Wall` sporadically; make sure you only have **one** in the directory!
 
 ### Configuring Transmission <a name="configuring-transmission"></a>
 The configuration settings for the transmission daemon can be found in `/etc/transmission-daemon/settings.json`. Lines of importance are
