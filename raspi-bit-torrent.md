@@ -34,7 +34,7 @@ and thus, create a `.secrets` file in `/etc/openvpn/`, storing the login details
 [username]
 [password]
 ```
-NB: the line break is essential. With this, OpenVPN will automatically login and start routing all (except LAN) traffic through the VPN on startup.
+NB: the line break is essential, and you'll probably want to `sudo chmod 400 .secrets` as well. With this, OpenVPN will automatically login and start routing all (except LAN) traffic through the VPN on startup.
 
 Next, we need to enable the `AUTOSTART="all"` flag in 
 ```
