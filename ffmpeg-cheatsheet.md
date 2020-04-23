@@ -72,3 +72,9 @@ For a given `.srt` file, the subtitles can be embedded into an `.mp4` using
 ```
 ffmpeg -i [videos].mp4 -i [subtitles].srt -c:v copy -c:a copy -c:s mov_text -metadata:s:s:0 language=eng out.mp4
 ```
+
+### Concatenating images into videos
+There are many commands that can achieve this result. For the problem I was solving, I wanted to concatenate PNG images, numbered `1.png`, `2.png`, `...`, into a `.mp4` video at a specific frame rate
+```
+ffmpeg -f image2 -r [framerate] -i %d.png -vcodec mpeg4 -y out.mp4
+```
