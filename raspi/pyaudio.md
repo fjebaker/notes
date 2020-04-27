@@ -13,7 +13,7 @@ Using the raspian operating system. The required packages are
 (sudo apt-get update && sudo-apt get upgrade)
 sudo apt-get install portaudio19-dev pulseaudio
 ```
-Pulseaudio seems to be required for translating the audio device indexes for PyAudio. Since it is a daemon, we must start it with
+Pulseaudio seems to be required for translating the audio device indexes for PyAudio. Since we want it to run as a daemon, we must start it with
 ```bash
 pulseaudio --start
 ```
