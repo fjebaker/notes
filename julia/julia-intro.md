@@ -576,26 +576,6 @@ import Pkg; Pkg.add("BenchmarkTools")
 using BenchmarkTools
 ```
 
-    [32m[1m   Updating[22m[39m registry at `~/.julia/registries/General`
-
-
-    [?25l    
-
-    [32m[1m   Updating[22m[39m git-repo `https://github.com/JuliaRegistries/General.git`
-
-
-        [36m[1mFetching:[22m[39m [============================>[2K[?25h[1mFetching:[22m[39m [========================================>]  100.0 %  97.4 %
-
-    [32m[1m  Resolving[22m[39m package versions...
-    [32m[1m  Installed[22m[39m BenchmarkTools ─ v0.5.0
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Project.toml`
-     [90m [6e4b80f9][39m[92m + BenchmarkTools v0.5.0[39m
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Manifest.toml`
-     [90m [6e4b80f9][39m[92m + BenchmarkTools v0.5.0[39m
-    ┌ Info: Precompiling BenchmarkTools [6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf]
-    └ @ Base loading.jl:1260
-
-
 
 ```julia
 operation(x) = x + 2 * x
@@ -1243,95 +1223,6 @@ using Interact
 # requires a `pip install jupyter_contrib_nbextensions`
 ```
 
-    [32m[1m   Updating[22m[39m registry at `~/.julia/registries/General`
-
-
-    [?25l    
-
-    [32m[1m   Updating[22m[39m git-repo `https://github.com/JuliaRegistries/General.git`
-
-
-    [2K[?25h
-
-    [32m[1m  Resolving[22m[39m package versions...
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Project.toml`
-    [90m [no changes][39m
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Manifest.toml`
-    [90m [no changes][39m
-    [32m[1m  Resolving[22m[39m package versions...
-
-
-
-<script>
-// Immediately-invoked-function-expression to avoid global variables.
-(function() {
-    var warning_div = document.getElementById("webio-warning-12904063493887090172");
-    var hide = function () {
-        var script = document.getElementById("webio-setup-8754794176794874610");
-        var parent = script && script.parentElement;
-        var grandparent = parent && parent.parentElement;
-        if (grandparent) {
-            grandparent.style.display = "none";
-        }
-        warning_div.style.display = "none";
-    };
-    if (typeof Jupyter !== "undefined") {
-        console.log("WebIO detected Jupyter notebook environment.");
-        // Jupyter notebook.
-        var extensions = (
-            Jupyter
-            && Jupyter.notebook.config.data
-            && Jupyter.notebook.config.data.load_extensions
-        );
-        if (extensions && extensions["webio-jupyter-notebook"]) {
-            // Extension already loaded.
-            console.log("Jupyter WebIO nbextension detected; not loading ad-hoc.");
-            hide();
-            return;
-        }
-    } else if (window.location.pathname.includes("/lab")) {
-        // Guessing JupyterLa
-        console.log("Jupyter Lab detected; make sure the @webio/jupyter-lab-provider labextension is installed.");
-        hide();
-        return;
-    }
-})();
-
-</script>
-<p
-    id="webio-warning-12904063493887090172"
-    class="output_text output_stderr"
-    style="padding: 1em; font-weight: bold;"
->
-    Unable to load WebIO. Please make sure WebIO works for your Jupyter client.
-    For troubleshooting, please see <a href="https://juliagizmos.github.io/WebIO.jl/latest/providers/ijulia/">
-    the WebIO/IJulia documentation</a>.
-    <!-- TODO: link to installation docs. -->
-</p>
-
-
-
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Project.toml`
-    [90m [no changes][39m
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Manifest.toml`
-    [90m [no changes][39m
-    ┌ Info: Installing Jupyter WebIO extension...
-    │   cmd = `[4m/Users/minerva/Developer/Julia/learning/pyenv/bin/jupyter[24m [4mnbextension[24m [4minstall[24m [4m--user[24m [4m/Users/minerva/.julia/packages/WebIO/2nnB1/deps/bundles/webio-jupyter-notebook.js[24m`
-    └ @ WebIO /Users/minerva/.julia/packages/WebIO/2nnB1/deps/jupyter.jl:237
-    Up to date: /Users/minerva/Library/Jupyter/nbextensions/webio-jupyter-notebook.js
-    
-        To initialize this nbextension in the browser every time the notebook (or other app) loads:
-        
-              jupyter nbextension enable <the entry point> --user
-        
-    ┌ Info: Enabling Jupyter WebIO extension...
-    │   cmd = `[4m/Users/minerva/Developer/Julia/learning/pyenv/bin/jupyter[24m [4mnbextension[24m [4menable[24m [4m--user[24m [4mwebio-jupyter-notebook[24m`
-    └ @ WebIO /Users/minerva/.julia/packages/WebIO/2nnB1/deps/jupyter.jl:241
-    Enabling notebook extension webio-jupyter-notebook...
-          - Validating: [32mOK[0m
-
-
-
 ```julia
 @manipulate for n in 1:20
     [i*j for i in 1:n, j in 1:n]
@@ -1381,13 +1272,6 @@ import Pkg; Pkg.add("Colors")
 using Colors
 ```
 
-    [32m[1m  Resolving[22m[39m package versions...
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Project.toml`
-    [90m [no changes][39m
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Manifest.toml`
-    [90m [no changes][39m
-
-
 
 ```julia
 @manipulate for n in 1:80
@@ -1424,14 +1308,6 @@ import Pkg; Pkg.add("OrdinaryDiffEq")
 using OrdinaryDiffEq
 ```
 
-    [32m[1m  Resolving[22m[39m package versions...
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Project.toml`
-    [90m [no changes][39m
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Manifest.toml`
-    [90m [no changes][39m
-
-
-
 ```julia
 # half life of carbon is 5730 years
 hfl = 5.730
@@ -1465,19 +1341,6 @@ Now with arbitrary precision:
 import Pkg; Pkg.add("Measurements")
 using Measurements
 ```
-
-    [32m[1m  Resolving[22m[39m package versions...
-    [32m[1m  Installed[22m[39m Calculus ───── v0.5.1
-    [32m[1m  Installed[22m[39m Measurements ─ v2.1.1
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Project.toml`
-     [90m [eff96d63][39m[92m + Measurements v2.1.1[39m
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Manifest.toml`
-     [90m [49dc2e85][39m[92m + Calculus v0.5.1[39m
-     [90m [eff96d63][39m[92m + Measurements v2.1.1[39m
-    ┌ Info: Precompiling Measurements [eff96d63-e80a-5855-80a2-b1b0885c5ab7]
-    └ @ Base loading.jl:1260
-
-
 
 ```julia
 hfl = big(5.730) # now a BigFloat
@@ -1589,13 +1452,6 @@ To assist in identifying and avoiding this issue, we can use [Traceur.jl](https:
 import Pkg; Pkg.add("Traceur")
 using Traceur
 ```
-
-    [32m[1m  Resolving[22m[39m package versions...
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Project.toml`
-     [90m [37b6cedf][39m[92m + Traceur v0.3.0[39m
-    [32m[1m   Updating[22m[39m `~/.julia/environments/v1.4/Manifest.toml`
-    [90m [no changes][39m
-
 
 
 ```julia
