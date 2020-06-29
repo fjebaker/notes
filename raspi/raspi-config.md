@@ -68,6 +68,13 @@ sudo dd if=/dev/diskID of=DISK_IMAGE_NAME.img
 ## Some quality of life tips <a name="toc-sub-tag-3"></a>
 I like to have my Pi's feel different from other machines, so I tend to tweak the same settings over and over; here are my notes for how I do that.
 
+### SSH enable in headless mode
+Simply navigate to the `boot` directory, and create an empty `ssh` file; e.g.:
+```bash
+touch Volumes/boot/ssh
+```
+and then (re)boot the device.
+
 ### Setting an SSH banner <a name="toc-sub-tag-4"></a>
 The 'standard' banner file (though you can create your own anywhere, just ensure read priveledges) is `/etc/issue.net`; paste whatever you want your banner to be in this file. Then we just need to configure the SSH server to present the banner -- to do this, edit
 ```
@@ -86,3 +93,11 @@ The hostname is located in a few different locations, so we want to edit the fil
 /etc/hosts
 ```
 and change, presumably, `raspberrypi` to whatever you'd like the hostname to be, and then reboot. Note, you may also need to run `hostname` upon reboot, but I have only read this, and did not personally need to.
+
+### Disabling unneeded hardware
+In `/boot/config.txt` you can set a variety of different parameters that control how the raspi boots up. For example, to disable WiFi and Bluetooth completely, add the line:
+```
+dtoverlay=disable-wifi
+dtoverlay=disable-bt
+```
+These are use-case specific, and more can be seen [here](https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README).
