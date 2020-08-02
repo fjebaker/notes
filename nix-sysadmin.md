@@ -12,6 +12,10 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 		1. [DHCP](#toc-sub-tag-4)
 		2. [Static IP](#toc-sub-tag-5)
 3. [Installing `sudo`](#toc-sub-tag-6)
+4. [Sound Configuration](#toc-sub-tag-7)
+	1. [ALSA](#toc-sub-tag-8)
+		1. [CMUS with ALSA](#toc-sub-tag-9)
+	2. [Hardware specifications](#toc-sub-tag-10)
 <!--END TOC-->
 
 ## Users and groups <a name="toc-sub-tag-0"></a>
@@ -142,12 +146,12 @@ to allow members of group sudo to execute any command.
 
 To commit changes, a reboot is required.
 
-## Sound Configuration
+## Sound Configuration <a name="toc-sub-tag-7"></a>
 Especially on headless installations of \*nix, some sound device configuration is required.
 
 **NB:** In most cases, the user wont succeed in configuring the sound unless they are also part of the `audio` group.
 
-### ALSA
+### ALSA <a name="toc-sub-tag-8"></a>
 [Advanced Linux Sound Architecture](https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture) replaces the original Open Sound System (OSS) on \*nix.
 
 There are conflicting methods for the installation on different \*nix systems, but I had personal success on Debian with
@@ -165,7 +169,7 @@ options snd_hda_intel index=1
 ```
 There is some information as to how this works in [this wiki entry](https://docs.slackware.com/howtos:hardware:audio_and_snd-hda-intel).
 
-#### CMUS with ALSA
+#### CMUS with ALSA <a name="toc-sub-tag-9"></a>
 To get CMUS to use ALSA, we edit the `~/.cmus/Autosave` file and change the configuration to
 ```
 dsp.alsa.device=default
@@ -174,7 +178,7 @@ mixer.alsa.channel=PCM
 output_plugin=alsa
 ```
 
-### Hardware specifications
+### Hardware specifications <a name="toc-sub-tag-10"></a>
 As stated in the [Debian wiki](https://wiki.debian.org/ALSA#Troubleshooting), the assigned indexes to sound cards can be found with
 ```bash
 cat /proc/asound/cards
