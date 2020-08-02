@@ -102,7 +102,7 @@ lib_deps =
   arduino
   SomePackageName
 ```
-or for all environments under the `[common_env_data]` section.
+or for all environments under the `[common_env_data]` section. Dependencies are automatically installed when the environment is run.
 
 More information can be seen here in the [PlatformIO Docs](https://docs.platformio.org/en/latest/projectconf/index.html).
 
