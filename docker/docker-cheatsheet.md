@@ -8,9 +8,10 @@ Compiled from different projects.
 	1. [Running images as containers](#toc-sub-tag-1)
 	2. [Distributing docker containers](#toc-sub-tag-2)
 	3. [Viewing container status](#toc-sub-tag-3)
-2. [Recipes](#toc-sub-tag-4)
-	1. [Clustering](#toc-sub-tag-5)
-	2. [Commiting Dockerfile Modifications](#toc-sub-tag-6)
+	4. [Copying files](#toc-sub-tag-4)
+2. [Recipes](#toc-sub-tag-5)
+	1. [Clustering](#toc-sub-tag-6)
+	2. [Commiting Dockerfile Modifications](#toc-sub-tag-7)
 <!--END TOC-->
 
 ## Command line <a name="toc-sub-tag-0"></a>
@@ -82,10 +83,16 @@ A JSON structure containing all information on a running container can be found 
 docker inspect [container-id/name]
 ```
 
-## Recipes <a name="toc-sub-tag-4"></a>
+### Copying files <a name="toc-sub-tag-4"></a>
+Files can be coied to and from running containers using
+```bash
+docker cp [local-path] [container-id/name]:[remote-path]
+```
+
+## Recipes <a name="toc-sub-tag-5"></a>
 A few case studies in using different docker commands.
 
-### Clustering <a name="toc-sub-tag-5"></a>
+### Clustering <a name="toc-sub-tag-6"></a>
 I recently set up a VerneMQTT cluster using docker images, which require knowledge of the IP addresses of the first host. This information can be found on a running container using the 
 ```bash
 docker inspect [container-id/name] | jq ".[0].NetworkSettings.IPAddress"
@@ -93,7 +100,7 @@ docker inspect [container-id/name] | jq ".[0].NetworkSettings.IPAddress"
 command, which pipes the JSON structure into JQ, and extracts specifically just the IP address.
 
 
-### Commiting Dockerfile Modifications <a name="toc-sub-tag-6"></a>
+### Commiting Dockerfile Modifications <a name="toc-sub-tag-7"></a>
 If you have a running container, but wish to modify it's behaviour so that port 80 is always exposed, you can do so [with the commit `--change` flag](https://docs.docker.com/engine/reference/commandline/commit/):
 ```bash
 docker commit --change="EXPOSE 80" [container-id/name] new-image-name
