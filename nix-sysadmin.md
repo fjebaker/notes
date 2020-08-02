@@ -30,6 +30,11 @@ sudo passwd [username]
 sudo chsh -s /bin/bash [username]
 # set startup shell
 ```
+**NB:** The whole user creation process is also streamlined with the 
+```bash
+sudo adduser [username]
+```
+interactive program.
 
 For managing **primary groups**
 ```bash
