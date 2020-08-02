@@ -48,6 +48,11 @@ Finally, so you don't have to run every Docker command as `sudo`, add yourself t
 ```
 sudo usermod -a -G docker ec2-user
 ```
+Note, if you want Docker to persist upon shutdown and restart, you must enable the service with 
+```
+sudo systemctl enable docker
+```
+
 
 ### Running your Docker container <a name="toc-sub-tag-4"></a>
 Once you have built an image, you can save it as a `.tar` file for distribution using
@@ -62,4 +67,13 @@ to load the image into the Docker image list. You can now run the image using
 ```
 docker run [image_name]
 ```
-or disconnected from a shell by including the `-d` flag. This way, the docker image will still run after log-off (NB this requires Docker to be running as a service). If you are exposing docker ports, ensure they are configured correctly in the VPC.
+or disconnected from a shell by including the `-d` flag. This way, the docker image will still run after log-off (NB this requires Docker to be running as a service). If you are exposing docker ports, ensure they are configured correctly in the VPC. To bind ports use, e.g., `-p 8080:8080`.
+
+To stop the container, use
+```
+docker stop CONTAINER_ID
+```
+and remove it with
+```
+docker rm CONTAINER_ID
+```
