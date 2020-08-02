@@ -97,6 +97,21 @@ result = db.songs.delete_many({'duration':300})
 print(result.deleted_count)
 ```
 
+### A note on mongo predicated
+Regular expressions can be inserted into most matching parameters as a predicate
+```python
+res = db.songs.find({
+		"artist":
+			{"$regex": u"God", "$options":"-i"}	# -i ignores case sensitivity
+	})
+```
+Note that the IDs are by default BSON, thus if you want to query them by string, you must use 
+```python
+from bson.objectid import ObjectId
+
+_id = ObjectId(stringid)
+``` 
+
 ### Aggregation pipelines <a name="toc-sub-tag-8"></a>
 MongoDB allows multiple database requests to be amalgamated into one; consider our test song database, where we want to know the number of count for each duration. This could be either 360 individual database requests, or, more conveniently, a single [aggregated pipeline](https://docs.mongodb.com/manual/aggregation/)
 ```python
