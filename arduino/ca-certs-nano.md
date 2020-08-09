@@ -1,5 +1,7 @@
-#Copying (root) CA certificates onto Arduino devices
+# Copying (root) CA certificates onto Arduino devices
 Certificate authority (CA) certificates are the basis for secure and trustworthy transport layer security (TLS). Depending on the Arduino library used, the methods for copying these certificates onto the device can vary. Here I document my exploration of this task, using the WiFiNina library, and the [Arduino Nano 33 IoT](https://store.arduino.cc/arduino-nano-33-iot).
+
+Note, there is a discussion as to the security of different WiFi chips, and whether they are SSL/TLS compatible in the [Arduino forums](https://forum.arduino.cc/index.php?topic=679562.0).
 
 <!--BEGIN TOC-->
 ## Table of Contents
@@ -133,3 +135,19 @@ Other examples, such as the [`ServerClientCert`](https://github.com/esp8266/Ardu
 A PoC for BearSSL is provided [here](https://github.com/tsi-software/Secure_ESP8266_MQTT_poc), which includes full secure MQTT setup.
 
 **NB:** The ESP8266 is its own WiFi hardware chip, and thus these solutions will not work with the Arduino Nano 33 IoT's u-blox NINA-W102. I've included them just for posterity, and maybe a little inspiration, if nothing else.
+
+### Ameba IoT devices
+https://www.instructables.com/id/Arduino-Using-AWS-IoT-Serivce/
+
+### mbedTLS
+https://tls.mbed.org/discussions/generic/mbedtls-configuration-for-google-iot
+
+
+### WiP links
+https://forum.arduino.cc/index.php?topic=608492.0
+
+https://forum.arduino.cc/index.php?topic=526033.0 final tmp2k post
+
+https://www.savjee.be/2019/07/connect-esp32-to-aws-iot-with-arduino-code/
+
+http://www.iotsharing.com/2017/08/how-to-use-esp32-mqtts-with-mqtts-mosquitto-broker-tls-ssl.html i wanna get an esp32
