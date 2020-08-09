@@ -16,6 +16,8 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 	1. [ALSA](#toc-sub-tag-8)
 		1. [CMUS with ALSA](#toc-sub-tag-9)
 	2. [Hardware specifications](#toc-sub-tag-10)
+5. [Useful commands](#toc-sub-tag-11)
+	1. [`STOP` and `CONT` a process](#toc-sub-tag-12)
 <!--END TOC-->
 
 ## Users and groups <a name="toc-sub-tag-0"></a>
@@ -191,7 +193,7 @@ cat /proc/asound/cards
 
 To see the hardware device names, you can also use
 ```bash
-lspci -nn |grep -i audio
+lspci -nn | grep -i audio
 ```
 Also useful is
 ```bash
@@ -202,4 +204,28 @@ to see the kernel sound modules.
 With ALSA installed, you can also identify the sound devices using
 ```bash
 aplay -l
+```
+
+## Useful commands <a name="toc-sub-tag-11"></a>
+In this section I will document useful commands, which, for brevity, don't merit a full chapter of their own.
+
+### `STOP` and `CONT` a process <a name="toc-sub-tag-12"></a>
+As an example, consider you wanted to use Wireshark to capture packets of a specific program, however other programs were being very chatty, and working out exactly what Wireshark filter to craft is proving tedious. A quick and dirty solution to this is just to halt the execution of the chatty program
+
+- find the `pid`:
+We can find the process ID of any program using
+```bash
+ps aux | grep [name]
+```
+
+- send a `STOP` signal
+Interrupt and halt the program using
+```bash
+kill -STOP [pid]
+```
+
+- resume with a `CONT` signal
+Using a very similar command, we run
+```bash
+kill -CONT [pid]
 ```
