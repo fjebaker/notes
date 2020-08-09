@@ -7,11 +7,11 @@ The arduino WiFi and WiFiNina both ship with a tool for updating the device's fi
 - install the Arduino IDE
 - under Tools -> Manage Libraries, install the WiFi(Nina)
 - load the example sketch, under File -> Examples -> WiFi(Nina) -> Tools -> Firmware Updater, and upload it onto your MC device
-- undet Tools, select the WiFi101 / WiFiNina Firmware Updater, and follow the Toolkit's instructions
+- under Tools, select the WiFi101 / WiFiNina Firmware Updater, and follow the Toolkit's instructions
 
-The final section of the tool allows you to enter the desired domains you wish to access with the device over SSL/TLS, and the device will then receive the root CA certificates in order to complete that task. As such, the security of the device is in only allowing specific domains to be accessed, preventing some Man-in-the-Middle attacks (MitM). However, uploading custom CA, for, e.g. a home server, becomes more involved, since you would have to provide a location where the certificate may be accessed, and understanding exactly how these certificates are taken also requires exploration.
+The final section of the tool allows you to enter the desired domains you wish to access with the device over SSL/TLS, and the device will then receive the root CA certificates in order to complete that task. As such, the security of the device is in only allowing specific domains to be trustfully accessed, preventing some Man-in-the-Middle attacks (MitM). However, uploading custom CA certificates, for, e.g. a home server, becomes more involved, since you would have to provide a domain where the certificate may be accessed; understanding exactly how these certificates are obtained by the Toolkit also requires exploration to complete this.
 
-There exist essentially two solutions then, to uploading a custom CA onto the device; either providing an endpoint on your server where the Toolkit may fetch it, so that it may be uploaded, or reverse-engineering the Firmware Updater sketch, and feeding the device your own `.pem` or `.cert` files. 
+There exist essentially two solutions then, in uploading a custom CA onto the device; either providing an endpoint on your server where the Toolkit may fetch it, so that it may be uploaded, or reverse-engineering the Firmware Updater sketch, and feeding the device your own `.pem` or `.cert` files. 
 
 ### Brief discussion of the library state
 
