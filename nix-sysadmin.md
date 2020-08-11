@@ -5,22 +5,33 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Users and groups](#toc-sub-tag-0)
-2. [Debian network configuration](#toc-sub-tag-1)
-	1. [Controlling interfaces](#toc-sub-tag-2)
-	2. [Configuring interfaces](#toc-sub-tag-3)
-		1. [DHCP](#toc-sub-tag-4)
-		2. [Static IP](#toc-sub-tag-5)
-3. [Installing `sudo`](#toc-sub-tag-6)
-4. [Sound Configuration](#toc-sub-tag-7)
-	1. [ALSA](#toc-sub-tag-8)
-		1. [CMUS with ALSA](#toc-sub-tag-9)
-	2. [Hardware specifications](#toc-sub-tag-10)
-5. [Useful commands](#toc-sub-tag-11)
-	1. [`STOP` and `CONT` a process](#toc-sub-tag-12)
+1. [General tricks and tips](#toc-sub-tag-0)
+	1. [Installing without ethernet](#toc-sub-tag-1)
+2. [Users and groups](#toc-sub-tag-2)
+3. [Debian network configuration](#toc-sub-tag-3)
+	1. [Controlling interfaces](#toc-sub-tag-4)
+	2. [Configuring interfaces](#toc-sub-tag-5)
+		1. [DHCP](#toc-sub-tag-6)
+		2. [Static IP](#toc-sub-tag-7)
+4. [Installing `sudo`](#toc-sub-tag-8)
+5. [Sound Configuration](#toc-sub-tag-9)
+	1. [ALSA](#toc-sub-tag-10)
+		1. [CMUS with ALSA](#toc-sub-tag-11)
+	2. [Hardware specifications](#toc-sub-tag-12)
+6. [Useful commands](#toc-sub-tag-13)
+	1. [`STOP` and `CONT` a process](#toc-sub-tag-14)
+	2. [SSL with `curl`](#toc-sub-tag-15)
 <!--END TOC-->
 
-## Users and groups <a name="toc-sub-tag-0"></a>
+## General tricks and tips <a name="toc-sub-tag-0"></a>
+Here are some general ideas that I think are vitally important to remember when handling \*nix systems.
+
+### Installing without ethernet <a name="toc-sub-tag-1"></a>
+When installing a \*nix system without an ethernet connection, it can be generally quite difficult to ensure the right drivers are at hand for the wifi hardware. Sometimes using just the non-free firmware versions of e.g. Debian can be enough to allow the system to enable the hardware, but at other times, you'll have to install the firmware through `apt`, which won't be available without an internet connection.
+
+The solution to this is, if you own an android phone, use **USB tethering** to add a network interface so you can complete the installation and find the necessary firmware.
+
+## Users and groups <a name="toc-sub-tag-2"></a>
 Creating a **new user**, managing startup shell and directory
 ```bash
 sudo useradd -d /home/[homedir] [username]
@@ -59,7 +70,7 @@ sudo userdel -r [username]
 # -r removes home directory aswell
 ```
 
-## Debian network configuration <a name="toc-sub-tag-1"></a>
+## Debian network configuration <a name="toc-sub-tag-3"></a>
 Whilst installing Debian 9 on an old machine, which had a faulty NIC, I learned a few things about network configurations on that specific OS, most of which is documented [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html).
 
 The legacy `ifconfig` is being replaced with the newer `ip` suite, and an overview of the translation can be quickly seen in this post by [ComputingForGeeks](https://computingforgeeks.com/ifconfig-vs-ip-usage-guide-on-linux/). Two very useful commands I use a lot for debugging are
@@ -70,7 +81,7 @@ ip -s link show [interface]	# outputs interface statistics
 ```
 
 
-### Controlling interfaces <a name="toc-sub-tag-2"></a>
+### Controlling interfaces <a name="toc-sub-tag-4"></a>
 Toggling specific interface states can be done using either `ip`
 ```bash
 ip link set [interface] up
@@ -80,6 +91,11 @@ or `ifup`/`ifdown`
 ifup [interface]
 ifdown [interface]
 ```
+**NB:** `ifup` and `ifdown` can only interact with interfaces defined in `/etc/network/interfaces`. Add a simple configuration, such as
+```
+iface [enoXYZ] inet dhcp
+```
+More detail on this in the next section.
 
 The whole network interface may be interacted with using the `init.d` service
 ```bash
@@ -91,7 +107,7 @@ sudo systemctl [start, stop, restart, status] networking
 ```
 
 
-### Configuring interfaces <a name="toc-sub-tag-3"></a>
+### Configuring interfaces <a name="toc-sub-tag-5"></a>
 A post on [nixCraft](https://www.cyberciti.biz/faq/howto-configuring-network-interface-cards-on-debian/) provides a good overview of Debian network configuration, and the configuration syntax can be seen [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_basic_syntax_of_etc_network_interfaces).
 
 The main interfaces configuration can be edited in
@@ -104,14 +120,14 @@ auto lo
 iface lo inet loopback
 ```
 
-#### DHCP <a name="toc-sub-tag-4"></a>
+#### DHCP <a name="toc-sub-tag-6"></a>
 For a DHCP interface, we can use a simple configuration such as
 ```
 auto eth0
 iface eth0 inet dhcp
 ```
 
-#### Static IP <a name="toc-sub-tag-5"></a>
+#### Static IP <a name="toc-sub-tag-7"></a>
 Static IP addresses can be assigned with
 ```
 auto eth0
@@ -131,7 +147,7 @@ domain example.com
 **NB:** The modern `systemd` configuration is considerably more elegant, and also documented [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_modern_network_configuration_without_gui).
 
 
-## Installing `sudo` <a name="toc-sub-tag-6"></a>
+## Installing `sudo` <a name="toc-sub-tag-8"></a>
 Some distributions, such as lightweight Debian, do not include `sudo` by default. We can install it with root privileges
 ```bash
 su -
@@ -153,12 +169,12 @@ to allow members of group sudo to execute any command.
 
 To commit changes, a reboot is required.
 
-## Sound Configuration <a name="toc-sub-tag-7"></a>
+## Sound Configuration <a name="toc-sub-tag-9"></a>
 Especially on headless installations of \*nix, some sound device configuration is required.
 
 **NB:** In most cases, the user wont succeed in configuring the sound unless they are also part of the `audio` group.
 
-### ALSA <a name="toc-sub-tag-8"></a>
+### ALSA <a name="toc-sub-tag-10"></a>
 [Advanced Linux Sound Architecture](https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture) replaces the original Open Sound System (OSS) on \*nix.
 
 There are conflicting methods for the installation on different \*nix systems, but I had personal success on Debian with
@@ -176,7 +192,7 @@ options snd_hda_intel index=1
 ```
 There is some information as to how this works in [this wiki entry](https://docs.slackware.com/howtos:hardware:audio_and_snd-hda-intel).
 
-#### CMUS with ALSA <a name="toc-sub-tag-9"></a>
+#### CMUS with ALSA <a name="toc-sub-tag-11"></a>
 To get CMUS to use ALSA, we edit the `~/.cmus/Autosave` file and change the configuration to
 ```
 dsp.alsa.device=default
@@ -185,7 +201,7 @@ mixer.alsa.channel=PCM
 output_plugin=alsa
 ```
 
-### Hardware specifications <a name="toc-sub-tag-10"></a>
+### Hardware specifications <a name="toc-sub-tag-12"></a>
 As stated in the [Debian wiki](https://wiki.debian.org/ALSA#Troubleshooting), the assigned indexes to sound cards can be found with
 ```bash
 cat /proc/asound/cards
@@ -206,10 +222,10 @@ With ALSA installed, you can also identify the sound devices using
 aplay -l
 ```
 
-## Useful commands <a name="toc-sub-tag-11"></a>
+## Useful commands <a name="toc-sub-tag-13"></a>
 In this section I will document useful commands, which, for brevity, don't merit a full chapter of their own.
 
-### `STOP` and `CONT` a process <a name="toc-sub-tag-12"></a>
+### `STOP` and `CONT` a process <a name="toc-sub-tag-14"></a>
 As an example, consider you wanted to use Wireshark to capture packets of a specific program, however other programs were being very chatty, and working out exactly what Wireshark filter to craft is proving tedious. A quick and dirty solution to this is just to halt the execution of the chatty program
 
 - find the `pid`:
@@ -229,3 +245,6 @@ Using a very similar command, we run
 ```bash
 kill -CONT [pid]
 ```
+
+### SSL with `curl` <a name="toc-sub-tag-15"></a>
+https://stackoverflow.com/questions/10079707/https-connection-using-curl-from-command-line
