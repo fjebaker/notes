@@ -1,4 +1,4 @@
-#Using the ECC0X08 with Arduino devices
+# Using the ECC0X08 with Arduino devices
 Part of my ongoing IoT project is to utilize the ATECC608a embedded in the Arduino Nano 33 IoT micro controller. I outline my aims and list my guides in my [dedicated repository](https://github.com/Dustpancake/MQTT-with-TLS), and will use these notes to document the exploration process.
 
 <!--BEGIN TOC-->
@@ -206,58 +206,15 @@ Let's examine what that means.
 To understand what the slot and key configurations dictate, we need to refer to the preliminary data sheet [Section 2.2.10](https://atecc608a.neocities.org/ATECC608A.pdf#%5B%7B%22num%22%3A43%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C32%2C727%2C0%5D) and [Section 2.2.11](https://atecc608a.neocities.org/ATECC608A.pdf#%5B%7B%22num%22%3A53%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C32%2C603%2C0%5D) respectively. We learn that both the slot and key configurations are separated into 16 two-byte flags, each mapping the the 16 available data slots in progressive order. We thus examine the two-byte flags:
 
 First, the **Slot configuration**:
-<table>
-  <tr>
-  	<td align="right">Bits<br>0 - 3</td>
-  	<td>Read Key</td>
-  	<td>
-  		Multi use but generally:<br>
-  		bit 0: enable external signatures of arbitrary messages<br>
-  		bit 1: enable internal signatures through digest or key generation methods<br>
-  		bit 2: ECDH operation is permitted<br>
-  		bit 3: if disabled, ECDH master key is readable
-  	</td>
-  </tr>
-  <tr>
-  	<td align="right">4</td>
-  	<td>No MAC</td>
-  	<td>
-  		`0`: key stored may be used by all commands<br>
-  		`1`: key stored may not be used by MAC commands (i.e. key is for verification)
-  	</td>
-  </tr>
-  <tr>
-  	<td align="right">5</td>
-  	<td>Limited Use</td>
-  	<td>
-  		`0`: No use limit<br>
-  		`1`: Limited use, see [`Counter0`](https://atecc608a.neocities.org/ATECC608A.pdf#%5B%7B%22num%22%3A86%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C32%2C379%2C0%5D)
-  	</td>
-  </tr>
-  <tr>
-  	<td align="right">6</td>
-  	<td>Encrypt Read</td>
-  	<td>
-  		`0`: Clear text reads permitted<br>
-  		`1`: Reads will be encrypted, see specifications for details
-  	</td>
-  </tr>
-  <tr>
-  	<td align="right">7</td>
-  	<td>Is Secret</td>
-  	<td>
-  		`0`: Does not contain secret information (key generation commands will fail on this slot)<br>
-  		`1`: Contents secret, clear text and 4 byte read/write prohibited
-  	</td>
-  </tr>
-  <tr>
-  	<td nowrap="nowrap" align="right">8 - 15</td>
-  	<td>Write Key and Write Config</td>
-  	<td>
-  		See specification
-  	</td>
-  </tr>
-</table>
+
+Bits      | Name | Description
+-:|-|-
+0<br>- 3 | Read Key | Multi use but generally:<br>bit 0: enable external signatures of arbitrary messages<br>bit 1: enable internal signatures through digest or key generation methods<br>bit 2: ECDH operation is permitted<br>bit 3: if disabled, ECDH master key is readable
+4 | No MAC | `0`: key stored may be used by all commands<br>`1`: key stored may not be used by MAC commands (i.e. key is for verification)
+5 | Limited Use | `0`: No use limit<br>`1`: Limited use, see [`Counter0`](https://atecc608a.neocities.org/ATECC608A.pdf#%5B%7B%22num%22%3A86%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C32%2C379%2C0%5D)
+6 | Encrypt Read | `0`: Clear text reads permitted<br>`1`: Reads will be encrypted, see specifications for details
+7 | Is Secret | `0`: Does not contain secret information (key generation commands will fail on this slot)<br>`1`: Contents secret, clear text and 4 byte read/write prohibited
+8<br>- 15 | Write Key and Config | See specification
 
 Translating the above `0x07 0x0F -> 0x0F07`, we get
 ```py
@@ -281,72 +238,17 @@ This is my test configuration for the AES keys, as it allows for full sanity che
 
 
 Now the **Key configuration** for the specific data slot:
-<table>
-  <tr>
-  	<td align="right">Bit 0</td>
-  	<td>Private</td>
-  	<td>
-  		If set, designated that this slot contains a private key
-  	</td>
-  </tr>
-  <tr>
-  	<td align="right">1</td>
-  	<td>Public Key Info</td>
-  	<td>
-  		Depending on whether the key is private or not, will designate a different verification flag.
-  	</td>
-  </tr>
-  <tr>
-  	<td align="right">2 - 4</td>
-  	<td>Key Type</td>
-  	<td>
-  		`000` - `011`: Reserved<br>
-  		`100`: P256 NIST ECC Key<br>
-  		`101`: Reserved<br>
-  		`110`: AES Key<br>
-  		`111`: SHA Key or Other<br>
-  	</td>
-  </tr>
-  <tr>
-  	<td align="right">5</td>
-  	<td>Lockable</td>
-  	<td>
-  		`0`: Slot is locked when Data locked<br>
-  		`1`: Key is individually lockable, see [Section 2.4](https://atecc608a.neocities.org/ATECC608A.pdf#%5B%7B%22num%22%3A53%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C32%2C603%2C0%5D)
-  	</td>
-  </tr>
-  <tr>
-  	<td align="right">6</td>
-  	<td>Requires Random Nonces</td>
-  	<td>
-  		`0`: No Nonce required<br>
-  		`1`: Nonce required
-  	</td>
-  </tr>
-  <tr>
-  	<td align="right">7</td>
-  	<td>Requires Authentication</td>
-  	<td>
-  		`0`: No auth required<br>
-  		`1`: Authentication required, see [Section 4.4.8](https://atecc608a.neocities.org/ATECC608A.pdf#%5B%7B%22num%22%3A53%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C32%2C603%2C0%5D)
-  	</td>
-  </tr>
-  <tr>
-  	<td align="right">8 - 11</td>
-  	<td>Auth Key</td>
-  	<td>
-  		Must be `0000` if no auth required
-  	</td>
-  </tr>
-  <tr>
-  	<td nowrap="nowrap" align="right">12 - 15</td>
-  	<td>Misc. </td>
-  	<td>
-  		See specification
-  	</td>
-  </tr>
 
-</table>
+Bits      | Name | Description
+-:|-|-
+0 | Private | If set, designated that this slot contains a private key
+1 | Public Key Info | Depending on whether the key is private or not, will designate a different verification flag.
+2<br>- 4 | Key Type | `000` - `011`: Reserved<br>`100`: P256 NIST ECC Key<br>`101`: Reserved<br>`110`: AES Key<br>`111`: SHA Key or Other<br>
+5 | Lockable | `0`: Slot is locked when Data locked<br>`1`: Key is individually lockable, see [Section 2.4](https://atecc608a.neocities.org/ATECC608A.pdf#%5B%7B%22num%22%3A53%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C32%2C603%2C0%5D)
+6 | Requires Random Nonce | `0`: No Nonce required<br>`1`: Nonce required
+7 | Requires Auth | `0`: No auth required<br>`1`: Authentication required, see [Section 4.4.8](https://atecc608a.neocities.org/ATECC608A.pdf#%5B%7B%22num%22%3A53%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C32%2C603%2C0%5D)
+8<br>- 11 | Auth Key | Must be `0000` if no auth required
+12<br>- 15 | Misc. | See specification
 
 
 Translating our `0x1A 0x00 -> 0x001A`, we obtain
@@ -354,7 +256,7 @@ Translating our `0x1A 0x00 -> 0x001A`, we obtain
 >>> toBin(int("001A", 16), 16)
 '0000000000011010'
 ```
-which reads to configure
+which reads to configure this slot with
 
 - public key
 - must be validated
