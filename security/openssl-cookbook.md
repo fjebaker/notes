@@ -139,6 +139,6 @@ now listening on 4433. Visit [locahost:4433](https://localhost:4433) to see the 
 ## Accessing an SSL/TLS server <a name="toc-sub-tag-4"></a>
 We can access any server with 
 ```
-openssl s_client -connect localhost:44330
+openssl s_client -connect localhost:4433
 ```
 which will print the certificate chain into the console.
