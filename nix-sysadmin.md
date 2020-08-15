@@ -1,5 +1,4 @@
-\*nix system administration cookbook
-====================================
+# \*nix system administration cookbook
 
 Recipes and writeups of solutions from problems on different \*nix operating systems.
 
@@ -21,6 +20,7 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 6. [Useful commands](#toc-sub-tag-13)
 	1. [`STOP` and `CONT` a process](#toc-sub-tag-14)
 	2. [SSL with `curl`](#toc-sub-tag-15)
+7. [Mounting a filesystem with SSH](#toc-sub-tag-16)
 <!--END TOC-->
 
 ## General tricks and tips <a name="toc-sub-tag-0"></a>
@@ -248,3 +248,26 @@ kill -CONT [pid]
 
 ### SSL with `curl` <a name="toc-sub-tag-15"></a>
 https://stackoverflow.com/questions/10079707/https-connection-using-curl-from-command-line
+
+## Mounting a filesystem with SSH <a name="toc-sub-tag-16"></a>
+For ease of development on a remote platform, tools like `sshfs` can mount directories on the local file-system as if they were a disk. On OSX, you'll require `osxfuse` for Linux filesystems also. Both tools can easily be installed with brew:
+
+```bash
+brew install osxfuse
+
+brew install sshfs
+```
+
+Make a mount point and mount with
+```bash
+sshfs -o allow_other,default_permissions [USER]@[ADDRESS]:/ /path/to/mnt
+```
+
+and unmount with
+```bash
+umount /path/to/mnt
+```
+or, on OSX,
+```bash
+diskutil unmountDisk /path/to/mnt
+```
