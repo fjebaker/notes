@@ -26,6 +26,13 @@ Series of notes adapted from different books and blogs so that I can easily refe
 	5. [JS `class` keyword](#toc-sub-tag-19)
 	6. [Getters and setters](#toc-sub-tag-20)
 	7. [Proxies and access control](#toc-sub-tag-21)
+4. [Array methods](#toc-sub-tag-22)
+	1. [`.forEach()`](#toc-sub-tag-23)
+	2. [`.map()`](#toc-sub-tag-24)
+	3. [Logical checks](#toc-sub-tag-25)
+	4. [Searching](#toc-sub-tag-26)
+	5. [Sorting arrays](#toc-sub-tag-27)
+	6. [`.reduce()`](#toc-sub-tag-28)
 <!--END TOC-->
 
 ## Functions <a name="toc-sub-tag-0"></a>
@@ -602,11 +609,13 @@ function SomeObject() {
 
 ### Proxies and access control <a name="toc-sub-tag-21"></a>
 Proxies allow us to execute additional routines when interacting with an object. They are, in many ways, generalizations of getters and setters. There exist many traps we can set up using the `Proxy` built in, such as
+
 - `apply`, activated when calling a function
 - `construct`, activated when using the new operator
 - `get` and `set`, used as surrogates for getters and setters
 - `getPrototypeOf`, `setPrototypeOf`, which are pretty self-explanatory
 - `enumerate`, activated in `for-in` statements.
+
 A full list of traps can be found in the [Mozilla reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
 For example, using the `apply` trap, we can write
 ```js
@@ -620,3 +629,98 @@ console.log(proxySum);			// [Function: sum]
 console.log(proxySum(1, 2));	// 0
 ```
 Proxies are a fantastic way of implementing logging or performance checking code. The cost of proxies is performance, however, and can incur a considerable speed decrease for the additional control.
+
+## Array methods <a name="toc-sub-tag-22"></a>
+Manipulating data in JS is facilitated by the extensive `Array` object. An array object may be manipulated dynamically with
+
+- `.push(item)`: add `item` to the end of the array
+- `.unshift(item)`: add `item` to the start of the array
+- `.pop()`: returns and removes the last item of array
+- `.shift()`: returns and removes first item in array
+
+### `.forEach()` <a name="toc-sub-tag-23"></a>
+Iterating over arrays is also made easy with several built-in methods. A simple for loop, such as
+```js
+for (let i = 0; i < array.length; i++) {
+	var item = array[i];
+	// operator on item
+}
+```
+is more elegantly expressed with the asynchronous
+```js
+array.forEach((item, i) => {
+	// operate on item
+	});
+```
+Full documentation can be found [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
+
+### `.map()` <a name="toc-sub-tag-24"></a>
+Creating a new array from properties in an array of objects is a common idiom, known as a 'map'. Verbosely, a map is equivalent to
+```js
+const newArray = [];
+array.forEach(item => {
+	newArray.push(item.prop);
+});
+```
+or, using the built-in
+```js
+const newArray = array.map(i => i.prop);
+```
+Full documentation can be found [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
+
+### Logical checks <a name="toc-sub-tag-25"></a>
+Checking if **every** item in `array` has some specific property
+```js
+const allHaveProperty = array.ever(i => 'prop' in i);
+// true only if every i has i.prop
+```
+Checking if **some** items in `array` have a specific property
+```js
+const someHaveProperty = array.some(i => 'prop' in i);
+// true if at least one i has i.prop
+```
+Not that `.some()` will act the callback on each item until some true case is found, and then return `true`.
+
+### Searching <a name="toc-sub-tag-26"></a>
+To find one and return one item with a given property, use
+```js
+const item = array.find(i => 'prop' in i);
+// returns undefined if no i with i.prop
+```
+To find all items with a given property
+```js
+const items = array.filter(i => 'prop' in i);
+```
+
+### Sorting arrays <a name="toc-sub-tag-27"></a>
+Arrays can be sorted by returning numerical values, for example
+```js
+array.sort((a, b) => a - b);
+```
+If
+
+- `a - b` > 0, `a` should come after `b`
+- `a - b` < 0, `a` should come before `b`
+- `a - b` = 0, `a` and `b` are on equal footing
+
+This means we can easily implement a reversal algorithm
+```js
+array.sort((a, b) => b - a);
+// [1, 2, 3] -> [3, 2, 1]
+```
+
+### `.reduce()` <a name="toc-sub-tag-28"></a>
+Aggregating, e.g., a sum, would be conventionally expressed through
+```js
+const sum = 0;
+array.forEach(i => {
+	sum += i.value;
+});
+```
+or, using the built-in method
+```js
+const sum = array.reduce((aggr, i) => {
+	return aggr += i;
+}, 0);
+```
+Here, `0` passed as the second argument is the starting value of the aggregate variable `aggr`.
