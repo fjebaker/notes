@@ -9,9 +9,11 @@ docker pull nodered/node-red
 to pull the [latest image](https://hub.docker.com/r/nodered/node-red/), and
 
 ```bash
-docker run -it -p 1880:1880 --name noddy nodered/node-red
+docker run -it -p 1880:1880 -v ~/nodered:/data --name noddy nodered/node-red
 ```
 to start the container. Optionally with `-d` to detach, or use the `Ctrl-P`, `Ctrl-Q` on the attached container to lower into a daemon. Connect to port `1880` with your web browser to get started.
+
+The volume we attach in the above command allows for container persistence. 
 
 ## Useful guides
 Creating custom nodes [here](https://nodered.org/docs/creating-nodes/first-node).
