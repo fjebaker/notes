@@ -7,9 +7,10 @@ Web scraping is a very powerful tool, and at the heart of the scraping technique
 	1. [HTTP client](#toc-sub-tag-1)
 	2. [XMLHttpRequest](#toc-sub-tag-2)
 	3. [jQuery Ajax in clients](#toc-sub-tag-3)
-	4. [The (deprecated) `request` package](#toc-sub-tag-4)
-2. [Parsing response data](#toc-sub-tag-5)
-	1. [Cheerio](#toc-sub-tag-6)
+	4. [Axios](#toc-sub-tag-4)
+	5. [The (deprecated) `request` package](#toc-sub-tag-5)
+2. [Parsing response data](#toc-sub-tag-6)
+	1. [Cheerio](#toc-sub-tag-7)
 <!--END TOC-->
 
 ## Making HTTP requests <a name="toc-sub-tag-0"></a>
@@ -39,7 +40,22 @@ Note that the Ajax specification does not allow **User-Agent** headers to be cha
 ### jQuery Ajax in clients <a name="toc-sub-tag-3"></a>
 TODO
 
-### The (deprecated) `request` package <a name="toc-sub-tag-4"></a>
+### Axios <a name="toc-sub-tag-4"></a>
+The [`axios` project](https://www.npmjs.com/package/axios) is arguably the de-facto standard for making HTTP/HTTPS requests with JS.
+
+```js
+const axios = require('axios');
+
+request('url').then(resp => {
+	// handle resp if success
+}).catch(err => {
+	// handle error
+}).then(() => {
+	// always executed
+})
+```
+
+### The (deprecated) `request` package <a name="toc-sub-tag-5"></a>
 Similar to the Python `requests` module, [`request`](https://www.npmjs.com/package/request) is a JS wrapper around. The syntax is, likewise, very similar, e.g.
 ```js
 const request = require('request');
@@ -60,17 +76,17 @@ const opts = {
 		'someHeader': 'value',
 		'anotherHeader': 'otherValue'
 	}
-}
+};
 request(opts, (err, resp, body) => {
 	// ...
 });
 ```
-## Parsing response data <a name="toc-sub-tag-5"></a>
+## Parsing response data <a name="toc-sub-tag-6"></a>
 My aim here was to find a library similar to Python's BeautifulSoup. From minimal research, I quickly stumbled on a few packages, which I will document here. Additionally, I wanted a library that used the familiar jQuery syntax.
 
 My cookbook of jQuery searches is [here (todo)](), updated as I find new recipes and commands.
 
-### Cheerio <a name="toc-sub-tag-6"></a>
+### Cheerio <a name="toc-sub-tag-7"></a>
 Cheerio provides jQuery like parsing in node. Syntactically, it is very easy to use, e.g.
 ```js
 const cheerio = require('cheerio');
