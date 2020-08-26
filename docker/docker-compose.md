@@ -50,6 +50,7 @@ CONFIG_PATH=/path/to/config/
 HTTP_PORT:80
 ...
 ```
+More on environment variables and environment files can be found in the [official docs](https://docs.docker.com/compose/environment-variables/), and [syntax guide](https://docs.docker.com/compose/env-file/).
 
 ### Controlling startup and tear-down order
 For more, see [the official docs](https://docs.docker.com/compose/startup-order/).
