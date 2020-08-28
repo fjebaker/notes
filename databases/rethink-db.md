@@ -44,8 +44,10 @@ and start the database with a mounted volume for data, and a bound port for acce
 docker run \
 	--name rtdb \
 	-p 8080:8080 \
+  -p 28015:28015 \
+  -p 29015:29015 \
 	-v data:/data \
-	-d \			# run as daemon
+	-d \
 	rethinkdb
 ```
 You can then connect to [`http://localhost:8080/`](http://localhost:8080/) to access the UI and admin features.
