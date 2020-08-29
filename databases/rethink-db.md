@@ -8,16 +8,20 @@ The query language is derivative of NoSQL.
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [Overview](#toc-sub-tag-0)
-2. [RethinkDB with Docker](#toc-sub-tag-1)
-3. [ReQL Query Language](#toc-sub-tag-2)
-	1. [Examples](#toc-sub-tag-3)
-		1. [Functional](#toc-sub-tag-4)
-		2. [Composable](#toc-sub-tag-5)
-		3. [Subqueries](#toc-sub-tag-6)
-		4. [Expressions](#toc-sub-tag-7)
-	2. [More involved concepts](#toc-sub-tag-8)
-4. [Geospatial use and geoemtry](#toc-sub-tag-9)
-	1. [Data types](#toc-sub-tag-10)
+	1. [Data storage format](#toc-sub-tag-1)
+2. [RethinkDB with Docker](#toc-sub-tag-2)
+3. [ReQL Query Language](#toc-sub-tag-3)
+	1. [Examples](#toc-sub-tag-4)
+		1. [Functional](#toc-sub-tag-5)
+		2. [Composable](#toc-sub-tag-6)
+		3. [Subqueries](#toc-sub-tag-7)
+		4. [Expressions](#toc-sub-tag-8)
+		5. [Regex](#toc-sub-tag-9)
+	2. [Connection](#toc-sub-tag-10)
+	3. [More involved concepts](#toc-sub-tag-11)
+4. [Geospatial use and geoemtry](#toc-sub-tag-12)
+	1. [Data types](#toc-sub-tag-13)
+5. [Users and permissions](#toc-sub-tag-14)
 <!--END TOC-->
 
 ## Overview <a name="toc-sub-tag-0"></a>
@@ -30,10 +34,10 @@ Languages supported
 
 Client drivers connect to **port 28015**. Web UI present on **port 8080**.
 
-### Data storage format
+### Data storage format <a name="toc-sub-tag-1"></a>
 By default, RethinkDB uses `id` as the attribute for primary keys, which is auto-incremented.
 
-## RethinkDB with Docker <a name="toc-sub-tag-1"></a>
+## RethinkDB with Docker <a name="toc-sub-tag-2"></a>
 Pull the latest image from the docker hub with 
 ```bash
 docker pull rethinkdb
@@ -52,11 +56,11 @@ docker run \
 ```
 You can then connect to [`http://localhost:8080/`](http://localhost:8080/) to access the UI and admin features.
 
-## ReQL Query Language <a name="toc-sub-tag-2"></a>
+## ReQL Query Language <a name="toc-sub-tag-3"></a>
 The [RethinkDB Query Language](https://rethinkdb.com/docs/introduction-to-reql/) is described to differ from other NoSQL languages in the sense that is embedded into a programming language. All queries are **simply constructed**, they are **chainable** and they execute **on the server**. 
 
 
-### Examples <a name="toc-sub-tag-3"></a>
+### Examples <a name="toc-sub-tag-4"></a>
 In the following section, I will include Python examples:
 
 ```py
@@ -80,7 +84,7 @@ distinct_lastnames_query = r.table('songs').pluck('artist').distinct()
 distinct_lastnames_query.run(conn)
 ```
 
-#### Functional <a name="toc-sub-tag-4"></a>
+#### Functional <a name="toc-sub-tag-5"></a>
 Queries may also be functional, such as
 ```py
 r.table('songs').filter(lambda song: song['duration'] > 60).run(conn)
@@ -92,7 +96,7 @@ r.table('songs').filter(lambda song:
     r.branch(song['duration'] > 60, True, False)).run(conn)
 ```
 
-#### Composable <a name="toc-sub-tag-5"></a>
+#### Composable <a name="toc-sub-tag-6"></a>
 ReQL queries are composable, in the sense that multiple may be combined, and JS code executed
 
 > RethinkDB supports server-side JavaScript evaluation using the embedded V8 engine (sandboxed within outside processes, of course):
@@ -106,7 +110,7 @@ would evaluate the JS expression `1 + 1` server side. As such, the functional sy
 ```py
 r.table('songs').filter(r.js('(function (song) { return song.duration > 60; })')).run(conn)
 ```
-#### Subqueries <a name="toc-sub-tag-6"></a>
+#### Subqueries <a name="toc-sub-tag-7"></a>
 Subqueries are also supported, such as a query to select all songs from artists who are in the `history` table:
 ```py
 r.table('songs').filter(lambda song:
@@ -115,22 +119,33 @@ r.table('songs').filter(lambda song:
 ```
 This allows for very complex queries to be easily constructed.
 
-#### Expressions <a name="toc-sub-tag-7"></a>
+#### Expressions <a name="toc-sub-tag-8"></a>
 Expressions are also supported. Here is a query which will search the `songs` table for all songs with more up-votes than down-votes, and subsequently increase the rating of the song by 1:
 ```py
 r.table('songs').filter(lambda song: song['upvotes'] - user['downvotes'] > 0)
- .update(lambda song: {'rating': song['rating'] + 1})
+ .update(lambda song: {'rating': song['rating'] + 1}).run(conn)
 ```
 For more, see the full [Python API reference](https://rethinkdb.com/api/python/).
 
-### More involved concepts <a name="toc-sub-tag-8"></a>
+#### Regex <a name="toc-sub-tag-9"></a>
+You can [use regex in queries](https://rethinkdb.com/api/python/match) by using a `.match()` function call in the lambda:
+```py
+r.table('songs').filter(lambda song:
+    song['name'].match(r"ing$")
+).run(conn)
+```
+
+### Connection <a name="toc-sub-tag-10"></a>
+For exploratory and interactive purposes, when creating a connection you can also call `.repl()` to ensure the connection is kept alive, and to avoid calling `.run(conn)` at the end of each query. See [this section of the documentation](https://rethinkdb.com/api/python/repl/).
+
+### More involved concepts <a name="toc-sub-tag-11"></a>
 Notes for the future on
 
 - using [map-reduce](https://rethinkdb.com/docs/map-reduce/)
 - [table joins](https://rethinkdb.com/docs/table-joins/)
 - more on [lambda functions](https://rethinkdb.com/blog/lambda-functions/)
 
-## Geospatial use and geoemtry <a name="toc-sub-tag-9"></a>
+## Geospatial use and geoemtry <a name="toc-sub-tag-12"></a>
 Adapted mainly from information in the [JS API on geospatial queries](https://rethinkdb.com/docs/geo-support/javascript/).
 
 RethinkDB has native support for handling geometric data. Geoemtry objects are points mapped onto a sphere. Distances are calculated by RethinkDB as geodesics on a sphere. The data is by default interpreted as **latitude and longitude** (reverse order from e.g. Google maps) points:
@@ -170,8 +185,12 @@ var point = r.point(-3.651051, 51.0234467);  // Stonehenge
 r.table('map').getNearest(point, {index: 'location'})
 ```
 
-### Data types <a name="toc-sub-tag-10"></a>
+### Data types <a name="toc-sub-tag-13"></a>
 The data types supported for geospatial queries are
 - points
 - lines
 - polygons (i.e. at least three points)
+
+
+## Users and permissions <a name="toc-sub-tag-14"></a>
+[link to docs](https://rethinkdb.com/docs/permissions-and-accounts/)
