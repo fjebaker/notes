@@ -31,8 +31,9 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 	1. [Mounting a filesystem with SSH](#toc-sub-tag-24)
 11. [Installing Docker on Debian](#toc-sub-tag-25)
 12. [Package management](#toc-sub-tag-26)
-13. [Versions](#toc-sub-tag-27)
-	1. [Debian](#toc-sub-tag-28)
+13. [Python installations](#toc-sub-tag-27)
+14. [Versions](#toc-sub-tag-28)
+	1. [Debian](#toc-sub-tag-29)
 <!--END TOC-->
 
 ## General tricks and tips <a name="toc-sub-tag-0"></a>
@@ -434,10 +435,43 @@ dpkg -r [package_name]
 ```
 and purge with `-P` instead of `-r`. Purge will also delete all configuration files.
 
-## Versions <a name="toc-sub-tag-27"></a>
+## Python installations <a name="toc-sub-tag-27"></a>
+Following from [this guide](https://linuxize.com/post/how-to-install-python-3-8-on-debian-10/).
+
+First, we grab the dependencies
+```bash
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
+```
+then we grab the tar (use the latest version found [here](https://www.python.org/downloads/source/))
+```bash
+curl -O https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tar.xz
+```
+extract
+```bash
+tar -xf Python-3.8.2.tar.xz && cd Python-3.8.2
+```
+configure the installation
+```bash
+./configure --enable-optimizations
+```
+and install with
+```bash
+make -j $(nproc)
+```
+
+To install the binaries into their respective location, use
+```bash
+sudo make altinstall
+```
+and validate with
+```bash
+python3.8 --version
+```
+
+## Versions <a name="toc-sub-tag-28"></a>
 All sorts of valuable version information can be obtained with different commands, most of which are listed on [linuxconfig](https://linuxconfig.org/check-what-debian-version-you-are-running-on-your-linux-system).
 
-### Debian <a name="toc-sub-tag-28"></a>
+### Debian <a name="toc-sub-tag-29"></a>
 ```bash
 lsb_release -cs
 # buster
