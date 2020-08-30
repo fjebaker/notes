@@ -12,15 +12,27 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 	2. [Configuring interfaces](#toc-sub-tag-5)
 		1. [DHCP](#toc-sub-tag-6)
 		2. [Static IP](#toc-sub-tag-7)
-4. [Installing `sudo`](#toc-sub-tag-8)
-5. [Sound Configuration](#toc-sub-tag-9)
-	1. [ALSA](#toc-sub-tag-10)
-		1. [CMUS with ALSA](#toc-sub-tag-11)
-	2. [Hardware specifications](#toc-sub-tag-12)
-6. [Useful commands](#toc-sub-tag-13)
-	1. [`STOP` and `CONT` a process](#toc-sub-tag-14)
-	2. [SSL with `curl`](#toc-sub-tag-15)
-7. [Mounting a filesystem with SSH](#toc-sub-tag-16)
+4. [SSH Overview](#toc-sub-tag-8)
+5. [Installing `sudo`](#toc-sub-tag-9)
+6. [Hardware](#toc-sub-tag-10)
+	1. [Graphics cards](#toc-sub-tag-11)
+7. [Sound Configuration](#toc-sub-tag-12)
+	1. [ALSA](#toc-sub-tag-13)
+		1. [CMUS with ALSA](#toc-sub-tag-14)
+	2. [Hardware specifications](#toc-sub-tag-15)
+8. [Useful commands](#toc-sub-tag-16)
+	1. [`STOP` and `CONT` a process](#toc-sub-tag-17)
+	2. [SSL with `curl`](#toc-sub-tag-18)
+9. [Disks and mounting](#toc-sub-tag-19)
+	1. [Listing disks](#toc-sub-tag-20)
+	2. [File system checks](#toc-sub-tag-21)
+	3. [Formating](#toc-sub-tag-22)
+10. [Burning CDs and DVDs](#toc-sub-tag-23)
+	1. [Mounting a filesystem with SSH](#toc-sub-tag-24)
+11. [Installing Docker on Debian](#toc-sub-tag-25)
+12. [Package management](#toc-sub-tag-26)
+13. [Versions](#toc-sub-tag-27)
+	1. [Debian](#toc-sub-tag-28)
 <!--END TOC-->
 
 ## General tricks and tips <a name="toc-sub-tag-0"></a>
@@ -146,8 +158,20 @@ domain example.com
 
 **NB:** The modern `systemd` configuration is considerably more elegant, and also documented [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_modern_network_configuration_without_gui).
 
+## SSH Overview <a name="toc-sub-tag-8"></a>
+Useful commands are
 
-## Installing `sudo` <a name="toc-sub-tag-8"></a>
+Copy login key to remote:
+
+```bash
+ssh-copy-id user@host
+```
+Remove host key from chain:
+```bash
+ssh-keygen -R host
+```
+
+## Installing `sudo` <a name="toc-sub-tag-9"></a>
 Some distributions, such as lightweight Debian, do not include `sudo` by default. We can install it with root privileges
 ```bash
 su -
@@ -169,12 +193,27 @@ to allow members of group sudo to execute any command.
 
 To commit changes, a reboot is required.
 
-## Sound Configuration <a name="toc-sub-tag-9"></a>
+## Hardware <a name="toc-sub-tag-10"></a>
+Listing all of the PCI devices can be achieved with 
+```bash
+lspci
+```
+You may need to update the PCI database
+```bash
+update-pciids
+```
+
+On [HowToGeek](https://www.howtogeek.com/508993/how-to-check-which-gpu-is-installed-on-linux/) is a Ubuntu overview for listing hardware.
+
+### Graphics cards <a name="toc-sub-tag-11"></a>
+For graphics cards on Debian, I have created [separate notes](https://github.com/Dustpancake/Dust-Notes/blob/master/hardware/debian-gpu.md) as a how-to.
+
+## Sound Configuration <a name="toc-sub-tag-12"></a>
 Especially on headless installations of \*nix, some sound device configuration is required.
 
 **NB:** In most cases, the user wont succeed in configuring the sound unless they are also part of the `audio` group.
 
-### ALSA <a name="toc-sub-tag-10"></a>
+### ALSA <a name="toc-sub-tag-13"></a>
 [Advanced Linux Sound Architecture](https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture) replaces the original Open Sound System (OSS) on \*nix.
 
 There are conflicting methods for the installation on different \*nix systems, but I had personal success on Debian with
@@ -192,7 +231,7 @@ options snd_hda_intel index=1
 ```
 There is some information as to how this works in [this wiki entry](https://docs.slackware.com/howtos:hardware:audio_and_snd-hda-intel).
 
-#### CMUS with ALSA <a name="toc-sub-tag-11"></a>
+#### CMUS with ALSA <a name="toc-sub-tag-14"></a>
 To get CMUS to use ALSA, we edit the `~/.cmus/Autosave` file and change the configuration to
 ```
 dsp.alsa.device=default
@@ -201,7 +240,7 @@ mixer.alsa.channel=PCM
 output_plugin=alsa
 ```
 
-### Hardware specifications <a name="toc-sub-tag-12"></a>
+### Hardware specifications <a name="toc-sub-tag-15"></a>
 As stated in the [Debian wiki](https://wiki.debian.org/ALSA#Troubleshooting), the assigned indexes to sound cards can be found with
 ```bash
 cat /proc/asound/cards
@@ -222,10 +261,10 @@ With ALSA installed, you can also identify the sound devices using
 aplay -l
 ```
 
-## Useful commands <a name="toc-sub-tag-13"></a>
+## Useful commands <a name="toc-sub-tag-16"></a>
 In this section I will document useful commands, which, for brevity, don't merit a full chapter of their own.
 
-### `STOP` and `CONT` a process <a name="toc-sub-tag-14"></a>
+### `STOP` and `CONT` a process <a name="toc-sub-tag-17"></a>
 As an example, consider you wanted to use Wireshark to capture packets of a specific program, however other programs were being very chatty, and working out exactly what Wireshark filter to craft is proving tedious. A quick and dirty solution to this is just to halt the execution of the chatty program
 
 - find the `pid`:
@@ -246,11 +285,79 @@ Using a very similar command, we run
 kill -CONT [pid]
 ```
 
-### SSL with `curl` <a name="toc-sub-tag-15"></a>
+### SSL with `curl` <a name="toc-sub-tag-18"></a>
 https://stackoverflow.com/questions/10079707/https-connection-using-curl-from-command-line
 
-## Mounting a filesystem with SSH <a name="toc-sub-tag-16"></a>
-For ease of development on a remote platform, tools like `sshfs` can mount directories on the local file-system as if they were a disk. On OSX, you'll require `osxfuse` for Linux filesystems also. Both tools can easily be installed with brew:
+## Disks and mounting <a name="toc-sub-tag-19"></a>
+This section covers all things related to disks, disks drives, mounts, and anything else loosely `/dev/s*`.
+
+### Listing disks <a name="toc-sub-tag-20"></a>
+You can list the disks and block devices in a variety of ways depending on the information you are trying to ascertain:
+
+- listing block devices
+```bash
+lsblk
+```
+will show the mount point and disk size. For non-formatted partitions
+```bash
+lsblk -f
+```
+
+- listing `/dev/sd*` partitions
+```bash
+sudo fdisk -l
+```
+
+- disk system space usage
+```bash
+df -h
+```
+The `-h` prints in human readable form.
+
+- overview of all mounts and usage
+```bash
+findmnt [path]
+```
+You do not need to specify a path if you want to list all devices. This program is a repertoire for printing mount points and disk devices, and even has `--json` output. Another useful flag is `--df` for disk usage.
+
+- general mount info
+```bash
+mount
+```
+Will tell you the disks mounted, and the options applied.
+
+A full discussion can be seen in [this SO answer](https://askubuntu.com/questions/583909/how-do-i-check-where-devices-are-mounted).
+
+### File system checks <a name="toc-sub-tag-21"></a>
+Using [`fsck`](https://www.howtogeek.com/282374/what-is-the-lostfound-folder-on-linux-and-macos/).
+
+### Formating <a name="toc-sub-tag-22"></a>
+From [devconnected](https://devconnected.com/how-to-format-disk-partitions-on-linux/), you can format a partition/disk with a specific journal using
+```bash
+sudo mkfs -t [journal] /dev/sda1
+```
+Linux commonly uses `ext4`, apple has `adfs`, and windows `fat32`/`vfat`, `ntfs` or `msdos`. **NB:** is some cases, mostly windows, the journal must be written in all caps.
+
+## Burning CDs and DVDs <a name="toc-sub-tag-23"></a>
+The standard disk formatting is [`ISO9660`](https://wiki.osdev.org/ISO_9660) for `.iso` files.
+
+Following from the [Debian wiki](https://wiki.debian.org/BurnCd), the easiest (and probably best way) to burn disks with Debian is to use a tool like `growisofs`. A recipe for **burning dvds** is then
+```bash
+growisofs -dvd-compat -speed=8 -Z /dev/sr0=my.iso
+```
+You can also mount the disk into the file system with
+```bash
+sudo mount /dev/sr0 /mnt/cdrom
+```
+though personally I have encountered many errors in doing so (you're best of ripping the cd/dvd with `dd`). The above mount command may also require `-t iso9660` to specify the format.
+
+There is a short discussion in [this arch linux forum](https://bbs.archlinux.org/viewtopic.php?id=131299) on mounting disks.
+
+An overview of Debian r/w CDs and DVDs can be found [here](https://wiki.debian.org/CDDVD).
+
+
+### Mounting a filesystem with SSH <a name="toc-sub-tag-24"></a>
+For ease of development on a remote platform, tools like `sshfs` can mount directories on the local file-system as if they were a disk. On **OSX**, you'll require `osxfuse` for Linux filesystems also. Both tools can easily be installed with brew:
 
 ```bash
 brew install osxfuse
@@ -270,4 +377,86 @@ umount /path/to/mnt
 or, on OSX,
 ```bash
 diskutil unmountDisk /path/to/mnt
+```
+
+## Installing Docker on Debian <a name="toc-sub-tag-25"></a>
+Following from the [official install scripts](https://docs.docker.com/engine/install/debian/):
+```bash
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+```
+Add the GPG key
+```bash
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+```
+at tme of writing this keys is `9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88` which can be verified with 
+```bash
+sudo apt-key fingerprint 0EBFCD88
+```
+Depending on your architecture, this command may change, but for my use case (amd64) I run
+```bash
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   $(lsb_release -cs) \
+   stable"
+```
+
+We can now install the docker engine by updating the package index and fetching the requirements
+```bash
+sudo apt-get update
+```
+followed by
+```bash
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+Verify the installation with 
+```bash
+sudo docker run hello-world
+```
+
+## Package management <a name="toc-sub-tag-26"></a>
+With `dpkg`, you can install with
+```bash
+dpkg -i [package].deb
+```
+list installations with 
+```bash
+dpkg -l | grep [package_name]
+```
+
+Uninstall
+```bash
+dpkg -r [package_name]
+```
+and purge with `-P` instead of `-r`. Purge will also delete all configuration files.
+
+## Versions <a name="toc-sub-tag-27"></a>
+All sorts of valuable version information can be obtained with different commands, most of which are listed on [linuxconfig](https://linuxconfig.org/check-what-debian-version-you-are-running-on-your-linux-system).
+
+### Debian <a name="toc-sub-tag-28"></a>
+```bash
+lsb_release -cs
+# buster
+```
+
+```bash
+cat /etc/issue
+# Debian GNU/Linux 10 \n \l
+```
+
+```bash
+cat /etc/os-release
+# PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+# NAME="Debian GNU/Linux"
+# VERSION_ID="10"
+# VERSION="10 (buster)"
+# VERSION_CODENAME=buster
+# ID=debian
+# HOME_URL="https://www.debian.org/"
+# SUPPORT_URL="https://www.debian.org/support"
+# BUG_REPORT_URL="https://bugs.debian.org/"
 ```
