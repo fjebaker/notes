@@ -29,14 +29,14 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 	2. [File system checks](#toc-sub-tag-22)
 	3. [Formating](#toc-sub-tag-23)
 	4. [Automount with `/etc/fstab`](#toc-sub-tag-24)
-10. [Burning CDs and DVDs](#toc-sub-tag-25)
-	1. [Mounting a filesystem with SSH](#toc-sub-tag-26)
-11. [Installing Docker on Debian](#toc-sub-tag-27)
+	5. [Burning CDs and DVDs](#toc-sub-tag-25)
+	6. [Mounting a filesystem with SSH](#toc-sub-tag-26)
+10. [Installing Docker on Debian](#toc-sub-tag-27)
 	1. [docker-compose](#toc-sub-tag-28)
-12. [Package management](#toc-sub-tag-29)
-13. [Python installations](#toc-sub-tag-30)
-14. [Path alternatives](#toc-sub-tag-31)
-15. [Versions](#toc-sub-tag-32)
+11. [Package management](#toc-sub-tag-29)
+12. [Python installations](#toc-sub-tag-30)
+13. [Path alternatives](#toc-sub-tag-31)
+14. [Versions](#toc-sub-tag-32)
 	1. [Debian](#toc-sub-tag-33)
 <!--END TOC-->
 
@@ -366,7 +366,7 @@ sudo mount -a
 ```
 See [here](https://linoxide.com/file-system/example-linux-nfs-mount-entry-in-fstab-etcfstab/) for a network mount example.
 
-## Burning CDs and DVDs <a name="toc-sub-tag-25"></a>
+### Burning CDs and DVDs <a name="toc-sub-tag-25"></a>
 The standard disk formatting is [`ISO9660`](https://wiki.osdev.org/ISO_9660) for `.iso` files.
 
 Following from the [Debian wiki](https://wiki.debian.org/BurnCd), the easiest (and probably best way) to burn disks with Debian is to use a tool like `growisofs`. A recipe for **burning dvds** is then
