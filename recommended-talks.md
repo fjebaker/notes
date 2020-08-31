@@ -35,8 +35,7 @@ Key notes:
 ## Paradigms <a name="toc-sub-tag-2"></a>
 
 ### The Forgotten Art of Structured Programming - Kevlin Henney [C++ on Sea 2019] <a name="toc-sub-tag-3"></a>
-[YouTube link](https://www.youtube.com/watch?v=SFv8Wm2HdNM)
-On keeping code clean, factorisable, and the importance of intelligent control flow.
+[YouTube link](https://www.youtube.com/watch?v=SFv8Wm2HdNM). On keeping code clean, factorisable, and the importance of intelligent control flow.
 
 A cool (but legacy) code example demonstrating multiple entry points of a `while` directive
 ```C
