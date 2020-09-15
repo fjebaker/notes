@@ -58,3 +58,41 @@ TODO
 
 ### Good practices <a name="toc-sub-tag-4"></a>
 TODO
+
+
+## docker-compose
+Recipes for docker-compose.
+
+### MongoDB with MongoExpress
+```yml
+version: "3.8"
+
+# Docker compose file for starting only the database environment for development
+
+services:
+    mongodb:
+        image: mongo
+        ports:
+            - 27017:27017
+            - 28017:28017
+        volumes:
+            - ./store:/data/db
+        networks:
+            - asteroid
+
+    mongo_express:
+        image: mongo-express
+        ports:
+            - 8081:8081
+        environment:
+            - ME_CONFIG_MONGODB_SERVER=mongodb
+            - ME_CONFIG_MONGODB_PORT=27017
+        networks:
+            - asteroid
+        depends_on:
+            - mongodb
+        restart: always
+
+networks:
+    asteroid:
+```

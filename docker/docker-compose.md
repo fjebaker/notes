@@ -24,7 +24,7 @@ For full documentation on writing compose files, see the [official docs](https:/
 ### Structuring a service
 We can structure normal command line flags, such as for binding ports, volumes, or setting env variables, in the compose file as such
 ```
-version "3.8"
+version: "3.8"
 services:
 	some_service:
 		image: some/image:tag
