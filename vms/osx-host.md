@@ -5,6 +5,13 @@ Using [Oracle VirtualBox](https://www.virtualbox.org/), installed using brew wit
 brew cask install virtualbox  virtualbox-extension-pack
 ```
 
+## Host reconnaissance 
+Discover the chip instructions set with
+```bash
+uname -a 
+```
+to distinguish between `amd`, `arm`, and 32 and 64 bit operating systems.
+
 ## Linux Images
 In general, setting up a Linux VM is relatively configuration-free -- following the regular method for creating a new image, unless a fairly unknown distribution of Linux is being used, VirtualBox already configures most of the settings for you.
 
