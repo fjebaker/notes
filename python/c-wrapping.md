@@ -12,10 +12,11 @@ The most primitive was of wrapping Clang into Python is using `setuptools` and t
 3. [Some API notes](#toc-sub-tag-4)
 	1. [Using `**kwargs`](#toc-sub-tag-5)
 	2. [Raising exceptions](#toc-sub-tag-6)
-4. [Using Python objects in Clang](#toc-sub-tag-7)
-	1. [Using callbacks](#toc-sub-tag-8)
-	2. [Using iterators](#toc-sub-tag-9)
-5. [On reference counting](#toc-sub-tag-10)
+	3. [The `static` prefix](#toc-sub-tag-7)
+4. [Using Python objects in Clang](#toc-sub-tag-8)
+	1. [Using callbacks](#toc-sub-tag-9)
+	2. [Using iterators](#toc-sub-tag-10)
+5. [On reference counting](#toc-sub-tag-11)
 <!--END TOC-->
 
 ## Creating the build environment <a name="toc-sub-tag-0"></a>
@@ -203,10 +204,13 @@ And common error types to be called in `PyErr_SetString` are
 - `PyExc_TypeError`
 - `PyExc_RuntimeError`
 
-## Using Python objects in Clang <a name="toc-sub-tag-7"></a>
+### The `static` prefix <a name="toc-sub-tag-7"></a>
+In these notes, all method definitions have been defined as `static`, since they are functions defined in a single scope (i.e. a single C file). However, when extending these recipes to mutiple header and source files, the static definition *must be dropped*, else conflicts in the header includes will prevent the module from compiling.
+
+## Using Python objects in Clang <a name="toc-sub-tag-8"></a>
 The malleability of Python can be a little difficult to translate into a strongly type language like C or C++, however the Python/C API helps to smooth out many difficulties.
 
-### Using callbacks <a name="toc-sub-tag-8"></a>
+### Using callbacks <a name="toc-sub-tag-9"></a>
 To use a callback in Clang is surprisingly straight forward. Consider a function that just calls the callback on an integer argument; the implementation is
 ```C
 static PyObject* act_callback(PyObject* self, PyObject* args) {	// nb: no kwargs
@@ -231,7 +235,7 @@ static PyObject* act_callback(PyObject* self, PyObject* args) {	// nb: no kwargs
 ```
 We check that the callback is okay, we parse our argument into the callback, and then, since the callback is executing Python code, must cast the return object back into a C object. Since we expect only one return item, we can use the `PyLong_AsLong` to facilitate this conversion (bad conversion throws a `TypeError`).
 
-### Using iterators <a name="toc-sub-tag-9"></a>
+### Using iterators <a name="toc-sub-tag-10"></a>
 A common idiom in python is to pass a list or iterator to a function. We can use these in Clang too; consider a iterator sum accumulator
 ```C
 static PyObject* sum_itt(PyObject* self, PyObject* args) {
@@ -269,4 +273,5 @@ sum_itt([1, 2, 3, 4, 5])		# 15
 sum_itt(iter([1, 2, 3, 4, 5]))	# 15
 ```
 
-## On reference counting <a name="toc-sub-tag-10"></a>
+## On reference counting <a name="toc-sub-tag-11"></a>
+[notes](https://docs.python.org/3/c-api/refcounting.html)
