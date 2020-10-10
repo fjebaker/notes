@@ -113,3 +113,8 @@ Now, the module may be used, by importing it with
 ```js
 const example = require("./build/Release/example");
 ```
+
+## Resources
+Useful resources to bare in mind are
+- the [`gyp` user documentation](https://gyp.gsrc.io/docs/UserDocumentation.md) for defining `bindings.gyp`
+- a [Hello World example](https://github.com/nodejs/node/tree/master/test/addons/hello-world) for using `node-gyp`
