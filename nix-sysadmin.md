@@ -367,6 +367,17 @@ sudo mount -a
 See [here](https://linoxide.com/file-system/example-linux-nfs-mount-entry-in-fstab-etcfstab/) for a network mount example.
 
 ### Burning CDs and DVDs <a name="toc-sub-tag-25"></a>
+An overview of Debian r/w CDs and DVDs can be found [here](https://wiki.debian.org/CDDVD).
+
+- CDs
+
+For this, it is easy to use `wodim` in [Disk-At-Once mode](https://en.wikipedia.org/wiki/Optical_disc_recording_modes). The command template is
+```bash
+wodim -v dev=/dev/rs0 -dao /path/to/my.iso
+```
+
+- DVDs
+
 The standard disk formatting is [`ISO9660`](https://wiki.osdev.org/ISO_9660) for `.iso` files.
 
 Following from the [Debian wiki](https://wiki.debian.org/BurnCd), the easiest (and probably best way) to burn disks with Debian is to use a tool like `growisofs`. A recipe for **burning dvds** is then
@@ -380,8 +391,6 @@ sudo mount /dev/sr0 /mnt/cdrom
 though personally I have encountered many errors in doing so (you're best of ripping the cd/dvd with `dd`). The above mount command may also require `-t iso9660` to specify the format.
 
 There is a short discussion in [this arch linux forum](https://bbs.archlinux.org/viewtopic.php?id=131299) on mounting disks.
-
-An overview of Debian r/w CDs and DVDs can be found [here](https://wiki.debian.org/CDDVD).
 
 
 ### Mounting a filesystem with SSH <a name="toc-sub-tag-26"></a>
