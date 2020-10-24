@@ -2,6 +2,10 @@
 
 Being able to launch Docker or `docker-compose` containers as system services can be very useful when administrating a larger server. To accomplish this, there are a few different solutions, utilising different mechanisms in how service files are executed -- as I find use cases for each, I will document them here.
 
+- for controlling the docker daemon with `systemd` see [this Mirantis article](https://success.mirantis.com/article/using-systemd-to-control-the-docker-daemon)
+- for a `.service` writing guide, see [this ShellHacks post](https://www.shellhacks.com/systemd-service-file-example/)
+
+
 ## On installation and use
 It is convention that server specific modifications are placed into `/etc/` and repository installed services in `/usr`. From `man 7 file-hierarchy`:
 > ```        
