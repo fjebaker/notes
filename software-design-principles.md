@@ -19,7 +19,7 @@ A short synopsis of common design principles.
 - **R**epeat
 - **Y**ourself
 
-Duplicate code is bad. If there are multiple copies of the same code, maintaining or changing the behaviour of a program can become seriously tricky. Instead, we try to eliminate any repeated lines into a shared function that is (generically) reusable.
+Duplicate code is bad. If there are multiple copies of the same code, maintaining, or changing, the behaviour of a program can become seriously tricky. Instead, we try to eliminate any repeated lines, and merge them into a shared function that is (generically) reusable.
 
 If code is not *entirely* identical, then redesign the components that use it so that we can prefer a common interface.
 
@@ -33,14 +33,13 @@ If code is not *entirely* identical, then redesign the components that use it so
 
 Analyzing each principle at a time:
 
-*Single responsibility* states that every module, class, function, or otherwise, should only do one thing, and thus only have a single functional objective. This should reduce the size of components, make the code easier to understand, and importantly easy to test.
+*Single responsibility* states that every module, class, function, or otherwise, should only do one thing, and thus only have a single functional objective. This should reduce the size of components, make the code easier to understand, and, importantly, easy to test.
 
+The *Open/Closed principle* states that every module should be *open* for extension but *closed* for modification. Existing components can then be easily reused in derived modules, and component design is loosely coupled, so that they can be replaced without affecting existing functionality.
 
-The *Open/Closed principle* states that every module should be *open* for extension but *closed* for modification. Existing components can then be easily reused in derived modules, and components are loosely coupled so that they can be replaced without affecting existing functionality.
+*Liskov substitution principle* states that a routine which accepts type `T` can also accept type `S < T` without any change to the behaviour, or expected result, allowing a function to be reused for any subtype.
 
-*Liskov substitution principle* states that a routine which accepts type `T` can also accept type `S < T` without any change to the behaviour or result, allowing a function to be reused for any subtype.
-
-*Interface segregation* means a client does not need to implement interfaces they do not intend to use. New implementations are more easily available to construct, and software components are reusable and more modular.
+*Interface segregation* means a client does not need to implement interfaces they do not intend to use. New implementations are always available to construct when needed, and designed software components tend consequently to be more reusable and modular.
 
 *Dependency inversion* is the idea that derived classes should not depend on low-level classes; high-level classes should only depend on an abstraction, implemented by the low-level classes. This way components are decoupled, allowing low-level components to be replaced or adjusted.
 
@@ -52,7 +51,7 @@ The *Open/Closed principle* states that every module should be *open* for extens
 - **L**east
 - **A**stonishment
 
-Software should always be easy to understand and the behaviour should never be *astonishing* or surprising. Modules, classes, functions, etc., should be intelligently named so that they are clear and unambiguous. Modules should be right-sized and maintained. Interfaces should be small and understandable, and generally, try to minimize functional arguments.
+Software should always be easy to understand and the behaviour should never be *astonishing* or surprising. Modules, classes, functions, etc., should be thoughftully named so that they are clear and unambiguous. Modules should be right-sized and well maintained. Interfaces should be small and understandable, and generally, try to minimize the number of functional arguments, in the interest of interprability by the user.
 
 ## KISS <a name="toc-sub-tag-3"></a>
 
@@ -61,7 +60,7 @@ Software should always be easy to understand and the behaviour should never be *
 - **S**imple
 - **S**tupid
 
-It can be tempting to try and future-proof your software, and anticipate needs, however this can take a lot more effort and designing, and can lead to excessive abstraction or bloated modules. This can make a system difficult to maintain, enhance, or even just use. Additionally it can impact the performance of the code too.
+It can be tempting to try and future-proof your software, and anticipate needs, however this can be a lot more effort, and can lead to excessive abstraction or bloated modules, making a system difficult to maintain, enhance, or even just use. Additionally, keeping code generic for the future can impact the performance of the code in the present.
 
 
 ## POLP <a name="toc-sub-tag-4"></a>
@@ -71,7 +70,7 @@ It can be tempting to try and future-proof your software, and anticipate needs, 
 - **L**east
 - **P**rivilege
 
-Clients must be given access only to the informations or methods that need; this helps keep applications secure, and allows easier use of libraries. Generally this is to say that sensitive data must be protected, only exposure to privileged users reduces the number of test scenarios, and together these make the system less prone to misuse.
+Clients must be given access only to the information or methods that they need; this helps keep applications secure, and allows for easier use of libraries. Generally, this means that sensitive data must be protected, and only exposing to privileged users reduces the number of test scenarios that must be anticipated; and together these make the system less prone to misuse.
 
 ## YAGNI <a name="toc-sub-tag-5"></a>
 
@@ -81,9 +80,9 @@ Clients must be given access only to the informations or methods that need; this
 - **N**eed
 - **I**t
 
-YAGNI means only develop the software needed today, and stems from Ron Jeffries' blog
+YAGNI means only develop the software needed today. Stemming from Ron Jeffries' blog:
 > "Always implement things when you actually need them, never when you just foresee that you need them."
 
-This links to KISS, in that future-proofing can prove more of a liability than a benefit. Functionality not needed by the customer will never be executed. The use-case may change, and mean the system must be redesigned or replaced entirely. Or potentially a dependency may be discontinued, requiring a software rewrite. 
+This links to KISS, in that future-proofing can prove more of a liability than a benefit. Functionality not needed by the customer will never be executed, so don't write it. The use-case may change, and mean the system must be redesigned or replaced entirely, so don't anticipate and write it. Or potentially a dependency may be discontinued, requiring a software rewrite, so don't think your software will need to be runnable forever. 
 
 > The cheapest software is the one that you didn't write. You aren't gonna need it!
