@@ -239,14 +239,35 @@ options snd_hda_intel index=1
 ```
 There is some information as to how this works in [this wiki entry](https://docs.slackware.com/howtos:hardware:audio_and_snd-hda-intel).
 
+You'll probably also need to add 
+```
+pcm.!default {
+type hw
+card 1
+}
+
+ctl.!default {
+type hw
+card 1
+}
+```
+to `~/.asoundrc`, at least I did on Buster.
+
 #### CMUS with ALSA <a name="toc-sub-tag-15"></a>
-To get CMUS to use ALSA, we edit the `~/.cmus/Autosave` file and change the configuration to
+To get CMUS to use ALSA, we edit the `~/.cmus/autosave` file and change the configuration to
 ```
-dsp.alsa.device=default
-mixer.alsa.device=default
-mixer.alsa.channel=PCM
-output_plugin=alsa
+set dsp.alsa.device=default
+set mixer.alsa.device=default
+set mixer.alsa.channel=PCM
+set output_plugin=alsa
 ```
+
+If it fails to start, add the line
+```
+set output_plugin=alsa
+```
+in (a file which you'll probably have to create) `.cmus/rc`.
+
 
 ### Hardware specifications <a name="toc-sub-tag-16"></a>
 As stated in the [Debian wiki](https://wiki.debian.org/ALSA#Troubleshooting), the assigned indexes to sound cards can be found with
