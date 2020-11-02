@@ -55,6 +55,8 @@ Uploading is a simple one-liner
 ```
 python -m twine upload -u USERNAME -p PASSWORD dist/*
 ```
+where you use the username and password of your pypi account (create one [here](https://pypi.org/)).
+
 This will upload to the default repository, which is
 ```
 https://test.pypi.org/legacy/
