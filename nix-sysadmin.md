@@ -60,7 +60,7 @@ sudo passwd [username]
 sudo chsh -s /bin/bash [username]
 # set startup shell
 ```
-**NB:** The whole user creation process is also streamlined with the 
+**NB:** The whole user creation process is also streamlined with the
 ```bash
 sudo adduser [username]
 ```
@@ -183,13 +183,13 @@ ssh-keygen -R host
 Some distributions, such as lightweight Debian, do not include `sudo` by default. We can install it with root privileges
 ```bash
 su -
-apt-get install sudo -y 
+apt-get install sudo -y
 ```
 and allow a user to act as `sudo` by adding them to the relevant group and sudoers file, as documented on the [Debian wiki](https://wiki.debian.org/sudo)
 ```bash
 usermod -aG sudo [name]
 ```
-followed by 
+followed by
 ```bash
 visudo
 ```
@@ -202,7 +202,7 @@ to allow members of group sudo to execute any command.
 To commit changes, a reboot is required.
 
 ## Hardware <a name="toc-sub-tag-11"></a>
-Listing all of the PCI devices can be achieved with 
+Listing all of the PCI devices can be achieved with
 ```bash
 lspci
 ```
@@ -239,7 +239,7 @@ options snd_hda_intel index=1
 ```
 There is some information as to how this works in [this wiki entry](https://docs.slackware.com/howtos:hardware:audio_and_snd-hda-intel).
 
-You'll probably also need to add 
+You'll probably also need to add
 ```
 pcm.!default {
 type hw
@@ -360,6 +360,14 @@ A full discussion can be seen in [this SO answer](https://askubuntu.com/question
 ### File system checks <a name="toc-sub-tag-22"></a>
 Using [`fsck`](https://www.howtogeek.com/282374/what-is-the-lostfound-folder-on-linux-and-macos/).
 
+`fsck` will run pretty much out-of-the-box, and can perform some (irreversible) file system repairs also.
+
+Another good tool to use is `dumpe2fs` for printing filesystem information and rudimentary diagnostics. It is useful for obtaining block size information, when the drive was last used, when it was created, and so forth.
+
+Tools for recovery:
+- `testdisk`, which ships with `photorec`, is an open source tool for file system checks and file recovery.
+- outdated, but still useful in certain circles, `scalpel`
+
 ### Formating <a name="toc-sub-tag-23"></a>
 From [devconnected](https://devconnected.com/how-to-format-disk-partitions-on-linux/), you can format a partition/disk with a specific journal using
 ```bash
@@ -451,7 +459,7 @@ Add the GPG key
 ```bash
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 ```
-at tme of writing this keys is `9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88` which can be verified with 
+at tme of writing this keys is `9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88` which can be verified with
 ```bash
 sudo apt-key fingerprint 0EBFCD88
 ```
@@ -471,7 +479,7 @@ followed by
 ```bash
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
-Verify the installation with 
+Verify the installation with
 ```bash
 sudo docker run hello-world
 ```
@@ -487,7 +495,7 @@ and then adjust permissions
 ```bash
 sudo chmod +x /usr/local/bin/docker-compose
 ```
-and finally link into the path 
+and finally link into the path
 ```bash
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
@@ -497,7 +505,7 @@ With `dpkg`, you can install with
 ```bash
 dpkg -i [package].deb
 ```
-list installations with 
+list installations with
 ```bash
 dpkg -l | grep [package_name]
 ```
@@ -548,7 +556,7 @@ update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
 
 update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
 ```
-You can check the configuration with 
+You can check the configuration with
 ```bash
 update-alternatives --config python
 ```
