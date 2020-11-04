@@ -27,17 +27,18 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 9. [Disks and mounting](#toc-sub-tag-20)
 	1. [Listing disks](#toc-sub-tag-21)
 	2. [File system checks](#toc-sub-tag-22)
-	3. [Formating](#toc-sub-tag-23)
-	4. [Automount with `/etc/fstab`](#toc-sub-tag-24)
-	5. [Burning CDs and DVDs](#toc-sub-tag-25)
-	6. [Mounting a filesystem with SSH](#toc-sub-tag-26)
-10. [Installing Docker on Debian](#toc-sub-tag-27)
-	1. [docker-compose](#toc-sub-tag-28)
-11. [Package management](#toc-sub-tag-29)
-12. [Python installations](#toc-sub-tag-30)
-13. [Path alternatives](#toc-sub-tag-31)
-14. [Versions](#toc-sub-tag-32)
-	1. [Debian](#toc-sub-tag-33)
+	3. [Recovering files](#toc-sub-tag-23)
+	4. [Formating](#toc-sub-tag-24)
+	5. [Automount with `/etc/fstab`](#toc-sub-tag-25)
+	6. [Burning CDs and DVDs](#toc-sub-tag-26)
+	7. [Mounting a filesystem with SSH](#toc-sub-tag-27)
+10. [Installing Docker on Debian](#toc-sub-tag-28)
+	1. [docker-compose](#toc-sub-tag-29)
+11. [Package management](#toc-sub-tag-30)
+12. [Python installations](#toc-sub-tag-31)
+13. [Path alternatives](#toc-sub-tag-32)
+14. [Versions](#toc-sub-tag-33)
+	1. [Debian](#toc-sub-tag-34)
 <!--END TOC-->
 
 ## General tricks and tips <a name="toc-sub-tag-0"></a>
@@ -357,6 +358,11 @@ Will tell you the disks mounted, and the options applied.
 
 A full discussion can be seen in [this SO answer](https://askubuntu.com/questions/583909/how-do-i-check-where-devices-are-mounted).
 
+To list the UUIDs and PTUUIDs, use
+```bash
+sudo blkid
+```
+
 ### File system checks <a name="toc-sub-tag-22"></a>
 Using [`fsck`](https://www.howtogeek.com/282374/what-is-the-lostfound-folder-on-linux-and-macos/).
 
@@ -364,18 +370,29 @@ Using [`fsck`](https://www.howtogeek.com/282374/what-is-the-lostfound-folder-on-
 
 Another good tool to use is `dumpe2fs` for printing filesystem information and rudimentary diagnostics. It is useful for obtaining block size information, when the drive was last used, when it was created, and so forth.
 
-Tools for recovery:
+### Recovering files <a name="toc-sub-tag-23"></a>
+There are multiple recovery tools available; two which I frequently use are:
+
 - `testdisk`, which ships with `photorec`, is an open source tool for file system checks and file recovery.
+
+`photorec` is an incredible tool by [CGSecurity](https://www.cgsecurity.org/wiki/PhotoRec), which runs in terminal curses, and is fairly self explanatory. The `testdisk` suite is also able to perform file system checks and repairs, however I have not yet explored it enough to document its usage. Once I am more familiar with the tool, I will endeavour to include notes. 
+
 - outdated, but still useful in certain circles, `scalpel`
 
-### Formating <a name="toc-sub-tag-23"></a>
+### Formating <a name="toc-sub-tag-24"></a>
 From [devconnected](https://devconnected.com/how-to-format-disk-partitions-on-linux/), you can format a partition/disk with a specific journal using
 ```bash
 sudo mkfs -t [journal] /dev/sda1
 ```
 Linux commonly uses `ext4`, apple has `adfs`, and windows `fat32`/`vfat`, `ntfs` or `msdos`. **NB:** is some cases, mostly windows, the journal must be written in all caps.
 
-### Automount with `/etc/fstab` <a name="toc-sub-tag-24"></a>
+To format a drive to Linux `ext4`, we can use `fdisk` to create a partition of type `83` (Linux), and then run
+```
+sudo mkfs.ext4 /dev/sd[...]
+```
+on the intended partition. Note, this can also be used on the whole disk `/dev/sd*`.
+
+### Automount with `/etc/fstab` <a name="toc-sub-tag-25"></a>
 Following [this guide](https://www.techrepublic.com/article/how-to-properly-automount-a-drive-in-ubuntu-linux/), we can configure a drive to automount by adding it to `/etc/fstab`. For this, we require the UUID of the device, which we can obtain with
 ```bash
 sudo blkid
@@ -395,7 +412,7 @@ sudo mount -a
 ```
 See [here](https://linoxide.com/file-system/example-linux-nfs-mount-entry-in-fstab-etcfstab/) for a network mount example.
 
-### Burning CDs and DVDs <a name="toc-sub-tag-25"></a>
+### Burning CDs and DVDs <a name="toc-sub-tag-26"></a>
 An overview of Debian r/w CDs and DVDs can be found [here](https://wiki.debian.org/CDDVD).
 
 - CDs
@@ -422,7 +439,7 @@ though personally I have encountered many errors in doing so (you're best of rip
 There is a short discussion in [this arch linux forum](https://bbs.archlinux.org/viewtopic.php?id=131299) on mounting disks.
 
 
-### Mounting a filesystem with SSH <a name="toc-sub-tag-26"></a>
+### Mounting a filesystem with SSH <a name="toc-sub-tag-27"></a>
 For ease of development on a remote platform, tools like `sshfs` can mount directories on the local file-system as if they were a disk. On **OSX**, you'll require `osxfuse` for Linux filesystems also. Both tools can easily be installed with brew:
 
 ```bash
@@ -445,7 +462,7 @@ or, on OSX,
 diskutil unmountDisk /path/to/mnt
 ```
 
-## Installing Docker on Debian <a name="toc-sub-tag-27"></a>
+## Installing Docker on Debian <a name="toc-sub-tag-28"></a>
 Following from the [official install scripts](https://docs.docker.com/engine/install/debian/):
 ```bash
 sudo apt-get install \
@@ -484,7 +501,7 @@ Verify the installation with
 sudo docker run hello-world
 ```
 
-### docker-compose <a name="toc-sub-tag-28"></a>
+### docker-compose <a name="toc-sub-tag-29"></a>
 Following this guide:
 
 We first get the stable release
@@ -500,7 +517,7 @@ and finally link into the path
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
-## Package management <a name="toc-sub-tag-29"></a>
+## Package management <a name="toc-sub-tag-30"></a>
 With `dpkg`, you can install with
 ```bash
 dpkg -i [package].deb
@@ -516,7 +533,7 @@ dpkg -r [package_name]
 ```
 and purge with `-P` instead of `-r`. Purge will also delete all configuration files.
 
-## Python installations <a name="toc-sub-tag-30"></a>
+## Python installations <a name="toc-sub-tag-31"></a>
 Following from [this guide](https://linuxize.com/post/how-to-install-python-3-8-on-debian-10/).
 
 First, we grab the dependencies
@@ -549,7 +566,7 @@ and validate with
 python3.8 --version
 ```
 
-## Path alternatives <a name="toc-sub-tag-31"></a>
+## Path alternatives <a name="toc-sub-tag-32"></a>
 You can adjust the priority of conflicting program versions, commonly [python3 vs python2](https://exitcode0.net/changing-the-default-python-version-in-debian/) using the `update-alternatives` command. The program linked with the highest priority will become the default
 ```bash
 update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
@@ -561,10 +578,10 @@ You can check the configuration with
 update-alternatives --config python
 ```
 
-## Versions <a name="toc-sub-tag-32"></a>
+## Versions <a name="toc-sub-tag-33"></a>
 All sorts of valuable version information can be obtained with different commands, most of which are listed on [linuxconfig](https://linuxconfig.org/check-what-debian-version-you-are-running-on-your-linux-system).
 
-### Debian <a name="toc-sub-tag-33"></a>
+### Debian <a name="toc-sub-tag-34"></a>
 ```bash
 lsb_release -cs
 # buster
