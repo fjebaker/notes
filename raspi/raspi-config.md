@@ -68,6 +68,38 @@ sudo dd if=/dev/diskID of=DISK_IMAGE_NAME.img
 ## Some quality of life tips <a name="toc-sub-tag-3"></a>
 I like to have my Pi's feel different from other machines, so I tend to tweak the same settings over and over; here are my notes for how I do that.
 
+### Getting Docker
+Docker is installed with a one-liner:
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
+```
+
+Add a non-root user to the docker group, e.g. the default pi user
+```bash
+sudo usermod -aG docker pi
+```
+and you're away! Test it all with
+```bash
+docker run hello-world
+```
+
+### Enabling WiFi before boot
+You can configure the pi to connect to a wifi router before you boot the device; mount the SD card, and in the `boot` volume, create a new file with the contents:
+```
+country=gb
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+ssid="SSID"
+scan_ssid=1
+psk="WIFI_PASSWORD"
+}
+```
+The country codes follow Alpha-2 ISO 3166 format.
+
+That's it; use `arp -a` or `nmap -sn` to scan for the pi once it connects!
+
 ### SSH enable in headless mode
 Simply navigate to the `boot` directory, and create an empty `ssh` file; e.g.:
 ```bash
