@@ -100,6 +100,9 @@ The country codes follow Alpha-2 ISO 3166 format.
 
 That's it; use `arp -a` or `nmap -sn` to scan for the pi once it connects!
 
+### Enabling WiFi after boot
+This is as simple as using the interactive `sudo raspi-config`, and navigating to the Network Options.
+
 ### SSH enable in headless mode
 Simply navigate to the `boot` directory, and create an empty `ssh` file; e.g.:
 ```bash
