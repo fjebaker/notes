@@ -10,7 +10,7 @@ I am in the process of reconfiguring CI/CD for a new project I am working on, an
 <!--END TOC-->
 
 ## Jenkins quick-start with Docker <a name="toc-sub-tag-0"></a>
-The latest image for jenkins is [`jenkinsci/blueocean`](https://hub.docker.com/r/jenkinsci/blueocean/), obtainable with the usual 
+The latest image for jenkins is [`jenkinsci/blueocean`](https://hub.docker.com/r/jenkinsci/blueocean/), obtainable with the usual
 ```bash
 docker pull jenkinsci/blueocean
 ```
@@ -25,7 +25,7 @@ This setup follows the [official documentation](https://www.jenkins.io/doc/book/
 Jenkins requires a docker network and (recommended) two docker volumes. We can create the bridged network and simple default volumes with
 ```bash
 docker network create jenkins
-# for TLS certificates 
+# for TLS certificates
 docker volume create jenkins-docker-certs
 docker volume create jenkins-data
 ```
@@ -69,3 +69,14 @@ Then visit [`http://localhost:8080`](http://localhost:8080) to enter setup.
 
 ## Python-Jenkins worked example <a name="toc-sub-tag-3"></a>
 Following from tutorials on the Jenkins website, primarily [this example](https://www.jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/).
+
+## Jenkins with Gitea
+If you're hosting a [Gitea](https://gitea.io/en-us/) server, you may wish to fully automate local CI/CD with Jenkins. In order to do that, we log into the Jenkins server with an admin account, and under the *Manage Jenkins* tab, navigate to *Manage Plugins*, and from there, install the Gitea plugin.
+
+Under *Manage Jenkins* again, this time *Configure System*, scroll down to Gitea and add a Gitea server. If you want to enable webhook automation, be sure to tick the box, and create a Jenkins account on Gitea for Jenkins to use. NB: this account must be an administrator. Apply and save your changes.
+
+Next, create a new (mutlibranch) Pipeline, and under *Add Source*, select Gitea and your configured server, along with the respective credentials if you enabled webhook management.
+
+You don't directly copy a link, but rather enter the username of the account holding the repository you wish to automate, and then select the repository from the dropdown menu.
+
+And that's it -- Jenkins should start running your Jenkinsfile.
