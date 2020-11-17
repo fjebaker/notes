@@ -375,7 +375,7 @@ There are multiple recovery tools available; two which I frequently use are:
 
 - `testdisk`, which ships with `photorec`, is an open source tool for file system checks and file recovery.
 
-`photorec` is an incredible tool by [CGSecurity](https://www.cgsecurity.org/wiki/PhotoRec), which runs in terminal curses, and is fairly self explanatory. The `testdisk` suite is also able to perform file system checks and repairs, however I have not yet explored it enough to document its usage. Once I am more familiar with the tool, I will endeavour to include notes. 
+`photorec` is an incredible tool by [CGSecurity](https://www.cgsecurity.org/wiki/PhotoRec), which runs in terminal curses, and is fairly self explanatory. The `testdisk` suite is also able to perform file system checks and repairs, however I have not yet explored it enough to document its usage. Once I am more familiar with the tool, I will endeavour to include notes.
 
 - outdated, but still useful in certain circles, `scalpel`
 
@@ -410,7 +410,7 @@ You can test the mount point configuration is okay with
 ```bash
 sudo mount -a
 ```
-See [here](https://linoxide.com/file-system/example-linux-nfs-mount-entry-in-fstab-etcfstab/) for a network mount example.
+See [here](https://linoxide.com/file-system/example-linux-nfs-mount-entry-in-fstab-etcfstab/) for a network mount example. See [here](https://help.ubuntu.com/community/Fstab) for the ubuntu documentation on `fstab`.
 
 ### Burning CDs and DVDs <a name="toc-sub-tag-26"></a>
 An overview of Debian r/w CDs and DVDs can be found [here](https://wiki.debian.org/CDDVD).
