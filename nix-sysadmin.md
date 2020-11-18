@@ -604,3 +604,10 @@ cat /etc/os-release
 # SUPPORT_URL="https://www.debian.org/support"
 # BUG_REPORT_URL="https://bugs.debian.org/"
 ```
+
+
+## Other:
+CPU temperature:
+```
+/sys/class/thermal/thermal_zone0/temp
+```
