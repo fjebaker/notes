@@ -28,17 +28,19 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 	1. [Listing disks](#toc-sub-tag-21)
 	2. [File system checks](#toc-sub-tag-22)
 	3. [Recovering files](#toc-sub-tag-23)
-	4. [Formating](#toc-sub-tag-24)
+	4. [Formatting](#toc-sub-tag-24)
 	5. [Automount with `/etc/fstab`](#toc-sub-tag-25)
 	6. [Burning CDs and DVDs](#toc-sub-tag-26)
 	7. [Mounting a filesystem with SSH](#toc-sub-tag-27)
-10. [Installing Docker on Debian](#toc-sub-tag-28)
-	1. [docker-compose](#toc-sub-tag-29)
-11. [Package management](#toc-sub-tag-30)
-12. [Python installations](#toc-sub-tag-31)
-13. [Path alternatives](#toc-sub-tag-32)
-14. [Versions](#toc-sub-tag-33)
-	1. [Debian](#toc-sub-tag-34)
+	8. [Mounting HFS/HFS+ on Linux](#toc-sub-tag-28)
+10. [Installing Docker on Debian](#toc-sub-tag-29)
+	1. [docker-compose](#toc-sub-tag-30)
+11. [Package management](#toc-sub-tag-31)
+12. [Python installations](#toc-sub-tag-32)
+13. [Path alternatives](#toc-sub-tag-33)
+14. [Versions](#toc-sub-tag-34)
+	1. [Debian](#toc-sub-tag-35)
+15. [Other:](#toc-sub-tag-36)
 <!--END TOC-->
 
 ## General tricks and tips <a name="toc-sub-tag-0"></a>
@@ -379,7 +381,8 @@ There are multiple recovery tools available; two which I frequently use are:
 
 - outdated, but still useful in certain circles, `scalpel`
 
-### Formating <a name="toc-sub-tag-24"></a>
+### Formatting <a name="toc-sub-tag-24"></a>
+
 From [devconnected](https://devconnected.com/how-to-format-disk-partitions-on-linux/), you can format a partition/disk with a specific journal using
 ```bash
 sudo mkfs -t [journal] /dev/sda1
@@ -462,7 +465,21 @@ or, on OSX,
 diskutil unmountDisk /path/to/mnt
 ```
 
-## Installing Docker on Debian <a name="toc-sub-tag-28"></a>
+### Mounting HFS/HFS+ on Linux <a name="toc-sub-tag-28"></a>
+By default, linux will mount Apple HFS/HFS+ journaled filesystems as read-only. To cirumvent this, without having to disable journaling, we can use `hfsprogs`
+```bash
+sudo apt-get install hfsprogs
+```
+
+We then force `rw` permissions on the mount:
+```
+sudo mount -t hfsplus -o rw,force /dev/sdx /path/to/mnt
+```
+The specific type may vary.
+
+To enable others, you still need to pass `gid/uid` or `umask`.
+
+## Installing Docker on Debian <a name="toc-sub-tag-29"></a>
 Following from the [official install scripts](https://docs.docker.com/engine/install/debian/):
 ```bash
 sudo apt-get install \
@@ -501,7 +518,7 @@ Verify the installation with
 sudo docker run hello-world
 ```
 
-### docker-compose <a name="toc-sub-tag-29"></a>
+### docker-compose <a name="toc-sub-tag-30"></a>
 Following this guide:
 
 We first get the stable release
@@ -517,7 +534,7 @@ and finally link into the path
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
-## Package management <a name="toc-sub-tag-30"></a>
+## Package management <a name="toc-sub-tag-31"></a>
 With `dpkg`, you can install with
 ```bash
 dpkg -i [package].deb
@@ -533,7 +550,7 @@ dpkg -r [package_name]
 ```
 and purge with `-P` instead of `-r`. Purge will also delete all configuration files.
 
-## Python installations <a name="toc-sub-tag-31"></a>
+## Python installations <a name="toc-sub-tag-32"></a>
 Following from [this guide](https://linuxize.com/post/how-to-install-python-3-8-on-debian-10/).
 
 First, we grab the dependencies
@@ -566,7 +583,7 @@ and validate with
 python3.8 --version
 ```
 
-## Path alternatives <a name="toc-sub-tag-32"></a>
+## Path alternatives <a name="toc-sub-tag-33"></a>
 You can adjust the priority of conflicting program versions, commonly [python3 vs python2](https://exitcode0.net/changing-the-default-python-version-in-debian/) using the `update-alternatives` command. The program linked with the highest priority will become the default
 ```bash
 update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
@@ -578,10 +595,10 @@ You can check the configuration with
 update-alternatives --config python
 ```
 
-## Versions <a name="toc-sub-tag-33"></a>
+## Versions <a name="toc-sub-tag-34"></a>
 All sorts of valuable version information can be obtained with different commands, most of which are listed on [linuxconfig](https://linuxconfig.org/check-what-debian-version-you-are-running-on-your-linux-system).
 
-### Debian <a name="toc-sub-tag-34"></a>
+### Debian <a name="toc-sub-tag-35"></a>
 ```bash
 lsb_release -cs
 # buster
@@ -606,7 +623,7 @@ cat /etc/os-release
 ```
 
 
-## Other:
+## Other: <a name="toc-sub-tag-36"></a>
 CPU temperature:
 ```
 /sys/class/thermal/thermal_zone0/temp
