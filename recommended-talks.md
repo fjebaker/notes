@@ -9,12 +9,14 @@ I watch a lot of talks about programming languages, paradigms, tools, compilers,
 	3. [Monoids, Monads and Applicative Functors: Repeated Software Patterns - David Sankel [CppCon 2020]](#toc-sub-tag-3)
 	4. [What Everyone Should Know About How Amazing Compilers Are - Matt Godbolt [C++ on Sea 2019]](#toc-sub-tag-4)
 	5. [When a Microsecond is an Eternity: High Performance Trading Systems in C++ - Carl Cook [CppCon 2017]](#toc-sub-tag-5)
-2. [Go](#toc-sub-tag-6)
-	1. [Building a container from scratch in Go - Liz Rice [Container Camp 2016]](#toc-sub-tag-7)
-3. [Linux](#toc-sub-tag-8)
-	1. [Write and Submit your first Linux kernel Patch - Greg Kroah-Hartman [FOSDEM 2010]](#toc-sub-tag-9)
-4. [Paradigms](#toc-sub-tag-10)
-	1. [The Forgotten Art of Structured Programming - Kevlin Henney [C++ on Sea 2019]](#toc-sub-tag-11)
+2. [MongoDB](#toc-sub-tag-6)
+	1. [Data Modeling with MongoDB - Yulia Genkina [MongoDB 2020]](#toc-sub-tag-7)
+3. [Go](#toc-sub-tag-8)
+	1. [Building a container from scratch in Go - Liz Rice [Container Camp 2016]](#toc-sub-tag-9)
+4. [Linux](#toc-sub-tag-10)
+	1. [Write and Submit your first Linux kernel Patch - Greg Kroah-Hartman [FOSDEM 2010]](#toc-sub-tag-11)
+5. [Paradigms](#toc-sub-tag-12)
+	1. [The Forgotten Art of Structured Programming - Kevlin Henney [C++ on Sea 2019]](#toc-sub-tag-13)
 <!--END TOC-->
 
 ## C / C++ <a name="toc-sub-tag-0"></a>
@@ -196,9 +198,14 @@ Tools: sampling profiler `gprof`, instrumentation profilers `callgrind`, microbe
 
 Aim for very simple runtime logic, **compilers optimize simple code the best**. Prefer approximations over precision where appropriate; do the expensive work only when you have spare time. Conduct accurate measurements.
 
-## Go <a name="toc-sub-tag-6"></a>
+## MongoDB <a name="toc-sub-tag-6"></a>
 
-### Building a container from scratch in Go - Liz Rice [Container Camp 2016] <a name="toc-sub-tag-7"></a>
+### Data Modeling with MongoDB - Yulia Genkina [MongoDB 2020] <a name="toc-sub-tag-7"></a>
+[YouTube link](https://www.youtube.com/watch?v=yuPjoC3jmPA&ab_channel=MongoDB). I've covered this talk in detail in [my MonogDB notes](https://github.com/dustpancake/dust-notes/blob/master/databases/mongo-db.md).
+
+## Go <a name="toc-sub-tag-8"></a>
+
+### Building a container from scratch in Go - Liz Rice [Container Camp 2016] <a name="toc-sub-tag-9"></a>
 [YouTube link](https://www.youtube.com/watch?v=Utf-A4rODH8&ab_channel=ContainerCamp). How container runtimes work, from an effective level.
 
 - Demonstrates how you can use system flags to create namespaces, virtual directory structures, and process trees
@@ -206,14 +213,14 @@ Aim for very simple runtime logic, **compilers optimize simple code the best**. 
 
 A very good talk for a solid understanding of how container runtimes work.
 
-## Linux <a name="toc-sub-tag-8"></a>
+## Linux <a name="toc-sub-tag-10"></a>
 
-### Write and Submit your first Linux kernel Patch - Greg Kroah-Hartman [FOSDEM 2010] <a name="toc-sub-tag-9"></a>
+### Write and Submit your first Linux kernel Patch - Greg Kroah-Hartman [FOSDEM 2010] <a name="toc-sub-tag-11"></a>
 [YouTube link](https://www.youtube.com/watch?v=LLBrBBImJt4&ab_channel=FOSDEM).
 
-## Paradigms <a name="toc-sub-tag-10"></a>
+## Paradigms <a name="toc-sub-tag-12"></a>
 
-### The Forgotten Art of Structured Programming - Kevlin Henney [C++ on Sea 2019] <a name="toc-sub-tag-11"></a>
+### The Forgotten Art of Structured Programming - Kevlin Henney [C++ on Sea 2019] <a name="toc-sub-tag-13"></a>
 [YouTube link](https://www.youtube.com/watch?v=SFv8Wm2HdNM). On keeping code clean, factorisable, and the importance of intelligent control flow.
 
 A cool (but legacy) code example demonstrating multiple entry points of a `while` directive
