@@ -4,15 +4,31 @@ I watch a lot of talks about programming languages, paradigms, tools, compilers,
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [C / C++](#toc-sub-tag-0)
-	1. [What Everyone Should Know About How Amazing Compilers Are - Matt Godbolt [C++ on Sea 2019]](#toc-sub-tag-1)
-	2. [When a Microsecond is an Eternity: High Performance Trading Systems in C++ - Carl Cook [CppCon 2017]](#toc-sub-tag-2)
-2. [Paradigms](#toc-sub-tag-3)
-	1. [The Forgotten Art of Structured Programming - Kevlin Henney [C++ on Sea 2019]](#toc-sub-tag-4)
+	1. [Effective CMake - Daniel Pfeifer [C++Now 2017]](#toc-sub-tag-1)
+	2. [Using Modern CMake Patterns to Enforce a Good Modular Design - Mathieu Ropert [CppCon 2017]](#toc-sub-tag-2)
+	3. [Monoids, Monads and Applicative Functors: Repeated Software Patterns - David Sankel [CppCon 2020]](#toc-sub-tag-3)
+	4. [What Everyone Should Know About How Amazing Compilers Are - Matt Godbolt [C++ on Sea 2019]](#toc-sub-tag-4)
+	5. [When a Microsecond is an Eternity: High Performance Trading Systems in C++ - Carl Cook [CppCon 2017]](#toc-sub-tag-5)
+2. [Go](#toc-sub-tag-6)
+	1. [Building a container from scratch in Go - Liz Rice [Container Camp 2016]](#toc-sub-tag-7)
+3. [Linux](#toc-sub-tag-8)
+	1. [Write and Submit your first Linux kernel Patch - Greg Kroah-Hartman [FOSDEM 2010]](#toc-sub-tag-9)
+4. [Paradigms](#toc-sub-tag-10)
+	1. [The Forgotten Art of Structured Programming - Kevlin Henney [C++ on Sea 2019]](#toc-sub-tag-11)
 <!--END TOC-->
 
 ## C / C++ <a name="toc-sub-tag-0"></a>
 
-### What Everyone Should Know About How Amazing Compilers Are - Matt Godbolt [C++ on Sea 2019] <a name="toc-sub-tag-1"></a>
+### Effective CMake - Daniel Pfeifer [C++Now 2017] <a name="toc-sub-tag-1"></a>
+[YouTube link](https://www.youtube.com/watch?v=bsXLMQ6WgIk&ab_channel=CppNow).
+
+### Using Modern CMake Patterns to Enforce a Good Modular Design - Mathieu Ropert [CppCon 2017] <a name="toc-sub-tag-2"></a>
+[YouTube link](https://www.youtube.com/watch?v=eC9-iRN2b04&ab_channel=CppCon).
+
+### Monoids, Monads and Applicative Functors: Repeated Software Patterns - David Sankel [CppCon 2020] <a name="toc-sub-tag-3"></a>
+[YouTube link](https://www.youtube.com/watch?v=giWCdQ7fnQU).
+
+### What Everyone Should Know About How Amazing Compilers Are - Matt Godbolt [C++ on Sea 2019] <a name="toc-sub-tag-4"></a>
 [YouTube link](https://www.youtube.com/watch?v=w0sz5WbS5AM). Introduces and demos the website [Explorer Compiler](https://godbolt.org/), including examples of where the compiler optimizes (architecture dependent) even seemingly esoteric C++ code, and also how to ensure the compiler optimizes when trying non trivial implementation. Provides great overview of basic x86-64 registers and operations.
 
 Key notes:
@@ -33,7 +49,7 @@ Key notes:
     - algorithms
 - compiler cannot save you from bad data layout or algorithms
 
-### When a Microsecond is an Eternity: High Performance Trading Systems in C++ - Carl Cook [CppCon 2017] <a name="toc-sub-tag-2"></a>
+### When a Microsecond is an Eternity: High Performance Trading Systems in C++ - Carl Cook [CppCon 2017] <a name="toc-sub-tag-5"></a>
 [YouTube link](https://www.youtube.com/watch?v=NH1Tta7purM). Discussing fast coding practices for economic application, although the idioms discussed are applicable anywhere; also notes the importance of measurement and cache v. cores. Also touches on the cache warming technique, and shortens to "Keep the hot path hot".
 
 - Slowpath Removal:
@@ -180,9 +196,24 @@ Tools: sampling profiler `gprof`, instrumentation profilers `callgrind`, microbe
 
 Aim for very simple runtime logic, **compilers optimize simple code the best**. Prefer approximations over precision where appropriate; do the expensive work only when you have spare time. Conduct accurate measurements.
 
-## Paradigms <a name="toc-sub-tag-3"></a>
+## Go <a name="toc-sub-tag-6"></a>
 
-### The Forgotten Art of Structured Programming - Kevlin Henney [C++ on Sea 2019] <a name="toc-sub-tag-4"></a>
+### Building a container from scratch in Go - Liz Rice [Container Camp 2016] <a name="toc-sub-tag-7"></a>
+[YouTube link](https://www.youtube.com/watch?v=Utf-A4rODH8&ab_channel=ContainerCamp). How container runtimes work, from an effective level.
+
+- Demonstrates how you can use system flags to create namespaces, virtual directory structures, and process trees
+- Live coding examples in GO
+
+A very good talk for a solid understanding of how container runtimes work.
+
+## Linux <a name="toc-sub-tag-8"></a>
+
+### Write and Submit your first Linux kernel Patch - Greg Kroah-Hartman [FOSDEM 2010] <a name="toc-sub-tag-9"></a>
+[YouTube link](https://www.youtube.com/watch?v=LLBrBBImJt4&ab_channel=FOSDEM).
+
+## Paradigms <a name="toc-sub-tag-10"></a>
+
+### The Forgotten Art of Structured Programming - Kevlin Henney [C++ on Sea 2019] <a name="toc-sub-tag-11"></a>
 [YouTube link](https://www.youtube.com/watch?v=SFv8Wm2HdNM). On keeping code clean, factorisable, and the importance of intelligent control flow.
 
 A cool (but legacy) code example demonstrating multiple entry points of a `while` directive
