@@ -1,5 +1,42 @@
 # Julia Scopes
 
+
+## `let`
+The [scope created by `let`](https://docs.julialang.org/en/v1/manual/variables-and-scoping/#Let-Blocks) is purely a local scope, with variables being deallocated after the scope exits. As such, it will allocate every time the scope is executed.
+
+From the docs
+```jl
+x, y, z = -1, -1, -1;
+
+let x = 1, z
+    println("x: $x, y: $y") # x is local variable, y the global
+    println("z: $z") # errors as z has not been assigned yet but is local
+end
+```
+This can be extremely useful in closure definitions; for example with mutable data structures like `Vectors`, we could have
+```jl
+vec = Vector{Function}(undef, 2)
+
+i = 1;
+while i <= 2
+    # implicitly using global i
+    vec[i] = () -> i 
+    # explicitly using global i
+    global i += 1
+end
+```
+will return `3` for each element call. However, we can span the local scope `i` with a `let`-block
+```jl
+while <= 2
+    let i = i # assigning current value of global i to local i
+        # implicitly using local i
+        vec[i] = () -> i
+    end
+    global i += 1
+end 
+```
+will execute as expected.
+
 ## `do`
 We can use `do` similarly(ish) to the Python `with` statement, as a wrapper for a context code block.
 
