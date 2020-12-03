@@ -25,23 +25,24 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 8. [Useful commands](#toc-sub-tag-18)
 	1. [`STOP` and `CONT` a process](#toc-sub-tag-19)
 	2. [SSL with `curl`](#toc-sub-tag-20)
-9. [Disks and mounting](#toc-sub-tag-21)
-	1. [Listing disks](#toc-sub-tag-22)
-	2. [File system checks](#toc-sub-tag-23)
-	3. [Recovering files](#toc-sub-tag-24)
-	4. [Formatting](#toc-sub-tag-25)
-	5. [Automount with `/etc/fstab`](#toc-sub-tag-26)
-	6. [Burning CDs and DVDs](#toc-sub-tag-27)
-	7. [Mounting a filesystem with SSH](#toc-sub-tag-28)
-	8. [Mounting HFS/HFS+ on Linux](#toc-sub-tag-29)
-10. [Installing Docker on Debian](#toc-sub-tag-30)
-	1. [docker-compose](#toc-sub-tag-31)
-11. [Package management](#toc-sub-tag-32)
-12. [Python installations](#toc-sub-tag-33)
-13. [Path alternatives](#toc-sub-tag-34)
-14. [Versions](#toc-sub-tag-35)
-	1. [Debian](#toc-sub-tag-36)
-15. [Other:](#toc-sub-tag-37)
+	3. [`curl` proxies](#toc-sub-tag-21)
+9. [Disks and mounting](#toc-sub-tag-22)
+	1. [Listing disks](#toc-sub-tag-23)
+	2. [File system checks](#toc-sub-tag-24)
+	3. [Recovering files](#toc-sub-tag-25)
+	4. [Formatting](#toc-sub-tag-26)
+	5. [Automount with `/etc/fstab`](#toc-sub-tag-27)
+	6. [Burning CDs and DVDs](#toc-sub-tag-28)
+	7. [Mounting a filesystem with SSH](#toc-sub-tag-29)
+	8. [Mounting HFS/HFS+ on Linux](#toc-sub-tag-30)
+10. [Installing Docker on Debian](#toc-sub-tag-31)
+	1. [docker-compose](#toc-sub-tag-32)
+11. [Package management](#toc-sub-tag-33)
+12. [Python installations](#toc-sub-tag-34)
+13. [Path alternatives](#toc-sub-tag-35)
+14. [Versions](#toc-sub-tag-36)
+	1. [Debian](#toc-sub-tag-37)
+15. [Other:](#toc-sub-tag-38)
 <!--END TOC-->
 
 ## General tricks and tips <a name="toc-sub-tag-0"></a>
@@ -332,10 +333,18 @@ kill -CONT [pid]
 ### SSL with `curl` <a name="toc-sub-tag-20"></a>
 https://stackoverflow.com/questions/10079707/https-connection-using-curl-from-command-line
 
-## Disks and mounting <a name="toc-sub-tag-21"></a>
+### `curl` proxies <a name="toc-sub-tag-21"></a>
+You can either set the environment variables
+```
+export http_proxy="http://uname:pw@addr:port"
+export https_proxy="https://uname:pw@addr:port"
+```
+which `curl` automatically uses, or, pass in the flag `-x http://uname:pw@addr:port`.
+
+## Disks and mounting <a name="toc-sub-tag-22"></a>
 This section covers all things related to disks, disks drives, mounts, and anything else loosely `/dev/s*`.
 
-### Listing disks <a name="toc-sub-tag-22"></a>
+### Listing disks <a name="toc-sub-tag-23"></a>
 You can list the disks and block devices in a variety of ways depending on the information you are trying to ascertain:
 
 - listing block devices
@@ -377,14 +386,14 @@ To list the UUIDs and PTUUIDs, use
 sudo blkid
 ```
 
-### File system checks <a name="toc-sub-tag-23"></a>
+### File system checks <a name="toc-sub-tag-24"></a>
 Using [`fsck`](https://www.howtogeek.com/282374/what-is-the-lostfound-folder-on-linux-and-macos/).
 
 `fsck` will run pretty much out-of-the-box, and can perform some (irreversible) file system repairs also.
 
 Another good tool to use is `dumpe2fs` for printing filesystem information and rudimentary diagnostics. It is useful for obtaining block size information, when the drive was last used, when it was created, and so forth.
 
-### Recovering files <a name="toc-sub-tag-24"></a>
+### Recovering files <a name="toc-sub-tag-25"></a>
 There are multiple recovery tools available; two which I frequently use are:
 
 - `testdisk`, which ships with `photorec`, is an open source tool for file system checks and file recovery.
@@ -393,7 +402,7 @@ There are multiple recovery tools available; two which I frequently use are:
 
 - outdated, but still useful in certain circles, `scalpel`
 
-### Formatting <a name="toc-sub-tag-25"></a>
+### Formatting <a name="toc-sub-tag-26"></a>
 
 From [devconnected](https://devconnected.com/how-to-format-disk-partitions-on-linux/), you can format a partition/disk with a specific journal using
 ```bash
@@ -407,7 +416,7 @@ sudo mkfs.ext4 /dev/sd[...]
 ```
 on the intended partition. Note, this can also be used on the whole disk `/dev/sd*`.
 
-### Automount with `/etc/fstab` <a name="toc-sub-tag-26"></a>
+### Automount with `/etc/fstab` <a name="toc-sub-tag-27"></a>
 Following [this guide](https://www.techrepublic.com/article/how-to-properly-automount-a-drive-in-ubuntu-linux/), we can configure a drive to automount by adding it to `/etc/fstab`. For this, we require the UUID of the device, which we can obtain with
 ```bash
 sudo blkid
@@ -427,7 +436,7 @@ sudo mount -a
 ```
 See [here](https://linoxide.com/file-system/example-linux-nfs-mount-entry-in-fstab-etcfstab/) for a network mount example. See [here](https://help.ubuntu.com/community/Fstab) for the ubuntu documentation on `fstab`.
 
-### Burning CDs and DVDs <a name="toc-sub-tag-27"></a>
+### Burning CDs and DVDs <a name="toc-sub-tag-28"></a>
 An overview of Debian r/w CDs and DVDs can be found [here](https://wiki.debian.org/CDDVD).
 
 - CDs
@@ -454,7 +463,7 @@ though personally I have encountered many errors in doing so (you're best of rip
 There is a short discussion in [this arch linux forum](https://bbs.archlinux.org/viewtopic.php?id=131299) on mounting disks.
 
 
-### Mounting a filesystem with SSH <a name="toc-sub-tag-28"></a>
+### Mounting a filesystem with SSH <a name="toc-sub-tag-29"></a>
 For ease of development on a remote platform, tools like `sshfs` can mount directories on the local file-system as if they were a disk. On **OSX**, you'll require `osxfuse` for Linux filesystems also. Both tools can easily be installed with brew:
 
 ```bash
@@ -477,7 +486,7 @@ or, on OSX,
 diskutil unmountDisk /path/to/mnt
 ```
 
-### Mounting HFS/HFS+ on Linux <a name="toc-sub-tag-29"></a>
+### Mounting HFS/HFS+ on Linux <a name="toc-sub-tag-30"></a>
 By default, linux will mount Apple HFS/HFS+ journaled filesystems as read-only. To cirumvent this, without having to disable journaling, we can use `hfsprogs`
 ```bash
 sudo apt-get install hfsprogs
@@ -491,7 +500,7 @@ The specific type may vary.
 
 To enable others, you still need to pass `gid/uid` or `umask`.
 
-## Installing Docker on Debian <a name="toc-sub-tag-30"></a>
+## Installing Docker on Debian <a name="toc-sub-tag-31"></a>
 Following from the [official install scripts](https://docs.docker.com/engine/install/debian/):
 ```bash
 sudo apt-get install \
@@ -530,7 +539,7 @@ Verify the installation with
 sudo docker run hello-world
 ```
 
-### docker-compose <a name="toc-sub-tag-31"></a>
+### docker-compose <a name="toc-sub-tag-32"></a>
 Following this guide:
 
 We first get the stable release
@@ -546,7 +555,7 @@ and finally link into the path
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
-## Package management <a name="toc-sub-tag-32"></a>
+## Package management <a name="toc-sub-tag-33"></a>
 With `dpkg`, you can install with
 ```bash
 dpkg -i [package].deb
@@ -562,7 +571,7 @@ dpkg -r [package_name]
 ```
 and purge with `-P` instead of `-r`. Purge will also delete all configuration files.
 
-## Python installations <a name="toc-sub-tag-33"></a>
+## Python installations <a name="toc-sub-tag-34"></a>
 Following from [this guide](https://linuxize.com/post/how-to-install-python-3-8-on-debian-10/).
 
 First, we grab the dependencies
@@ -595,7 +604,7 @@ and validate with
 python3.8 --version
 ```
 
-## Path alternatives <a name="toc-sub-tag-34"></a>
+## Path alternatives <a name="toc-sub-tag-35"></a>
 You can adjust the priority of conflicting program versions, commonly [python3 vs python2](https://exitcode0.net/changing-the-default-python-version-in-debian/) using the `update-alternatives` command. The program linked with the highest priority will become the default
 ```bash
 update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
@@ -607,10 +616,10 @@ You can check the configuration with
 update-alternatives --config python
 ```
 
-## Versions <a name="toc-sub-tag-35"></a>
+## Versions <a name="toc-sub-tag-36"></a>
 All sorts of valuable version information can be obtained with different commands, most of which are listed on [linuxconfig](https://linuxconfig.org/check-what-debian-version-you-are-running-on-your-linux-system).
 
-### Debian <a name="toc-sub-tag-36"></a>
+### Debian <a name="toc-sub-tag-37"></a>
 ```bash
 lsb_release -cs
 # buster
@@ -635,7 +644,7 @@ cat /etc/os-release
 ```
 
 
-## Other: <a name="toc-sub-tag-37"></a>
+## Other: <a name="toc-sub-tag-38"></a>
 CPU temperature:
 ```
 /sys/class/thermal/thermal_zone0/temp
