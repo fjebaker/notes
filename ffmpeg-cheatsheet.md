@@ -7,6 +7,8 @@ ffmpeg -i input.ext1 output.ext2
 ```
 and if it fails, tinker. Below are some common tinkers to fix common problems.
 
+For HTTP proxies, use the `-http_proxy [addr]` flag.
+
 ### Converting video
 For `.mp4` to `.mp3` with correct time-stamping
 ```
