@@ -70,9 +70,32 @@ git rebase upstream/master
 git push -f origin master
 ```
 
-## Merging commits with `rebase` <a name="toc-sub-tag-2"></a>
-We can use e.g.
+## Using `rebase`
+
+### Changing Author
+Use
+```bash
+git rebase -i -p [commit hash]
 ```
+where the commit hash is the last "good" commit. From there, preprend `edit` to the commits you want to alter, and follow the instructions:
+
+
+Use 
+```bash
+git commit --amend --author "username <email@addr.com>"
+```
+to change the author for the specific commit, followed by 
+```bash
+git rebase --continue
+```
+until you are back at the top of the tree. Check the changes were successful with
+```bash
+git log
+```
+
+### Merging commits with `rebase` <a name="toc-sub-tag-2"></a>
+We can use e.g.
+```bash
 git rebase -i HEAD~3
 ```
 to modify information relating to the last 3 commits, and use either `squash` or `fixup` to merge commits, depending whether we want to hold onto the commit message or not.
