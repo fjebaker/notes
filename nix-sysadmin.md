@@ -42,7 +42,8 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 13. [Path alternatives](#toc-sub-tag-35)
 14. [Versions](#toc-sub-tag-36)
 	1. [Debian](#toc-sub-tag-37)
-15. [Other:](#toc-sub-tag-38)
+15. [Installing VSCode on Debian](#toc-sub-tag-38)
+16. [Other:](#toc-sub-tag-39)
 <!--END TOC-->
 
 ## General tricks and tips <a name="toc-sub-tag-0"></a>
@@ -643,8 +644,28 @@ cat /etc/os-release
 # BUG_REPORT_URL="https://bugs.debian.org/"
 ```
 
+## Installing VSCode on Debian <a name="toc-sub-tag-38"></a>
+From a [Linuxize](https://linuxize.com/post/how-to-install-visual-studio-code-on-debian-10/) tutorial:
 
-## Other: <a name="toc-sub-tag-38"></a>
+Provided you have already
+```bash
+sudo apt install software-properties-common apt-transport-https curl
+```
+we add the Microsoft GPG keys
+```bash
+curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+```
+and the relevant repository
+```bash
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+```
+
+We can now update the index and install VSCode
+```bash
+sudo apt update && sudo apt install code
+```
+
+## Other: <a name="toc-sub-tag-39"></a>
 CPU temperature:
 ```
 /sys/class/thermal/thermal_zone0/temp
