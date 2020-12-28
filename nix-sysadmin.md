@@ -43,7 +43,8 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 14. [Versions](#toc-sub-tag-36)
 	1. [Debian](#toc-sub-tag-37)
 15. [Installing VSCode on Debian](#toc-sub-tag-38)
-16. [Other:](#toc-sub-tag-39)
+16. [Modifying keymaps with `xmodmap`](#toc-sub-tag-39)
+17. [Other:](#toc-sub-tag-40)
 <!--END TOC-->
 
 ## General tricks and tips <a name="toc-sub-tag-0"></a>
@@ -665,7 +666,30 @@ We can now update the index and install VSCode
 sudo apt update && sudo apt install code
 ```
 
-## Other: <a name="toc-sub-tag-39"></a>
+## Modifying keymaps with `xmodmap` <a name="toc-sub-tag-39"></a>
+I don't like specific default [dead keys](https://en.wikipedia.org/wiki/Dead_key), such as the backtick symbol. To modify the behaviour of keys, we use `xmodmap`.
+
+For my case, first identify the keycode using
+```bash
+xmodmap -pke | grep grave
+```
+and look for the output like 
+```
+keycode  21 = dead_circumflex dead_grave equal plus dead_tilde dead_ogonek dead_cedilla dead_ogonek
+```
+This will commonly be 21 or 49, depending on the nationality of your Keyboard.
+
+We then copy the line, remove the `dead_` prefix from `grave`, and configure the mapping with 
+```bash
+xmodmap -e 'keycode  21 = dead_circumflex grave equal plus dead_tilde dead_ogonek dead_cedilla dead_ogonek'
+``` 
+
+To make this change permanent, we create a `~/.Xmodmap` dotfile with our modifications. Alternatively, to save an entire configuration, use
+```bash
+xmodmap -pke >> ~/.Xmodmap
+```
+
+## Other: <a name="toc-sub-tag-40"></a>
 CPU temperature:
 ```
 /sys/class/thermal/thermal_zone0/temp
