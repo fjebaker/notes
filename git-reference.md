@@ -142,3 +142,8 @@ git config --global user.name "username"
 
 git config --global user.email "email@addr.com"
 ```
+
+## Editor configuration
+```bash
+git config --global core.editor "vim"
+```
