@@ -110,3 +110,12 @@ git push origin --tags
 ```
 
 For more information, [see the docs](https://git-scm.com/book/en/v2/Git-Basics-Tagging).
+
+
+## Authentication
+To configure global authentication locally, use
+```bash
+git config --global user.name "username"
+
+git config --global user.email "email@addr.com"
+```
