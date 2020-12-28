@@ -6,9 +6,13 @@ As everyone with git, there is a tendency to use the same idioms over and over. 
 ## Table of Contents
 1. [GitHub action recipes](#toc-sub-tag-0)
 2. [Triangular work ethic](#toc-sub-tag-1)
-3. [Merging commits with `rebase`](#toc-sub-tag-2)
-4. [Reverting to a given commit](#toc-sub-tag-3)
-5. [Tagging](#toc-sub-tag-4)
+3. [Using `rebase`](#toc-sub-tag-2)
+	1. [Changing Author](#toc-sub-tag-3)
+	2. [Merging commits with `rebase`](#toc-sub-tag-4)
+4. [Reverting to a given commit](#toc-sub-tag-5)
+5. [Tagging](#toc-sub-tag-6)
+6. [Authentication](#toc-sub-tag-7)
+7. [Editor configuration](#toc-sub-tag-8)
 <!--END TOC-->
 
 ## GitHub action recipes <a name="toc-sub-tag-0"></a>
@@ -70,9 +74,9 @@ git rebase upstream/master
 git push -f origin master
 ```
 
-## Using `rebase`
+## Using `rebase` <a name="toc-sub-tag-2"></a>
 
-### Changing Author
+### Changing Author <a name="toc-sub-tag-3"></a>
 Use
 ```bash
 git rebase -i -p [commit hash]
@@ -93,7 +97,7 @@ until you are back at the top of the tree. Check the changes were successful wit
 git log
 ```
 
-### Merging commits with `rebase` <a name="toc-sub-tag-2"></a>
+### Merging commits with `rebase` <a name="toc-sub-tag-4"></a>
 We can use e.g.
 ```bash
 git rebase -i HEAD~3
@@ -102,7 +106,7 @@ to modify information relating to the last 3 commits, and use either `squash` or
 
 Changes must be *forced* pushed.
 
-## Reverting to a given commit <a name="toc-sub-tag-3"></a>
+## Reverting to a given commit <a name="toc-sub-tag-5"></a>
 Reverting a single file (or the whole branch) can be done with `checkout`, see [docs](https://git-scm.com/docs/git-checkout). It may be used
 ```bash
 git checkout [commit/branch] [file, ...]
@@ -118,7 +122,7 @@ git reset [--mode] [commit]
 ```
 Commonly used modes are `--hard`, which discards all changes in the working tree, `--merge`, which will essentially perform a merge of the current tree into the destination tree, and `--keep`, which updates files in the working tree that differ.
 
-## Tagging <a name="toc-sub-tag-4"></a>
+## Tagging <a name="toc-sub-tag-6"></a>
 We can add tags to our local repository with
 ```bash
 git tag -a v1.0 -m "message"
@@ -135,7 +139,7 @@ git push origin --tags
 For more information, [see the docs](https://git-scm.com/book/en/v2/Git-Basics-Tagging).
 
 
-## Authentication
+## Authentication <a name="toc-sub-tag-7"></a>
 To configure global authentication locally, use
 ```bash
 git config --global user.name "username"
@@ -143,7 +147,7 @@ git config --global user.name "username"
 git config --global user.email "email@addr.com"
 ```
 
-## Editor configuration
+## Editor configuration <a name="toc-sub-tag-8"></a>
 ```bash
 git config --global core.editor "vim"
 ```
