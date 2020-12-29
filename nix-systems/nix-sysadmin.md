@@ -18,33 +18,21 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 5. [Installing `sudo`](#toc-sub-tag-11)
 6. [Hardware](#toc-sub-tag-12)
 	1. [Graphics cards](#toc-sub-tag-13)
-7. [Sound Configuration](#toc-sub-tag-14)
-	1. [ALSA](#toc-sub-tag-15)
-		1. [CMUS with ALSA](#toc-sub-tag-16)
-	2. [Hardware specifications](#toc-sub-tag-17)
-8. [Useful commands](#toc-sub-tag-18)
-	1. [`STOP` and `CONT` a process](#toc-sub-tag-19)
-	2. [SSL with `curl`](#toc-sub-tag-20)
-	3. [`curl` proxies](#toc-sub-tag-21)
-9. [Disks and mounting](#toc-sub-tag-22)
-	1. [Listing disks](#toc-sub-tag-23)
-	2. [File system checks](#toc-sub-tag-24)
-	3. [Recovering files](#toc-sub-tag-25)
-	4. [Formatting](#toc-sub-tag-26)
-	5. [Automount with `/etc/fstab`](#toc-sub-tag-27)
-	6. [Burning CDs and DVDs](#toc-sub-tag-28)
-	7. [Mounting a filesystem with SSH](#toc-sub-tag-29)
-	8. [Mounting HFS/HFS+ on Linux](#toc-sub-tag-30)
-10. [Installing Docker on Debian](#toc-sub-tag-31)
-	1. [docker-compose](#toc-sub-tag-32)
-11. [Package management](#toc-sub-tag-33)
-12. [Python installations](#toc-sub-tag-34)
-13. [Path alternatives](#toc-sub-tag-35)
-14. [Versions](#toc-sub-tag-36)
-	1. [Debian](#toc-sub-tag-37)
-15. [Installing VSCode on Debian](#toc-sub-tag-38)
-16. [Modifying keymaps with `xmodmap`](#toc-sub-tag-39)
-17. [Other:](#toc-sub-tag-40)
+	2. [Sound cards](#toc-sub-tag-14)
+7. [Useful commands](#toc-sub-tag-15)
+	1. [`STOP` and `CONT` a process](#toc-sub-tag-16)
+	2. [SSL with `curl`](#toc-sub-tag-17)
+	3. [`curl` proxies](#toc-sub-tag-18)
+8. [Installing Docker on Debian](#toc-sub-tag-19)
+	1. [docker-compose](#toc-sub-tag-20)
+9. [Package management](#toc-sub-tag-21)
+10. [Python installations](#toc-sub-tag-22)
+11. [Path alternatives](#toc-sub-tag-23)
+12. [Versions](#toc-sub-tag-24)
+	1. [Debian](#toc-sub-tag-25)
+13. [Installing VSCode on Debian](#toc-sub-tag-26)
+14. [Modifying keymaps with `xmodmap`](#toc-sub-tag-27)
+15. [Other:](#toc-sub-tag-28)
 <!--END TOC-->
 
 ## General tricks and tips <a name="toc-sub-tag-0"></a>
@@ -232,86 +220,15 @@ update-pciids
 On [HowToGeek](https://www.howtogeek.com/508993/how-to-check-which-gpu-is-installed-on-linux/) is a Ubuntu overview for listing hardware.
 
 ### Graphics cards <a name="toc-sub-tag-13"></a>
-For graphics cards on Debian, I have created [separate notes](https://github.com/Dustpancake/Dust-Notes/blob/master/hardware/debian-gpu.md) as a how-to.
+For graphics cards on Debian, I have created [separate notes](https://github.com/Dustpancake/Dust-Notes/blob/master/nix-systems/debian-gpu.md).
 
-## Sound Configuration <a name="toc-sub-tag-14"></a>
-Especially on headless installations of \*nix, some sound device configuration is required.
+### Sound cards <a name="toc-sub-tag-14"></a>
+For sound cards on Debian, I have created [separate notes](https://github.com/Dustpancake/Dust-Notes/blob/master/nix-systems/debian-soundcards.md)
 
-**NB:** In most cases, the user wont succeed in configuring the sound unless they are also part of the `audio` group.
-
-### ALSA <a name="toc-sub-tag-15"></a>
-[Advanced Linux Sound Architecture](https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture) replaces the original Open Sound System (OSS) on \*nix.
-
-There are conflicting methods for the installation on different \*nix systems, but I had personal success on Debian with
-```bash
-sudo apt-get install libasound2 alsa-utils alsa-oss
-```
-
-The seemingly magic configuration step that is missed out in a lot of guides is to create the file
-```
-/etc/modprobe.d/default.conf
-```
-with contents
-```
-options snd_hda_intel index=1
-```
-There is some information as to how this works in [this wiki entry](https://docs.slackware.com/howtos:hardware:audio_and_snd-hda-intel).
-
-You'll probably also need to add
-```
-pcm.!default {
-type hw
-card 1
-}
-
-ctl.!default {
-type hw
-card 1
-}
-```
-to `~/.asoundrc`, at least I did on Buster.
-
-#### CMUS with ALSA <a name="toc-sub-tag-16"></a>
-To get CMUS to use ALSA, we edit the `~/.cmus/autosave` file and change the configuration to
-```
-set dsp.alsa.device=default
-set mixer.alsa.device=default
-set mixer.alsa.channel=PCM
-set output_plugin=alsa
-```
-
-If it fails to start, add the line
-```
-set output_plugin=alsa
-```
-in (a file which you'll probably have to create) `.cmus/rc`.
-
-
-### Hardware specifications <a name="toc-sub-tag-17"></a>
-As stated in the [Debian wiki](https://wiki.debian.org/ALSA#Troubleshooting), the assigned indexes to sound cards can be found with
-```bash
-cat /proc/asound/cards
-```
-
-To see the hardware device names, you can also use
-```bash
-lspci -nn | grep -i audio
-```
-Also useful is
-```bash
-lsmod | grep snd
-```
-to see the kernel sound modules.
-
-With ALSA installed, you can also identify the sound devices using
-```bash
-aplay -l
-```
-
-## Useful commands <a name="toc-sub-tag-18"></a>
+## Useful commands <a name="toc-sub-tag-15"></a>
 In this section I will document useful commands, which, for brevity, don't merit a full chapter of their own.
 
-### `STOP` and `CONT` a process <a name="toc-sub-tag-19"></a>
+### `STOP` and `CONT` a process <a name="toc-sub-tag-16"></a>
 As an example, consider you wanted to use Wireshark to capture packets of a specific program, however other programs were being very chatty, and working out exactly what Wireshark filter to craft is proving tedious. A quick and dirty solution to this is just to halt the execution of the chatty program
 
 - find the `pid`:
@@ -332,10 +249,10 @@ Using a very similar command, we run
 kill -CONT [pid]
 ```
 
-### SSL with `curl` <a name="toc-sub-tag-20"></a>
+### SSL with `curl` <a name="toc-sub-tag-17"></a>
 https://stackoverflow.com/questions/10079707/https-connection-using-curl-from-command-line
 
-### `curl` proxies <a name="toc-sub-tag-21"></a>
+### `curl` proxies <a name="toc-sub-tag-18"></a>
 You can either set the environment variables
 ```
 export http_proxy="http://uname:pw@addr:port"
@@ -343,166 +260,7 @@ export https_proxy="https://uname:pw@addr:port"
 ```
 which `curl` automatically uses, or, pass in the flag `-x http://uname:pw@addr:port`.
 
-## Disks and mounting <a name="toc-sub-tag-22"></a>
-This section covers all things related to disks, disks drives, mounts, and anything else loosely `/dev/s*`.
-
-### Listing disks <a name="toc-sub-tag-23"></a>
-You can list the disks and block devices in a variety of ways depending on the information you are trying to ascertain:
-
-- listing block devices
-```bash
-lsblk
-```
-will show the mount point and disk size. For non-formatted partitions
-```bash
-lsblk -f
-```
-
-- listing `/dev/sd*` partitions
-```bash
-sudo fdisk -l
-```
-
-- disk system space usage
-```bash
-df -h
-```
-The `-h` prints in human readable form.
-
-- overview of all mounts and usage
-```bash
-findmnt [path]
-```
-You do not need to specify a path if you want to list all devices. This program is a repertoire for printing mount points and disk devices, and even has `--json` output. Another useful flag is `--df` for disk usage.
-
-- general mount info
-```bash
-mount
-```
-Will tell you the disks mounted, and the options applied.
-
-A full discussion can be seen in [this SO answer](https://askubuntu.com/questions/583909/how-do-i-check-where-devices-are-mounted).
-
-To list the UUIDs and PTUUIDs, use
-```bash
-sudo blkid
-```
-
-### File system checks <a name="toc-sub-tag-24"></a>
-Using [`fsck`](https://www.howtogeek.com/282374/what-is-the-lostfound-folder-on-linux-and-macos/).
-
-`fsck` will run pretty much out-of-the-box, and can perform some (irreversible) file system repairs also.
-
-Another good tool to use is `dumpe2fs` for printing filesystem information and rudimentary diagnostics. It is useful for obtaining block size information, when the drive was last used, when it was created, and so forth.
-
-### Recovering files <a name="toc-sub-tag-25"></a>
-There are multiple recovery tools available; two which I frequently use are:
-
-- `testdisk`, which ships with `photorec`, is an open source tool for file system checks and file recovery.
-
-`photorec` is an incredible tool by [CGSecurity](https://www.cgsecurity.org/wiki/PhotoRec), which runs in terminal curses, and is fairly self explanatory. The `testdisk` suite is also able to perform file system checks and repairs, however I have not yet explored it enough to document its usage. Once I am more familiar with the tool, I will endeavour to include notes.
-
-- outdated, but still useful in certain circles, `scalpel`
-
-### Formatting <a name="toc-sub-tag-26"></a>
-
-From [devconnected](https://devconnected.com/how-to-format-disk-partitions-on-linux/), you can format a partition/disk with a specific journal using
-```bash
-sudo mkfs -t [journal] /dev/sda1
-```
-Linux commonly uses `ext4`, apple has `adfs`, and windows `fat32`/`vfat`, `ntfs` or `msdos`. **NB:** is some cases, mostly windows, the journal must be written in all caps.
-
-To format a drive to Linux `ext4`, we can use `fdisk` to create a partition of type `83` (Linux), and then run
-```
-sudo mkfs.ext4 /dev/sd[...]
-```
-on the intended partition. Note, this can also be used on the whole disk `/dev/sd*`.
-
-### Automount with `/etc/fstab` <a name="toc-sub-tag-27"></a>
-Following [this guide](https://www.techrepublic.com/article/how-to-properly-automount-a-drive-in-ubuntu-linux/), we can configure a drive to automount by adding it to `/etc/fstab`. For this, we require the UUID of the device, which we can obtain with
-```bash
-sudo blkid
-```
-Change the ownership of the desired mount directory to the user's group, and then add
-```
-UUID=[your uuid]    /mnt/point    [format/auto]  nosuid,nodev,nofail 0   0
-```
-to `fstab`. A few comments
-> `nosuid` - specifies that the filesystem cannot contain set userid files. This prevents root escalation and other security issues.
-
-> `nodev` - specifies that the filesystem cannot contain special devices (to prevent access to random device hardware).
-
-You can test the mount point configuration is okay with
-```bash
-sudo mount -a
-```
-See [here](https://linoxide.com/file-system/example-linux-nfs-mount-entry-in-fstab-etcfstab/) for a network mount example. See [here](https://help.ubuntu.com/community/Fstab) for the ubuntu documentation on `fstab`.
-
-### Burning CDs and DVDs <a name="toc-sub-tag-28"></a>
-An overview of Debian r/w CDs and DVDs can be found [here](https://wiki.debian.org/CDDVD).
-
-- CDs
-
-For this, it is easy to use `wodim` in [Disk-At-Once mode](https://en.wikipedia.org/wiki/Optical_disc_recording_modes). The command template is
-```bash
-wodim -v dev=/dev/rs0 -dao /path/to/my.iso
-```
-
-- DVDs
-
-The standard disk formatting is [`ISO9660`](https://wiki.osdev.org/ISO_9660) for `.iso` files.
-
-Following from the [Debian wiki](https://wiki.debian.org/BurnCd), the easiest (and probably best way) to burn disks with Debian is to use a tool like `growisofs`. A recipe for **burning dvds** is then
-```bash
-growisofs -dvd-compat -speed=8 -Z /dev/sr0=my.iso
-```
-You can also mount the disk into the file system with
-```bash
-sudo mount /dev/sr0 /mnt/cdrom
-```
-though personally I have encountered many errors in doing so (you're best of ripping the cd/dvd with `dd`). The above mount command may also require `-t iso9660` to specify the format.
-
-There is a short discussion in [this arch linux forum](https://bbs.archlinux.org/viewtopic.php?id=131299) on mounting disks.
-
-
-### Mounting a filesystem with SSH <a name="toc-sub-tag-29"></a>
-For ease of development on a remote platform, tools like `sshfs` can mount directories on the local file-system as if they were a disk. On **OSX**, you'll require `osxfuse` for Linux filesystems also. Both tools can easily be installed with brew:
-
-```bash
-brew install osxfuse
-
-brew install sshfs
-```
-
-Make a mount point and mount with
-```bash
-sshfs -o allow_other,default_permissions [USER]@[ADDRESS]:/ /path/to/mnt
-```
-
-and unmount with
-```bash
-umount /path/to/mnt
-```
-or, on OSX,
-```bash
-diskutil unmountDisk /path/to/mnt
-```
-
-### Mounting HFS/HFS+ on Linux <a name="toc-sub-tag-30"></a>
-By default, linux will mount Apple HFS/HFS+ journaled filesystems as read-only. To cirumvent this, without having to disable journaling, we can use `hfsprogs`
-```bash
-sudo apt-get install hfsprogs
-```
-
-We then force `rw` permissions on the mount:
-```
-sudo mount -t hfsplus -o rw,force /dev/sdx /path/to/mnt
-```
-The specific type may vary.
-
-To enable others, you still need to pass `gid/uid` or `umask`.
-
-## Installing Docker on Debian <a name="toc-sub-tag-31"></a>
+## Installing Docker on Debian <a name="toc-sub-tag-19"></a>
 Following from the [official install scripts](https://docs.docker.com/engine/install/debian/):
 ```bash
 sudo apt-get install \
@@ -541,7 +299,7 @@ Verify the installation with
 sudo docker run hello-world
 ```
 
-### docker-compose <a name="toc-sub-tag-32"></a>
+### docker-compose <a name="toc-sub-tag-20"></a>
 Following this guide:
 
 We first get the stable release
@@ -557,7 +315,7 @@ and finally link into the path
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
-## Package management <a name="toc-sub-tag-33"></a>
+## Package management <a name="toc-sub-tag-21"></a>
 With `dpkg`, you can install with
 ```bash
 dpkg -i [package].deb
@@ -573,7 +331,7 @@ dpkg -r [package_name]
 ```
 and purge with `-P` instead of `-r`. Purge will also delete all configuration files.
 
-## Python installations <a name="toc-sub-tag-34"></a>
+## Python installations <a name="toc-sub-tag-22"></a>
 Following from [this guide](https://linuxize.com/post/how-to-install-python-3-8-on-debian-10/).
 
 First, we grab the dependencies
@@ -606,7 +364,7 @@ and validate with
 python3.8 --version
 ```
 
-## Path alternatives <a name="toc-sub-tag-35"></a>
+## Path alternatives <a name="toc-sub-tag-23"></a>
 You can adjust the priority of conflicting program versions, commonly [python3 vs python2](https://exitcode0.net/changing-the-default-python-version-in-debian/) using the `update-alternatives` command. The program linked with the highest priority will become the default
 ```bash
 update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
@@ -618,10 +376,10 @@ You can check the configuration with
 update-alternatives --config python
 ```
 
-## Versions <a name="toc-sub-tag-36"></a>
+## Versions <a name="toc-sub-tag-24"></a>
 All sorts of valuable version information can be obtained with different commands, most of which are listed on [linuxconfig](https://linuxconfig.org/check-what-debian-version-you-are-running-on-your-linux-system).
 
-### Debian <a name="toc-sub-tag-37"></a>
+### Debian <a name="toc-sub-tag-25"></a>
 ```bash
 lsb_release -cs
 # buster
@@ -645,7 +403,7 @@ cat /etc/os-release
 # BUG_REPORT_URL="https://bugs.debian.org/"
 ```
 
-## Installing VSCode on Debian <a name="toc-sub-tag-38"></a>
+## Installing VSCode on Debian <a name="toc-sub-tag-26"></a>
 From a [Linuxize](https://linuxize.com/post/how-to-install-visual-studio-code-on-debian-10/) tutorial:
 
 Provided you have already
@@ -666,7 +424,7 @@ We can now update the index and install VSCode
 sudo apt update && sudo apt install code
 ```
 
-## Modifying keymaps with `xmodmap` <a name="toc-sub-tag-39"></a>
+## Modifying keymaps with `xmodmap` <a name="toc-sub-tag-27"></a>
 I don't like specific default [dead keys](https://en.wikipedia.org/wiki/Dead_key), such as the backtick symbol. To modify the behaviour of keys, we use `xmodmap`.
 
 For my case, first identify the keycode using
@@ -689,7 +447,7 @@ To make this change permanent, we create a `~/.Xmodmap` dotfile with our modific
 xmodmap -pke >> ~/.Xmodmap
 ```
 
-## Other: <a name="toc-sub-tag-40"></a>
+## Other: <a name="toc-sub-tag-28"></a>
 CPU temperature:
 ```
 /sys/class/thermal/thermal_zone0/temp
