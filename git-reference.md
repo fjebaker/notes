@@ -13,6 +13,10 @@ As everyone with git, there is a tendency to use the same idioms over and over. 
 5. [Tagging](#toc-sub-tag-6)
 6. [Authentication](#toc-sub-tag-7)
 7. [Editor configuration](#toc-sub-tag-8)
+8. [Using SSH](#toc-sub-tag-9)
+	1. [Generating keypairs](#toc-sub-tag-10)
+	2. [Uploading public keys](#toc-sub-tag-11)
+	3. [Changing repository origin](#toc-sub-tag-12)
 <!--END TOC-->
 
 ## GitHub action recipes <a name="toc-sub-tag-0"></a>
@@ -150,4 +154,28 @@ git config --global user.email "email@addr.com"
 ## Editor configuration <a name="toc-sub-tag-8"></a>
 ```bash
 git config --global core.editor "vim"
+```
+
+## Using SSH <a name="toc-sub-tag-9"></a>
+Overview of using SSH for Git(Hub) interaction.
+
+### Generating keypairs <a name="toc-sub-tag-10"></a>
+Using the email associated with your Git identity:
+```bash
+ssh-keygen -t ed25519 -C "your@email.com"
+```
+You may wish to name this file along the lines of `id_git` so that it's easy to remember what it's for.
+
+### Uploading public keys <a name="toc-sub-tag-11"></a>
+- GitHub
+Under Account Settings, SSH and GPG keys, add a new SSH, give it a memorable name, and then copy the contents of 
+```bash
+~/.ssh/id_[yourkey].pub
+```
+i.e. your public key, into the text field and save.
+
+### Changing repository origin <a name="toc-sub-tag-12"></a>
+To change your git client to use SSH over HTTP(s), simply change the origin url to the general format
+```bash
+git remote set-url origin git@github.com:<uname>/<repository>.git
 ```
