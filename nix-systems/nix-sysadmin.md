@@ -447,6 +447,22 @@ To make this change permanent, we create a `~/.Xmodmap` dotfile with our modific
 xmodmap -pke >> ~/.Xmodmap
 ```
 
+We load the changes with
+```bash
+xmodmap ~/.Xmodmap
+```
+
+or to ensure the changes are ran when the X server inits, use
+```bash
+echo 'xmodmap ~/.Xmodmap' >> ~/.xinitrc
+```
+
+To undo a keyboard mapping, use
+```bash
+setxkbmap -option
+```
+
+
 ## Other: <a name="toc-sub-tag-28"></a>
 CPU temperature:
 ```
