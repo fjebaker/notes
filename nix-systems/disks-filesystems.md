@@ -11,6 +11,8 @@
 	6. [Burning CDs and DVDs](#toc-sub-tag-6)
 	7. [Mounting a filesystem with SSH](#toc-sub-tag-7)
 	8. [Mounting HFS/HFS+ on Linux](#toc-sub-tag-8)
+2. [On storing binaries](#toc-sub-tag-9)
+3. [On `.desktop` files](#toc-sub-tag-10)
 <!--END TOC-->
 
 ## Disks and mounting <a name="toc-sub-tag-0"></a>
@@ -171,3 +173,25 @@ sudo mount -t hfsplus -o rw,force /dev/sdx /path/to/mnt
 The specific type may vary.
 
 To enable others, you still need to pass `gid/uid` or `umask`.
+
+
+## On storing binaries <a name="toc-sub-tag-9"></a>
+There are multiple different locations for binaries on Linux, however there is [an etiquette](https://unix.stackexchange.com/a/8658) which ought to be abided by. In general, the prefix `s` denotes system, and thus is for binaries and executables managed by the system for root (i.e. not for ordinary users).
+
+- `/bin` (and `/sbin`) is for programs required on the `/` partition, prior to mounting other partitions; e.g. shells and disk commands.
+- `/usr/bin` (and `/usr/sbin`) is for distro-managed user programs.
+- `/usr/local/bin` (and `/usr/local/sbin`) is for normal programs not managed by the distro. 
+- `/opt` is for non-distro packages that do not behave well on the chosen distro. It is usually reserved for large poorly behaved packages.
+
+`/usr/local/bin` is where you would want to store and link your own executables to.
+
+## On `.desktop` files <a name="toc-sub-tag-10"></a>
+Link for the single user to
+```
+~/.local/share/applications/
+```
+
+or globally in
+```
+/usr/share/applications/
+```

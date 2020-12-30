@@ -6,33 +6,32 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 ## Table of Contents
 1. [General tricks and tips](#toc-sub-tag-0)
 	1. [Installing without ethernet](#toc-sub-tag-1)
-	2. [On storing binaries](#toc-sub-tag-2)
-2. [Users and groups](#toc-sub-tag-3)
-3. [Debian network configuration](#toc-sub-tag-4)
-	1. [Controlling interfaces](#toc-sub-tag-5)
-	2. [Configuring interfaces](#toc-sub-tag-6)
-		1. [DHCP](#toc-sub-tag-7)
-		2. [Static IP](#toc-sub-tag-8)
-	3. [Debugging networks](#toc-sub-tag-9)
-4. [SSH Overview](#toc-sub-tag-10)
-5. [Installing `sudo`](#toc-sub-tag-11)
-6. [Hardware](#toc-sub-tag-12)
-	1. [Graphics cards](#toc-sub-tag-13)
-	2. [Sound cards](#toc-sub-tag-14)
-7. [Useful commands](#toc-sub-tag-15)
-	1. [`STOP` and `CONT` a process](#toc-sub-tag-16)
-	2. [SSL with `curl`](#toc-sub-tag-17)
-	3. [`curl` proxies](#toc-sub-tag-18)
-8. [Installing Docker on Debian](#toc-sub-tag-19)
-	1. [docker-compose](#toc-sub-tag-20)
-9. [Package management](#toc-sub-tag-21)
-10. [Python installations](#toc-sub-tag-22)
-11. [Path alternatives](#toc-sub-tag-23)
-12. [Versions](#toc-sub-tag-24)
-	1. [Debian](#toc-sub-tag-25)
-13. [Installing VSCode on Debian](#toc-sub-tag-26)
-14. [Modifying keymaps with `xmodmap`](#toc-sub-tag-27)
-15. [Other:](#toc-sub-tag-28)
+2. [Users and groups](#toc-sub-tag-2)
+3. [Debian network configuration](#toc-sub-tag-3)
+	1. [Controlling interfaces](#toc-sub-tag-4)
+	2. [Configuring interfaces](#toc-sub-tag-5)
+		1. [DHCP](#toc-sub-tag-6)
+		2. [Static IP](#toc-sub-tag-7)
+	3. [Debugging networks](#toc-sub-tag-8)
+4. [SSH Overview](#toc-sub-tag-9)
+5. [Installing `sudo`](#toc-sub-tag-10)
+6. [Hardware](#toc-sub-tag-11)
+	1. [Graphics cards](#toc-sub-tag-12)
+	2. [Sound cards](#toc-sub-tag-13)
+7. [Useful commands](#toc-sub-tag-14)
+	1. [`STOP` and `CONT` a process](#toc-sub-tag-15)
+	2. [SSL with `curl`](#toc-sub-tag-16)
+	3. [`curl` proxies](#toc-sub-tag-17)
+8. [Installing Docker on Debian](#toc-sub-tag-18)
+	1. [docker-compose](#toc-sub-tag-19)
+9. [Package management](#toc-sub-tag-20)
+10. [Python installations](#toc-sub-tag-21)
+11. [Path alternatives](#toc-sub-tag-22)
+12. [Versions](#toc-sub-tag-23)
+	1. [Debian](#toc-sub-tag-24)
+13. [Installing VSCode on Debian](#toc-sub-tag-25)
+14. [Modifying keymaps with `xmodmap`](#toc-sub-tag-26)
+15. [Other:](#toc-sub-tag-27)
 <!--END TOC-->
 
 ## General tricks and tips <a name="toc-sub-tag-0"></a>
@@ -43,18 +42,7 @@ When installing a \*nix system without an ethernet connection, it can be general
 
 The solution to this is, if you own an android phone, use **USB tethering** to add a network interface so you can complete the installation and find the necessary firmware.
 
-### On storing binaries <a name="toc-sub-tag-2"></a>
-There are multiple different locations for binaries on Linux, however there is [an etiquette](https://unix.stackexchange.com/a/8658) which ought to be abided by. In general, the prefix `s` denotes system, and thus is for binaries and executables managed by the system for root (i.e. not for ordinary users).
-
-- `/bin` (and `/sbin`) is for programs required on the `/` partition, prior to mounting other partitions; e.g. shells and disk commands.
-- `/usr/bin` (and `/usr/sbin`) is for distro-managed user programs.
-- `/usr/local/bin` (and `/usr/local/sbin`) is for normal programs not managed by the distro. 
-- `/opt` is for non-distro packages that do not behave well on the chosen distro. It is usually reserved for large poorly behaved packages.
-
-`/usr/local/bin` is where you would want to store and link your own executables to.
-
-
-## Users and groups <a name="toc-sub-tag-3"></a>
+## Users and groups <a name="toc-sub-tag-2"></a>
 Creating a **new user**, managing startup shell and directory
 ```bash
 sudo useradd -d /home/[homedir] [username]
@@ -93,7 +81,7 @@ sudo userdel -r [username]
 # -r removes home directory aswell
 ```
 
-## Debian network configuration <a name="toc-sub-tag-4"></a>
+## Debian network configuration <a name="toc-sub-tag-3"></a>
 Whilst installing Debian 9 on an old machine, which had a faulty NIC, I learned a few things about network configurations on that specific OS, most of which is documented [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html).
 
 The legacy `ifconfig` is being replaced with the newer `ip` suite, and an overview of the translation can be quickly seen in this post by [ComputingForGeeks](https://computingforgeeks.com/ifconfig-vs-ip-usage-guide-on-linux/). Two very useful commands I use a lot for debugging are
@@ -104,7 +92,7 @@ ip -s link show [interface]	# outputs interface statistics
 ```
 
 
-### Controlling interfaces <a name="toc-sub-tag-5"></a>
+### Controlling interfaces <a name="toc-sub-tag-4"></a>
 Toggling specific interface states can be done using either `ip`
 ```bash
 ip link set [interface] up
@@ -130,7 +118,7 @@ sudo systemctl [start, stop, restart, status] networking
 ```
 
 
-### Configuring interfaces <a name="toc-sub-tag-6"></a>
+### Configuring interfaces <a name="toc-sub-tag-5"></a>
 A post on [nixCraft](https://www.cyberciti.biz/faq/howto-configuring-network-interface-cards-on-debian/) provides a good overview of Debian network configuration, and the configuration syntax can be seen [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_basic_syntax_of_etc_network_interfaces).
 
 The main interfaces configuration can be edited in
@@ -143,14 +131,14 @@ auto lo
 iface lo inet loopback
 ```
 
-#### DHCP <a name="toc-sub-tag-7"></a>
+#### DHCP <a name="toc-sub-tag-6"></a>
 For a DHCP interface, we can use a simple configuration such as
 ```
 auto eth0
 iface eth0 inet dhcp
 ```
 
-#### Static IP <a name="toc-sub-tag-8"></a>
+#### Static IP <a name="toc-sub-tag-7"></a>
 Static IP addresses can be assigned with
 ```
 auto eth0
@@ -169,10 +157,10 @@ domain example.com
 
 **NB:** The modern `systemd` configuration is considerably more elegant, and also documented [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_modern_network_configuration_without_gui).
 
-### Debugging networks <a name="toc-sub-tag-9"></a>
+### Debugging networks <a name="toc-sub-tag-8"></a>
 See [this guide on port overviews](https://linuxize.com/post/check-listening-ports-linux/).
 
-## SSH Overview <a name="toc-sub-tag-10"></a>
+## SSH Overview <a name="toc-sub-tag-9"></a>
 Useful commands are
 
 Copy login key to remote:
@@ -185,7 +173,7 @@ Remove host key from chain:
 ssh-keygen -R host
 ```
 
-## Installing `sudo` <a name="toc-sub-tag-11"></a>
+## Installing `sudo` <a name="toc-sub-tag-10"></a>
 Some distributions, such as lightweight Debian, do not include `sudo` by default. We can install it with root privileges
 ```bash
 su -
@@ -207,7 +195,7 @@ to allow members of group sudo to execute any command.
 
 To commit changes, a reboot is required.
 
-## Hardware <a name="toc-sub-tag-12"></a>
+## Hardware <a name="toc-sub-tag-11"></a>
 Listing all of the PCI devices can be achieved with
 ```bash
 lspci
@@ -219,16 +207,16 @@ update-pciids
 
 On [HowToGeek](https://www.howtogeek.com/508993/how-to-check-which-gpu-is-installed-on-linux/) is a Ubuntu overview for listing hardware.
 
-### Graphics cards <a name="toc-sub-tag-13"></a>
+### Graphics cards <a name="toc-sub-tag-12"></a>
 For graphics cards on Debian, I have created [separate notes](https://github.com/Dustpancake/Dust-Notes/blob/master/nix-systems/debian-gpu.md).
 
-### Sound cards <a name="toc-sub-tag-14"></a>
+### Sound cards <a name="toc-sub-tag-13"></a>
 For sound cards on Debian, I have created [separate notes](https://github.com/Dustpancake/Dust-Notes/blob/master/nix-systems/debian-soundcards.md)
 
-## Useful commands <a name="toc-sub-tag-15"></a>
+## Useful commands <a name="toc-sub-tag-14"></a>
 In this section I will document useful commands, which, for brevity, don't merit a full chapter of their own.
 
-### `STOP` and `CONT` a process <a name="toc-sub-tag-16"></a>
+### `STOP` and `CONT` a process <a name="toc-sub-tag-15"></a>
 As an example, consider you wanted to use Wireshark to capture packets of a specific program, however other programs were being very chatty, and working out exactly what Wireshark filter to craft is proving tedious. A quick and dirty solution to this is just to halt the execution of the chatty program
 
 - find the `pid`:
@@ -249,10 +237,10 @@ Using a very similar command, we run
 kill -CONT [pid]
 ```
 
-### SSL with `curl` <a name="toc-sub-tag-17"></a>
+### SSL with `curl` <a name="toc-sub-tag-16"></a>
 https://stackoverflow.com/questions/10079707/https-connection-using-curl-from-command-line
 
-### `curl` proxies <a name="toc-sub-tag-18"></a>
+### `curl` proxies <a name="toc-sub-tag-17"></a>
 You can either set the environment variables
 ```
 export http_proxy="http://uname:pw@addr:port"
@@ -260,7 +248,7 @@ export https_proxy="https://uname:pw@addr:port"
 ```
 which `curl` automatically uses, or, pass in the flag `-x http://uname:pw@addr:port`.
 
-## Installing Docker on Debian <a name="toc-sub-tag-19"></a>
+## Installing Docker on Debian <a name="toc-sub-tag-18"></a>
 Following from the [official install scripts](https://docs.docker.com/engine/install/debian/):
 ```bash
 sudo apt-get install \
@@ -299,7 +287,7 @@ Verify the installation with
 sudo docker run hello-world
 ```
 
-### docker-compose <a name="toc-sub-tag-20"></a>
+### docker-compose <a name="toc-sub-tag-19"></a>
 Following this guide:
 
 We first get the stable release
@@ -315,7 +303,7 @@ and finally link into the path
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
-## Package management <a name="toc-sub-tag-21"></a>
+## Package management <a name="toc-sub-tag-20"></a>
 With `dpkg`, you can install with
 ```bash
 dpkg -i [package].deb
@@ -331,7 +319,7 @@ dpkg -r [package_name]
 ```
 and purge with `-P` instead of `-r`. Purge will also delete all configuration files.
 
-## Python installations <a name="toc-sub-tag-22"></a>
+## Python installations <a name="toc-sub-tag-21"></a>
 Following from [this guide](https://linuxize.com/post/how-to-install-python-3-8-on-debian-10/).
 
 First, we grab the dependencies
@@ -364,7 +352,7 @@ and validate with
 python3.8 --version
 ```
 
-## Path alternatives <a name="toc-sub-tag-23"></a>
+## Path alternatives <a name="toc-sub-tag-22"></a>
 You can adjust the priority of conflicting program versions, commonly [python3 vs python2](https://exitcode0.net/changing-the-default-python-version-in-debian/) using the `update-alternatives` command. The program linked with the highest priority will become the default
 ```bash
 update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
@@ -376,10 +364,10 @@ You can check the configuration with
 update-alternatives --config python
 ```
 
-## Versions <a name="toc-sub-tag-24"></a>
+## Versions <a name="toc-sub-tag-23"></a>
 All sorts of valuable version information can be obtained with different commands, most of which are listed on [linuxconfig](https://linuxconfig.org/check-what-debian-version-you-are-running-on-your-linux-system).
 
-### Debian <a name="toc-sub-tag-25"></a>
+### Debian <a name="toc-sub-tag-24"></a>
 ```bash
 lsb_release -cs
 # buster
@@ -403,7 +391,7 @@ cat /etc/os-release
 # BUG_REPORT_URL="https://bugs.debian.org/"
 ```
 
-## Installing VSCode on Debian <a name="toc-sub-tag-26"></a>
+## Installing VSCode on Debian <a name="toc-sub-tag-25"></a>
 From a [Linuxize](https://linuxize.com/post/how-to-install-visual-studio-code-on-debian-10/) tutorial:
 
 Provided you have already
@@ -424,7 +412,7 @@ We can now update the index and install VSCode
 sudo apt update && sudo apt install code
 ```
 
-## Modifying keymaps with `xmodmap` <a name="toc-sub-tag-27"></a>
+## Modifying keymaps with `xmodmap` <a name="toc-sub-tag-26"></a>
 I don't like specific default [dead keys](https://en.wikipedia.org/wiki/Dead_key), such as the backtick symbol. To modify the behaviour of keys, we use `xmodmap`.
 
 For my case, first identify the keycode using
@@ -463,7 +451,7 @@ setxkbmap -option
 ```
 
 
-## Other: <a name="toc-sub-tag-28"></a>
+## Other: <a name="toc-sub-tag-27"></a>
 CPU temperature:
 ```
 /sys/class/thermal/thermal_zone0/temp
