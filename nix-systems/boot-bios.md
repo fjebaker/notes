@@ -46,6 +46,38 @@ Open Nautilus (File Explorer), right click on your ISO and select `Open With Dis
 
 This *may* be able to mitigate FAT32 restrictions, but I am unsure as I have not personally tested this.
 
+## Booting/Installing with UEFI
+Provided you are able to boot from an ISO loaded on your device, the next step is to install the operating system.
 
+There are now some issues that may arrise relating to the destination drive's partition table.
+
+The format of prexisting partitions doesn't matter, as most installers will provide reformatting and partitioning tools. However, the drive's partition scheme label does make a difference.
+
+If you are using BIOS *Legacy Mode*, Master Boot Record (MBR) and GUID Partition Table (GPT) partitions schemes are supported, however UEFI can only install on GPT.
+
+The easiest way to check and change your partition label is with `fdisk` and `parted` (`sudo apt-get install parted`). We can view our drives with
+```bash
+sudo fdisk -l
+```
+and will see something like
+```
+Disk /dev/sdb: 465.8 GiB, 500107862016 bytes, 976773168 sectors
+Disk model: ST3500418AS     
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 0495045D-8196-419B-B4F5-5EDF681E3D27
+```
+
+Here, we see in the second to last line the `Disklabel type` is GPT. If this were something else, e.g. MS-DOS, we would need to use `parted` to update the label.
+
+**NB:** changing the label *is a very easy way* to "lose" all your data on the disk. Backup first.
+
+```bash
+sudo parted /dev/sdb mklabel gpt
+```
+
+Changing the label *will also* clear the partition table.
 
 
