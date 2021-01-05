@@ -80,4 +80,20 @@ sudo parted /dev/sdb mklabel gpt
 
 Changing the label *will also* clear the partition table.
 
+## Updating GRUB
 
+In the [GRUB documentation](https://www.gnu.org/software/grub/manual/grub/) are listed a few ways to edit the GRUB settings manually, including by editing the `grub.d` configuration files.
+
+Another method, slightly more automated, is to mount the partitions containing the alternative OS on your linux host, somewhere on `/`, and then use
+```bash
+sudo os-prober
+```
+to see if the OS is detected.
+
+Then use
+```bash
+sudo update-grub
+```
+in order to add the detected OSs into the GRUB menu.
+
+Note that the EFI boot may not be on the same partition as the OS itself, which I, at first, found a little perplexing.
