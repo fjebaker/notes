@@ -13,6 +13,7 @@
 	8. [Mounting HFS/HFS+ on Linux](#toc-sub-tag-8)
 2. [On storing binaries](#toc-sub-tag-9)
 3. [On `.desktop` files](#toc-sub-tag-10)
+4. [On securely erasing disks](#toc-sub-tag-11)
 <!--END TOC-->
 
 ## Disks and mounting <a name="toc-sub-tag-0"></a>
@@ -195,3 +196,34 @@ or globally in
 ```
 /usr/share/applications/
 ```
+
+## On securely erasing disks <a name="toc-sub-tag-11"></a>
+Shredding SSDs can be more involved, and a method is usually provided by the manufacturer. For HDDs, we can use `shred`, included with most Linux distributions.
+
+A common use is
+```bash 
+shred -uvz [file]
+```
+with `-u` for deallocation and removing, `-v` for verbose, and `-z` to overwrite the memory location with zeros. By default, `shred` will overwrite the file with random data three times, followed by the fourth swipe with zeroes.
+
+You can set the number of overwrite sweeps with `-n [num]`.
+
+On [journaled](https://en.wikipedia.org/wiki/Journaling_file_system) filesystems, such as ext3 and ext4, `shred` is not necessarily guaranteed to *permanetly* delete the files. For such problems, the `secure-delete` tool exists, installable with most package managers.
+
+This tool will scrub the data with a whole series of overwrites and passes, including techniques described by [Peter Gutmann](https://www.cs.auckland.ac.nz/~pgut001/pubs/secure_del.html).
+
+`secure-delete` ships with four commands:
+
+- `srm` for secure `rm`, for erasing, deleteing, and scrubbing
+```bash
+srm -vz [file]
+```
+with the flags having similar meaning to `shred`.
+
+- `sfill` for filling and overwritting free space on a filesystem
+
+This is to be used in conjunction with `srm`; afer filling memory with random data, `sfill` will then release the diskspace. This command accepts many of the same flags as `srm`.
+
+- `sswap` for overwriting swap space partitions
+- `sdmem` for wiping RAM
+
