@@ -2,7 +2,7 @@ syntax on
 set number
 set tabstop=4
 set softtabstop=0
-set noexpandtab
+set expandtab
 set shiftwidth=4
 set tw=0
 set textwidth=0 wrapmargin=0
