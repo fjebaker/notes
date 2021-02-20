@@ -4,7 +4,18 @@
 
 In these notes are common idioms and recipes that I find I keep having to look up.
 
-## Setting up a new project
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Setting up a new project](#toc-sub-tag-0)
+	1. [Adding Bootstrap](#toc-sub-tag-1)
+2. [Compontents](#toc-sub-tag-2)
+3. [Conditional rendering](#toc-sub-tag-3)
+	1. [`v-for`](#toc-sub-tag-4)
+4. [Buttons](#toc-sub-tag-5)
+	1. [Registering callbacks](#toc-sub-tag-6)
+<!--END TOC-->
+
+## Setting up a new project <a name="toc-sub-tag-0"></a>
 Requires `@vue/cli`, which is npm installable.
 
 Using the binary (if not in path, can be found under `node_modules/.bin/vue`)
@@ -13,13 +24,13 @@ Using the binary (if not in path, can be found under `node_modules/.bin/vue`)
 vue create [project-name]
 ```
 
-### Adding Bootstrap
+### Adding Bootstrap <a name="toc-sub-tag-1"></a>
 For the auto-configuration, simply use:
 ```bash
 vue add bootstrap-vue
 ```
 
-## Compontents
+## Compontents <a name="toc-sub-tag-2"></a>
 Components are modularised section of the webpage, analagous to a class in object orientated languages.
 
 The component must at it's minimal define
@@ -65,10 +76,10 @@ Components may also include scoped style tags:
 </style>
 ```
 
-## Conditional rendering
+## Conditional rendering <a name="toc-sub-tag-3"></a>
 Vue includes ways of conditionally including and exluding components, aswell as facilitating control flow with loops.
 
-### `v-for`
+### `v-for` <a name="toc-sub-tag-4"></a>
 We can define a component for each item in a javascript list with
 ```vue
 <template>
@@ -83,12 +94,12 @@ We can define a component for each item in a javascript list with
 Note the use of `:key="i.id"`; the key is used as a trigger for updating the item. That is, if `i.id` is modified, the `<b-col>` tag is redrawn, with the updated values in `i`.
 
 
-## Buttons
+## Buttons <a name="toc-sub-tag-5"></a>
 Buttons are usually redefined in different frameworks, such as [Vuetify](https://vuetifyjs.com/en/components/buttons/) or [Vue Bootstrap](https://bootstrap-vue.org/docs/components/button), and will offer their own methods and behaviours. There are some features that behave identically in most of these implementations.
 
 I frequently use Vue Bootstrap, so will make my code examples relevant to that specific syntax.
 
-### Registering callbacks
+### Registering callbacks <a name="toc-sub-tag-6"></a>
 We do this with the `@click` directive
 ```vue
 <template>
