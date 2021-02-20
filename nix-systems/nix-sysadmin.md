@@ -100,6 +100,8 @@ sudo chsh -s /bin/zsh someUser
 ```
 to change the shell of `someUser` to `zsh`.
 
+**NB**: new and alternative shells may be installed via the relevant package managers.
+
 ## Debian network configuration <a name="toc-sub-tag-4"></a>
 Whilst installing Debian 9 on an old machine, which had a faulty NIC, I learned a few things about network configurations on that specific OS, most of which is documented [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html).
 
