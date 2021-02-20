@@ -11,9 +11,11 @@
 	6. [Burning CDs and DVDs](#toc-sub-tag-6)
 	7. [Mounting a filesystem with SSH](#toc-sub-tag-7)
 	8. [Mounting HFS/HFS+ on Linux](#toc-sub-tag-8)
-2. [On storing binaries](#toc-sub-tag-9)
-3. [On `.desktop` files](#toc-sub-tag-10)
-4. [On securely erasing disks](#toc-sub-tag-11)
+2. [`rsync`](#toc-sub-tag-9)
+	1. [Merging file trees](#toc-sub-tag-10)
+3. [On storing binaries](#toc-sub-tag-11)
+4. [On `.desktop` files](#toc-sub-tag-12)
+5. [On securely erasing disks](#toc-sub-tag-13)
 <!--END TOC-->
 
 ## Disks and mounting <a name="toc-sub-tag-0"></a>
@@ -175,8 +177,25 @@ The specific type may vary.
 
 To enable others, you still need to pass `gid/uid` or `umask`.
 
+## `rsync` <a name="toc-sub-tag-9"></a>
+`rsync` is an alternative to `cp` or `mv` with much extended as useful functionality. I will include some common recipes here for it.
 
-## On storing binaries <a name="toc-sub-tag-9"></a>
+`rsync` does not not ship by default on many linux distributions, but can easily be installed with a package manager.
+
+Later version of `rsync` drive all of the operations over SSH, thus can be used inplace of `scp`.
+
+### Merging file trees <a name="toc-sub-tag-10"></a>
+To merge a directory `dir1` into `dir2` in such a way as to skip duplicate files, and ensure the tree structure of `dir1` is replicated in `dir2` we can use the archive command
+```bash
+rsync -av dir1/* dir2
+```
+
+Note, from the manual:
+> Note  that  -a does not preserve hardlinks, because finding multiply-linked files is ex‐
+pensive.  You must separately specify -H.
+
+
+## On storing binaries <a name="toc-sub-tag-11"></a>
 There are multiple different locations for binaries on Linux, however there is [an etiquette](https://unix.stackexchange.com/a/8658) which ought to be abided by. In general, the prefix `s` denotes system, and thus is for binaries and executables managed by the system for root (i.e. not for ordinary users).
 
 - `/bin` (and `/sbin`) is for programs required on the `/` partition, prior to mounting other partitions; e.g. shells and disk commands.
@@ -186,7 +205,7 @@ There are multiple different locations for binaries on Linux, however there is [
 
 `/usr/local/bin` is where you would want to store and link your own executables to.
 
-## On `.desktop` files <a name="toc-sub-tag-10"></a>
+## On `.desktop` files <a name="toc-sub-tag-12"></a>
 Link for the single user to
 ```
 ~/.local/share/applications/
@@ -197,7 +216,7 @@ or globally in
 /usr/share/applications/
 ```
 
-## On securely erasing disks <a name="toc-sub-tag-11"></a>
+## On securely erasing disks <a name="toc-sub-tag-13"></a>
 Shredding SSDs can be more involved, and a method is usually provided by the manufacturer. For HDDs, we can use `shred`, included with most Linux distributions.
 
 A common use is
