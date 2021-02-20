@@ -4,8 +4,9 @@
 ## Table of Contents
 1. [Sound Configuration](#toc-sub-tag-0)
 	1. [ALSA](#toc-sub-tag-1)
-		1. [CMUS with ALSA](#toc-sub-tag-2)
-	2. [Hardware specifications](#toc-sub-tag-3)
+		1. [ALSA auto-configuration](#toc-sub-tag-2)
+		2. [CMUS with ALSA](#toc-sub-tag-3)
+	2. [Hardware specifications](#toc-sub-tag-4)
 <!--END TOC-->
 
 ## Sound Configuration <a name="toc-sub-tag-0"></a>
@@ -45,7 +46,16 @@ card 1
 ```
 to `~/.asoundrc`, at least I did on Buster.
 
-#### CMUS with ALSA <a name="toc-sub-tag-2"></a>
+#### ALSA auto-configuration <a name="toc-sub-tag-2"></a>
+If the above did not work, or if you altered your sound hardware, a quick-fix for a lot of ALSA related issues is to run the init command:
+```bash
+sudo alsactl init
+```
+From the manual:
+> init  tries to initialize all devices to a default state. If device is not known, error code 99 is returned.
+
+
+#### CMUS with ALSA <a name="toc-sub-tag-3"></a>
 To get CMUS to use ALSA, we edit the `~/.cmus/autosave` file and change the configuration to
 ```
 set dsp.alsa.device=default
@@ -61,7 +71,7 @@ set output_plugin=alsa
 in (a file which you'll probably have to create) `.cmus/rc`.
 
 
-### Hardware specifications <a name="toc-sub-tag-3"></a>
+### Hardware specifications <a name="toc-sub-tag-4"></a>
 As stated in the [Debian wiki](https://wiki.debian.org/ALSA#Troubleshooting), the assigned indexes to sound cards can be found with
 ```bash
 cat /proc/asound/cards
