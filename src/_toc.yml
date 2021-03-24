@@ -1,0 +1,139 @@
+- file: titlepage
+
+- part: "C++"
+  chapters:
+    - file: cpp/declarations
+    - file: cpp/conan
+    - file: cpp/unit-testing
+    - file: cpp/swig-cmake
+    - file: cpp/cmake
+    - file: cpp/member-functions
+
+- part: "Docker"
+  chapters:
+    - file: docker/minio-registry
+    - file: docker/docker-cheatsheet
+    - file: docker/systemd-with-docker
+    - file: docker/docker-compose
+    - file: docker/dockerfile-recipes
+    - file: docker/docker-swarm
+
+- part: "Python"
+  chapters:
+    - file: python/jupyter-ipython
+    - file: python/regex
+    - file: python/py-serial
+    - file: python/high-perf
+    - file: python/c-wrapping
+    - file: python/pypi-distribution
+    - file: python/cpp-c-swig
+    - file: python/requests
+    - file: python/flask/using-flask
+      sections:
+        - file: python/flask/rethink-db-with-flask
+        - file: python/flask/jinja-templating
+    - file: python/fast-api/using-fast-api
+
+- part: "Julia"
+  chapters:
+    - file: julia/README
+    - file: julia/julia-intro  
+    - file: julia/advent-notes/README
+      sections:
+        - file: julia/advent-notes/scopes
+
+- part: "JavaScript"
+  chapters:
+    - file: js/jest-testing
+    - file: js/js-reference
+    - file: js/swig-nodejs
+    - file: js/request-parsing
+    - file: js/extensions/native-messaging
+    - file: js/vue/over-vue
+
+- part: "LaTeX"
+  chapters:
+    - file: tex/latex-documents
+    - file: tex/latexmk
+    - file: tex/presentations
+    - file: tex/posters
+
+- part: "Machine Learning"
+  chapters:
+    - file: machine-learning/tf-install
+    - file: machine-learning/README
+
+- part: "Databases"
+  chapters:
+    - file: databases/node-red
+    - file: databases/mongo-db
+    - file: databases/rethink-db
+    - file: databases/lang-drivers/py-mongo
+
+- part: "Vim"
+  chapters:
+    - file: vim/recipes
+    - file: vim/vundle
+    - file: vim/batch-rename
+
+- part: "Arduino"
+  chapters:
+    - file: arduino/platformio
+    - file: arduino/ca-certs-nano
+    - file: arduino/arduino-cookbook
+    - file: arduino/crypto-auth
+    - file: mq-mqtt/mqtt-specs
+    - file: mq-mqtt/nginx-load-balancing
+
+- part: "Raspi"
+  chapters:
+    - file: raspi/raspi-config
+    - file: raspi/raspi-bit-torrent
+    - file: raspi/pyaudio
+
+- part: "Discord"
+  chapters:
+    - file: discord/making-bots-python
+    - file: discord/discord-music-hook
+
+- part: "AWS"
+  chapters:
+    - file: aws/vpc-overview
+    - file: aws/setting-up
+    - file: aws/ec2-with-docker
+    - file: aws/goofys-s3
+
+- part: "Virtual Machines"
+  chapters:
+    - file: vms/osx-host
+    - file: vms/linux-guest-extensions
+
+- part: "nix Systems"
+  chapters:
+  - file: nix-systems/debian-gpu
+  - file: nix-systems/boot-bios
+  - file: nix-systems/debian-soundcards
+  - file: nix-systems/nix-sysadmin
+  - file: nix-systems/systemd
+  - file: nix-systems/disks-filesystems
+
+- part: "OSX"
+  chapters: 
+    - file: osx-reference
+
+- part: "Miscellaneous"
+  chapters:
+    - file: recommended-talks
+    - file: git-reference
+    - file: software-design-principles
+    - file: ffmpeg-cheatsheet
+    - file: iptables-and-firewalls
+    - file: ci-cd/jenkins-recipes
+    - file: security/openssl-cookbook
+    - file: configurations/shell-rc-profiles
+    - file: docs/mkdocs-notes
+    - file: gitea/gitea-mariadb
+    - file: visualisation/blender-learning
+    - file: java/gradle-cookbook
+    - file: automation/mycroft-osx
+
