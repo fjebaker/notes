@@ -9,3 +9,5 @@
 *.node
 *.h
 *.hpp
+
+src/_build
