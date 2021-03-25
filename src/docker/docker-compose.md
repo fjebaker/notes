@@ -10,7 +10,7 @@ I've known about this tool for a long time, however only invested time into lear
     3. [Controlling startup and tear-down order](#controlling-startup-and-tear-down-order)
 2. [Networks](#networks)
 3. [Volumes](#volumes)
-4. [Configs (docker-swarm)](#configs-(docker-swarm))
+4. [Configs (docker-swarm)](#configs-docker-swarm)
 5. [Docker-Compose commands](#docker-compose-commands)
     1. [Scaling](#scaling)
 6. [Discussions](#discussions)

@@ -9,7 +9,7 @@ Web scraping is a very powerful tool, and at the heart of the scraping technique
     2. [XMLHttpRequest](#xmlhttprequest)
     3. [jQuery Ajax in clients](#jquery-ajax-in-clients)
     4. [Axios](#axios)
-    5. [The (deprecated) `request` package](#the-(deprecated)-request-package)
+    5. [The (deprecated) `request` package](#the-deprecated-request-package)
 2. [Parsing response data](#parsing-response-data)
     1. [Cheerio](#cheerio)
 
