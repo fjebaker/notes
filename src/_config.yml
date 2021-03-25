@@ -1,5 +1,6 @@
 title: "dust-notes"
 author: "Fergus Baker"
+logo: "logo.jpg"
 
 execute:
   execute_notebooks: "off"
