@@ -1,6 +1,6 @@
 # JavaScript
 
+## Overview
 
-
-
-Notes related to JavaScript.
+```{tableofcontents}
+```

@@ -1,7 +1,7 @@
 
 # LaTeX
 
+## Overview
 
-
-
-Notes for LaTeX doc preparation system.
+```{tableofcontents}
+```
