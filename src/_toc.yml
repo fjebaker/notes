@@ -27,7 +27,7 @@
     - file: julia/index
       sections:
         - file: julia/julia-intro  
-        - file: julia/advent-notes/index
+        - file: julia/advent-notes/README
         - file: julia/advent-notes/scopes
 
     - file: python/index
