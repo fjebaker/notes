@@ -1,5 +1,18 @@
 # Using Jest testing framework
+
 [Jest](https://jestjs.io/) is a JavaScript testing framework, with intuitive structuring and extensibility. These notes document details and recipes involving Jest that I have used.
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Quick-start overview](#quick-start-overview)
+    1. [Project setup](#project-setup)
+    2. [Configuring Jest](#configuring-jest)
+    3. [Writing a simple test](#writing-a-simple-test)
+2. [Using Jest with Vue.js](#using-jest-with-vue-js)
+3. [Using Jest with React Apps](#using-jest-with-react-apps)
+4. [Other links](#other-links)
+
+<!--END TOC-->
 
 ## Quick-start overview
 Jest has [comprehensive guides](https://jestjs.io/docs/en/getting-started) on how to use Jest in pretty much any javascript project. I will amalgamate a few of the guides into a [webpack](https://webpack.js.org/) with [babel](https://babeljs.io/) quickstart:

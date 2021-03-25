@@ -1,7 +1,16 @@
 # Python `requests` cookbook
+
 For easy automated access to the internet.
 
-### Sessions
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Sessions](#sessions)
+    1. [Headers in sessions](#headers-in-sessions)
+2. [Streaming file content](#streaming-file-content)
+
+<!--END TOC-->
+
+## Sessions
 Sessioning is an easy way to ensure that metadata like cookies, or referer headers are maintained when scraping a website. They also provide an 'environment' for request conditions.
 
 We can define a session, and mount transport adapters with
@@ -12,7 +21,7 @@ session.mount('https://', adapter)	# example, but http and https are included in
 session.mount('http://', adapter)
 ```
 
-#### Headers in sessions
+### Headers in sessions
 So that headers are dynamically updates when visiting different pages during a session, the `requests` library includes a special method to add new and update old headers without annihilating those received organically
 ```python
 session.headers.update({
@@ -33,7 +42,7 @@ headers = {
 }
 ```
 
-### Streaming file content
+## Streaming file content
 In order to stream bytes instead of downloading the full file we can use the `stream` kwarg. An example implementation is
 ```python
 with requests.get(url, stream=True) as r:

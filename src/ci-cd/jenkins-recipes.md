@@ -1,15 +1,18 @@
 # Jenkins Cookbook
+
 I am in the process of reconfiguring CI/CD for a new project I am working on, and decided to document for ease of future-reuse, all the usual stuff I take notes on, but now for [Jenkins](https://www.jenkins.io).
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Jenkins quick-start with Docker](#toc-sub-tag-0)
-	1. [Creating the prerequisites](#toc-sub-tag-1)
-	2. [Running Jenkins](#toc-sub-tag-2)
-2. [Python-Jenkins worked example](#toc-sub-tag-3)
+1. [Jenkins quick-start with Docker](#jenkins-quick-start-with-docker)
+    1. [Creating the prerequisites](#creating-the-prerequisites)
+    2. [Running Jenkins](#running-jenkins)
+2. [Python-Jenkins worked example](#python-jenkins-worked-example)
+3. [Jenkins with Gitea](#jenkins-with-gitea)
+
 <!--END TOC-->
 
-## Jenkins quick-start with Docker <a name="toc-sub-tag-0"></a>
+## Jenkins quick-start with Docker
 The latest image for jenkins is [`jenkinsci/blueocean`](https://hub.docker.com/r/jenkinsci/blueocean/), obtainable with the usual
 ```bash
 docker pull jenkinsci/blueocean
@@ -21,7 +24,7 @@ docker image pull docker:dind
 
 This setup follows the [official documentation](https://www.jenkins.io/doc/book/installing/).
 
-### Creating the prerequisites <a name="toc-sub-tag-1"></a>
+### Creating the prerequisites
 Jenkins requires a docker network and (recommended) two docker volumes. We can create the bridged network and simple default volumes with
 ```bash
 docker network create jenkins
@@ -46,7 +49,7 @@ docker container run \
   docker:dind
 ```
 
-### Running Jenkins <a name="toc-sub-tag-2"></a>
+### Running Jenkins
 To start the jenkins service, we will use
 ```bash
 docker container run \
@@ -67,7 +70,7 @@ docker container run \
 Then visit [`http://localhost:8080`](http://localhost:8080) to enter setup.
 
 
-## Python-Jenkins worked example <a name="toc-sub-tag-3"></a>
+## Python-Jenkins worked example
 Following from tutorials on the Jenkins website, primarily [this example](https://www.jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/).
 
 ## Jenkins with Gitea

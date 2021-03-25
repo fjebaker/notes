@@ -2,6 +2,11 @@
 
 [Vundle](https://github.com/VundleVim/Vundle.vim) is a package manager for Vim Plugins.
 
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Installation](#installation)
+
+<!--END TOC-->
 
 ## Installation
 

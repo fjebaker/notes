@@ -4,27 +4,28 @@ I used to spend a lot of time reading and watching conferences on the C++ progra
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Method `= 0`](#toc-sub-tag-0)
-2. [Constructor or destructor `= default`](#toc-sub-tag-1)
-3. [Using `noexcept`](#toc-sub-tag-2)
-4. [`volatile`](#toc-sub-tag-3)
-5. [`constexpr` vs `const`](#toc-sub-tag-4)
-	1. [`const` in method definitions](#toc-sub-tag-5)
-6. [`final`](#toc-sub-tag-6)
-7. [Deep and shallow copies](#toc-sub-tag-7)
-	1. [The `excplicit` keyword](#toc-sub-tag-8)
-8. [Functional arguments](#toc-sub-tag-9)
-9. [Good templating practices](#toc-sub-tag-10)
+1. [Method `= 0`](#method-=-0)
+2. [Constructor or destructor `= default`](#constructor-or-destructor-=-default)
+3. [Using `noexcept`](#using-noexcept)
+4. [`volatile`](#volatile)
+5. [`constexpr` vs `const`](#constexpr-vs-const)
+    1. [`const` in method definitions](#const-in-method-definitions)
+6. [`final`](#final)
+7. [Deep and shallow copies](#deep-and-shallow-copies)
+    1. [The `excplicit` keyword](#the-excplicit-keyword)
+8. [Functional arguments](#functional-arguments)
+9. [Good templating practices](#good-templating-practices)
+
 <!--END TOC-->
 
-## Method `= 0` <a name="toc-sub-tag-0"></a>
+## Method `= 0`
 Pure virtual
 
-## Constructor or destructor `= default` <a name="toc-sub-tag-1"></a>
+## Constructor or destructor `= default`
 
-## Using `noexcept` <a name="toc-sub-tag-2"></a>
+## Using `noexcept`
 
-## `volatile` <a name="toc-sub-tag-3"></a>
+## `volatile`
 Compilers often try to make many optimizations to the written code. An example is, if no attempt is made to modify some integer `num`, it may be try to change
 ```cpp
 while(num == 0) {
@@ -44,16 +45,16 @@ volatile int num = 0;
 
 Note that structs declared as `volatile` extends to all of the members also (see a SO thread [here](https://stackoverflow.com/questions/4479597/does-making-a-struct-volatile-make-all-its-members-volatile/4479652)).
 
-## `constexpr` vs `const` <a name="toc-sub-tag-4"></a>
+## `constexpr` vs `const`
 
-### `const` in method definitions <a name="toc-sub-tag-5"></a>
+### `const` in method definitions
 
-## `final` <a name="toc-sub-tag-6"></a>
+## `final`
 
-## Deep and shallow copies <a name="toc-sub-tag-7"></a>
+## Deep and shallow copies
 
-### The `excplicit` keyword <a name="toc-sub-tag-8"></a>
+### The `excplicit` keyword
 
-## Functional arguments <a name="toc-sub-tag-9"></a>
+## Functional arguments
 
-## Good templating practices <a name="toc-sub-tag-10"></a>
+## Good templating practices

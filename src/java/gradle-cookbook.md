@@ -1,15 +1,5 @@
 # Gradle build-tool cookbook
 
-## Table of Contents
-1. [Gradle configuration](#config)
-2. [A worked example](#worked-example)
-	1. [Declaring dependencies](#example-dependencies)
-	2. [Specifying JAR artifact](#example-jar)
-	3. [Building with gradle wrapper](#example-wrapper)
-	4. [Running as an application](#example-app)
-3. [Flushing wrapper cache](#wrapper-cache)
-
-#### Notes on installation
 Working on OSX, I installed gradle from brew
 ```
 brew install gradle
@@ -28,7 +18,19 @@ For compilers to find openjdk you may need to set:
 
 Subsequently did I install the Oracle JDK 14 (openjdk is 13 in keg) so caution when assuming the JDK.
 
-## Gradle configuration <a name="config"></a>
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Gradle configuration](#gradle-configuration)
+2. [A worked example](#a-worked-example)
+    1. [Using `joda.time` and declaring dependencies](#using-joda-time-and-declaring-dependencies)
+    2. [Specifying JAR artifact](#specifying-jar-artifact)
+    3. [Building the example project with a gradle wrapper](#building-the-example-project-with-a-gradle-wrapper)
+    4. [Making the project executable as an application](#making-the-project-executable-as-an-application)
+3. [Flushing wrapper cache](#flushing-wrapper-cache)
+
+<!--END TOC-->
+
+## Gradle configuration
 Changing the JDK used by gradle can be done in two ways
 
 1. In `gradle.properties` in the `.gradle` directory in home directory, set 
@@ -46,7 +48,7 @@ compileJava.options.forkOptions.executable = '/[path_to_javac]'
 
 The second option I would imagine is system dependent (haven't tried).
 
-## A worked example <a name="worked-example"></a>
+## A worked example
 This example follows the [spring.io tutorial](https://spring.io/guides/gs/gradle/).
 
 We set up a directory structure `mkdir -p src/main/java/hello/`, where we have two classes defined: `HelloWorld.java` and `Greeter.java`, both in the `hello` package. `HelloWorld` implements an instance of `Greeter`.
@@ -73,7 +75,7 @@ Dependencies are stored in the `dependency_cache`, which at this point should be
 
 The output of the command also includes unit test executions, of which there are none, since none have been defined.
 
-#### Using `joda.time` and declaring dependencies <a name="example-dependencies"></a>
+### Using `joda.time` and declaring dependencies
 Suppose`HelloWorld.java` used the `joda.time` library. We would need to specify in the build file where this library can be found. We add a repository for these external libraries
 ```js
 repositories {
@@ -92,7 +94,7 @@ dependencies {
 ```
 The syntax follows `{group}:{library}:{version}`. We also specified that, e.g., `joda-time` should be a `compile` dependency, i.e. only available during compile time. `testCompile` on the other hand would not be included in build or runtime code, but only used when compiling and execute tests.
 
-#### Specifying JAR artifact <a name="example-jar"></a>
+### Specifying JAR artifact
 We can provide a simple name and version number for our artifact
 ```js
 jar {
@@ -102,7 +104,7 @@ jar {
 ```
 This would create an artifact when `gradle build` is executed with the name `gs-gradle-0.1.0.jar`.
 
-#### Building the example project with a gradle wrapper <a name="example-wrapper"></a>
+### Building the example project with a gradle wrapper
 The gradle wrapper is batch script in Wnidows, and a shell script in `*nix`, allowing gradle builds to be performed even on machines that do not have gradle installed.
 
 To create a wrapper, execute
@@ -123,7 +125,7 @@ jar tvf build/libs/gs-gradle-0.1.0.jar
 ```
 Note that the dependencies are not included here, nor is this `.jar` executable. To amend this, we use the `application` plugin.
 
-#### Making the project executable as an application <a name="example-app"></a>
+### Making the project executable as an application
 We add a few lines to define the new plugin and the main class in our build file
 ```js
 apply plugin: 'application'
@@ -136,7 +138,7 @@ which then allows us to run the application immediately with
 
 To bundle the dependencies requires a little more work. Suppose we build a WAR file, we could easily use gradle's WAR plugin to fascilitate this. For spring boot, similarly, there is a spring-boot-gradle-plugin to assist this.
 
-## Flushing wrapper cache <a name="wrapper-cache"></a>
+## Flushing wrapper cache
 The gradle cache is located in
 ```
 ~/.gradle/caches/

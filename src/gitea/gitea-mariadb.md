@@ -3,6 +3,13 @@
 
 The [installation guide]() explains how you can configure Gitea with `docker-compose` and a MySQL database. My interest is in using MariaDB, which can require a few additional steps if the setup fails out-of-the-box.
 
+<!--BEGIN TOC-->
+## Table of Contents
+1. [`docker-compose.yml`](#docker-compose-yml)
+2. [Troubleshooting](#troubleshooting)
+
+<!--END TOC-->
+
 ## `docker-compose.yml`
 We configure
 ```yml

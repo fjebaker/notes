@@ -1,5 +1,16 @@
 # Notes on Boots, Boot Loaders and BIOS control
+
 Loose collection of notes and predominantly case studies for solutions to problems that develop before the operating system starts.
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Creating a Windows bootable USB drive](#creating-a-windows-bootable-usb-drive)
+    1. [Using `dd`](#using-dd)
+    2. [Graphically](#graphically)
+2. [Booting/Installing with UEFI](#booting/installing-with-uefi)
+3. [Updating GRUB](#updating-grub)
+
+<!--END TOC-->
 
 ## Creating a Windows bootable USB drive
 The Windows ISOs can be downloaded from the [Microsoft homepage](https://www.microsoft.com/en-us/software-download/windows10ISO), and are language specific. The ISOs are just under 6 GB, with seemingly no net-install or lighter ISO available.

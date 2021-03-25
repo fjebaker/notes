@@ -1,14 +1,18 @@
-Creating a Discord music feed using webhooks
-============================================
+
+# Creating a Discord music feed using webhooks
+
 This is more of an exercise in web-scraping than in creating webhooks. I'll include some detail at the end at what the webhook api is wrapping over when I find the motivation. We'll be scraping from the fantastic music review website [Sputnik Music](https://www.sputnikmusic.com/), and sourcing the music videos as YouTube urls.
 
+<!--BEGIN TOC-->
 ## Table of Contents
-1. [Scraping Sputnik Music](#scraping-sputnik)
-2. [Querying YouTube](#query-youtube)
-3. [Attaching to a webhook](#discord-webhook)
-4. [Some more detail on webhooks](#more-webhooks)
+1. [Prerequisites](#prerequisites)
+2. [Scraping Sputnik Music](#scraping-sputnik-music)
+    1. [Querying YouTube](#querying-youtube)
+    2. [Attaching to a webhook](#attaching-to-a-webhook)
 
-### Prerequisites
+<!--END TOC-->
+
+## Prerequisites
 We'll be using Python3 built-in virtual-environments, so you can install all of the prerequisites and recreate the environment with
 ```
 python3 -m venv venv
@@ -16,7 +20,7 @@ source venv/bin/activate
 pip install requests bs4 discord_webhooks
 ```
 
-## Scraping Sputnik Music <a name="scraping-sputnik"></a>
+## Scraping Sputnik Music
 There's loads of ways of sourcing a random album on [Sputnik Music](https://www.sputnikmusic.com/), but the method I settled on was also aiming to pick albums most likely to have a written review. For some reason, call it a false sense of intuition, I opted to use their user lists to find albums.
 
 The album reviews themselves follow a URL format
@@ -84,7 +88,7 @@ To further annoy the linguists, a *word* to me is anything separated by `0x20` ;
 
 As web pages can be quite unpredictable, we wrap all of this in some try-catch-else statements, ensure that if anything goes wrong it just skips that album in the list, or tries a new list if no albums are left, and then returns the paragraph and the `[album-name]` section of the review URL.
 
-### Querying YouTube <a name="query-youtube"></a>
+### Querying YouTube
 There's plenty of YouTube APIs and wrappers out there for you to use if you want to query YouTube (and for any google product, for that matter), but since what we're doing is rather simple, we can minimize the effort and just write a handful of lines.
 
 We know what the search query will be to try and find the correct album for the review we scraped from Sputnik, as it's just the `[album-name]` portion of the review page URL. To convert that easily to a HTTP friendly flavour, we can use `urllib` and search YouTube with
@@ -124,7 +128,7 @@ Unfortunately, it seems to me we have to traverse with two for loops, as the pla
 
 We can select a random (or in my case, the first) item from the `candidates` list and append it to `https://www.youtube.com` to finalize our video URL.
 
-### Attaching to a webhook <a name="discord-webhook"></a>
+### Attaching to a webhook
 Fortunately, the embedding in Discord is already pretty savvy, so there isn't too much processing left to undertake.
 
 On a server, create a webhook and get the associated `url`; then the entire webhook posting script is simply

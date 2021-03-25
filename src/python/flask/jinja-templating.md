@@ -1,3 +1,4 @@
+
 # Templating HTML pages with jinja
 
 By default, Flask will look for templated HTML pages in the `templates` directory of the project. You can write a simple GET endpoint for a template with
@@ -15,6 +16,14 @@ which will replace keys in `options` present in `home.html` with the respective 
 - Full documentation available [here](https://jinja.palletsprojects.com/en/2.11.x/).
 
 Jinja uses `{% %}` to denote its syntax specific instructions, and `{{ }}` for substitution rules.
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Replacement rules](#replacement-rules)
+2. [Components](#components)
+3. [Conditional Rendering](#conditional-rendering)
+
+<!--END TOC-->
 
 ## Replacement rules
 Jinja will replace any double bracketed key with the respective python value; e.g., a html document with

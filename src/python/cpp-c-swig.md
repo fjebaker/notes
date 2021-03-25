@@ -1,20 +1,22 @@
 # Wrapping C/C++ code using SWIG
+
 The Simplified Wrapper and Interface Generator (SWIG) is a tool for wrapping C/C++ code into a variety of higher level languages, including JS, Python, Ruby, etc., and is used alongside interface files which help instruct the SWIG pre-compiler which methods and functions should be exposed.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [SWIG setups](#toc-sub-tag-0)
-	1. [Python](#toc-sub-tag-1)
-		1. [Useful command line options](#toc-sub-tag-2)
-2. [Python Packages](#toc-sub-tag-3)
-3. [Binding abstractions](#toc-sub-tag-4)
-	1. [Pointers](#toc-sub-tag-5)
-	2. [Structures](#toc-sub-tag-6)
-	3. [Classes](#toc-sub-tag-7)
-4. [numpy](#toc-sub-tag-8)
-5. [A worked example: Python](#toc-sub-tag-9)
-	1. [SWIG CLI](#toc-sub-tag-10)
-	2. [Distutils](#toc-sub-tag-11)
+1. [SWIG setups](#swig-setups)
+    1. [Python](#python)
+        1. [Useful command line options](#useful-command-line-options)
+2. [Python Packages](#python-packages)
+3. [Binding abstractions](#binding-abstractions)
+    1. [Pointers](#pointers)
+    2. [Structures](#structures)
+    3. [Classes](#classes)
+4. [numpy](#numpy)
+5. [A worked example: Python](#a-worked-example:-python)
+    1. [SWIG CLI](#swig-cli)
+    2. [Distutils](#distutils)
+
 <!--END TOC-->
 
 The official [SWIG Tutorial](http://swig.org/tutorial.html) covers how to get started quickly with SWIG, however my notes will elucidate a few more applied scenarios for SWIG which I will document as I continue to learn the tool myself.
@@ -27,10 +29,10 @@ The main difference when using C++ over C with SWIG is to include the relevant f
 swig -c++ -python example.i 
 ```
 
-## SWIG setups <a name="toc-sub-tag-0"></a>
+## SWIG setups
 In this section are the interface changes required for compiling to different higher level languages.
 
-### Python <a name="toc-sub-tag-1"></a>
+### Python
 In the interface file, we must define
 ```C
 #define SWIG_FILE_WITH_INIT
@@ -43,14 +45,14 @@ ext_package='some_other_name'
 ```
 *NOTE:* I can't fully figure out an elegant solution for doing the above when not using explicit packaging (see Python Packages below). Instead, changing the module name in the interface file, and *prefixing* the python Extension with an underscore achieves the same result.
 
-#### Useful command line options <a name="toc-sub-tag-2"></a>
+#### Useful command line options
 - `-builtin`: create python built-in types rather than proxy classes for better performance
 - `-doxygen`: convert C++ doxygen comments to pydoc comments in proxy classes
 - `-interface <mod>`: set low-level C/C++ module name to `<mod>` (default: module name prefixed by an underscore)
 - `-py3`: generate code with python3 specific features
 - `-O`: enable the `-fastdispatch`, `-fastproxy`, `-fvirtual` optimizations
 
-## Python Packages <a name="toc-sub-tag-3"></a>
+## Python Packages
 
 To mimic the package hierarchy of python, SWIG provides the `package` keyword in the module definition
 ```C
@@ -123,18 +125,18 @@ It can then be used with
 
 This recipe could then be extended for arbitrary package structure and/or modules, where we define a single interface `.i` file *for each* module in the package.
 
-## Binding abstractions <a name="toc-sub-tag-4"></a>
+## Binding abstractions
 The SWIG documentation lists how many higher-level classes and types in python are mapped to C/C++ types and classes.
 
-### Pointers <a name="toc-sub-tag-5"></a>
+### Pointers
 Pointer bindings [here](http://swig.org/Doc3.0/Python.html#Python_nn18).
-### Structures <a name="toc-sub-tag-6"></a>
+### Structures
 Structure bindings [here](http://swig.org/Doc3.0/Python.html#Python_nn19).
-### Classes <a name="toc-sub-tag-7"></a>
+### Classes
 Class bindings [here](http://swig.org/Doc3.0/Python.html#Python_nn20).
 How SWIG generates shadow classes and mappings [here](http://swig.org/Doc3.0/Python.html#Python_nn28).
 
-## numpy <a name="toc-sub-tag-8"></a>
+## numpy
 Using [numpy in SWIG](https://numpy.org/doc/stable/reference/swig.interface-file.html#summary) is also fairly straight forward, and only requires a few modifications to the recipe. First of all, in the interface file for the module, we need to include the `numpy.i`, available [here](https://github.com/numpy/numpy/blob/master/tools/swig/numpy.i), call the relevant `init` function, and define type maps; overall, we modify with the additional 
 ```C
 %include "numpy.i"
@@ -171,7 +173,7 @@ Extension(
 ```
 The build commands are identical to before.
 
-## A worked example: Python <a name="toc-sub-tag-9"></a>
+## A worked example: Python
 Following from [the documentation](http://swig.org/Doc3.0/Python.html#Python).
 
 We create three files
@@ -217,7 +219,7 @@ And then the SWIG interface file:
 int fact(int n);
 ```
 
-### SWIG CLI <a name="toc-sub-tag-10"></a>
+### SWIG CLI
 
 We can then compile the wrapped C++ code for Python with 
 ```bash
@@ -231,7 +233,7 @@ The module name defined by the line
 ```
 is used as a prefix for the output files.
 
-### Distutils <a name="toc-sub-tag-11"></a>
+### Distutils
 We can use Distutils to compile and build the extension modules generated by the SWIG CLI. Disutils, in short,
 > takes care of making sure that your extension is built with all the correct flags, headers, etc. for the version of Python it is run with.
 

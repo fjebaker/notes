@@ -1,23 +1,25 @@
-# Native Messaging for Browser Extensions:
+# Native Messaging for Browser Extensions
+
 I recently reinstalled my machine without properly backing up custom extensions, so had to relearn how to perform native messaging properly. The concept is simple -- it allows browser extensions to communicate with native applications on the host machine (saving e.g. communication to webservices). More information can be found in the [Mozilla Documentation](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging).
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Problem Description:](#toc-sub-tag-0)
-2. [Solution:](#toc-sub-tag-1)
-	1. [Layout and Manifest:](#toc-sub-tag-2)
-	2. [Creating a message:](#toc-sub-tag-3)
-	3. [Receiving the message (Python):](#toc-sub-tag-4)
-3. [Some additional notes](#toc-sub-tag-5)
+1. [Problem Description](#problem-description)
+2. [Solution:](#solution:)
+    1. [Layout and Manifest](#layout-and-manifest)
+    2. [Creating a message](#creating-a-message)
+    3. [Receiving the message (Python)](#receiving-the-message-(python))
+3. [Some additional notes](#some-additional-notes)
+
 <!--END TOC-->
 
-## Problem Description: <a name="toc-sub-tag-0"></a>
+## Problem Description
 Say you have a script which scrapes and downloads from a webpage, which you would like to embed into the webpages themselves, so that you can simply press a button whilst browsing to start the scraping process.
 
-## Solution: <a name="toc-sub-tag-1"></a>
+## Solution:
 
 
-### Layout and Manifest: <a name="toc-sub-tag-2"></a>
+### Layout and Manifest
 In the extension's `manifest.json` we need to include permissions that allow it to use `nativeMessaging`; we include the line
 ```JS
 "permissions": ["nativeMessaging", "tabs", "<all_urls>"]
@@ -45,7 +47,7 @@ This JSON file, in a simple case, can be formatted with just
 ```
 These fields should be pretty self explanatory. We have specified which extension is allowed to message this application, and the communication type, i.e. `stdio`, which delivers the message as `stdin`.
 
-### Creating a message: <a name="toc-sub-tag-3"></a>
+### Creating a message
 On the page layer of our extension, we create a new button in the DOM with a simple callback
 ```JS
 function callBack() {
@@ -75,7 +77,8 @@ function handleMessage(request, sender, sendResponse) {
 }
 ```
 
-### Receiving the message (Python): <a name="toc-sub-tag-4"></a>
+### Receiving the message (Python)
+
 On the application side, we need a small script to handle the incoming message. In Python, this is very straight forward:
 ```Python
 #!/bin/bash/python3
@@ -101,5 +104,5 @@ return_message({"content": "World says Hello back!"})
 
 The paradigm applies to all other languages the same.
 
-## Some additional notes <a name="toc-sub-tag-5"></a>
+## Some additional notes
 Different aspects of this process are logged to different consoles all over the place; the background layer logs to the console in `about:debugging`, when inspecting the specified extension, whereas errors occurring at the native messaging layer themselves are logged to the browser console (Shift + Cmd + J on Mac, else Firefox Menu -> Web Developer -> Browser Console), and messages on the page layer are logged to the conventional console.

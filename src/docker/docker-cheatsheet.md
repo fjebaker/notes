@@ -1,23 +1,25 @@
 # Docker cheatsheet
+
 Compiled from different projects.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Command line](#toc-sub-tag-0)
-	1. [Running images as containers](#toc-sub-tag-1)
-	2. [Distributing docker containers](#toc-sub-tag-2)
-	3. [Viewing container status](#toc-sub-tag-3)
-	4. [Copying files](#toc-sub-tag-4)
-	5. [Cleanup](#toc-sub-tag-5)
-2. [Recipes](#toc-sub-tag-6)
-	1. [Clustering](#toc-sub-tag-7)
-	2. [Commiting Dockerfile Modifications](#toc-sub-tag-8)
+1. [Command line](#command-line)
+    1. [Running images as containers](#running-images-as-containers)
+    2. [Distributing docker containers](#distributing-docker-containers)
+    3. [Viewing container status](#viewing-container-status)
+    4. [Copying files](#copying-files)
+    5. [Cleanup](#cleanup)
+2. [Recipes](#recipes)
+    1. [Clustering](#clustering)
+    2. [Commiting Dockerfile Modifications](#commiting-dockerfile-modifications)
+
 <!--END TOC-->
 
-## Command line <a name="toc-sub-tag-0"></a>
+## Command line
 The docker CLI provides a wide range of methods for creating, maintaining, and removing both docker images and containers.
 
-### Running images as containers <a name="toc-sub-tag-1"></a>
+### Running images as containers
 The `docker run` command offers many flags to change the behaviour of a docker container:
 
 - `-d` : detach; run the container using the daemon (i.e. not in the current shell)
@@ -29,7 +31,7 @@ You can pass environment variables using the `-e` flag, followed by a pair-value
 -e "MY_ENV_VAR=VALUE"
 ```
 
-### Distributing docker containers <a name="toc-sub-tag-2"></a>
+### Distributing docker containers
 After a image has been built, it may be exported with
 ```bash
 docker save -o [image-name].tar [image-name]
@@ -51,7 +53,7 @@ docker image ls
 docker images
 ```
 
-### Viewing container status <a name="toc-sub-tag-3"></a>
+### Viewing container status
 A simple was of viewing the container status us to view the log files it produces (commonly just STDOUT in the container)
 ```bash
 docker logs [container-id/name]
@@ -83,13 +85,13 @@ A JSON structure containing all information on a running container can be found 
 docker inspect [container-id/name]
 ```
 
-### Copying files <a name="toc-sub-tag-4"></a>
+### Copying files
 Files can be coied to and from running containers using
 ```bash
 docker cp [local-path] [container-id/name]:[remote-path]
 ```
 
-### Cleanup <a name="toc-sub-tag-5"></a>
+### Cleanup
 Following instructions from [Hostinger](https://www.hostinger.com/tutorials/docker-remove-all-images-tutorial/), we can employ the following commands to clear unneeded containers, images, networks, and more:
 
 ```bash
@@ -113,10 +115,10 @@ To do all of these `prune` commands in one, execute
 docker system prune
 ```
 
-## Recipes <a name="toc-sub-tag-6"></a>
+## Recipes
 A few case studies in using different docker commands.
 
-### Clustering <a name="toc-sub-tag-7"></a>
+### Clustering
 I recently set up a VerneMQTT cluster using docker images, which require knowledge of the IP addresses of the first host. This information can be found on a running container using the 
 ```bash
 docker inspect [container-id/name] | jq ".[0].NetworkSettings.IPAddress"
@@ -124,7 +126,7 @@ docker inspect [container-id/name] | jq ".[0].NetworkSettings.IPAddress"
 command, which pipes the JSON structure into JQ, and extracts specifically just the IP address.
 
 
-### Commiting Dockerfile Modifications <a name="toc-sub-tag-8"></a>
+### Commiting Dockerfile Modifications
 If you have a running container, but wish to modify it's behaviour so that port 80 is always exposed, you can do so [with the commit `--change` flag](https://docs.docker.com/engine/reference/commandline/commit/):
 ```bash
 docker commit --change="EXPOSE 80" [container-id/name] new-image-name

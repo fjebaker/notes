@@ -1,25 +1,27 @@
 # Using the ECC0X08 with Arduino devices
+
 Part of my ongoing IoT project is to utilize the ATECC608a embedded in the Arduino Nano 33 IoT micro controller. I outline my aims and list my guides in my [dedicated repository](https://github.com/Dustpancake/MQTT-with-TLS), and will use these notes to document the exploration process.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Available libraries and specifications](#toc-sub-tag-0)
-	1. [ArduinoECCX08](#toc-sub-tag-1)
-	2. [ECC608 data sheets](#toc-sub-tag-2)
-	3. [A few warnings](#toc-sub-tag-3)
-2. [Configuring the ECC608](#toc-sub-tag-4)
-	1. [Configuring AES and the respective key slots](#toc-sub-tag-5)
-	2. [Slot and Key configuration bytes](#toc-sub-tag-6)
+1. [Available libraries and specifications](#available-libraries-and-specifications)
+    1. [ArduinoECCX08](#arduinoeccx08)
+    2. [ECC608 data sheets](#ecc608-data-sheets)
+    3. [A few warnings](#a-few-warnings)
+2. [Configuring the ECC608](#configuring-the-ecc608)
+    1. [Configuring AES and the respective key slots](#configuring-aes-and-the-respective-key-slots)
+    2. [Slot and Key configuration bytes](#slot-and-key-configuration-bytes)
+
 <!--END TOC-->
 
-## Available libraries and specifications <a name="toc-sub-tag-0"></a>
+## Available libraries and specifications
 The ATECC608a chip, developed by [Microchip Tech](https://www.microchip.com/wwwproducts/en/ATECC608A) is an all encompassing improvement on their previous ATECC508, now supporting a secure boot feature, AES, and all sorts of performance enhancements. Unfortunately, the (summary) data sheet available on the [official website](http://ww1.microchip.com/downloads/en/DeviceDoc/ATECC608A-CryptoAuthentication-Device-Summary-Data-Sheet-DS40001977B.pdf) is somewhat lackluster when it comes to working out how to interface with the device, beyond indicating that the ECC508 libraries will interface with the I2C in the same way, and that only *new* functionality has been added (the datasheet for the ATECC508 can be found [here](https://content.arduino.cc/assets/mkr-microchip_atecc508a_cryptoauthentication_device_summary_datasheet-20005927a.pdf).
 
 Also indicated is the [`cryptoauthlib`](https://github.com/MicrochipTech/cryptoauthlib), which is a generic library for interfacing with different cryptographic authentication chips made by Microchip Tech, for use with a full blown OS, as well as MCUs.
 
 I had a good long go at trying to get `cryptoauthlib` to work satisfactorily on the Arduino Nano 33 IoT, but found it very difficult to interface with the chip, even when following essentially [the only tutorial](https://www.instructables.com/id/Secure-Communication-Arduino/) I could find.
 
-### ArduinoECCX08 <a name="toc-sub-tag-1"></a>
+### ArduinoECCX08
 I searched on GitHub and found an Arduino library called [ArduinoECCX08](https://github.com/arduino-libraries/ArduinoECCX08) for both the ATECC508 and ATECC608. This library worked with little adjustment on my Nano 33 IoT, but comes with very limited functionality -- at the time of writing (August 2020), it only supports some of the ECC508 features
 
 - random numbers
@@ -30,7 +32,7 @@ I searched on GitHub and found an Arduino library called [ArduinoECCX08](https:/
 
 My particular interest lies in the secure boot, AES crypto, and key storage features in the ECC608, not currently present. *I have forked the repo* **[Dustpancake/ArduinoECCX08](https://github.com/Dustpancake/ArduinoECCX08)**, and intend to implement those features myself soon. As such, these notes will act as a development log as well as their overview purpose.
 
-### ECC608 data sheets <a name="toc-sub-tag-2"></a>
+### ECC608 data sheets
 After a lot of searching, I found two, more complete, data sheets for the ECC608
 
 - an NDA protected [preliminary data sheet](https://atecc608a.neocities.org/ATECC608A.pdf)
@@ -38,14 +40,14 @@ After a lot of searching, I found two, more complete, data sheets for the ECC608
 
 I use these as references for my implementations, and will refer to them heavily in the development logs.
 
-### A few warnings <a name="toc-sub-tag-3"></a>
+### A few warnings
 Something to note is that development with the ECC608 can be very infuriating at times, since the majority of the chip's functionality only becomes available after the configuration has been locked. **Once the configuration is locked, it can never be unlocked.** 
 
 It can also be annoying, since the One Time Programmable (OTP) and Data stores can also be locked. **Once the OTP & Data stores are locked, they can never be unlocked.**
 
 A mistake I made on my first exploration was executing code from the ArduinoECCX08 example, which called a `lock()` method. My intuition suggested this would only lock the config, but it locks **both config and OTP/Data.** My fork separates these methods, as I think, especially for newcomers, that function can be quite painful, and for most learning cases, you don't need to lock the OTP/Data, and it is arguably a silly thing to do unless going into production.
 
-## Configuring the ECC608 <a name="toc-sub-tag-4"></a>
+## Configuring the ECC608
 These notes are explicitly for the ECC608, though the general technique is applicable for general ECCX08s.
 
 Drawing from [Section 2.1](http://ww1.microchip.com/downloads/en/DeviceDoc/ATECC608A-TNGTLS-CryptoAuthentication-Data-Sheet-DS40002112B.pdf#_OPENTOPIC_TOC_PROCESSING_d137e1597), we see the device is configured by a 128 byte location in memory, which can be summarized as
@@ -180,7 +182,7 @@ def gB(num, stop=None):
 ```
 I could now view each configuration byte (and range) in both hexadecimal and binary (NB: I cast to int, and then recast to hex in this approach -- this was an oversight of not planning my code before writing it).
 
-### Configuring AES and the respective key slots <a name="toc-sub-tag-5"></a>
+### Configuring AES and the respective key slots
 The first byte of interest is 13, as it tells us if AES is enabled on this chip (I use this as a sanity check so far)
 
 ```py
@@ -202,7 +204,7 @@ and the key config bytes to
 ```
 Let's examine what that means.
 
-### Slot and Key configuration bytes <a name="toc-sub-tag-6"></a>
+### Slot and Key configuration bytes
 To understand what the slot and key configurations dictate, we need to refer to the preliminary data sheet [Section 2.2.10](https://atecc608a.neocities.org/ATECC608A.pdf#%5B%7B%22num%22%3A43%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C32%2C727%2C0%5D) and [Section 2.2.11](https://atecc608a.neocities.org/ATECC608A.pdf#%5B%7B%22num%22%3A53%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C32%2C603%2C0%5D) respectively. We learn that both the slot and key configurations are separated into 16 two-byte flags, each mapping the the 16 available data slots in progressive order. We thus examine the two-byte flags:
 
 First, the **Slot configuration**:

@@ -1,6 +1,25 @@
 # The magical world of Docker-Compose
+
 I've known about this tool for a long time, however only invested time into learning and understanding it over the summer of 2020. In these notes are recipes, little how-to's, and general command and configuration reference.
 
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Compose files](#compose-files)
+    1. [Structuring a service](#structuring-a-service)
+    2. [Environment variables](#environment-variables)
+    3. [Controlling startup and tear-down order](#controlling-startup-and-tear-down-order)
+2. [Networks](#networks)
+3. [Volumes](#volumes)
+4. [Configs (docker-swarm)](#configs-(docker-swarm))
+5. [Docker-Compose commands](#docker-compose-commands)
+    1. [Scaling](#scaling)
+6. [Discussions](#discussions)
+    1. [The importance of `down`](#the-importance-of-down)
+    2. [Installing on \*nix](#installing-on-\*nix)
+7. [Example use cases](#example-use-cases)
+    1. [VerneMQ cluster](#vernemq-cluster)
+
+<!--END TOC-->
 
 ## Compose files
 We use `docker-compose.yml` or `.yaml` to specify how we want to deploy a series of docker containers. A simple such file to spawn instances of the `hello-world` image may be written
@@ -76,7 +95,7 @@ This way, we spawn 5 containers of `some_service`.
 ## Discussions
 In this section I want to elaborate on some thoughts I've had whilst using `docker-compose`.
 
-### The importance of `down` 
+### The importance of `down`
 When configuring e.g. complicated networks to run between your containers, you need to ensure they are properly taken down so that any changes you try to make, actually get implemented instead of throwing errors. Similarly, if you are tampering with services, by default sig-term in `docker-compose up` won't delete the previous containers, such that if you ran the command again, the containers would just be restarted, instead of new ones being created.
 
 As we see in the [official docs](https://docs.docker.com/compose/reference/down/), the `down` command takes care of this for us by

@@ -1,4 +1,5 @@
 # Using Goofys with S3
+
 [Goofys](https://github.com/kahing/goofys) filey system is a POSIX-like file system for use with S3 (or similar) cloud storage solutions.
 
 - OSX
@@ -9,6 +10,13 @@ It can be installed in a variety of ways, as documented in the repository; for O
 brew cask install osxfuse
 brew install goofys
 ```
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Mounting S3](#mounting-s3)
+2. [Using MinIO](#using-minio)
+
+<!--END TOC-->
 
 ## Mounting S3
 We can mount an S3 bit bucket to our local file system with the command

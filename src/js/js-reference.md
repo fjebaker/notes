@@ -4,40 +4,41 @@ Series of notes adapted from different books and blogs so that I can easily refe
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Functions](#toc-sub-tag-0)
-	1. [Functions as objects](#toc-sub-tag-1)
-	2. [Function declarations](#toc-sub-tag-2)
-	3. [Parameters and arguments](#toc-sub-tag-3)
-	4. [The `this` implicit argument](#toc-sub-tag-4)
-	5. [Closures](#toc-sub-tag-5)
-		1. [Mimicking private variables](#toc-sub-tag-6)
-		2. [Closures in callbacks](#toc-sub-tag-7)
-2. [Generators and promises](#toc-sub-tag-8)
-	1. [Generators](#toc-sub-tag-9)
-	2. [Promises](#toc-sub-tag-10)
-	3. [Combining generators with promises](#toc-sub-tag-11)
-3. [Object orientation and prototypes](#toc-sub-tag-12)
-	1. [Inheritance with `.setPrototypeOf()`](#toc-sub-tag-13)
-	2. [Constructors](#toc-sub-tag-14)
-		1. [Instance prototype properties](#toc-sub-tag-15)
-		2. [Object typing with constructors](#toc-sub-tag-16)
-	3. [Achieving inheritance](#toc-sub-tag-17)
-	4. [Configuring object properties](#toc-sub-tag-18)
-	5. [JS `class` keyword](#toc-sub-tag-19)
-	6. [Getters and setters](#toc-sub-tag-20)
-	7. [Proxies and access control](#toc-sub-tag-21)
-4. [Array methods](#toc-sub-tag-22)
-	1. [`.forEach()`](#toc-sub-tag-23)
-	2. [`.map()`](#toc-sub-tag-24)
-	3. [Logical checks](#toc-sub-tag-25)
-	4. [Searching](#toc-sub-tag-26)
-	5. [Sorting arrays](#toc-sub-tag-27)
-	6. [`.reduce()`](#toc-sub-tag-28)
+1. [Functions](#functions)
+    1. [Functions as objects](#functions-as-objects)
+    2. [Function declarations](#function-declarations)
+    3. [Parameters and arguments](#parameters-and-arguments)
+    4. [The `this` implicit argument](#the-this-implicit-argument)
+    5. [Closures](#closures)
+        1. [Mimicking private variables](#mimicking-private-variables)
+        2. [Closures in callbacks](#closures-in-callbacks)
+2. [Generators and promises](#generators-and-promises)
+    1. [Generators](#generators)
+    2. [Promises](#promises)
+    3. [Combining generators with promises](#combining-generators-with-promises)
+3. [Object orientation and prototypes](#object-orientation-and-prototypes)
+    1. [Inheritance with `.setPrototypeOf()`](#inheritance-with--setprototypeof())
+    2. [Constructors](#constructors)
+        1. [Instance prototype properties](#instance-prototype-properties)
+        2. [Object typing with constructors](#object-typing-with-constructors)
+    3. [Achieving inheritance](#achieving-inheritance)
+    4. [Configuring object properties](#configuring-object-properties)
+    5. [JS `class` keyword](#js-class-keyword)
+    6. [Getters and setters](#getters-and-setters)
+    7. [Proxies and access control](#proxies-and-access-control)
+4. [Array methods](#array-methods)
+    1. [`.forEach()`](#-foreach())
+    2. [`.map()`](#-map())
+    3. [Logical checks](#logical-checks)
+    4. [Searching](#searching)
+    5. [Sorting arrays](#sorting-arrays)
+    6. [`.reduce()`](#-reduce())
+
 <!--END TOC-->
 
-## Functions <a name="toc-sub-tag-0"></a>
+## Functions
 The following mostly stems from Secrets of the JavaScript Ninja (Resig, Bibeault and Maras).
-### Functions as objects <a name="toc-sub-tag-1"></a>
+### Functions as objects
 Functions are first-class objects, and behave just as any other JS object. As such, they may even have stored state
 ```js
 var someFunc = () => {};
@@ -64,7 +65,7 @@ if (fibbonaci._cache[n] === undefined) {
 	// ...
 } 
 ```
-### Function declarations <a name="toc-sub-tag-2"></a>
+### Function declarations
 There are multiple ways to define functions, simplest of which is the function literal `() => {}` (here in arrow notation). There are four groups of declarations in JS
 
 - **`function` declaration and expression**, to the analogy of declaration and implementation in C-type languages
@@ -103,7 +104,7 @@ These types of evaluations are sometimes known as *immediately invoked function 
 ~function(){}();
 ```
 
-### Parameters and arguments <a name="toc-sub-tag-3"></a>
+### Parameters and arguments
 JS does not throw errors on function calls with more or fewer arguments than accepted parameters. Instead, those arguments are not assigned to any namespace values in the function scope, or the parameters left `undefined`
 ```js
 function someFunc(arg1, arg2) { /* ... */ }  
@@ -136,7 +137,7 @@ function someFunc(arg = "default") {
 }
 ```
 
-### The `this` implicit argument <a name="toc-sub-tag-4"></a>
+### The `this` implicit argument
 Functions may be invoked on their own, as a method (`obj.func()`), through a constructor, as in `new Func()`, or through `apply` and `call` prototype methods.
 
 The `this` object provides the function context at face value. For example
@@ -184,10 +185,10 @@ Note we can also use `bind` to create a *new* function, with its context bound t
 button.clicked.bind(button);	// context of this is now button
 ```
 
-### Closures <a name="toc-sub-tag-5"></a>
+### Closures
 The concept of *closure* allows a function to access the namespace in the scope of the function definition. The closure encompasses variables and definitions in the scope and ensures they are available if needed, even once program execution has left the scope.
 
-#### Mimicking private variables <a name="toc-sub-tag-6"></a>
+#### Mimicking private variables
 Let us suppose we wanted to create read only access to a variable in a definition
 ```js
 function Counter() {
@@ -207,7 +208,7 @@ console.log(c.getCount());				// 1
 ```
 Note, `Counter.getCount` and `Counter.nudge` could also be defined with arrow notation. It is crucial to use the function constructor, so that a new context for the object is created.
 
-#### Closures in callbacks <a name="toc-sub-tag-7"></a>
+#### Closures in callbacks
 Were a function called at an unspecified time later on, closures provide a intuitive way of avoiding nasty pitfalls.
 
 For example, were we to use the built-in `setInterval` to periodically call some callback function, we can use closure to provide the necessary control statements as to give the periodic function a simple interface
@@ -226,10 +227,10 @@ periodicLog();	// outputs a tick every 100 ms
 ```
 Or creating unique instances of the function also provides each instance with its own set of parameters, allowing complex properties to easily be abstracted.
 
-## Generators and promises <a name="toc-sub-tag-8"></a>
+## Generators and promises
 Leading into the notion of asynchronous programming, JS is a single threaded language, thus any waiting will deactivate the UI until the function call ends. Asynchronous function calls and callbacks can extend the function and interaction of our program considerably.
 
-### Generators <a name="toc-sub-tag-9"></a>
+### Generators
 Much like Pythonic generators, JS generators are state yielding functions
 ```js 
 function* generator() {
@@ -296,7 +297,7 @@ Or we can use `.throw(/* what */)` to throw an exception in the iterator at `yie
 
 Note that generators still have access to the `return` keyword, allowing them to give a value to their instance upon completion.
 
-### Promises <a name="toc-sub-tag-10"></a>
+### Promises
 Promises are the main driver behind writing succinct asynchronous code. They provide an implementation for allowing function chains to be established off of the basis of a result or error case. A promise may be defined
 ```js 
 const p = new Promise((resolve, reject) => {
@@ -329,7 +330,7 @@ Promise.all([
 
 Similar syntax is also used to obtain the first result of a series of asynchronous tasks using `.race()`. The `result` argument is now just the result of a single function, instead of the list of inputs.
 
-### Combining generators with promises <a name="toc-sub-tag-11"></a>
+### Combining generators with promises
 We can combine generators with promises and the concept of closure to write strong asynchronous code. Note, this is **not** a production grade implementation, and indeed the `async()` demonstrated has default language implementations
 
 ```js
@@ -372,10 +373,10 @@ JS introduces the `async` and `await` keywords to help integrate promises and ge
 })();
 ```
 
-## Object orientation and prototypes <a name="toc-sub-tag-12"></a>
+## Object orientation and prototypes
 Prototypes in JS are objects to which the property lookup is delegated, allowing properties and functionality to automatically be accessible to other objects. They can be thought of as classes in other object orientated languages. Prototypes allow for inheritance within JS.
 
-### Inheritance with `.setPrototypeOf()` <a name="toc-sub-tag-13"></a>
+### Inheritance with `.setPrototypeOf()`
 We can mimic inheritance using the `Object.setPrototypeOf()` method
 ```js
 const assert = require('assert')
@@ -396,7 +397,7 @@ assert("lie" in athlete, "Athlete can now lie.");
 ```
 The calling order in the case of same identifier is always the inheriting object's attribute/method, then that of the prototype, and further up the chain.
 
-### Constructors <a name="toc-sub-tag-14"></a>
+### Constructors
 We can prototype methods using a function constructor and the `new` keyword
 ```js
 function SomeObject() {}	// no implementation
@@ -408,7 +409,7 @@ const instance = new SomeObject();
 instance.action();
 ```
 
-#### Instance prototype properties <a name="toc-sub-tag-15"></a>
+#### Instance prototype properties
 Here is an example of initialization precedence
 ```js
 function SomeObject() {
@@ -450,7 +451,7 @@ instance.action();		// still Altered action!
 ```
 The `instance` still holds reference to the old prototype, but once the prototype has been overridden, becomes inaccessible.
 
-#### Object typing with constructors <a name="toc-sub-tag-16"></a>
+#### Object typing with constructors
 Prototypes also store information on how the instance was constructed. For instance, we can access the constructor function using the `.constructor` property of the instance
 ```js
 function SomeObject() {}
@@ -463,7 +464,7 @@ const newInstance = new instance.constructor();
 console.log(newInstance === instance)		// false
 ```
 
-### Achieving inheritance <a name="toc-sub-tag-17"></a>
+### Achieving inheritance
 We already saw how inheritance can be mimicked using the `.setPrototypeOf()` method, but we can also achieve inheritance with objects or instances. The common idiom is to write
 ```js
 function Super() {}
@@ -481,7 +482,7 @@ The problem with this implementation is that the check
 ```
 will fail, as it will yield Super instead. We will come back to a solution to this later, but for now we need to examine the JS object properties in order to find an appropriate solution.
 
-### Configuring object properties <a name="toc-sub-tag-18"></a>
+### Configuring object properties
 JS describes every object property with a descriptor, which is controlled with the keys
 
 - `configurable`: if `true`, property's descriptor can be changed or deleted. else cannot do either
@@ -527,7 +528,7 @@ Now the check
 ```
 will pass.
 
-### JS `class` keyword <a name="toc-sub-tag-19"></a>
+### JS `class` keyword
 Recent versions of JS also include the familiar `class` keyword to abstract a lot of the inheritance features. A traditional class may then be defined 
 ```js
 class SomeClass {
@@ -577,7 +578,7 @@ class SomeExtendedClass extends SomeClass {
 	}
 }
 ```
-### Getters and setters <a name="toc-sub-tag-20"></a>
+### Getters and setters
 Also included in modern JS version are the keywords `get` and `set` used to define getters and setters for object properties. We can use them
 ```js
 const someCollection = {
@@ -607,7 +608,7 @@ function SomeObject() {
 }
 ```
 
-### Proxies and access control <a name="toc-sub-tag-21"></a>
+### Proxies and access control
 Proxies allow us to execute additional routines when interacting with an object. They are, in many ways, generalizations of getters and setters. There exist many traps we can set up using the `Proxy` built in, such as
 
 - `apply`, activated when calling a function
@@ -630,7 +631,7 @@ console.log(proxySum(1, 2));	// 0
 ```
 Proxies are a fantastic way of implementing logging or performance checking code. The cost of proxies is performance, however, and can incur a considerable speed decrease for the additional control.
 
-## Array methods <a name="toc-sub-tag-22"></a>
+## Array methods
 Manipulating data in JS is facilitated by the extensive `Array` object. An array object may be manipulated dynamically with
 
 - `.push(item)`: add `item` to the end of the array
@@ -638,7 +639,7 @@ Manipulating data in JS is facilitated by the extensive `Array` object. An array
 - `.pop()`: returns and removes the last item of array
 - `.shift()`: returns and removes first item in array
 
-### `.forEach()` <a name="toc-sub-tag-23"></a>
+### `.forEach()`
 Iterating over arrays is also made easy with several built-in methods. A simple for loop, such as
 ```js
 for (let i = 0; i < array.length; i++) {
@@ -654,7 +655,7 @@ array.forEach((item, i) => {
 ```
 Full documentation can be found [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
 
-### `.map()` <a name="toc-sub-tag-24"></a>
+### `.map()`
 Creating a new array from properties in an array of objects is a common idiom, known as a 'map'. Verbosely, a map is equivalent to
 ```js
 const newArray = [];
@@ -668,7 +669,7 @@ const newArray = array.map(i => i.prop);
 ```
 Full documentation can be found [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
 
-### Logical checks <a name="toc-sub-tag-25"></a>
+### Logical checks
 Checking if **every** item in `array` has some specific property
 ```js
 const allHaveProperty = array.ever(i => 'prop' in i);
@@ -681,7 +682,7 @@ const someHaveProperty = array.some(i => 'prop' in i);
 ```
 Not that `.some()` will act the callback on each item until some true case is found, and then return `true`.
 
-### Searching <a name="toc-sub-tag-26"></a>
+### Searching
 To find one and return one item with a given property, use
 ```js
 const item = array.find(i => 'prop' in i);
@@ -692,7 +693,7 @@ To find all items with a given property
 const items = array.filter(i => 'prop' in i);
 ```
 
-### Sorting arrays <a name="toc-sub-tag-27"></a>
+### Sorting arrays
 Arrays can be sorted by returning numerical values, for example
 ```js
 array.sort((a, b) => a - b);
@@ -709,7 +710,7 @@ array.sort((a, b) => b - a);
 // [1, 2, 3] -> [3, 2, 1]
 ```
 
-### `.reduce()` <a name="toc-sub-tag-28"></a>
+### `.reduce()`
 Aggregating, e.g., a sum, would be conventionally expressed through
 ```js
 const sum = 0;

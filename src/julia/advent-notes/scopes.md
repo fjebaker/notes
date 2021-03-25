@@ -1,5 +1,12 @@
 # Julia Scopes
 
+<!--BEGIN TOC-->
+## Table of Contents
+1. [`let`](#let)
+2. [`do`](#do)
+3. [`begin`](#begin)
+
+<!--END TOC-->
 
 ## `let`
 The [scope created by `let`](https://docs.julialang.org/en/v1/manual/variables-and-scoping/#Let-Blocks) is purely a local scope, with variables being deallocated after the scope exits. As such, it will allocate every time the scope is executed.

@@ -4,16 +4,17 @@ A short synopsis of common design principles.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [DRY](#toc-sub-tag-0)
-2. [SOLID](#toc-sub-tag-1)
-3. [POLA](#toc-sub-tag-2)
-4. [KISS](#toc-sub-tag-3)
-5. [POLP](#toc-sub-tag-4)
-6. [YAGNI](#toc-sub-tag-5)
+1. [DRY](#dry)
+2. [SOLID](#solid)
+3. [POLA](#pola)
+4. [KISS](#kiss)
+5. [POLP](#polp)
+6. [YAGNI](#yagni)
+
 <!--END TOC-->
 
 
-## DRY <a name="toc-sub-tag-0"></a>
+## DRY
 
 - **D**on't
 - **R**epeat
@@ -23,7 +24,7 @@ Duplicate code is bad. If there are multiple copies of the same code, maintainin
 
 If code is not *entirely* identical, then redesign the components that use it so that we can prefer a common interface.
 
-## SOLID <a name="toc-sub-tag-1"></a>
+## SOLID
 
 - **S**ingle responsibility principle
 - **O**pen/Closed principle
@@ -44,7 +45,7 @@ The *Open/Closed principle* states that every module should be *open* for extens
 *Dependency inversion* is the idea that derived classes should not depend on low-level classes; high-level classes should only depend on an abstraction, implemented by the low-level classes. This way components are decoupled, allowing low-level components to be replaced or adjusted.
 
 
-## POLA <a name="toc-sub-tag-2"></a>
+## POLA
 
 - **P**rinciple
 - **O**f
@@ -53,7 +54,7 @@ The *Open/Closed principle* states that every module should be *open* for extens
 
 Software should always be easy to understand and the behaviour should never be *astonishing* or surprising. Modules, classes, functions, etc., should be thoughftully named so that they are clear and unambiguous. Modules should be right-sized and well maintained. Interfaces should be small and understandable, and generally, try to minimize the number of functional arguments, in the interest of interprability by the user.
 
-## KISS <a name="toc-sub-tag-3"></a>
+## KISS
 
 - **K**eep
 - **I**t
@@ -63,7 +64,7 @@ Software should always be easy to understand and the behaviour should never be *
 It can be tempting to try and future-proof your software, and anticipate needs, however this can be a lot more effort, and can lead to excessive abstraction or bloated modules, making a system difficult to maintain, enhance, or even just use. Additionally, keeping code generic for the future can impact the performance of the code in the present.
 
 
-## POLP <a name="toc-sub-tag-4"></a>
+## POLP
 
 - **P**rinciple
 - **O**f
@@ -72,7 +73,7 @@ It can be tempting to try and future-proof your software, and anticipate needs, 
 
 Clients must be given access only to the information or methods that they need; this helps keep applications secure, and allows for easier use of libraries. Generally, this means that sensitive data must be protected, and only exposing to privileged users reduces the number of test scenarios that must be anticipated; and together these make the system less prone to misuse.
 
-## YAGNI <a name="toc-sub-tag-5"></a>
+## YAGNI
 
 - **Y**ou
 - **A**ren't

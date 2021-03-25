@@ -1,4 +1,8 @@
 # Installing Guest Extensions on Linux Images
+
+
+
+
 Following a guide from [Linuxsize](https://linuxize.com/post/how-to-install-virtualbox-guest-additions-on-debian-10/).
 
 1. Update the guest machine repositories

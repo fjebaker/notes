@@ -9,7 +9,17 @@ and if it fails, tinker. Below are some common tinkers to fix common problems.
 
 For HTTP proxies, use the `-http_proxy [addr]` flag.
 
-### Converting video
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Converting video](#converting-video)
+2. [Converting streams](#converting-streams)
+3. [The `-map` flag](#the--map-flag)
+4. [Embedding subtitles](#embedding-subtitles)
+5. [Concatenating images into videos](#concatenating-images-into-videos)
+
+<!--END TOC-->
+
+## Converting video
 For `.mp4` to `.mp3` with correct time-stamping
 ```
 ffmpeg -i video.mp4 -b:a 192K -vn audio.mp3
@@ -26,14 +36,14 @@ ffmpeg -i video.mp4 -ab 160k -ac 2 -ar 44100 -vn audio.wav
 # -ar is audio sample rate
 ```
 
-### Converting streams
+## Converting streams
 Downloading from `.m3u8` files
 ```
 ffmpeg -i [url to m3u8 file] -c copy -bsf:a aac_adtstoasc output.mp4
 ```
 Can also include comma seperated string list of headers using the `-headers` flag.
 
-### The `-map` flag
+## The `-map` flag
 Different streams from input files can be mux'd together into the output file. To do this, we first need to identify the audio and video streams available in the input:
 
 ```
@@ -69,13 +79,13 @@ ffmpeg -i s0q0.m4s -i s1q1.m4s -c copy -map 0:a:0 -map 1:v:0 -shortest out.mp4
 
 The `-shortest` flag ensures that if the timestamps for the two inputs are slightly different, we reduce the output to the length of the shortest.
 
-### Embedding subtitles
+## Embedding subtitles
 For a given `.srt` file, the subtitles can be embedded into an `.mp4` using
 ```
 ffmpeg -i [videos].mp4 -i [subtitles].srt -c:v copy -c:a copy -c:s mov_text -metadata:s:s:0 language=eng out.mp4
 ```
 
-### Concatenating images into videos
+## Concatenating images into videos
 There are many commands that can achieve this result. For the problem I was solving, I wanted to concatenate PNG images, numbered `1.png`, `2.png`, `...`, into a `.mp4` video at a specific frame rate
 ```
 ffmpeg -f image2 -r [framerate] -i %d.png -vcodec mpeg4 -y out.mp4

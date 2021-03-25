@@ -1,5 +1,13 @@
 # Using SWIG with CMake
+
 There is a [UseSWIG](https://cmake.org/cmake/help/latest/module/UseSWIG.html) file providing support in CMake for system-installed SWIG, providing new bindings and methods for use in the project.
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Building with CMake](#building-with-cmake)
+2. [Building with Setuptools](#building-with-setuptools)
+
+<!--END TOC-->
 
 
 ## Building with CMake

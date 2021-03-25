@@ -1,5 +1,13 @@
 # NodeRed Notes
+
 Maybe the coolest tool I've been introduced to. Since the usage is fairly self explanatory, I will just document tips, tricks, and recipes.
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [NodeRed with Docker](#nodered-with-docker)
+2. [Useful guides](#useful-guides)
+
+<!--END TOC-->
 
 ## NodeRed with Docker
 There are a multitude of guides available, including the [Official NodeRed](https://nodered.org/docs/getting-started/docker) getting started guide. In short, to get a simple docker container running with NodeRed, execute

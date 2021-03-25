@@ -4,22 +4,23 @@ As everyone with git, there is a tendency to use the same idioms over and over. 
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [GitHub action recipes](#toc-sub-tag-0)
-2. [Triangular work ethic](#toc-sub-tag-1)
-3. [Using `rebase`](#toc-sub-tag-2)
-	1. [Changing Author](#toc-sub-tag-3)
-	2. [Merging commits with `rebase`](#toc-sub-tag-4)
-4. [Reverting to a given commit](#toc-sub-tag-5)
-5. [Tagging](#toc-sub-tag-6)
-6. [Authentication](#toc-sub-tag-7)
-7. [Editor configuration](#toc-sub-tag-8)
-8. [Using SSH](#toc-sub-tag-9)
-	1. [Generating keypairs](#toc-sub-tag-10)
-	2. [Uploading public keys](#toc-sub-tag-11)
-	3. [Changing repository origin](#toc-sub-tag-12)
+1. [GitHub action recipes](#github-action-recipes)
+2. [Triangular work ethic](#triangular-work-ethic)
+3. [Using `rebase`](#using-rebase)
+    1. [Changing Author](#changing-author)
+    2. [Merging commits with `rebase`](#merging-commits-with-rebase)
+4. [Reverting to a given commit](#reverting-to-a-given-commit)
+5. [Tagging](#tagging)
+6. [Authentication](#authentication)
+7. [Editor configuration](#editor-configuration)
+8. [Using SSH](#using-ssh)
+    1. [Generating keypairs](#generating-keypairs)
+    2. [Uploading public keys](#uploading-public-keys)
+    3. [Changing repository origin](#changing-repository-origin)
+
 <!--END TOC-->
 
-## GitHub action recipes <a name="toc-sub-tag-0"></a>
+## GitHub action recipes
 
 Building and deploying a vue static webpage to github pages can be achieved with use of the [`JamesIves/github-pages-deploy-action` action](https://github.com/JamesIves/github-pages-deploy-action). We can specify a artifact generator and consumer in a `build` and `deploy` approach:
 ```yml
@@ -63,7 +64,7 @@ jobs:
 This is a little contrived, and maybe there is an argument to be made as making the deployment job part of the build. However, for posterity if nothing else, this method works as well.
 
 
-## Triangular work ethic <a name="toc-sub-tag-1"></a>
+## Triangular work ethic
 When working on a fork of a project you wish to keep updated, it is useful to add the original repository as an upstream remote, so that you can update your master branch if you've left it stale for too long, without having to open a PR on your fork:
 ```bash
 git remote add upstream [upstream-url]
@@ -78,9 +79,9 @@ git rebase upstream/master
 git push -f origin master
 ```
 
-## Using `rebase` <a name="toc-sub-tag-2"></a>
+## Using `rebase`
 
-### Changing Author <a name="toc-sub-tag-3"></a>
+### Changing Author
 Use
 ```bash
 git rebase -i -p [commit hash]
@@ -101,7 +102,7 @@ until you are back at the top of the tree. Check the changes were successful wit
 git log
 ```
 
-### Merging commits with `rebase` <a name="toc-sub-tag-4"></a>
+### Merging commits with `rebase`
 We can use e.g.
 ```bash
 git rebase -i HEAD~3
@@ -110,7 +111,7 @@ to modify information relating to the last 3 commits, and use either `squash` or
 
 Changes must be *forced* pushed.
 
-## Reverting to a given commit <a name="toc-sub-tag-5"></a>
+## Reverting to a given commit
 Reverting a single file (or the whole branch) can be done with `checkout`, see [docs](https://git-scm.com/docs/git-checkout). It may be used
 ```bash
 git checkout [commit/branch] [file, ...]
@@ -126,7 +127,7 @@ git reset [--mode] [commit]
 ```
 Commonly used modes are `--hard`, which discards all changes in the working tree, `--merge`, which will essentially perform a merge of the current tree into the destination tree, and `--keep`, which updates files in the working tree that differ.
 
-## Tagging <a name="toc-sub-tag-6"></a>
+## Tagging
 We can add tags to our local repository with
 ```bash
 git tag -a v1.0 -m "message"
@@ -143,7 +144,7 @@ git push origin --tags
 For more information, [see the docs](https://git-scm.com/book/en/v2/Git-Basics-Tagging).
 
 
-## Authentication <a name="toc-sub-tag-7"></a>
+## Authentication
 To configure global authentication locally, use
 ```bash
 git config --global user.name "username"
@@ -151,22 +152,22 @@ git config --global user.name "username"
 git config --global user.email "email@addr.com"
 ```
 
-## Editor configuration <a name="toc-sub-tag-8"></a>
+## Editor configuration
 ```bash
 git config --global core.editor "vim"
 ```
 
-## Using SSH <a name="toc-sub-tag-9"></a>
+## Using SSH
 Overview of using SSH for Git(Hub) interaction.
 
-### Generating keypairs <a name="toc-sub-tag-10"></a>
+### Generating keypairs
 Using the email associated with your Git identity:
 ```bash
 ssh-keygen -t ed25519 -C "your@email.com"
 ```
 You may wish to name this file along the lines of `id_git` so that it's easy to remember what it's for.
 
-### Uploading public keys <a name="toc-sub-tag-11"></a>
+### Uploading public keys
 - GitHub
 Under Account Settings, SSH and GPG keys, add a new SSH, give it a memorable name, and then copy the contents of 
 ```bash
@@ -174,7 +175,7 @@ Under Account Settings, SSH and GPG keys, add a new SSH, give it a memorable nam
 ```
 i.e. your public key, into the text field and save.
 
-### Changing repository origin <a name="toc-sub-tag-12"></a>
+### Changing repository origin
 To change your git client to use SSH over HTTP(s), simply change the origin url to the general format
 ```bash
 git remote set-url origin git@github.com:<uname>/<repository>.git

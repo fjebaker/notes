@@ -1,21 +1,23 @@
 # Installing TensorFlow 2.0
+
 Installing TensorFlow with optional GPU support.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [CPU install](#toc-sub-tag-0)
-2. [GPU installation](#toc-sub-tag-1)
-    1. [Docker](#toc-sub-tag-2)
-3. [Validation](#toc-sub-tag-3)
+1. [CPU install](#cpu-install)
+2. [GPU installation](#gpu-installation)
+    1. [Docker](#docker)
+3. [Validation](#validation)
+
 <!--END TOC-->
 
-## CPU install <a name="toc-sub-tag-0"></a>
+## CPU install
 CPU installation is a very simple
 ```bash
 pip install tensorflow
 ```
 
-## GPU installation <a name="toc-sub-tag-1"></a>
+## GPU installation
 For GPU, you'll require at the very least CUDA. To see which TensorFlow your OS is compatible with, be sure to [check this list](https://www.tensorflow.org/install/source#tested_build_configurations).
 
 For a native installation you will also require cuDNN, which I've written notes for [Debian here](https://github.com/Dustpancake/Dust-Notes/blob/master/hardware/debian-gpu.md).
@@ -26,7 +28,7 @@ pip install tensorflow-gpu
 ```
 to install GPU supported Tensorflow.
 
-### Docker <a name="toc-sub-tag-2"></a>
+### Docker
 As is recommended in the [installation guide](https://www.tensorflow.org/install/docker#gpu_support), you can also use a Docker image with cuDNN and TensorFlow GPU preinstalled. There are many images available in the [docker hub](https://hub.docker.com/r/tensorflow/tensorflow), and personally I use
 ```bash
 docker pull tensorflow/tensorflow:latest-gpu-jupyter
@@ -72,7 +74,7 @@ My version combination is `nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04`.
 
 See here for troubleshooting some [nVidia](https://github.com/NVIDIA/nvidia-docker/issues/1034) docker images.
 
-## Validation <a name="toc-sub-tag-3"></a>
+## Validation
 We can [verify](https://www.codingforentrepreneurs.com/blog/install-tensorflow-gpu-windows-cuda-cudnn/) that TensorFlow has correctly identified the GPU with two Python lines
 ```py
 from tensorflow.python.client import device_lib

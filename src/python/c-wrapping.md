@@ -1,25 +1,27 @@
 # Wrapping C and C++ into Python
+
 One of the many flexibilities that Python comes with is integration into many other languages. Since Python itself is compiled down into C bytecode, it is seen that Python and Clangs almost go hand-in-hand; indeed, many libraries such as numpy and scipy have primarily a C backend.
 
 The most primitive was of wrapping Clang into Python is using `setuptools` and the [Python/C API](https://docs.python.org/3/c-api/index.html). Other libraries exist to make this task less verbose and more seamless, such as Cython, but here are my notes from reading a section on package-free Clang wrapping.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Creating the build environment](#toc-sub-tag-0)
-2. [Writing Pythonic C code](#toc-sub-tag-1)
-	1. [`sum_of_squares` example](#toc-sub-tag-2)
-	2. [Making the extension accessible](#toc-sub-tag-3)
-3. [Some API notes](#toc-sub-tag-4)
-	1. [Using `**kwargs`](#toc-sub-tag-5)
-	2. [Raising exceptions](#toc-sub-tag-6)
-	3. [The `static` prefix](#toc-sub-tag-7)
-4. [Using Python objects in Clang](#toc-sub-tag-8)
-	1. [Using callbacks](#toc-sub-tag-9)
-	2. [Using iterators](#toc-sub-tag-10)
-5. [On reference counting](#toc-sub-tag-11)
+1. [Creating the build environment](#creating-the-build-environment)
+2. [Writing Pythonic C code](#writing-pythonic-c-code)
+    1. [`sum_of_squares` example](#sum_of_squares-example)
+    2. [Making the extension accessible](#making-the-extension-accessible)
+3. [Some API notes](#some-api-notes)
+    1. [Using `**kwargs`](#using-**kwargs)
+    2. [Raising exceptions](#raising-exceptions)
+    3. [The `static` prefix](#the-static-prefix)
+4. [Using Python objects in Clang](#using-python-objects-in-clang)
+    1. [Using callbacks](#using-callbacks)
+    2. [Using iterators](#using-iterators)
+5. [On reference counting](#on-reference-counting)
+
 <!--END TOC-->
 
-## Creating the build environment <a name="toc-sub-tag-0"></a>
+## Creating the build environment
 Fortunately, very little is required to compile the Clang, as the Python library `setuptools` can take care of a lot of the heavy lifting for us. Using the directory structure
 ```
 root/
@@ -51,10 +53,10 @@ We can then pop a python shell, or write a python script, and include our module
 import test_module
 ```
 
-## Writing Pythonic C code <a name="toc-sub-tag-1"></a>
+## Writing Pythonic C code
 The `setuptools` environment links the `Python.h` header into the path, which itself defines the whole Python/C API. 
 
-### `sum_of_squares` example <a name="toc-sub-tag-2"></a>
+### `sum_of_squares` example
 For a simple example, we will write a sum of squares function. A python implementation of this would be 
 ```python
 def sum_of_squares(n):
@@ -93,7 +95,7 @@ static PyObject* sum_of_squares(PyObject* self, PyObject* args) {
 	return PyLong_FromLong(sum);	// return a python object
 }
 ```
-### Making the extension accessible <a name="toc-sub-tag-3"></a>
+### Making the extension accessible
 Our function alone wont be of much use if not included into a module. To define the API of our module, a little extra work in C is required
 ```C
 static PyMethodDef test_methods[] = {	// define the available methods
@@ -130,10 +132,10 @@ print(test_module.sum_of_squares(100))
 # 285
 ```
 
-## Some API notes <a name="toc-sub-tag-4"></a>
+## Some API notes
 I've encountered a few additional pieces of information whilst learning this API which I thought I would document here.
 
-### Using `**kwargs` <a name="toc-sub-tag-5"></a>
+### Using `**kwargs`
 Using keyword arguments in our C code is fairly intuitive. We can implement a function that uses keywords as
 ```C
 static PyObject* function(PyObject *self, PyObject *args, PyObject *kwargs) {
@@ -179,7 +181,7 @@ PyArg_ParseTupleAndKeywords(
 ```
 This helps ensure we don't accidentally use positional arguments as optionals. Note that the parser also implicitly does type conversion and **checks** for overflows! It is therefore important that the specifier matches the variable type exactly.
 
-### Raising exceptions <a name="toc-sub-tag-6"></a>
+### Raising exceptions
 The Python/C API allows for all sorts of different exceptions to be raised in the Python interpreter. This is preferred over trying to handle them in Clang, since an uncaught exception will cause the entire environment to crash, and error messages are brief, if not cryptic.
 
 The general idiom is to define some error type, and then return `NULL`. For example, a function which throws a runtime error with a custom message could be
@@ -204,13 +206,13 @@ And common error types to be called in `PyErr_SetString` are
 - `PyExc_TypeError`
 - `PyExc_RuntimeError`
 
-### The `static` prefix <a name="toc-sub-tag-7"></a>
+### The `static` prefix
 In these notes, all method definitions have been defined as `static`, since they are functions defined in a single scope (i.e. a single C file). However, when extending these recipes to mutiple header and source files, the static definition *must be dropped*, else conflicts in the header includes will prevent the module from compiling.
 
-## Using Python objects in Clang <a name="toc-sub-tag-8"></a>
+## Using Python objects in Clang
 The malleability of Python can be a little difficult to translate into a strongly type language like C or C++, however the Python/C API helps to smooth out many difficulties.
 
-### Using callbacks <a name="toc-sub-tag-9"></a>
+### Using callbacks
 To use a callback in Clang is surprisingly straight forward. Consider a function that just calls the callback on an integer argument; the implementation is
 ```C
 static PyObject* act_callback(PyObject* self, PyObject* args) {	// nb: no kwargs
@@ -235,7 +237,7 @@ static PyObject* act_callback(PyObject* self, PyObject* args) {	// nb: no kwargs
 ```
 We check that the callback is okay, we parse our argument into the callback, and then, since the callback is executing Python code, must cast the return object back into a C object. Since we expect only one return item, we can use the `PyLong_AsLong` to facilitate this conversion (bad conversion throws a `TypeError`).
 
-### Using iterators <a name="toc-sub-tag-10"></a>
+### Using iterators
 A common idiom in python is to pass a list or iterator to a function. We can use these in Clang too; consider a iterator sum accumulator
 ```C
 static PyObject* sum_itt(PyObject* self, PyObject* args) {
@@ -273,5 +275,5 @@ sum_itt([1, 2, 3, 4, 5])		# 15
 sum_itt(iter([1, 2, 3, 4, 5]))	# 15
 ```
 
-## On reference counting <a name="toc-sub-tag-11"></a>
+## On reference counting
 [notes](https://docs.python.org/3/c-api/refcounting.html)

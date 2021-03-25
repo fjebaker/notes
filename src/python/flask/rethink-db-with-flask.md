@@ -1,5 +1,16 @@
 # Using RethinkDB with Flask
+
 I have already written [some notes on RethinkDB](https://github.com/Dustpancake/Dust-Notes/blob/master/databases/rethink-db.md), and have been using it in a jukebox server project. I believe I came up with quite an elegant instantiation of RethinkDB client driver with Flask. It is similar to [existing solution](https://github.com/rethinkdb/rethinkdb-example-flask-backbone-todo/blob/master/todo.py), but without the need of carting round global functions and obscene imports.
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Setup](#setup)
+    1. [`app.py` content](#app-py-content)
+    2. [Registering the database connection in the application context](#registering-the-database-connection-in-the-application-context)
+    3. [Using the connection](#using-the-connection)
+2. [Comments](#comments)
+
+<!--END TOC-->
 
 ## Setup
 First, we set up the project and get our requirements

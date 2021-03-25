@@ -1,18 +1,22 @@
 # PlatformIO notes
+
 Notes for using the PlatformIO CLI.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Getting started](#toc-sub-tag-2)
-2. [Serial communication](#toc-sub-tag-3)
-	1. [USB device debugging on OSX](#toc-sub-tag-4)
-3. [Distribution](#toc-sub-tag-5)
-	1. [Specifying dependencies](#toc-sub-tag-6)
-	2. [Unit testing](#toc-sub-tag-7)
-	3. [Build flags](#toc-sub-tag-8)
+1. [Configuring PlatformIO <a name="toc-sub-tag-0"></a>](#configuring-platformio-<a-name="toc-sub-tag-0"></a>)
+    1. [Packages for a project <a name="toc-sub-tag-1"></a>](#packages-for-a-project-<a-name="toc-sub-tag-1"></a>)
+2. [Getting started](#getting-started)
+3. [Serial communication](#serial-communication)
+    1. [USB device debugging on OSX](#usb-device-debugging-on-osx)
+4. [Distribution](#distribution)
+    1. [Specifying dependencies](#specifying-dependencies)
+    2. [Unit testing](#unit-testing)
+    3. [Build flags](#build-flags)
+
 <!--END TOC-->
 
-### Configuring PlatformIO <a name="toc-sub-tag-0"></a>
+## Configuring PlatformIO <a name="toc-sub-tag-0"></a>
 I will probably end up making another document on using PlatformIO, but for the sake of getting started, PlatformIO may be installed with
 
 - **OSX**: 
@@ -30,7 +34,7 @@ You can install dependencies using
 platformio lib install "Name"
 ```
 
-## Getting started <a name="toc-sub-tag-2"></a>
+## Getting started
 All of the supported micro-controller boards can be listed using
 ```bash
 platformio boards
@@ -74,13 +78,13 @@ PlatformIO comes with multiple different target and environment flags
 - `platformio run -t clean`: Clean project (delete compiled objects)
 - `platformio run -e uno`: Process only the `uno` environment
 
-## Serial communication <a name="toc-sub-tag-3"></a>
+## Serial communication
 Serial communication with the MCU device is packaged into PlatformIO. We can monitor the MCU with
 ```bash
 platformio device monitor -b [baudrate]
 ```
 
-### USB device debugging on OSX <a name="toc-sub-tag-4"></a>
+### USB device debugging on OSX
 It can be a little bit tentative sometimes to discover the right USB port on OSX. The command
 ```bash
 system_profiler SPUSBDataType
@@ -92,10 +96,10 @@ ls /dev/cu.*
 ```
 outputs.
 
-## Distribution <a name="toc-sub-tag-5"></a>
+## Distribution
 PlatformIO can also act as a distribution tool if the environments are correctly defined.
 
-### Specifying dependencies <a name="toc-sub-tag-6"></a>
+### Specifying dependencies
 We can specify the dependencies for a specific environment, e.g. `[env:uno]` with
 ```
 lib_deps =
@@ -106,8 +110,8 @@ or for all environments under the `[common_env_data]` section. Dependencies are 
 
 More information can be seen here in the [PlatformIO Docs](https://docs.platformio.org/en/latest/projectconf/index.html).
 
-### Unit testing <a name="toc-sub-tag-7"></a>
+### Unit testing
 TODO
 
-### Build flags <a name="toc-sub-tag-8"></a>
+### Build flags
 TODO
