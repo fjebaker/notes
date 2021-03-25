@@ -5,18 +5,22 @@ Note, there is a discussion as to the security of different WiFi chips, and whet
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [WiFi(Nina) Toolkit](#toc-sub-tag-0)
-	1. [Brief discussion of the library state](#toc-sub-tag-1)
-2. [Using the shipped Toolkit with custom CA certificates](#toc-sub-tag-2)
-	1. [Wireshark](#toc-sub-tag-3)
-	2. [OpenSSL to view certificate chains](#toc-sub-tag-4)
-	3. [Configuring a CA](#toc-sub-tag-5)
-3. [Reverse-engineering the shipped Toolkit with custom CA certificates](#toc-sub-tag-6)
-4. [Using other Libraries](#toc-sub-tag-7)
-	1. [BearSSL](#toc-sub-tag-8)
+1. [WiFi(Nina) Toolkit](#wifi(nina)-toolkit)
+    1. [Brief discussion of the library state](#brief-discussion-of-the-library-state)
+2. [Using the shipped Toolkit with custom CA certificates](#using-the-shipped-toolkit-with-custom-ca-certificates)
+    1. [Wireshark](#wireshark)
+    2. [OpenSSL to view certificate chains](#openssl-to-view-certificate-chains)
+    3. [Configuring a CA](#configuring-a-ca)
+3. [Reverse-engineering the shipped Toolkit with custom CA certificates](#reverse-engineering-the-shipped-toolkit-with-custom-ca-certificates)
+4. [Using other Libraries](#using-other-libraries)
+    1. [BearSSL](#bearssl)
+    2. [Ameba IoT devices](#ameba-iot-devices)
+    3. [mbedTLS](#mbedtls)
+    4. [WiP links](#wip-links)
+
 <!--END TOC-->
 
-## WiFi(Nina) Toolkit <a name="toc-sub-tag-0"></a>
+## WiFi(Nina) Toolkit
 The arduino WiFi and [WiFiNina](https://www.arduino.cc/en/Reference/WiFiNINA) both ship with a tool for updating the device's firmware, and copying new certificates. There are [tutorials](https://www.arduino.cc/en/Tutorial/WiFiNINAFirmwareUpdater) on the internet as to how to accomplish this, but a brief summary of the simplest method is as follows
 
 - install the Arduino IDE
@@ -28,16 +32,16 @@ The final section of the tool allows you to enter the desired domains you wish t
 
 There exist essentially two solutions then, in uploading a custom CA onto the device; either providing an endpoint on your server where the Toolkit may fetch it, so that it may be uploaded, or reverse-engineering the Firmware Updater sketch, and feeding the device your own `.pem` or `.cert` files. 
 
-### Brief discussion of the library state <a name="toc-sub-tag-1"></a>
+### Brief discussion of the library state
 
 Unfortunately, despite quite extensive research, I have not found an easier way of adding certificates onto these IoT devices. I found discussion in some forums about the [official Nina Firmware](https://github.com/arduino/nina-fw), and how you could compile and flash the device with your own keys inserted in `data/roots.pem`, but that is itself not a straight-forward task, and requires additional tools. My general approach is always to install the minimal amount of new software on my main machine, so I've dismissed that for now.
 
 I saw in a repository issue ([issue #10](https://github.com/arduino/nina-fw/issues/10)) that a feature will be added that solves this problem of uploading certificate files. Until then, and for my own learning, I will explore an alternative solution.
 
-## Using the shipped Toolkit with custom CA certificates <a name="toc-sub-tag-2"></a>
+## Using the shipped Toolkit with custom CA certificates
 First I wanted to know if the root certificates aquired by the Toolkit are done by the arduino device, or by the host machine before uploading. An info message during the upload step shows that the Toolkit is fetching the certificates, however it did not describe in detail how it achieves this, nor explicitly which device was acquiring the keys.
 
-### Wireshark <a name="toc-sub-tag-3"></a>
+### Wireshark
 I monitored my network traffic whilst running the certificate tookit with the domain `arduino.cc:443`. Filtering with
 ```
 ip.addr == 192.168.1.120 and ip.addr == 100.24.172.113
@@ -73,7 +77,7 @@ we don't see much. I read on forums that these sort of `Alert (21)`s are an ambi
 
 The general handshake however clues in that we may be able to just host a `443` socket on our webserver, which is TLS savvy, and let the Toolkit fetch the root certificate for us (our custom CA in this case), and add it to the device. A possible caveat of this is that the handshake may be rejected by the host machine, unless the custom CA is added to the host's keychain -- something that is completely acceptable to do, but none the less is something I am reluctant to do. My views on this sort of a topic are that I want the IoT device only to be able to connect to this server securely and reliably, and don't wish to have to pollute other machines to accomplish this.
 
-### OpenSSL to view certificate chains <a name="toc-sub-tag-4"></a>
+### OpenSSL to view certificate chains
 Another handy technique when examining this sort of a problem, and one that may come in handy when testing the success of either solution, is to view the certificate chains, and examine exactly which CA is the root. Examining the `Server Hello` packet from the Wireshark capture a little closer, we see
 ```
 ...
@@ -114,18 +118,18 @@ Here `s:` is the subject line, and `i:` informs us about the issuing authority. 
 
 I will write more explicit [notes](https://github.com/Dustpancake/Dust-Notes/blob/master/security/ssl-tls-certificates.md) on certificate authorities, SSL/TLS, and how to configure custom certificate chains at a later date, which will elaborate on different analysis methods more completely.
 
-### Configuring a CA <a name="toc-sub-tag-5"></a>
+### Configuring a CA
 TODO
 
 
-## Reverse-engineering the shipped Toolkit with custom CA certificates <a name="toc-sub-tag-6"></a>
+## Reverse-engineering the shipped Toolkit with custom CA certificates
 TODO
 
 
-## Using other Libraries <a name="toc-sub-tag-7"></a>
+## Using other Libraries
 An alternative solution to all of this is to use a different library (though in doing so it could be argued we learn less). From digging for a solution using WiFiNina, I found a few other libraries which already improved upon what I was trying to accomplish, however with their own issues here an there.
 
-### BearSSL <a name="toc-sub-tag-8"></a>
+### BearSSL
 BearSSL allows you do pass x.509 certificates, set trust anchors and Client RSA certificates. The prevelent issue with this library at the moment is securely injecting the certificates in such a way as to prevent them being accessed by a would-be intruder; storing them in the source code, as in the examples, is a very bad practice.
 
 BearSSL builds on the [ESP8266WiFi](https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WiFi) library, which includes a solution for reading in CA certificates during the `setup()` in the examples.

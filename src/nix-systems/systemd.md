@@ -2,10 +2,11 @@
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Using service files with mounts](#toc-sub-tag-0)
+1. [Using service files with mounts](#using-service-files-with-mounts)
+
 <!--END TOC-->
 
-## Using service files with mounts <a name="toc-sub-tag-0"></a>
+## Using service files with mounts
 In order to ensure a service file is executed after a file system has been mounted with e.g. `fstab`, we need to find the relevant `*.mount` service genereated.
 
 After adding the filesystem to `/etc/fstab`, generate the configuration with

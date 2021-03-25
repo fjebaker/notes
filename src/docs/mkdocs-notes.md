@@ -3,15 +3,16 @@
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Installation and setup](#toc-sub-tag-0)
-2. [Basic use](#toc-sub-tag-1)
-	1. [Adding navigation](#toc-sub-tag-2)
-	2. [Linking images](#toc-sub-tag-3)
-3. [Plugins](#toc-sub-tag-4)
-4. [Styling](#toc-sub-tag-5)
+1. [Installation and setup](#installation-and-setup)
+2. [Basic use](#basic-use)
+    1. [Adding navigation](#adding-navigation)
+    2. [Linking images](#linking-images)
+3. [Plugins](#plugins)
+4. [Styling](#styling)
+
 <!--END TOC-->
 
-## Installation and setup <a name="toc-sub-tag-0"></a>
+## Installation and setup
 Installing `mkdocs` is as simple as
 ```
 pip install mkdocs
@@ -23,7 +24,7 @@ mkdocs new [project_name]
 ```
 which will create a new folder `project_name` with the directory structure of `mkdocs` within.
 
-## Basic use <a name="toc-sub-tag-1"></a>
+## Basic use
 The overall documentation is controlled by the `mkdocs.yml` file, which also acts as the configuration for the site. You then add your normal markdown documents in the `docs` directory. You can also add new directories, as explained in the [writing your docs](https://www.mkdocs.org/user-guide/writing-your-docs/) guide, and this will be mapped to new endpoints of the docs site, with the usual nesting: e.g. a file in
 ```
 about/version1/about_v1.md
@@ -34,7 +35,7 @@ http://[hostname]/about/version1/about_v1
 ```
 in the build site.
 
-### Adding navigation <a name="toc-sub-tag-2"></a>
+### Adding navigation
 You can add a basic navigation by creating the `nav` section in `mkdocs.yml`. The most bare bones version would be simply:
 ```
 nav:
@@ -53,7 +54,7 @@ nav:
         - 'Release Notes': 'release-notes.md'
 ```
 
-### Linking images <a name="toc-sub-tag-3"></a>
+### Linking images
 You can easily link images by relative paths with a project like
 ```
 mkdocs.yml
@@ -68,8 +69,8 @@ with markdown in `about.md`
 ![Some Image](img/some_image.png)
 ```
 
-## Plugins <a name="toc-sub-tag-4"></a>
+## Plugins
 You can view a lot of the supported plugins on the [`mkdocs` github wiki](https://github.com/mkdocs/mkdocs/wiki/MkDocs-Plugins).
 
-## Styling <a name="toc-sub-tag-5"></a>
+## Styling
 For information on styling, see [the official how-to](https://www.mkdocs.org/user-guide/styling-your-docs/).

@@ -1,28 +1,30 @@
 # Making Discord bots in Python
+
 Unlike webhooks, discord bots are invited into servers, and managed through a special [developer portal](https://discordapp.com/developers/applications). A link to the discord Python API reference can be found [here](https://discordpy.readthedocs.io/en/latest/api.html).
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Using the developer portal to create a bot](#toc-sub-tag-0)
-	1. [Overview of the portal](#toc-sub-tag-1)
-		1. [Application features](#toc-sub-tag-2)
-		2. [Bot features](#toc-sub-tag-3)
-	2. [Adding a bot to the server](#toc-sub-tag-4)
-		1. [Generating OAuth2 URIs](#toc-sub-tag-5)
-2. [Using python to handle application functionality](#toc-sub-tag-6)
-	1. [Connecting to a Discord server](#toc-sub-tag-7)
-	2. [Utility functions](#toc-sub-tag-8)
-	3. [Responding to events](#toc-sub-tag-9)
-		1. [Messages](#toc-sub-tag-10)
-		2. [Direct messaging channels](#toc-sub-tag-11)
-	4. [Connecting a bot](#toc-sub-tag-12)
-		1. [Attaching a bot](#toc-sub-tag-13)
-		2. [Bot commands](#toc-sub-tag-14)
-		3. [Converting commands](#toc-sub-tag-15)
-		4. [Command predicates](#toc-sub-tag-16)
+1. [Using the developer portal to create a bot](#using-the-developer-portal-to-create-a-bot)
+    1. [Overview of the portal](#overview-of-the-portal)
+        1. [Application features](#application-features)
+        2. [Bot features](#bot-features)
+    2. [Adding a bot to the server](#adding-a-bot-to-the-server)
+        1. [Generating OAuth2 URIs](#generating-oauth2-uris)
+2. [Using python to handle application functionality](#using-python-to-handle-application-functionality)
+    1. [Connecting to a Discord server](#connecting-to-a-discord-server)
+    2. [Utility functions](#utility-functions)
+    3. [Responding to events](#responding-to-events)
+        1. [Messages](#messages)
+        2. [Direct messaging channels](#direct-messaging-channels)
+    4. [Connecting a bot](#connecting-a-bot)
+        1. [Attaching a bot](#attaching-a-bot)
+        2. [Bot commands](#bot-commands)
+        3. [Converting commands](#converting-commands)
+        4. [Command predicates](#command-predicates)
+
 <!--END TOC-->
 
-## Using the developer portal to create a bot <a name="toc-sub-tag-0"></a>
+## Using the developer portal to create a bot
 In order to develop a bot, we need to register the correct authentication tokens on the developer portal, through OAuth2. To do this we, on the main dashboard of the portal
 
 - select *New Application*
@@ -31,22 +33,22 @@ In order to develop a bot, we need to register the correct authentication tokens
 
 OAuth2 protocol generates limited-access tokens based on the permissions granted to the application/bot.
 
-### Overview of the portal <a name="toc-sub-tag-1"></a>
+### Overview of the portal
 The following explains some of the details which may be configured in the developer portal.
 
-#### Application features <a name="toc-sub-tag-2"></a>
+#### Application features
 TODO; what is the client ID, what is the client secret?
 
-#### Bot features <a name="toc-sub-tag-3"></a>
+#### Bot features
 Bots can be granted special OAuth2 tokens, and as many permissions as they need. It also allows you to access the **secret bot tokens** required to activate the bot remotely from a server.
 
 TODO; what are all the setting available?
 
 
-### Adding a bot to the server <a name="toc-sub-tag-4"></a>
+### Adding a bot to the server
 To add our bot to the server, we require a key from the OAuth2 URI generator.
 
-#### Generating OAuth2 URIs <a name="toc-sub-tag-5"></a>
+#### Generating OAuth2 URIs
 From the hamburger menu, select OAuth2. This dashboard is a wrapper for the OAuth2 API, and manages and generates credential tokens. 
 
 For our bot we want to add user access to the discord API; to do this, scroll down and select
@@ -58,12 +60,12 @@ For our bot we want to add user access to the discord API; to do this, scroll do
 
 Select *Copy* and paste it into the browser in order to invite the application/bot to your server.
 
-## Using python to handle application functionality <a name="toc-sub-tag-6"></a>
+## Using python to handle application functionality
 The environment requires the `discord.py` API packages
 ```
 pip install discord.py
 ```
-### Connecting to a Discord server <a name="toc-sub-tag-7"></a>
+### Connecting to a Discord server
 Require a `Client` instance to connect to the server. The client represents a connection to a given discord server; the servers the bot is currently connected to is handles by `client.guild`. The client is able to interact with the full discord API.
 ```python
 import discord, os
@@ -89,13 +91,13 @@ for member in guild:
 	print(member.name)
 ```
 
-### Utility functions <a name="toc-sub-tag-8"></a>
+### Utility functions
 The discord python API includes a `utils` module to fasciculate quality-of-life functions, such as the ability to find
 ```python
 guild = discord.utils.find(lambda i: i.name == "YOUR SERVER NAME", client.guilds)
 ```
 
-### Responding to events <a name="toc-sub-tag-9"></a>
+### Responding to events
 Event triggers can be defined by either using the `client.event` decorator, or by creating a custom client class, inheriting from `discord.Client`, and overriding the appropriate methods.
 Some common endpoints are
 ```python
@@ -112,7 +114,7 @@ class NewClient(discord.Client)
 
 ```
 
-#### Messages <a name="toc-sub-tag-10"></a>
+#### Messages
 The message argument given to the `on_message()` function contains the message contents and metadata, for example
 ```python
 if message.author == client.user: 	# encase you messaged yourself
@@ -123,23 +125,23 @@ if message.content == "Hey fuck you!":
 	await message.channel.send(resp)
 ```
 
-#### Direct messaging channels <a name="toc-sub-tag-11"></a>
+#### Direct messaging channels
 To direct message a member, we can create a new `dm` channel, with
 ```python
 await member.create_dm()
 await member.dm_channel.send("MESSAGE")
 ```
 
-### Connecting a bot <a name="toc-sub-tag-12"></a>
+### Connecting a bot
 Subclasses of `Client` include bot, which has tailored functionality for bot interactions. This includes the whole of the commands API, which the superclass `Client` does not have access to.
-#### Attaching a bot <a name="toc-sub-tag-13"></a>
+#### Attaching a bot
 Instead of using an instance of `Client`, we instead want to use an instance of `Bot`, with many of the same endpoints as client. The primary difference is that we are going to prefix the bot with a command token, e.g.
 ```python
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix='?')
 ```
-#### Bot commands <a name="toc-sub-tag-14"></a>
+#### Bot commands
 Commands, different to the event endpoints, are arbitrary. We can define a command endpoint with
 ```python
 @bot.command(name='beer', help='Ask the bot for a beer.')
@@ -149,7 +151,7 @@ async def give_beer(context):
 ```
 Given the command prefix of `?`, the bot will now respond to the input `?beer`. Similarly, using `?help` will trigger the help text to be shown.
 
-#### Converting commands <a name="toc-sub-tag-15"></a>
+#### Converting commands
 Say we wanted to create a command that takes parameters as arguments, we could do so for our bot with
 ```python
 @bot.command(name='beer', help='Ask the bot for <n> beers')
@@ -158,7 +160,7 @@ async def give_beer(context, n: int):
 ```
 Python3's builtin annotations will automatically get the API to convert the argument into the type you want, and handle exceptions if the input does not match.
 
-#### Command predicates <a name="toc-sub-tag-16"></a>
+#### Command predicates
 We can make sure that our commands have the correct permissions or environment in order to execute the desired task. For example, we can ensure we have admin permissions by using
 ```python
 @bot.command(name='create-channel')

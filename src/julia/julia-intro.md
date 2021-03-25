@@ -3,42 +3,47 @@ Some notes from my first day of learning the Julia language; converted from an i
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Types and Dispatch](#toc-sub-tag-0)
-2. [Functions and Dispatch](#toc-sub-tag-1)
-    1. [Parametric types](#toc-sub-tag-2)
-    2. [Union types and the `where` keyword](#toc-sub-tag-3)
-    3. [Posterity: variadics](#toc-sub-tag-4)
-3. [Custom Types](#toc-sub-tag-5)
-    1. [Defining a data type](#toc-sub-tag-6)
-    2. [Abstract Interfaces](#toc-sub-tag-7)
-4. [Benchmarking](#toc-sub-tag-8)
-    1. [Julia compile-to-run graph](#toc-sub-tag-9)
-    2. [Specialization and code inspection](#toc-sub-tag-10)
-    3. [Estimating the performance gain of specialization](#toc-sub-tag-11)
-    4. [Using Run-time effectively](#toc-sub-tag-12)
-5. [Generic programming](#toc-sub-tag-13)
-    1. [Generic Programming with Multiple Dispatch and JIT](#toc-sub-tag-14)
-    2. [Example: DifferentialEquations.jl](#toc-sub-tag-15)
-6. [*Gotchas* and how to handle them](#toc-sub-tag-16)
-    1. [Gotcha 1: Global scope](#toc-sub-tag-17)
-        1. [Solution 1: Wrap code in functions](#toc-sub-tag-18)
-        2. [Solution 2: Declare globals as (compile-time) constants](#toc-sub-tag-19)
-    2. [Gotcha 2: Type-instabilities](#toc-sub-tag-20)
-        3. [Solution 1: Avoid type changes](#toc-sub-tag-21)
-        4. [Solution 2: Detect issues with `@code_warntype` or `@trace`](#toc-sub-tag-22)
-        5. [Solution 3: C/Fortran type specifications](#toc-sub-tag-23)
-        6. [Solution 4: Function barriers](#toc-sub-tag-24)
-    3. [Gotcha 3: Views and copies](#toc-sub-tag-25)
-    4. [Gotcha 4: Temporary allocations and vectorized code](#toc-sub-tag-26)
-        1. [Solution: More dots and explicit code](#toc-sub-tag-27)
-    5. [Gotcha 5: Abstract fields](#toc-sub-tag-28)
-    6. [Gotcha 6: Writing to global scope](#toc-sub-tag-29)
-    7. [Gotcha 7: Column major order](#toc-sub-tag-30)
-    8. [Gotcha 8: Lazy operations](#toc-sub-tag-32)
-    9. [Extra: Generators and comprehension.](#toc-sub-tag-33)
+1. [Types and Dispatch](#types-and-dispatch)
+2. [Functions and Dispatch](#functions-and-dispatch)
+    1. [Parametric types](#parametric-types)
+    2. [Union types and the `where` keyword](#union-types-and-the-where-keyword)
+    3. [Posterity: variadics](#posterity:-variadics)
+3. [Custom Types](#custom-types)
+    1. [Defining a data type](#defining-a-data-type)
+    2. [Abstract Interfaces](#abstract-interfaces)
+4. [Benchmarking](#benchmarking)
+    1. [Specializations and speed](#specializations-and-speed)
+        1. [Julia compile-to-run graph](#julia-compile-to-run-graph)
+        2. [Specialization and code inspection](#specialization-and-code-inspection)
+        3. [Estimating the performance gain of specialization](#estimating-the-performance-gain-of-specialization)
+        4. [Using Run-time effectively](#using-run-time-effectively)
+5. [Generic programming](#generic-programming)
+    1. [Generic Programming with Multiple Dispatch and JIT](#generic-programming-with-multiple-dispatch-and-jit)
+    2. [Example: DifferentialEquations.jl](#example:-differentialequations-jl)
+6. [*Gotchas* and how to handle them](#*gotchas*-and-how-to-handle-them)
+    1. [Gotcha 1: Global scope](#gotcha-1:-global-scope)
+        1. [Solution 1: Wrap code in functions](#solution-1:-wrap-code-in-functions)
+        2. [Solution 2: Declare globals as (compile-time) constants](#solution-2:-declare-globals-as-(compile-time)-constants)
+    2. [Gotcha 2: Type-instabilities](#gotcha-2:-type-instabilities)
+        1. [Solution 1: Avoid type changes](#solution-1:-avoid-type-changes)
+        2. [Solution 2: Detect issues with `@code_warntype` or `@trace`](#solution-2:-detect-issues-with-@code_warntype-or-@trace)
+        3. [Solution 3: C/Fortran type specifications](#solution-3:-c/fortran-type-specifications)
+        4. [Solution 4: Function barriers](#solution-4:-function-barriers)
+    3. [Gotcha 3: Views and copies](#gotcha-3:-views-and-copies)
+    4. [Examples](#examples)
+        1. [Gotcha 4: Temporary allocations and vectorized code](#gotcha-4:-temporary-allocations-and-vectorized-code)
+            1. [Solution: More dots and explicit code](#solution:-more-dots-and-explicit-code)
+        2. [Gotcha 5: Abstract fields](#gotcha-5:-abstract-fields)
+        3. [Gotcha 6: Writing to global scope](#gotcha-6:-writing-to-global-scope)
+        4. [Gotcha 7: Column major order](#gotcha-7:-column-major-order)
+            1. [**NB**: put the fastest varying index first!](#**nb**:-put-the-fastest-varying-index-first!)
+        5. [Gotcha 8: Lazy operations](#gotcha-8:-lazy-operations)
+    5. [Examples](#examples)
+        1. [Extra: Generators and comprehension.](#extra:-generators-and-comprehension-)
+
 <!--END TOC-->
 
-## Types and Dispatch <a name="toc-sub-tag-0"></a>
+## Types and Dispatch
 Julia has notions of **concrete** and **abstract** types; i.e. those of objects, and those that cannot be instantiated but instead define a structure.
 
 
@@ -159,7 +164,7 @@ print_tree(Number)
 
 Note that only **concrete** types are and leaf points, whereas **abstract** types are the nodes.
 
-## Functions and Dispatch <a name="toc-sub-tag-1"></a>
+## Functions and Dispatch
 Example: a function that calculates absolute values (like builtin `abs` already does).
 Want something to work for Reals and Complex; thus want to create type specific implementations of the function:
 
@@ -220,7 +225,7 @@ testf(3, "test")
      [1] top-level scope at In[7]:11
 
 
-### Parametric types <a name="toc-sub-tag-2"></a>
+### Parametric types
 An example of use of **type parameters** is the Julia array type:
 
 
@@ -262,7 +267,7 @@ println(Vector{Float64} == Array{Float64, 1})
     true
 
 
-### Union types and the `where` keyword <a name="toc-sub-tag-3"></a>
+### Union types and the `where` keyword
 Note that `Vector{Float64} <: Vector{Real}` is `false`, despite `Float64 <: Real`, and this is exactly since `Vector{Real}` is a concrete type (with elements `T <: Real`): **concrete types** don't have subtypes.
 
 
@@ -349,7 +354,7 @@ Other types include union types `Union{Float64, Int32}`, [bit based](https://doc
 
 Full refernce for types can be found in [this page of the manual](https://docs.julialang.org/en/latest/manual/types/).
 
-### Posterity: variadics <a name="toc-sub-tag-4"></a>
+### Posterity: variadics
 Julia can use variadic arguments in function signatures or calls:
 
 
@@ -376,8 +381,8 @@ It can either
 - combine many arguments into one argument, like `*args` in Python. Returns type `Tuple`
 - split one argument into many different arguments in a function call, like calling a function with `f(*some_list)` in Python.
 
-## Custom Types <a name="toc-sub-tag-5"></a>
-### Defining a data type <a name="toc-sub-tag-6"></a>
+## Custom Types
+### Defining a data type
 Types can be defined with the `struct` keyword (*NB*: they cannot be redefined; would have to restart the Julia kernel). The `struct` objects behave like classes, with different methods (e.g. constructors) defineable. They are by default **immutable**, but note that the immutability does not propagate (**edit**: it totally does?):
 
 
@@ -446,7 +451,7 @@ d2 = DiagonalMat([2.4, 1.9, 5])
 
 
 
-### Abstract Interfaces <a name="toc-sub-tag-7"></a>
+### Abstract Interfaces
 Integrating an object into Julia's type hierarchy is as simple as subtyping an abstract class, and implementing its interface. For example, we could recreate the `DiagonalMat` struct by subtyping `AbstractMatrix`, and the storage with `AbstractVector`:
 
 
@@ -567,7 +572,7 @@ Can be advantageous to define fast implementations
 
 
 
-## Benchmarking <a name="toc-sub-tag-8"></a>
+## Benchmarking
 Benchmarking in Julia is easily fascilitated with the [`BenchmarkTools.jl` library](https://github.com/JuliaCI/BenchmarkTools.jl/blob/master/doc/manual.md):
 
 
@@ -745,7 +750,7 @@ plot(ns, tnp./tjl, m=:circle, xscale=:log10, xlab="matrix size", ylab="NumPy tim
 
 The Julia implementation also works for non-numerical types, as long as a `one` identity is defined, aswell as the multiplication operator.
 
-### Julia compile-to-run graph <a name="toc-sub-tag-9"></a>
+### Julia compile-to-run graph
 ![png](julia-intro-files/from_source_to_native.png)
 
 **AST** = Abstract Syntax Tree
@@ -754,7 +759,7 @@ The Julia implementation also works for non-numerical types, as long as a `one` 
 
 **LLVM** = Low Level Virtual Machine
 
-### Specialization and code inspection <a name="toc-sub-tag-10"></a>
+### Specialization and code inspection
 Julia specializes on the function argument types. When a function is **called** for the first time, Julia pre-compiles machine code for the given input types. For **subsequent calls**, the machine code can be reused, until a function with different input types is called. It can therefore be argued that it is benefitial to write specialized functions from the get-go, to limit the need for pre-compilation.
 
 
@@ -872,7 +877,7 @@ To examine this further, we can inspect the code transformation stages with buil
     	nopl	(%rax)
 
 
-### Estimating the performance gain of specialization <a name="toc-sub-tag-11"></a>
+### Estimating the performance gain of specialization
 We'll wrap our numbers into a custom type `Anything` which stores them as `Any` type to prevent the specialization from occuring (equivalent to Python's behaviour):
 
 
@@ -1000,7 +1005,7 @@ x = Anything(2.0)
     	nopl	(%rax,%rax)
 
 
-### Using Run-time effectively <a name="toc-sub-tag-12"></a>
+### Using Run-time effectively
 For numerical computations, we'll typically run a piece of code many times (c.f. Monte Carlo simulations). It is in our interest to **minimize run-time** as much as we can.
 
 Since Julia compiles a piece of code only once, we can assume our compile-time will be **far shorter** than our run-time. It is a good strategy then to move as much of the logic and computation into compile-time operations. As Julia specializes around types, the only information available at compile-time are **types**.
@@ -1091,7 +1096,7 @@ end
 
 The implicit benefit of type annotations however can be to help define user interface, enforce conversions, and (in rare situations), aid the compiler in infer tricky situations.
 
-## Generic programming <a name="toc-sub-tag-13"></a>
+## Generic programming
 From Wikipedia:
 > Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters.
 
@@ -1207,7 +1212,7 @@ x = rand(Float32, 100);
       22.117 μs (2 allocations: 39.14 KiB)
 
 
-### Generic Programming with Multiple Dispatch and JIT <a name="toc-sub-tag-14"></a>
+### Generic Programming with Multiple Dispatch and JIT
 Generic algorithms that compile to fast machine code in combination with multiple dispatch can lead to a large amount of code reuse (see [YouTube Video from JuliaCon 19 here](https://www.youtube.com/watch?v=kc9HwsxE1OY)).
 
 Code sharing comes as either: **1. Sharing generic algorithms**, where methods are selected based on all argument types, and **2. Sharing types** where you define methods on types *after* the type is defined.
@@ -1294,7 +1299,7 @@ end
 ```
 
 
-### Example: DifferentialEquations.jl <a name="toc-sub-tag-15"></a>
+### Example: DifferentialEquations.jl
 Lets examine differentials in the form
 $$\frac{du}{dt} = f(u,p,t)$$
 
@@ -1381,8 +1386,8 @@ If you wanted to do that yourself, it would be a lot more code.
 
 Generic Programming with Multiple Dispatch and JIT = **lots of code sharing and emergent features**.
 
-## *Gotchas* and how to handle them <a name="toc-sub-tag-16"></a>
-### Gotcha 1: Global scope <a name="toc-sub-tag-17"></a>
+## *Gotchas* and how to handle them
+### Gotcha 1: Global scope
 In the following code extract, the REPL/global scope does not guaruntee that `a` and `b` are of a certain type.
 
 
@@ -1477,7 +1482,7 @@ using Traceur
 
 
 
-#### Solution 1: Wrap code in functions <a name="toc-sub-tag-18"></a>
+#### Solution 1: Wrap code in functions
 
 
 ```julia
@@ -1520,7 +1525,7 @@ answer = outer()
 
 This is about as fast as Julia can be; it's just returning a literal.
 
-#### Solution 2: Declare globals as (compile-time) constants <a name="toc-sub-tag-19"></a>
+#### Solution 2: Declare globals as (compile-time) constants
 
 
 ```julia
@@ -1572,7 +1577,7 @@ Linearcombo()
 
 
 
-### Gotcha 2: Type-instabilities <a name="toc-sub-tag-20"></a>
+### Gotcha 2: Type-instabilities
 There's a bad performance aspect in the implentation of the following code:
 
 
@@ -1749,7 +1754,7 @@ f() = rand([1.0, 2, "3"])
     }
 
 
-#### Solution 1: Avoid type changes <a name="toc-sub-tag-21"></a>
+#### Solution 1: Avoid type changes
 Init `x` as `Float64` and it's fast again:
 
 
@@ -1771,7 +1776,7 @@ end
     }
 
 
-#### Solution 2: Detect issues with `@code_warntype` or `@trace` <a name="toc-sub-tag-22"></a>
+#### Solution 2: Detect issues with `@code_warntype` or `@trace`
 
 
 ```julia
@@ -1827,7 +1832,7 @@ end
     [90m4 ┄[39m       return x
 
 
-#### Solution 3: C/Fortran type specifications <a name="toc-sub-tag-23"></a>
+#### Solution 3: C/Fortran type specifications
 
 
 ```julia
@@ -1850,7 +1855,7 @@ end
     }
 
 
-#### Solution 4: Function barriers <a name="toc-sub-tag-24"></a>
+#### Solution 4: Function barriers
 
 
 ```julia
@@ -1916,7 +1921,7 @@ calc_square_inner(x) = x^2
     [90m└──[39m      return %3
 
 
-### Gotcha 3: Views and copies <a name="toc-sub-tag-25"></a>
+### Gotcha 3: Views and copies
 Suppose: for a given 3x3 matrix M and vector V want to calculate the dot product of the first column of M and v:
 
 
@@ -2028,7 +2033,7 @@ julia> A
 
 
 
-### Gotcha 4: Temporary allocations and vectorized code <a name="toc-sub-tag-26"></a>
+### Gotcha 4: Temporary allocations and vectorized code
 
 
 ```julia
@@ -2061,7 +2066,7 @@ end
 
 
 
-#### Solution: More dots and explicit code <a name="toc-sub-tag-27"></a>
+#### Solution: More dots and explicit code
 
 Read [this blog post](https://julialang.org/blog/2017/01/moredots/):
 
@@ -2135,7 +2140,7 @@ end
       75.224 μs (1 allocation: 112 bytes)
 
 
-### Gotcha 5: Abstract fields <a name="toc-sub-tag-28"></a>
+### Gotcha 5: Abstract fields
 
 
 ```julia
@@ -2207,10 +2212,10 @@ c = MyTypeParametric(3.0, "test")
       2.035 ns (0 allocations: 0 bytes)
 
 
-### Gotcha 6: Writing to global scope <a name="toc-sub-tag-29"></a>
+### Gotcha 6: Writing to global scope
 See [this github issue](https://github.com/JuliaLang/julia/issues/28789). Solution: use code block wrapping or functions.
 
-### Gotcha 7: Column major order <a name="toc-sub-tag-30"></a>
+### Gotcha 7: Column major order
 
 
 ```julia
@@ -2252,9 +2257,9 @@ end
       1.083 ms (0 allocations: 0 bytes)
 
 
-#### **NB**: put the fastest varying index first! <a name="toc-sub-tag-31"></a>
+#### **NB**: put the fastest varying index first!
 
-### Gotcha 8: Lazy operations <a name="toc-sub-tag-32"></a>
+### Gotcha 8: Lazy operations
 Say want to calculate
 $$X = M + (M^\prime + 2 I)$$
 
@@ -2378,7 +2383,7 @@ end
       102.890 ns (3 allocations: 240 bytes)
 
 
-### Extra: Generators and comprehension. <a name="toc-sub-tag-33"></a>
+### Extra: Generators and comprehension.
 For generators, see [here](https://docs.julialang.org/en/v1/manual/arrays/#Generator-Expressions-1).
 
 For comprehension, see [here](https://docs.julialang.org/en/v1/manual/arrays/#Comprehensions-1).

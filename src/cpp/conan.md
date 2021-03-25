@@ -1,5 +1,12 @@
 # Conan package manager
+
 Conan is a package manager and repository for C and C++, well integrated into CMake.
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Example use](#example-use)
+
+<!--END TOC-->
 
 ## Example use
 (this section adapted from [a conan tutorial](https://docs.conan.io/en/latest/getting_started.html))

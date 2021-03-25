@@ -1,5 +1,10 @@
 # Using Mycroft Docker images on OSX
 
+<!--BEGIN TOC-->
+## Table of Contents
+
+<!--END TOC-->
+
 Following from the ["Get Mycroft" instructions](https://mycroft.ai/get-started/), we can obtain a docker image with
 ```bash
 docker pull mycroftai/docker-mycroft

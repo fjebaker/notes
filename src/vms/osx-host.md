@@ -1,11 +1,19 @@
 # Virtual Machines with OSX Hosts
+
 Using [Oracle VirtualBox](https://www.virtualbox.org/), installed using brew with extensions:
 
 ```bash
 brew cask install virtualbox  virtualbox-extension-pack
 ```
 
-## Host reconnaissance 
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Host reconnaissance](#host-reconnaissance)
+2. [Linux Images](#linux-images)
+
+<!--END TOC-->
+
+## Host reconnaissance
 Discover the chip instructions set with
 ```bash
 uname -a 

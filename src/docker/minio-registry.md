@@ -1,8 +1,15 @@
 # Creating a persistent local registry with S3/MinIO
+
 The network design is
 - MinIO running on a separate host (replicating AWS s3)
 - docker registry hosted as a service through docker swarm
 
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Configurations](#configurations)
+2. [Starting the registry service](#starting-the-registry-service)
+
+<!--END TOC-->
 
 ## Configurations
 

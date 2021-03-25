@@ -1,5 +1,12 @@
-# Learning Blender
+# Learning Blender
+
 I've got some non-traditional visualization ideas I would like to prototype, and wish to learn Blender to aid me with this.
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Key shortcuts](#key-shortcuts)
+
+<!--END TOC-->
 
 ## Key shortcuts
 

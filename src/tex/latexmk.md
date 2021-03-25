@@ -1,15 +1,17 @@
 # Using `latexmk`
+
 `latexmk` is a tool by John Collins for providing a simplified way of building LaTeX files in a system agnostic way.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Configuration](#toc-sub-tag-0)
-2. [Command line options](#toc-sub-tag-1)
+1. [Configuration](#configuration)
+2. [Command line options](#command-line-options)
+
 <!--END TOC-->
 
 Full manual is available [here](http://personal.psu.edu/~jcc8/software/latexmk/latexmk-469a.txt).
 
-## Configuration <a name="toc-sub-tag-0"></a>
+## Configuration
 `latexmk` is configured either through `~/.latexmkrc` or locally to the project with a `.latexmkrc` or `latexmkrc` file.
 
 
@@ -35,7 +37,7 @@ $postscript_mode = 0;	# no postscript files
 
 ```
 
-## Command line options <a name="toc-sub-tag-1"></a>
+## Command line options
 Here are a view useful command line options to use with `latexmk`:
 
 - `-pvc`: enable hot reloading in the pdf previewer of choice

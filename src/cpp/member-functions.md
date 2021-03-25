@@ -1,4 +1,16 @@
 # On using `std::function` for member functions
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Overview](#overview)
+2. [Pointers to class members](#pointers-to-class-members)
+3. [Using `std::function`](#using-std::function)
+    1. [With lambda wrappers](#with-lambda-wrappers)
+
+<!--END TOC-->
+
+## Overview
+
 A colleague recently asked me about passing function pointers under different circumstances, so I thought I would write up a few explanatory notes, as it can be a little confusing.
 
 Consider the code snippet

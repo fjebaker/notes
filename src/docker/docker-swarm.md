@@ -1,5 +1,16 @@
 # Docker Swarm
 
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Getting started](#getting-started)
+    1. [Scaling a service](#scaling-a-service)
+2. [Private registry (no TLS)](#private-registry-(no-tls))
+    1. [Pushing an image to a private registry](#pushing-an-image-to-a-private-registry)
+3. [OpenFaas (no TLS)](#openfaas-(no-tls))
+    1. [Viewing usage in Prometheus](#viewing-usage-in-prometheus)
+
+<!--END TOC-->
+
 ## Getting started
 
 Docker swarm has the notion of `managers` and `workers`; nodes in the swarm cluster can be either, or both. The manager is used to delegate tasks and deploy services, whereas the workers will only do the work.

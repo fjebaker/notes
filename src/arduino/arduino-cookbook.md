@@ -1,35 +1,38 @@
 # Arduino cookbook
-I tend to like doing things on the command line, so I will be using the [PlatformIO](https://platformio.org/) open source IoT tool.
 
-#### Configuring PlatformIO <a name="toc-sub-tag-0"></a>
-I will probably end up making another document on using PlatformIO, but for the sake of getting started (edit: indeed I did; section moved to [PlatformIO notes](https://github.com/Dustpancake/Dust-Notes/blob/master/arduino/platformio.md)).
+I tend to like doing things on the command line, so I will be using the [PlatformIO](https://platformio.org/) open source IoT tool.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Interacting with pins](#toc-sub-tag-1)
-	1. [LED](#toc-sub-tag-2)
-	2. [Servo](#toc-sub-tag-3)
-	3. [Reading from analog pins](#toc-sub-tag-4)
-2. [Serial data](#toc-sub-tag-5)
-	1. [Writing to serial](#toc-sub-tag-6)
-	2. [Reading from serial](#toc-sub-tag-7)
-	3. [Serial communication](#toc-sub-tag-8)
-		1. [A note on USB translation](#toc-sub-tag-9)
-		2. [The `Serial` module](#toc-sub-tag-10)
-3. [Interrupts](#toc-sub-tag-11)
-	1. [Software interrupts](#toc-sub-tag-12)
-	2. [Hardware interrupts](#toc-sub-tag-13)
-4. [The EEPROM](#toc-sub-tag-14)
+1. [Configuring PlatformIO <a name="toc-sub-tag-0"></a>](#configuring-platformio-<a-name="toc-sub-tag-0"></a>)
+2. [Interacting with pins](#interacting-with-pins)
+    1. [LED](#led)
+    2. [Servo](#servo)
+    3. [Reading from analog pins](#reading-from-analog-pins)
+3. [Serial data](#serial-data)
+    1. [Writing to serial](#writing-to-serial)
+    2. [Reading from serial](#reading-from-serial)
+    3. [Serial communication](#serial-communication)
+        1. [A note on USB translation](#a-note-on-usb-translation)
+        2. [The `Serial` module](#the-serial-module)
+4. [Interrupts](#interrupts)
+    1. [Software interrupts](#software-interrupts)
+    2. [Hardware interrupts](#hardware-interrupts)
+5. [The EEPROM](#the-eeprom)
+
 <!--END TOC-->
 
-## Interacting with pins <a name="toc-sub-tag-1"></a>
+## Configuring PlatformIO <a name="toc-sub-tag-0"></a>
+I will probably end up making another document on using PlatformIO, but for the sake of getting started (edit: indeed I did; section moved to [PlatformIO notes](https://github.com/Dustpancake/Dust-Notes/blob/master/arduino/platformio.md)).s
+
+## Interacting with pins
 Different recipes for interacting with pins. All of these scripts will require the
 ```cpp
 #include "Arduino.h"
 ```
 library.
 
-### LED <a name="toc-sub-tag-2"></a>
+### LED
 The most basic circuit we can construct is an LED bridging a pin to ground; the code to interact with such a circuit is
 ```cpp
 void setup() {
@@ -40,7 +43,7 @@ void loop() {
 	digitalWrite(LED_BUILTIN, HIGH);	// or LOW or whatever you like
 }
 ```
-### Servo <a name="toc-sub-tag-3"></a>
+### Servo
 Common micro-servos have three connecting cables; **ground**, commonly brown, **live**, commonly +5V and red, and **control**, commonly orange. The ground and live cables connect trivially, but the control must connect to a pin capable of PWM.
 
 Once the circuit is built, the servo may be controlled
@@ -66,7 +69,7 @@ void loop() {
 }
 ```
 
-### Reading from analog pins <a name="toc-sub-tag-4"></a>
+### Reading from analog pins
 Some MCUs come with analog in pins, such as the Uno with 6 pins A0 through A5. These pins are able to detect voltages between 0V and 5V. We can read in the voltage value with
 ```cpp
 analogRead(PIN);
@@ -87,7 +90,7 @@ Note that the AREF pin has built-in 32kOhm resistance. If, e.g. 2.5V applied to 
 ```
 at the AREF pin.
 
-## Serial data <a name="toc-sub-tag-5"></a>
+## Serial data
 Interacting with serial data is included in the default arduino library. A thing to be cautious of is the baud rate, and that the IO is buffered. Common baud rates are 9600, 19200, 38400, 57600 and 115200.
 
 The `setup` function for all of these recipes is identical, with changes made where necessary
@@ -97,13 +100,13 @@ void setup() {
 }
 ```
 
-### Writing to serial <a name="toc-sub-tag-6"></a>
+### Writing to serial
 Serial data is written into bytes, with the decoding and encoding happening automatically in the built-in functions. Writing to serial is as easy as
 ```cpp
 Serial.println("some string");
 ```
 
-### Reading from serial <a name="toc-sub-tag-7"></a>
+### Reading from serial
 Reading from serial needs to ensure that data is available
 ```cpp
 String readString = "";
@@ -121,17 +124,17 @@ void loop() {
 }
 ```
 
-### Serial communication <a name="toc-sub-tag-8"></a>
+### Serial communication
 Standard MCUs come with TX (transmit) and RX (receive) digital pins. Serial data is not the same as USB data; these pins are 'multiplexed' into the USB connections, but a separate IC decodes and translates between the two. Some micro-controllers, such as the arduino Leonardo 32U4 MCU, have built in USB controllers.
 
-#### A note on USB translation <a name="toc-sub-tag-9"></a>
+#### A note on USB translation
 On some MCU with USB-to-serial translation, this task is undertaken by a FTDI chip. This is often the case on smaller MC, such as the Nano.
 
 Other MCUs, such as the Uno, have IC other than FTDI chips handling the translation, such as the Atmel 8U2 or 16U2.
 
 And finally, some MCUs are even able to act as USB hosts, such as the Due, or Mega ADK. The ADK comes with Android Open Accessory Protocol (AOA) facilitating communication between arduino and android devices.
 
-#### The `Serial` module <a name="toc-sub-tag-10"></a>
+#### The `Serial` module
 All of the printing functions allow different representations of data types. These include
 
 Data types |  Code  | Output
@@ -161,7 +164,7 @@ void serialEvent() {
 }
 ```
 
-## Interrupts <a name="toc-sub-tag-11"></a>
+## Interrupts
 Interrupts are the closest many MCUs get to asynchronous code execution. Interrupts, as the name suggests, interrupt the code execution to complete a secondary routine, before resuming where the main thread left off. Interrupts may be included as either **software** or **hardware** interrupts.
 
 Most arduino MCU have two defined harware interrupts `interrupt0` and `interrupt1` hardwired into IO pins 2 and 3 respectively. The Mega has six interrupts, namely `interrupt0` through `interrupt5`, additionally on pins 18-21.
@@ -170,10 +173,10 @@ Routines using interrupts are known as *interrupt service routines* (ISRs). For 
 
 ISRs should be short and fast, can only be executed one at a time, and are executed sequentially as to the order they occur in. Global variables are commonly used to pass information from the main code execution to the ISR and back -- it is therefore best that they are declared as `volatile`.
 
-### Software interrupts <a name="toc-sub-tag-12"></a>
+### Software interrupts
 To my knowledge, only hack implementation of software interrupts exist on most MCUs.
 
-### Hardware interrupts <a name="toc-sub-tag-13"></a>
+### Hardware interrupts
 We can define a hardware interrupt using the `attachInterrupt()` syntax, defining a pin number, and ISR, and the triggering mode
 ```cpp
 attachInterrupt(
@@ -193,5 +196,5 @@ and the available modes are
 - **FALLING**: triggering when the pin goes from high to low
 
 
-## The EEPROM <a name="toc-sub-tag-14"></a>
+## The EEPROM
 TODO

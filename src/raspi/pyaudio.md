@@ -2,11 +2,14 @@
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [A note on the default audio device](#toc-sub-tag-0)
-2. [Making pulesaudio an enabled service](#toc-sub-tag-1)
-3. [Listing PyAudio devices](#toc-sub-tag-2)
+1. [Setup](#setup)
+2. [A note on the default audio device <a name="toc-sub-tag-0"></a>](#a-note-on-the-default-audio-device-<a-name="toc-sub-tag-0"></a>)
+3. [Making pulesaudio an enabled service <a name="toc-sub-tag-1"></a>](#making-pulesaudio-an-enabled-service-<a-name="toc-sub-tag-1"></a>)
+4. [Listing PyAudio devices <a name="toc-sub-tag-2"></a>](#listing-pyaudio-devices-<a-name="toc-sub-tag-2"></a>)
+
 <!--END TOC-->
 
+## Setup
 
 Using the raspian operating system. The required packages are
 ```bash
@@ -47,7 +50,7 @@ with wave.open(testfile, 'rb') as wf:
 
     pa.terminate()
 ```
-### A note on the default audio device <a name="toc-sub-tag-0"></a>
+## A note on the default audio device <a name="toc-sub-tag-0"></a>
 To view the default audio device used by PyAudio, use
 ```python
 import pyaudio
@@ -56,7 +59,7 @@ pa.get_default_output_device_info()
 ```
 
 
-### Making pulesaudio an enabled service <a name="toc-sub-tag-1"></a>
+## Making pulesaudio an enabled service <a name="toc-sub-tag-1"></a>
 We can make pulseaudio auto-start with `systemd` by creating a file in `/etc/systemd/system/pulseaudio.service` with contents
 ```
 [Unit]
@@ -79,7 +82,7 @@ sudo systemctl --system start pulseaudio.service
 
 Also note that interacting with this service using `systemctl` requires the **`--system`** flag, e.g. `sudo systemctl --system status pulseaudio`.
 
-### Listing PyAudio devices <a name="toc-sub-tag-2"></a>
+## Listing PyAudio devices <a name="toc-sub-tag-2"></a>
 To list the audio devices PyAudio is able to interact with, use
 ```python
 import pyaudio

@@ -2,12 +2,13 @@
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Creating users and managing groups](#toc-sub-tag-0)
-2. [S3](#toc-sub-tag-1)
-3. [AWS CLI](#toc-sub-tag-2)
+1. [Creating users and managing groups <a name="toc-sub-tag-0"></a>](#creating-users-and-managing-groups-<a-name="toc-sub-tag-0"></a>)
+2. [S3 <a name="toc-sub-tag-1"></a>](#s3-<a-name="toc-sub-tag-1"></a>)
+3. [AWS CLI <a name="toc-sub-tag-2"></a>](#aws-cli-<a-name="toc-sub-tag-2"></a>)
+
 <!--END TOC-->
 
-### Creating users and managing groups <a name="toc-sub-tag-0"></a>
+## Creating users and managing groups <a name="toc-sub-tag-0"></a>
 Under services, navigate to IAM. Then from that console can create new user, give them a username/password, and manage permissions through different groups.
 
 Can create custom group policies.
@@ -23,12 +24,12 @@ Can either email invites, or distribute the keys.
 
 Instruct user to set up a signed MFA device.
 
-### S3 <a name="toc-sub-tag-1"></a>
+## S3 <a name="toc-sub-tag-1"></a>
 Creating a bit bucket. Some regions are more feature complete than others (something to bear in mind when selecting location).
 
 Creating a new bit bucket, under properties, can change bucket to host static website. Under permissions, allows control of different users / groups / everyone -- list access provides user the ability to render the webpage.
 
-### AWS CLI <a name="toc-sub-tag-2"></a>
+## AWS CLI <a name="toc-sub-tag-2"></a>
 To begin, configure with credentials -- best to use a user `.csv` file. Simply write
 ```
 aws configure

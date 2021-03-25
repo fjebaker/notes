@@ -1,18 +1,22 @@
 # Making presentations in LaTeX
+
 I have my master's thesis *viva voce* tomorrow, and need to prepare a short \~10 minute presentation for the introduction. I thought I would use this as an opportunity to learn how to make presentation slides in LaTeX.
+
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [The `beamer` package](#toc-sub-tag-0)
-	1. [Using sections and subsections](#toc-sub-tag-1)
-	2. [Formatting individual slides](#toc-sub-tag-2)
-		1. [Blocks](#toc-sub-tag-3)
-		2. [Definitions](#toc-sub-tag-4)
-		3. [Lists](#toc-sub-tag-5)
-		4. [Columns](#toc-sub-tag-6)
-2. [Themes](#toc-sub-tag-7)
-3. [Formatting table of contents](#toc-sub-tag-8)
+1. [The `beamer` package](#the-beamer-package)
+    1. [Using sections and subsections](#using-sections-and-subsections)
+    2. [Formatting individual slides](#formatting-individual-slides)
+        1. [Blocks](#blocks)
+        2. [Definitions](#definitions)
+        3. [Lists](#lists)
+        4. [Columns](#columns)
+2. [Themes](#themes)
+3. [Formatting table of contents](#formatting-table-of-contents)
+
 <!--END TOC-->
-## The `beamer` package <a name="toc-sub-tag-0"></a>
+
+## The `beamer` package
 The general format of the document will be
 ```
 \documentclass[xcolor=dvipsnames]{beamer}%
@@ -40,7 +44,7 @@ Slide content
 ```
 We define slides using the `frame` objects. Each slide is rendered with a task-bar at the bottom of the page for navigation. The document may be compiled easily with `pdflatex`.
 
-### Using sections and subsections <a name="toc-sub-tag-1"></a>
+### Using sections and subsections
 Sections and subsections do not appear on the slides as headings, but rather in the slide metadata (located differently depending on the choice of theme). To define a section, we do so outside of a `frame`
 ```
 \section{Motivation and aims}
@@ -53,9 +57,9 @@ The sections and subsections still interface with the table of contents, and can
 ```
 either in a separate frame, or elsewhere.
 
-### Formatting individual slides <a name="toc-sub-tag-2"></a>
+### Formatting individual slides
 Included here are some of the basic formatting types for LaTeX slides.
-#### Blocks <a name="toc-sub-tag-3"></a>
+#### Blocks
 You can use blocks to create emphasis on a `frame` with
 ```
 \begin{block}{Background and axioms}
@@ -63,14 +67,14 @@ You can use blocks to create emphasis on a `frame` with
 \end{block}
 ```
 This will create a colourful block of tedt on the slide.
-#### Definitions <a name="toc-sub-tag-4"></a>
+#### Definitions
 Definitions are a special type of block, which have a different colour profile. They can be created with
 ```
 \begin{definition}{Open string}
 % ...
 \end{block}
 ```
-#### Lists <a name="toc-sub-tag-5"></a>
+#### Lists
 Similar to regular LaTeX, we can define a list with bullet-points as
 ```
 \begin{itemize}
@@ -92,7 +96,7 @@ For `itemize` lists, the icon style may be changed using the `\beamertemplate` m
 \setbeamertemplate{itemize items}[ball]			% circle with lighting effect
 ```
 
-#### Columns <a name="toc-sub-tag-6"></a>
+#### Columns
 Using the `multicol` package, the slides can be split up easily. For example, creating a two column slide
 ```
 \begin{frame}
@@ -107,7 +111,7 @@ Right Column.
 \end{columns}
 \end{frame}
 ```
-## Themes <a name="toc-sub-tag-7"></a>
+## Themes
 For my purpose, I slightly modified the `Antibes` theme for `beamer`; I wanted the infobar at the top only to display the title and section (but not the subsection). Following some examples from online
 ```
 \makeatletter
@@ -138,7 +142,7 @@ For my purpose, I slightly modified the `Antibes` theme for `beamer`; I wanted t
 \makeatother
 ```
 
-## Formatting table of contents <a name="toc-sub-tag-8"></a>
+## Formatting table of contents
 I wanted my table of contents to split over two columns, so that the full text could be displayed on one side. To achieve this, I use
 ```
 % -------------------------------------------- TOC FRAME

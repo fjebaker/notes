@@ -1,19 +1,21 @@
 # Using MongoDB
+
 MongoDB is a document-based database storage service.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Docker](#toc-sub-tag-0)
-	1. [Web GUI with `mongo-express`](#toc-sub-tag-1)
-2. [Mongo tools](#toc-sub-tag-2)
-	1. [Compass](#toc-sub-tag-3)
-	2. [Atlas](#toc-sub-tag-4)
-3. [Storage paradigms](#toc-sub-tag-5)
-	1. [Schema versioning](#toc-sub-tag-6)
-	2. [Bucketing](#toc-sub-tag-7)
+1. [Docker](#docker)
+    1. [Web GUI with `mongo-express`](#web-gui-with-mongo-express)
+2. [Mongo tools](#mongo-tools)
+    1. [Compass](#compass)
+    2. [Atlas](#atlas)
+3. [Storage paradigms](#storage-paradigms)
+    1. [Schema versioning](#schema-versioning)
+    2. [Bucketing](#bucketing)
+
 <!--END TOC-->
 
-## Docker <a name="toc-sub-tag-0"></a>
+## Docker
 The [Docker Hub](https://hub.docker.com/_/mongo/) contains all sorts of relevant information; for the simplest case, the one-liner
 ```bash
 docker run --rm \ # delete after use
@@ -25,23 +27,23 @@ docker run --rm \ # delete after use
   mongo
 ```
 
-### Web GUI with `mongo-express` <a name="toc-sub-tag-1"></a>
+### Web GUI with `mongo-express`
 [Mongo-Express](https://github.com/mongo-express/mongo-express)
 
-## Mongo tools <a name="toc-sub-tag-2"></a>
+## Mongo tools
 Tools to make life easier with Mongo.
 
-### Compass <a name="toc-sub-tag-3"></a>
+### Compass
 Link to [compass](https://www.mongodb.com/try/download/compass)
 
-### Atlas <a name="toc-sub-tag-4"></a>
+### Atlas
 All-in-one cloud storage solution, with a minimal version of compass.
 
 Free for up to 512 MB of storage, and hosted through AWS for geographic redundancy.
 
 [Link to Atlas](https://www.mongodb.com/cloud/atlas).
 
-## Storage paradigms <a name="toc-sub-tag-5"></a>
+## Storage paradigms
 
 Useful talks related to properly organising and planning mongo databases:
 
@@ -50,7 +52,7 @@ Useful talks related to properly organising and planning mongo databases:
 Covers everything you really need to know in getting started with Mongo and related paradigms.
 
 
-### Schema versioning <a name="toc-sub-tag-6"></a>
+### Schema versioning
 As the data may evolve with the application lifetime, it is a good practice to include a `schema` version in the document, so that different schemas may be processed differently.
 
 Consider a model storing contact information
@@ -86,7 +88,7 @@ The way we contact an individual may evolve, and require new or different inform
 By including the `schema_version`, our processing code can dispatch how the information is to be used depending on the schema provided; this way old and new data can coexist without compromising normalization.
 
 
-### Bucketing <a name="toc-sub-tag-7"></a>
+### Bucketing
 Data that shares a degree of similarity *could be* bucketed together into documents.
 
 The example from Genkina's talk related to IoT measurements; instead of having a single document per measurements, one may anticipate the use case of the data. For example, since we may wish to calculate time series averages, or similar, another way of organising the data is into buckets:

@@ -1,4 +1,15 @@
 # Using SWIG with NodeJS
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Caution](#caution)
+2. [Example](#example)
+3. [Resources](#resources)
+
+<!--END TOC-->
+
+## Caution
+
 Complete documentation is available on the [SWIG website](http://swig.org/Doc4.0/Javascript.html) (at time of writing, using SWIG 4.0.2), however I am adding notes for the current state and most likely the anticipated future state of using SWIG with NodeJS: **versions are very important**.
 
 Any familiarity with SWIG lends itself to Javascript perfectly, and indeed if using Javascript Core

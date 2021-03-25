@@ -1,20 +1,27 @@
 # Configuring a Raspberry Pi from fresh install
+
 I recently bought a new SD card for my years-old pi, and wanted to reformat and configure the thing properly. I first attempted to copy the existing OS onto the disk, and then expand the partition but apparently NOOBS prevents this from being a straight forward task. Even attempts using `fdisk` just seemed to fragment the partitions, so instead I just created a fresh install. Here are my notes for how I achieved this.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Formatting an SD card for Raspbian](#toc-sub-tag-0)
-	1. [OSX: using `diskutil`](#toc-sub-tag-1)
-2. [Backing up disk images](#toc-sub-tag-2)
-3. [Some quality of life tips](#toc-sub-tag-3)
-	1. [Setting an SSH banner](#toc-sub-tag-4)
-	2. [Changing the hostname](#toc-sub-tag-5)
+1. [Formatting an SD card for Raspbian](#formatting-an-sd-card-for-raspbian)
+    1. [OSX: using `diskutil`](#osx:-using-diskutil)
+2. [Backing up disk images](#backing-up-disk-images)
+3. [Some quality of life tips](#some-quality-of-life-tips)
+    1. [Getting Docker](#getting-docker)
+    2. [Enabling WiFi before boot](#enabling-wifi-before-boot)
+    3. [Enabling WiFi after boot](#enabling-wifi-after-boot)
+    4. [SSH enable in headless mode](#ssh-enable-in-headless-mode)
+    5. [Setting an SSH banner](#setting-an-ssh-banner)
+    6. [Changing the hostname](#changing-the-hostname)
+    7. [Disabling unneeded hardware](#disabling-unneeded-hardware)
+
 <!--END TOC-->
 
-## Formatting an SD card for Raspbian <a name="toc-sub-tag-0"></a>
+## Formatting an SD card for Raspbian
 If the SD card is >32 GB, it can be necessary to use a special formatting tool; the pi can only use FAT8, FAT16 or FAT32 file formats (OSX: that's MS-DOS, **not** ExDOS). Since I mainly work on OSX, the following guide will follow the steps for my OS (I may write up guides for other OSs later).
 
-### OSX: using `diskutil` <a name="toc-sub-tag-1"></a>
+### OSX: using `diskutil`
 After plugging in the desired SD card to use in the Raspberry Pi, we need to identify the device associated
 ```bash
 diskutil list
@@ -59,13 +66,13 @@ where `pid` is the process ID of `dd`.
 
 Once this copy has completed, the SD card is ready to be used with the Pi.
 
-## Backing up disk images <a name="toc-sub-tag-2"></a>
+## Backing up disk images
 If you want to create a disk image from a given SD card, once you have identified the associated device, doing so is trivial
 ```
 sudo dd if=/dev/diskID of=DISK_IMAGE_NAME.img
 ```
 
-## Some quality of life tips <a name="toc-sub-tag-3"></a>
+## Some quality of life tips
 I like to have my Pi's feel different from other machines, so I tend to tweak the same settings over and over; here are my notes for how I do that.
 
 ### Getting Docker
@@ -110,7 +117,7 @@ touch Volumes/boot/ssh
 ```
 and then (re)boot the device.
 
-### Setting an SSH banner <a name="toc-sub-tag-4"></a>
+### Setting an SSH banner
 The 'standard' banner file (though you can create your own anywhere, just ensure read priveledges) is `/etc/issue.net`; paste whatever you want your banner to be in this file. Then we just need to configure the SSH server to present the banner -- to do this, edit
 ```
 /etc/ssh/sshd_config
@@ -121,7 +128,7 @@ Banner /etc/issue.net
 ```
 changing the file path to the relevant file for you.
 
-### Changing the hostname <a name="toc-sub-tag-5"></a>
+### Changing the hostname
 The hostname is located in a few different locations, so we want to edit the files
 ```
 /etc/hostname

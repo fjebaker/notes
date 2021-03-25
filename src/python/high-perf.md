@@ -1,26 +1,29 @@
 # High performance Python techniques and paradigms
+
 Python is a language that I find is easy to learn, but difficult to master. These notes are part of my ongoing task of becoming as proficient at this language as I can.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Advanced collections](#toc-sub-tag-0)
-	1. [`collections.ChainMap`](#toc-sub-tag-1)
-	2. [`collections.Counter`](#toc-sub-tag-2)
-	3. [`collections.deque`](#toc-sub-tag-3)
-	4. [`collections.defaultdict`](#toc-sub-tag-4)
-	5. [`collections.namedtuple`](#toc-sub-tag-5)
-	6. [`collections.enum`](#toc-sub-tag-6)
-	7. [`collections.OrderedDict`](#toc-sub-tag-7)
-	8. [`heapq`](#toc-sub-tag-8)
-	9. [`bisect`](#toc-sub-tag-9)
-2. [Some notes on comprehensions](#toc-sub-tag-10)
-3. [Some peculiarities of lambda functions](#toc-sub-tag-11)
+1. [Advanced collections](#advanced-collections)
+    1. [`collections.ChainMap`](#collections-chainmap)
+    2. [`collections.Counter`](#collections-counter)
+    3. [`collections.deque`](#collections-deque)
+    4. [`collections.defaultdict`](#collections-defaultdict)
+    5. [`collections.namedtuple`](#collections-namedtuple)
+    6. [`collections.enum`](#collections-enum)
+    7. [`collections.OrderedDict`](#collections-ordereddict)
+    8. [`heapq`](#heapq)
+    9. [`bisect`](#bisect)
+2. [Some notes on comprehensions](#some-notes-on-comprehensions)
+3. [Some peculiarities of lambda functions](#some-peculiarities-of-lambda-functions)
+4. [Using `itertools`](#using-itertools)
+
 <!--END TOC-->
 
-## Advanced collections <a name="toc-sub-tag-0"></a>
+## Advanced collections
 Beyond lists, tuples and dicts, python also has several other built-in collections with their own uses and applications.
 
-### `collections.ChainMap` <a name="toc-sub-tag-1"></a>
+### `collections.ChainMap`
 Useful for combining multiple dictionary mappings. When searching for a variable in the current scope, python first searches `locals()`, then `globals()`, and finally `builtins`. Commonly, the search pattern could be implemented
 ```python
 import builtins
@@ -43,7 +46,7 @@ mappings = collections.ChainMap(globals(), locals(), vars(builtins))
 value = mappings[key]
 ```
 
-### `collections.Counter` <a name="toc-sub-tag-2"></a>
+### `collections.Counter`
 The `Counter` is an excellent way of keeping track of the occurrences of an element
 ```python
 import collections
@@ -86,7 +89,7 @@ print_counter('eggs + spam:', eggs + spam)
 print_counter('eggs | spam:', eggs | spam)
 # eggs | spam: aeggmps
 ```
-### `collections.deque` <a name="toc-sub-tag-3"></a>
+### `collections.deque`
 Double Ended Queue, or `deque`, is a very low-level collection, equivalent to a double linked list; every item in the list points to the next and the previous, with the list reference pointing to both the first and last elements. Thus, adding and subtracting elements from either side of the `deque` is an O(1) operation
 ```python
 import collections
@@ -117,7 +120,7 @@ for i in range(5):
 ```
 The threading `queue.Queue` wraps a `deque` but implements locks and checks to make it threadsafe. Similar, `asyncio.Queue` is specialized for asynchronous use, and `multiprocessing.Queue` for multiprocess operations (which I will write notes for later).
 
-### `collections.defaultdict` <a name="toc-sub-tag-4"></a>
+### `collections.defaultdict`
 To put it simply, a `defaultdict` is a dictionary with a default value. The benefit of such an item prevents having to check if a key exists before accessing it, and has great application in implementing in-memory databases. As an illustration, consider a graph structure
 ```python
 nodes = [
@@ -191,7 +194,7 @@ print(json.dumps(colours, sort_keys=True, indent=4))
 ```
 Such a data structure is able to generate itself recursively.
 
-### `collections.namedtuple` <a name="toc-sub-tag-5"></a>
+### `collections.namedtuple`
 This collection is essentially a tuple with field names; it lends itself to describing coordinates well
 ```python
 import collections
@@ -211,7 +214,7 @@ print(point_a.x == point_a[0])
 # True
 ```
 
-### `collections.enum` <a name="toc-sub-tag-6"></a>
+### `collections.enum`
 Essentially a Python implementation of Clang familiar `enum`, allowing constants without magic numbers. For example
 ```python
 import enum
@@ -258,7 +261,7 @@ class Derived(str, enum.Enum):
 print(Derived.PROP == 'prop')	# True
 ```
 
-### `collections.OrderedDict` <a name="toc-sub-tag-7"></a>
+### `collections.OrderedDict`
 To put simply, a dictionary where the insertion order is important. By contrast, `dict` will return keys in the order of hash, whereas `OrderedDict` returns the keys in order of insertion
 ```python
 import collections
@@ -274,7 +277,7 @@ print(collections.OrderedDict(sorted(spam.items())))
 ```
 It is implemented by a `dict` in combination with a doubly linked list for keeping track of the order. Another `dict` is used to keep track of reverse relation. Within this, `set` and `get` are O(1) but the object requires more memory than conventional dictionaries, and as such don't scale very efficiently.
 
-### `heapq` <a name="toc-sub-tag-8"></a>
+### `heapq`
 Essentially an ordered list, and very useful for creating priority queues, able to make the smallest (or largest) item in the list easily obtainable
 ```python
 import heapq
@@ -298,7 +301,7 @@ while heap:
 # 7 []
 ```
 
-### `bisect` <a name="toc-sub-tag-9"></a>
+### `bisect`
 A sorted list; where `heapq` makes obtaining the smallest (or largest) item easy, `bisect` inserts items so that the overall list stays sorted. As such, finding in `bisect` is fast, whereas adding and removing in `heapq` is fast. Adding new elements to a `bisect` is an O(n) operation, and creating a sorted list using bisect takes O(n^2), compared to e.g. `heapq` with O(n log(n)). The primary use of `bisect` is then to extend an already ordered structure, as opposed to creating a new one
 ```python
 import bisect
@@ -339,7 +342,7 @@ contains(sorted_list, 4)	# False
 ```
 The implementation details for such a search is a binary search algorithm.
 
-## Some notes on comprehensions <a name="toc-sub-tag-10"></a>
+## Some notes on comprehensions
 Pythonic list and dictionary comprehension are powerful ways of generating complex data structures and algorithms, but at the cost of readability. They are analogous to simple for loops
 ```python
 some_list = []
@@ -390,7 +393,7 @@ Finally, you also have set comprehension
 # {0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 20}
 ```
 
-## Some peculiarities of lambda functions <a name="toc-sub-tag-11"></a>
+## Some peculiarities of lambda functions
 Lambda functions can be nested, such as to provide quick methods for providing callback functions or even decorators. For example
 ```python
 square_result = lambda func: lambda val: func(val)**2

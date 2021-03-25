@@ -1,26 +1,28 @@
 # Using GPUs on Debian
+
 Overview of graphics and shader development on Debian.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Graphics card installation](#toc-sub-tag-0)
-	1. [PCI wattage](#toc-sub-tag-1)
-	2. [nVidia](#toc-sub-tag-2)
-2. [CUDA and cuDNN](#toc-sub-tag-3)
-3. [Troubleshooting](#toc-sub-tag-4)
+1. [Graphics card installation](#graphics-card-installation)
+    1. [PCI wattage](#pci-wattage)
+    2. [nVidia](#nvidia)
+2. [CUDA and cuDNN](#cuda-and-cudnn)
+3. [Troubleshooting](#troubleshooting)
+
 <!--END TOC-->
 
-## Graphics card installation <a name="toc-sub-tag-0"></a>
+## Graphics card installation
 The official [Debian wiki](https://wiki.debian.org/GraphicsCard) has a great overview of graphic driver installations depending on the hardware you are using.
 
-### PCI wattage <a name="toc-sub-tag-1"></a>
+### PCI wattage
 The power ratings of graphics cards is discussed in detail on [the graphics card hub](https://graphicscardhub.com/graphics-card-pcie-power-connectors/). In brief
 
 - PCI provides 75 watts
 - 8-pin connector 150 watts 
 - 6-pin connector 75 watts
 
-### nVidia <a name="toc-sub-tag-2"></a>
+### nVidia
 List of compatible hardware is [here](http://us.download.nvidia.com/XFree86/Linux-x86_64/440.100/README/supportedchips.html).
 The [nVidia installation](https://wiki.debian.org/NvidiaGraphicsDrivers#CUDA) follows the following process:
 
@@ -48,7 +50,7 @@ sudo apt update && sudo apt install -t buster-backports nvidia-driver
 ```
 This performs upstream device detection to fetch the correct driver for your card. Finally, **reboot your system**to complete the installation.
 
-## CUDA and cuDNN <a name="toc-sub-tag-3"></a>
+## CUDA and cuDNN
 Installing CUDA is directed in the [wiki](https://wiki.debian.org/NvidiaGraphicsDrivers#CUDA). In short, we can install CUDA 10 with backports
 ```bash
 sudo apt -t buster-backports install nvidia-cuda-dev nvidia-cuda-toolkit
@@ -60,7 +62,7 @@ For cuDNN, we need to create a development account on the [nVidia website](https
 The full installation process is documented [on the nVidia site](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#overview).
 
 
-## Troubleshooting <a name="toc-sub-tag-4"></a>
+## Troubleshooting
 When installing the `nvidia-driver`, I encountered this issue
 ```bash
 sudo apt install -t buster-backports nvidia-driver

@@ -1,3 +1,4 @@
+
 # Using NGiNX with Docker
 In my use case, I had several VerneMQ Docker imagees running as a cluster, and wanted to use [NGiNX as a load balancer](https://www.nginx.com/blog/nginx-plus-iot-load-balancing-mqtt/) and client authentication server to seperate having to configure SSL certificates on every VerneMQ image.
 
@@ -8,6 +9,14 @@ docker run --name mqtt-nginx -d -p 8080:80 -p 1883:1883 nginx
 which can be quickly validated by visitng localhost:8080 in a web browser.
 
 All of my experience so far has been with the free community edition of NGiNX.
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [NGiNX as a Load Balancer](#nginx-as-a-load-balancer)
+    1. [Configuration](#configuration)
+    2. [Verifying](#verifying)
+
+<!--END TOC-->
 
 ## NGiNX as a Load Balancer
 The first task is to get NGiNX to distribute traffic amongst the different VerneMQ containers.

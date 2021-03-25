@@ -1,4 +1,5 @@
 # Making a project available on pypi
+
 The Python Package Index (pypi) is one of the most straight forward to use package managers; distributing your project on pypi makes it easy for anyone to use.
 
 We need `setuptools` and `wheel` to create the distribution, and `twine` to upload to the package index. First ensure you have them installed, and are using the latest versions
@@ -9,6 +10,13 @@ pip install --upgrade twine
 ```
 
 `wheel` and `egg` are both packaging formats; `wheel` is the 'new' format and considered the standard. You can read more about the two formats [here](https://packaging.python.org/discussions/wheel-vs-egg/).
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Configuring the project](#configuring-the-project)
+2. [Uploading to pypi](#uploading-to-pypi)
+
+<!--END TOC-->
 
 ## Configuring the project
 We need to correctly describe and package our project in order to comply with the pypi format. To do this, we create a `setup.py` in the root of the project directory. In this file, we configure

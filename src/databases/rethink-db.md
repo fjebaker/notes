@@ -1,4 +1,5 @@
 # RethinkDB
+
 RethinkDB is a JSON store, real-time database, optimized for continuously updating queries when new data is available. As such, it is fantastic for monitoring purposes, interactive data, marketplaces, streaming, and web delivery. As described in their [FAQ](https://rethinkdb.com/faq):
 
 > instead of polling for changes, the developer can tell RethinkDB to continuously push updated query results to applications in realtime
@@ -7,24 +8,25 @@ The query language is derivative of NoSQL.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Overview](#toc-sub-tag-0)
-	1. [Data storage format](#toc-sub-tag-1)
-2. [RethinkDB with Docker](#toc-sub-tag-2)
-3. [ReQL Query Language](#toc-sub-tag-3)
-	1. [Examples](#toc-sub-tag-4)
-		1. [Functional](#toc-sub-tag-5)
-		2. [Composable](#toc-sub-tag-6)
-		3. [Subqueries](#toc-sub-tag-7)
-		4. [Expressions](#toc-sub-tag-8)
-		5. [Regex](#toc-sub-tag-9)
-	2. [Connection](#toc-sub-tag-10)
-	3. [More involved concepts](#toc-sub-tag-11)
-4. [Geospatial use and geoemtry](#toc-sub-tag-12)
-	1. [Data types](#toc-sub-tag-13)
-5. [Users and permissions](#toc-sub-tag-14)
+1. [Overview](#overview)
+    1. [Data storage format](#data-storage-format)
+2. [RethinkDB with Docker](#rethinkdb-with-docker)
+3. [ReQL Query Language](#reql-query-language)
+    1. [Examples](#examples)
+        1. [Functional](#functional)
+        2. [Composable](#composable)
+        3. [Subqueries](#subqueries)
+        4. [Expressions](#expressions)
+        5. [Regex](#regex)
+    2. [Connection](#connection)
+    3. [More involved concepts](#more-involved-concepts)
+4. [Geospatial use and geoemtry](#geospatial-use-and-geoemtry)
+    1. [Data types](#data-types)
+5. [Users and permissions](#users-and-permissions)
+
 <!--END TOC-->
 
-## Overview <a name="toc-sub-tag-0"></a>
+## Overview
 Languages supported
 
 - [JavaScript](https://rethinkdb.com/api/javascript/)
@@ -34,10 +36,10 @@ Languages supported
 
 Client drivers connect to **port 28015**. Web UI present on **port 8080**.
 
-### Data storage format <a name="toc-sub-tag-1"></a>
+### Data storage format
 By default, RethinkDB uses `id` as the attribute for primary keys, which is auto-incremented.
 
-## RethinkDB with Docker <a name="toc-sub-tag-2"></a>
+## RethinkDB with Docker
 Pull the latest image from the docker hub with 
 ```bash
 docker pull rethinkdb
@@ -56,11 +58,11 @@ docker run \
 ```
 You can then connect to [`http://localhost:8080/`](http://localhost:8080/) to access the UI and admin features.
 
-## ReQL Query Language <a name="toc-sub-tag-3"></a>
+## ReQL Query Language
 The [RethinkDB Query Language](https://rethinkdb.com/docs/introduction-to-reql/) is described to differ from other NoSQL languages in the sense that is embedded into a programming language. All queries are **simply constructed**, they are **chainable** and they execute **on the server**. 
 
 
-### Examples <a name="toc-sub-tag-4"></a>
+### Examples
 In the following section, I will include Python examples:
 
 ```py
@@ -84,7 +86,7 @@ distinct_lastnames_query = r.table('songs').pluck('artist').distinct()
 distinct_lastnames_query.run(conn)
 ```
 
-#### Functional <a name="toc-sub-tag-5"></a>
+#### Functional
 Queries may also be functional, such as
 ```py
 r.table('songs').filter(lambda song: song['duration'] > 60).run(conn)
@@ -96,7 +98,7 @@ r.table('songs').filter(lambda song:
     r.branch(song['duration'] > 60, True, False)).run(conn)
 ```
 
-#### Composable <a name="toc-sub-tag-6"></a>
+#### Composable
 ReQL queries are composable, in the sense that multiple may be combined, and JS code executed
 
 > RethinkDB supports server-side JavaScript evaluation using the embedded V8 engine (sandboxed within outside processes, of course):
@@ -110,7 +112,7 @@ would evaluate the JS expression `1 + 1` server side. As such, the functional sy
 ```py
 r.table('songs').filter(r.js('(function (song) { return song.duration > 60; })')).run(conn)
 ```
-#### Subqueries <a name="toc-sub-tag-7"></a>
+#### Subqueries
 Subqueries are also supported, such as a query to select all songs from artists who are in the `history` table:
 ```py
 r.table('songs').filter(lambda song:
@@ -119,7 +121,7 @@ r.table('songs').filter(lambda song:
 ```
 This allows for very complex queries to be easily constructed.
 
-#### Expressions <a name="toc-sub-tag-8"></a>
+#### Expressions
 Expressions are also supported. Here is a query which will search the `songs` table for all songs with more up-votes than down-votes, and subsequently increase the rating of the song by 1:
 ```py
 r.table('songs').filter(lambda song: song['upvotes'] - user['downvotes'] > 0)
@@ -127,7 +129,7 @@ r.table('songs').filter(lambda song: song['upvotes'] - user['downvotes'] > 0)
 ```
 For more, see the full [Python API reference](https://rethinkdb.com/api/python/).
 
-#### Regex <a name="toc-sub-tag-9"></a>
+#### Regex
 You can [use regex in queries](https://rethinkdb.com/api/python/match) by using a `.match()` function call in the lambda:
 ```py
 r.table('songs').filter(lambda song:
@@ -135,17 +137,17 @@ r.table('songs').filter(lambda song:
 ).run(conn)
 ```
 
-### Connection <a name="toc-sub-tag-10"></a>
+### Connection
 For exploratory and interactive purposes, when creating a connection you can also call `.repl()` to ensure the connection is kept alive, and to avoid calling `.run(conn)` at the end of each query. See [this section of the documentation](https://rethinkdb.com/api/python/repl/).
 
-### More involved concepts <a name="toc-sub-tag-11"></a>
+### More involved concepts
 Notes for the future on
 
 - using [map-reduce](https://rethinkdb.com/docs/map-reduce/)
 - [table joins](https://rethinkdb.com/docs/table-joins/)
 - more on [lambda functions](https://rethinkdb.com/blog/lambda-functions/)
 
-## Geospatial use and geoemtry <a name="toc-sub-tag-12"></a>
+## Geospatial use and geoemtry
 Adapted mainly from information in the [JS API on geospatial queries](https://rethinkdb.com/docs/geo-support/javascript/).
 
 RethinkDB has native support for handling geometric data. Geoemtry objects are points mapped onto a sphere. Distances are calculated by RethinkDB as geodesics on a sphere. The data is by default interpreted as **latitude and longitude** (reverse order from e.g. Google maps) points:
@@ -185,12 +187,12 @@ var point = r.point(-3.651051, 51.0234467);  // Stonehenge
 r.table('map').getNearest(point, {index: 'location'})
 ```
 
-### Data types <a name="toc-sub-tag-13"></a>
+### Data types
 The data types supported for geospatial queries are
 - points
 - lines
 - polygons (i.e. at least three points)
 
 
-## Users and permissions <a name="toc-sub-tag-14"></a>
+## Users and permissions
 [link to docs](https://rethinkdb.com/docs/permissions-and-accounts/)

@@ -1,21 +1,23 @@
 # OpenSSL Cookbook
+
 OpenSSL is a very comprehensive and complete command line tool, which I started using during my IoT learning. I will document here, the commands that I find particularly useful.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Becoming a Certificate Authority](#toc-sub-tag-0)
-	1. [Preparing the environment](#toc-sub-tag-1)
-	2. [Creating the Root key and certificate](#toc-sub-tag-2)
-2. [Starting an SSL/TLS Server](#toc-sub-tag-3)
-3. [Accessing an SSL/TLS server](#toc-sub-tag-4)
+1. [Becoming a Certificate Authority](#becoming-a-certificate-authority)
+    1. [Preparing the environment](#preparing-the-environment)
+    2. [Creating the Root key and certificate](#creating-the-root-key-and-certificate)
+2. [Starting an SSL/TLS Server](#starting-an-ssl/tls-server)
+3. [Accessing an SSL/TLS server](#accessing-an-ssl/tls-server)
+
 <!--END TOC-->
 
 A small note; all the private directories and files (mainly keys) should be `chmod 400`, though I leave this out as it becomes tedious to include everywhere.
 
-## Becoming a Certificate Authority <a name="toc-sub-tag-0"></a>
+## Becoming a Certificate Authority
 Following [this guide](https://jamielinux.com/docs/openssl-certificate-authority/create-the-root-pair.html), becoming a CA with OpenSSL is very straight forward. It notes that the root key should only be used to create new CAs, which sign on behalf of the root -- the root should be used as rarely as possible.
 
-### Preparing the environment <a name="toc-sub-tag-1"></a>
+### Preparing the environment
 We will organise our environment as
 ```bash
 mkdir certs crl newcerts private  \
@@ -109,7 +111,7 @@ The remaining sections specify different flags when signing certificates, such a
 
 The full configuration file is available [in my notes](https://github.com/Dustpancake/Dust-Notes/blob/master/security/openssl.cnf).
 
-### Creating the Root key and certificate <a name="toc-sub-tag-2"></a>
+### Creating the Root key and certificate
 The root key (private) and root certificate (public) can be created with a passphrase; in the root directory, run
 ```bash
 openssl genrsa -aes256 -out private/ca.key.pem 4096
@@ -129,14 +131,14 @@ openssl x509 -noout -text -in certs/ca.cert.pem
 ```
 which will print the signature algorithm used, the validity dates, the public key length, the issuer and the subject, which in our case will be identical, since this is self signed.
 
-## Starting an SSL/TLS Server <a name="toc-sub-tag-3"></a>
+## Starting an SSL/TLS Server
 Using the directory configuration from the previous section on becoming a CA, we can start an OpenSSL server using just the root key and certificate
 ```
 openssl s_server -key private/ca.key.pem  -cert certs/ca.cert.pem -accept 4433 -www
 ```
 now listening on 4433. Visit [locahost:4433](https://localhost:4433) to see the response from the server.
 
-## Accessing an SSL/TLS server <a name="toc-sub-tag-4"></a>
+## Accessing an SSL/TLS server
 We can access any server with 
 ```
 openssl s_client -connect localhost:4433

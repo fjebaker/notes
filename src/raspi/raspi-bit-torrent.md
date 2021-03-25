@@ -2,14 +2,19 @@
 
 The method for configuring the raspi as a torrenting node over vpn is based off of a 'trial and error' approach. It necessitates the use of `openvpn`, requiring itself valid `.ovpn` configuration files, which may require a premium service (successfully tested with NordVPN).
 
+<!--BEGIN TOC-->
 ## Table of Contents
-1. [Configuring OpenVPN](#configuring-openvpn)
-2. [Configuring Transmission](#configuring-transmission)
-3. [`elinks` for browsing torrent databases](#elink-config)
-4. [Allowing SSH behind OpenVPN](#ssh-config)
-5. [Useful scripts](#useful-scripts)
+1. [Installing pre-requisites](#installing-pre-requisites)
+2. [Configuring OpenVPN](#configuring-openvpn)
+3. [Configuring Transmission](#configuring-transmission)
+4. [`elinks` for browsing torrent databases](#elinks-for-browsing-torrent-databases)
+5. [Allowing SSH behind OpenVPN](#allowing-ssh-behind-openvpn)
+    1. [Configure firewall on startup](#configure-firewall-on-startup)
+6. [Useful scripts](#useful-scripts)
 
-#### Installing pre-requisites
+<!--END TOC-->
+
+## Installing pre-requisites
 All of the prerequisites are installed with
 ```bash
 sudo apt-get update
@@ -18,7 +23,7 @@ sudo apt-get install openvpn transmission-daemon transmission-common transmissio
 sudo apt-get install elinks
 ```
 
-### Configuring OpenVPN <a name="configuring-openvpn"></a>
+## Configuring OpenVPN
 We configure `openvpn` first, by editing/creating `/etc/openvpn/client.conf`, from some template `.ovpn` file provided by the VPN server. The starup routine of OpenVPN will configure the VPN according to this file, which often means a little editing is required, namely including `auth-user-pass` as
 ```
 # ...
@@ -74,7 +79,7 @@ pi@eidolon:~ $ curl ipinfo.io
 ```
 Something I've noticed with the automated start of OpenVPN is that having multiple `.conf` files in `/etc/openvpn/` can cause some anomalous behaviour, especially on more recent versions of linux, including a highly annoying systemd password manager writing to `Wall` sporadically; make sure you only have **one** in the directory!
 
-### Configuring Transmission <a name="configuring-transmission"></a>
+## Configuring Transmission
 The configuration settings for the transmission daemon can be found in `/etc/transmission-daemon/settings.json`. Lines of importance are
 ```
 {
@@ -122,7 +127,7 @@ NB: removing all torrents only removes their index from the daemon; the download
 
 With this you're now all set to start torrenting securely over a VPN.
 
-### `elinks` for browsing torrent databases <a name="elink-config"></a>
+## `elinks` for browsing torrent databases
 You'll be able to access websites normally blocked by your ISP just by using `elinks` through the VPN, but to make torrenting a little easier it's worth creating a script for passing magnet URIs directly to transmission with a keybinding.
 
 To do so, we create a bash script e.g. `~/scripts/magnet`, with contents
@@ -142,7 +147,7 @@ save, and then close. Press `k` to open up keybindings, and now under `Main mapp
 
 You're now all set to automatically add magnet URIs to transmission without having to leave the browser, by hovering over a magnet URI and pressing your key binding (`p`).
 
-### Allowing SSH behind OpenVPN <a name="ssh-config"></a>
+## Allowing SSH behind OpenVPN
 If you want remote (i.e. not LAN) access to the raspi, you'll have to reroute network traffic correctly, such that external traffic coming to the `eth0` interface is correctly rerouted back through `eth0`. If this isn't done, the pi tries to send back responses across `tun0`, since OpenVPN completely reconfigures the pi's networking when active.
 
 The fix for this is a little hacky, but it works well enough. Barebones, all that is required is a script
@@ -184,7 +189,7 @@ If the OpenVPN service was already started (which it probably was), the last che
 
 If you port forward on your home router now to the raspi, you'll have remote access.
 
-#### Configure firewall on startup
+### Configure firewall on startup
 I tried making this script run in `/etc/network/if-pre-up.d/` and `/etc/network/if-up.d/` but it was unable to correctly configure before OpenVPN spawns its service, so required one manual stop/start of the VPN before remote connection was allowed.
 
 The solution I settled on was to create a `systemd` service, by creating the file `/etc/systemd/system/firewall-config.service`, with the following content
@@ -210,7 +215,7 @@ to ensure the service is executed on startup.
 If you followed to here, just reboot and your raspi is all set and ready.
 
 
-### Useful scripts <a name="useful-scripts"></a>
+## Useful scripts
 This is specifically for the NordVPN `.ovpn` configuration files for `tcp` VPN. To make changing country a little bit easier, without leaving the transmission daemon torrenting in the background, I created this little script as `~/scripts/cvpn`:
 ```
 #!/bin/bash

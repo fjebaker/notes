@@ -3,20 +3,21 @@ The MQTT Protocol Packet structure is discussed [elsewhere](http://www.steves-in
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [The Message Structure](#toc-sub-tag-0)
-	1. [Control Header](#toc-sub-tag-1)
-		1. [Message Type](#toc-sub-tag-2)
-		2. [Header Flags](#toc-sub-tag-3)
-	2. [Remaining Length](#toc-sub-tag-4)
-	3. [Type Specific Header](#toc-sub-tag-5)
-		3. [`CONNECT` header](#toc-sub-tag-6)
-2. [Practical Examples](#toc-sub-tag-7)
-	1. [`CONNECT`](#toc-sub-tag-8)
-	2. [`CONNACK`](#toc-sub-tag-9)
+1. [The Message Structure](#the-message-structure)
+    1. [Control Header](#control-header)
+        1. [Message Type](#message-type)
+        2. [Header Flags](#header-flags)
+    2. [Remaining Length](#remaining-length)
+    3. [Type Specific Header](#type-specific-header)
+        1. [`CONNECT`](#connect)
+2. [Practical Examples](#practical-examples)
+    1. [`CONNECT`](#connect)
+    2. [`CONNACK`](#connack)
+
 <!--END TOC-->
 
 
-## The Message Structure <a name="toc-sub-tag-0"></a>
+## The Message Structure
 The overall structure of an MQTT packet is as follows
 
 | Control Header | Remaining Length | Type specific Header | Packet Payload |
@@ -26,7 +27,7 @@ The overall structure of an MQTT packet is as follows
 
 such that the simplest message is a 2 byte control field + 1 byte length, e.g. `CONNACK`.
 
-### Control Header <a name="toc-sub-tag-1"></a>
+### Control Header
 The control header is a single byte, with the first 4 bits representing the *Message Type* and the last 4 bits the *Header Flags*:
 
 <table>
@@ -48,7 +49,7 @@ The control header is a single byte, with the first 4 bits representing the *Mes
   </tr>
 </table>
 
-#### Message Type <a name="toc-sub-tag-2"></a>
+#### Message Type
 I have transcribed a table of message types
 
 | Message Type | Bits | Description |
@@ -71,7 +72,7 @@ I have transcribed a table of message types
 
 Any one of these must be included in the control header.
 
-#### Header Flags <a name="toc-sub-tag-3"></a>
+#### Header Flags
 There are 3 Header flags, namely `DUP`, `QOS`, and `RETAIN`, formatted as
 <table>
   <tr>
@@ -102,7 +103,7 @@ There are 3 Header flags, namely `DUP`, `QOS`, and `RETAIN`, formatted as
 
 `RETAIN` indicates whether the broker will hold the packet until it has been consumed by a subscriber. If it is not set, the broker will not hold the packet.
 
-### Remaining Length <a name="toc-sub-tag-4"></a>
+### Remaining Length
 The packet length, as described in the [official specifications](http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.pdf) is calculated by a variable length encoding scheme, utilizing up to 4 bytes, and indicates the number of bytes remaining in the packet.
 
 The easiest way to understand the variable length encoding scheme is by example; we separate the leading bit as a continuation flag, and so 0-127 can be encoded in the range
@@ -123,10 +124,10 @@ The range >127 requires at least two bytes, and is encoded
 
 With 4 bytes available, up to 268'435'455 can be stored (as the final byte must have the continuation bit turned off, equivalent to around 256M of data.
 
-### Type Specific Header <a name="toc-sub-tag-5"></a>
+### Type Specific Header
 This section may include all sorts of different information, including a packet identifier ([2.3.1 of the specification](http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.pdf)). 
 
-#### `CONNECT` <a name="toc-sub-tag-8"></a> header <a name="toc-sub-tag-6"></a>
+#### `CONNECT`
 My specific interest lies in extracting the client name from the `CONNECT` packet, which does not contain a packet identifier field. Instead, the header contains the protocol name over 6 bytes, including the length of the protocol:
 ```
 00 04   4d 51 54 54		(hex)
@@ -168,7 +169,7 @@ Exactly how each flag may be set is involved, but outlined in section [3.1.2 of 
 The next bytes, unless the Username flag is not set, is a UTF-8 encoded string, with the first two bytes being the string length MSB and LSB.
 
 
-## Practical Examples <a name="toc-sub-tag-7"></a>
+## Practical Examples
 Using Wireshark we can capture and examine MQTT packets.
 
 ### `CONNECT`
@@ -179,7 +180,7 @@ Here is a `CONNECT` packet from a Python client with the client name `python tes
 0020   20 20 20 20 20                                         
 ```
 
-### `CONNACK` <a name="toc-sub-tag-9"></a>
+### `CONNACK`
 And the associated `CONNACK` returned by the broker to the above `CONNECT` packet:
 ```
 0000   20 02 00 00                                        ...
