@@ -23,7 +23,7 @@ Some notes from my first day of learning the Julia language; converted from an i
 7. [*Gotchas* and how to handle them](#*gotchas*-and-how-to-handle-them)
     1. [Gotcha 1: Global scope](#gotcha-1:-global-scope)
         1. [Solution 1: Wrap code in functions](#solution-1:-wrap-code-in-functions)
-        2. [Solution 2: Declare globals as (compile-time) constants](#solution-2:-declare-globals-as-(compile-time)-constants)
+        2. [Solution 2: Declare globals as (compile-time) constants](#solution-2:-declare-globals-as-compile-time-constants)
     2. [Gotcha 2: Type-instabilities](#gotcha-2:-type-instabilities)
         1. [Solution 1: Avoid type changes](#solution-1:-avoid-type-changes)
         2. [Solution 2: Detect issues with `@code_warntype` or `@trace`](#solution-2:-detect-issues-with-@code_warntype-or-@trace)

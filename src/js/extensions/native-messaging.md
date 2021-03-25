@@ -8,7 +8,7 @@ I recently reinstalled my machine without properly backing up custom extensions,
 2. [Solution:](#solution:)
     1. [Layout and Manifest](#layout-and-manifest)
     2. [Creating a message](#creating-a-message)
-    3. [Receiving the message (Python)](#receiving-the-message-(python))
+    3. [Receiving the message (Python)](#receiving-the-message-python)
 3. [Some additional notes](#some-additional-notes)
 
 <!--END TOC-->

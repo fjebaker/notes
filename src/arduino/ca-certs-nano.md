@@ -1,11 +1,12 @@
 # Copying (root) CA certificates onto Arduino devices
+
 Certificate authority (CA) certificates are the basis for secure and trustworthy transport layer security (TLS). Depending on the Arduino library used, the methods for copying these certificates onto the device can vary. Here I document my exploration of this task, using the WiFiNina library, and the [Arduino Nano 33 IoT](https://store.arduino.cc/arduino-nano-33-iot).
 
 Note, there is a discussion as to the security of different WiFi chips, and whether they are SSL/TLS compatible in the [Arduino forums](https://forum.arduino.cc/index.php?topic=679562.0).
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [WiFi(Nina) Toolkit](#wifi(nina)-toolkit)
+1. [WiFi(Nina) Toolkit](#wifi-nina-toolkit)
     1. [Brief discussion of the library state](#brief-discussion-of-the-library-state)
 2. [Using the shipped Toolkit with custom CA certificates](#using-the-shipped-toolkit-with-custom-ca-certificates)
     1. [Wireshark](#wireshark)

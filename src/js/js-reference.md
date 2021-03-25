@@ -17,7 +17,7 @@ Series of notes adapted from different books and blogs so that I can easily refe
     2. [Promises](#promises)
     3. [Combining generators with promises](#combining-generators-with-promises)
 3. [Object orientation and prototypes](#object-orientation-and-prototypes)
-    1. [Inheritance with `.setPrototypeOf()`](#inheritance-with--setprototypeof())
+    1. [Inheritance with `.setPrototypeOf()`](#inheritance-with--setprototypeof)
     2. [Constructors](#constructors)
         1. [Instance prototype properties](#instance-prototype-properties)
         2. [Object typing with constructors](#object-typing-with-constructors)
@@ -27,12 +27,12 @@ Series of notes adapted from different books and blogs so that I can easily refe
     6. [Getters and setters](#getters-and-setters)
     7. [Proxies and access control](#proxies-and-access-control)
 4. [Array methods](#array-methods)
-    1. [`.forEach()`](#-foreach())
-    2. [`.map()`](#-map())
+    1. [`.forEach()`](#foreach)
+    2. [`.map()`](#map)
     3. [Logical checks](#logical-checks)
     4. [Searching](#searching)
     5. [Sorting arrays](#sorting-arrays)
-    6. [`.reduce()`](#-reduce())
+    6. [`.reduce()`](#reduce)
 
 <!--END TOC-->
 
