@@ -6,7 +6,4 @@ I will use this directory as a link and overview, with installation instructions
 
 As always, this repository is a work in progress.
 
-<!--BEGIN TOC-->
-## Table of Contents
 
-<!--END TOC-->

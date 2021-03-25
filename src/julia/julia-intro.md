@@ -12,15 +12,15 @@ Some notes from my first day of learning the Julia language; converted from an i
     1. [Defining a data type](#defining-a-data-type)
     2. [Abstract Interfaces](#abstract-interfaces)
 4. [Benchmarking](#benchmarking)
-    1. [Specializations and speed](#specializations-and-speed)
-        1. [Julia compile-to-run graph](#julia-compile-to-run-graph)
-        2. [Specialization and code inspection](#specialization-and-code-inspection)
-        3. [Estimating the performance gain of specialization](#estimating-the-performance-gain-of-specialization)
-        4. [Using Run-time effectively](#using-run-time-effectively)
-5. [Generic programming](#generic-programming)
+5. [Specializations and speed](#specializations-and-speed)
+    1. [Julia compile-to-run graph](#julia-compile-to-run-graph)
+    2. [Specialization and code inspection](#specialization-and-code-inspection)
+    3. [Estimating the performance gain of specialization](#estimating-the-performance-gain-of-specialization)
+    4. [Using Run-time effectively](#using-run-time-effectively)
+6. [Generic programming](#generic-programming)
     1. [Generic Programming with Multiple Dispatch and JIT](#generic-programming-with-multiple-dispatch-and-jit)
     2. [Example: DifferentialEquations.jl](#example:-differentialequations-jl)
-6. [*Gotchas* and how to handle them](#*gotchas*-and-how-to-handle-them)
+7. [*Gotchas* and how to handle them](#*gotchas*-and-how-to-handle-them)
     1. [Gotcha 1: Global scope](#gotcha-1:-global-scope)
         1. [Solution 1: Wrap code in functions](#solution-1:-wrap-code-in-functions)
         2. [Solution 2: Declare globals as (compile-time) constants](#solution-2:-declare-globals-as-(compile-time)-constants)
@@ -30,16 +30,16 @@ Some notes from my first day of learning the Julia language; converted from an i
         3. [Solution 3: C/Fortran type specifications](#solution-3:-c/fortran-type-specifications)
         4. [Solution 4: Function barriers](#solution-4:-function-barriers)
     3. [Gotcha 3: Views and copies](#gotcha-3:-views-and-copies)
-    4. [Examples](#examples)
-        1. [Gotcha 4: Temporary allocations and vectorized code](#gotcha-4:-temporary-allocations-and-vectorized-code)
-            1. [Solution: More dots and explicit code](#solution:-more-dots-and-explicit-code)
-        2. [Gotcha 5: Abstract fields](#gotcha-5:-abstract-fields)
-        3. [Gotcha 6: Writing to global scope](#gotcha-6:-writing-to-global-scope)
-        4. [Gotcha 7: Column major order](#gotcha-7:-column-major-order)
-            1. [**NB**: put the fastest varying index first!](#**nb**:-put-the-fastest-varying-index-first!)
-        5. [Gotcha 8: Lazy operations](#gotcha-8:-lazy-operations)
-    5. [Examples](#examples)
-        1. [Extra: Generators and comprehension.](#extra:-generators-and-comprehension-)
+8. [Examples](#examples)
+    1. [Gotcha 4: Temporary allocations and vectorized code](#gotcha-4:-temporary-allocations-and-vectorized-code)
+        1. [Solution: More dots and explicit code](#solution:-more-dots-and-explicit-code)
+    2. [Gotcha 5: Abstract fields](#gotcha-5:-abstract-fields)
+    3. [Gotcha 6: Writing to global scope](#gotcha-6:-writing-to-global-scope)
+    4. [Gotcha 7: Column major order](#gotcha-7:-column-major-order)
+        1. [**NB**: put the fastest varying index first!](#**nb**:-put-the-fastest-varying-index-first!)
+    5. [Gotcha 8: Lazy operations](#gotcha-8:-lazy-operations)
+9. [Examples](#examples)
+    1. [Extra: Generators and comprehension.](#extra:-generators-and-comprehension-)
 
 <!--END TOC-->
 
@@ -655,7 +655,7 @@ D = DiagonalMatrix(x)
       19.566 μs (4 allocations: 156.41 KiB)
 
 
-# Specializations and speed
+## Specializations and speed
 Julia *can* be one of the fastest conventional languages (rivaling or nearly outperforming C in certain circumstances). To explore this, let's use the example case of a [Vandermonde matrix](https://en.wikipedia.org/wiki/Vandermonde_matrix). We'll begin with comparisons to the Python implementation, and the numpy C-backended library:
 
 
@@ -2013,7 +2013,7 @@ Convert every array-slicing operation in the given expression (which may be a `b
     The `@views` macro only affects `array[...]` expressions that appear explicitly in the given `expression`, not array slicing that occurs in functions called by that code.
 
 
-# Examples
+## Examples
 
 ```jldoctest
 julia> A = zeros(3, 3);
@@ -2297,7 +2297,7 @@ I
 
 An object of type [`UniformScaling`](@ref), representing an identity matrix of any size.
 
-# Examples
+## Examples
 
 ```jldoctest
 julia> fill(1, (5,6)) * I == fill(1, (5,6))
