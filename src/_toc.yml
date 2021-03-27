@@ -129,7 +129,7 @@
 - part: "Miscellaneous"
   chapters:
     - file: recommended-talks
-    - file: git-reference
+    - file: git/git-reference
     - file: software-design-principles
     - file: ffmpeg-cheatsheet
     - file: iptables-and-firewalls
@@ -137,7 +137,7 @@
     - file: security/openssl-cookbook
     - file: configurations/shell-rc-profiles
     - file: docs/mkdocs-notes
-    - file: gitea/gitea-mariadb
+    - file: git/gitea-mariadb
     - file: visualisation/blender-learning
     - file: java/gradle-cookbook
     - file: automation/mycroft-osx
