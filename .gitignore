@@ -5,7 +5,6 @@
 *.class
 *.c
 *.html
-*.css
 *.node
 *.h
 *.hpp
