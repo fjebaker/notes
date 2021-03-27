@@ -44,6 +44,7 @@
         - file: python/flask/rethink-db-with-flask
         - file: python/flask/jinja-templating
         - file: python/fast-api/using-fast-api
+        - file: python/mkdocs-notes
 
     - file: js/index
       sections:
@@ -113,7 +114,7 @@
         - file: mq-mqtt/mqtt-specs
         - file: mq-mqtt/nginx-load-balancing
 
-- part: "Tools & Plugins"
+- part: "Tools"
   chapters:
     - file: vim/index
       sections:
@@ -126,18 +127,22 @@
         - file: discord/making-bots-python
         - file: discord/discord-music-hook
 
+    - file: git/index
+      sections:
+        - file: git/git-reference
+        - file: git/gitea-mariadb
+
+
 - part: "Miscellaneous"
   chapters:
     - file: recommended-talks
-    - file: git/git-reference
+    
     - file: software-design-principles
     - file: ffmpeg-cheatsheet
     - file: iptables-and-firewalls
     - file: ci-cd/jenkins-recipes
     - file: security/openssl-cookbook
     - file: configurations/shell-rc-profiles
-    - file: docs/mkdocs-notes
-    - file: git/gitea-mariadb
     - file: visualisation/blender-learning
     - file: java/gradle-cookbook
     - file: automation/mycroft-osx
