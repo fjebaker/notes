@@ -3,6 +3,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[scripts]
+build = "jb build"
+clean = "jb clean --all"
+
 [packages]
 jupyter-book = "*"
 
