@@ -4,7 +4,7 @@
 ## Table of Contents
 1. [Overview](#overview)
 2. [Pointers to class members](#pointers-to-class-members)
-3. [Using `std::function`](#using-std::function)
+3. [Using `std::function`](#using-std-function)
     1. [With lambda wrappers](#with-lambda-wrappers)
 
 <!--END TOC-->
