@@ -3,7 +3,7 @@ author: "Fergus Baker"
 logo: "logo.jpg"
 
 google_analytics:
-  mytrackingcode: G-JC6WLVLTT0
+  mytrackingcode: "G-JC6WLVLTT0"
 
 execute:
   execute_notebooks: "off"
@@ -24,3 +24,8 @@ only_build_toc_files: true
 
 latex:
   latex_engine: xelatex
+
+sphinx:
+  config:
+    html_css_files: 
+      - "_static/styles.css"
