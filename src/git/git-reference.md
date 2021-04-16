@@ -5,20 +5,22 @@ As everyone with git, there is a tendency to use the same idioms over and over. 
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [`format-patch`](#format-patch)
-2. [`apply`](#apply)
-3. [`stash`](#stash)
-4. [`rebase`](#rebase)
+2. [`am`](#am)
+3. [`apply`](#apply)
+4. [`stash`](#stash)
+5. [`rebase`](#rebase)
     1. [Changing Author](#changing-author)
     2. [Merging commits with `rebase`](#merging-commits-with-rebase)
-5. [Recipes](#recipes)
-    1. [Reverting to a given commit](#reverting-to-a-given-commit)
-6. [Tagging](#tagging)
-7. [GitHub action recipes](#github-action-recipes)
-8. [Triangular workflow](#triangular-workflow)
-9. [Configuration](#configuration)
+6. [Recipes](#recipes)
+    1. [Adding aliases](#adding-aliases)
+    2. [Reverting to a given commit](#reverting-to-a-given-commit)
+7. [Tagging](#tagging)
+8. [GitHub action recipes](#github-action-recipes)
+9. [Triangular workflow](#triangular-workflow)
+10. [Configuration](#configuration)
     1. [Editor configuration](#editor-configuration)
     2. [Authentication](#authentication)
-10. [Using SSH](#using-ssh)
+11. [Using SSH](#using-ssh)
     1. [Generating keypairs](#generating-keypairs)
     2. [Uploading public keys](#uploading-public-keys)
     3. [Changing repository origin](#changing-repository-origin)
@@ -47,8 +49,16 @@ git format-patch [R1]..[R2]
 
 If the intention is to apply with tools like `git am`, the `-k` flag can be used to keep the subject.
 
+## `am`
+[Applies from mailbox](https://git-scm.com/docs/git-am) patches onto the current tree, e.g.
+```bash
+git am *.patch
+```
+
+In contrast to [`apply`](#apply), `am` adds the commits into the working tree.
+
 ## `apply`
-[Applies](https://git-scm.com/docs/git-apply) patches onto the current tree
+[Applies](https://git-scm.com/docs/git-apply) patches onto the current working directory, but does not add the commits to the tree
 ```bash
 git apply [patchfile]
 ```
@@ -116,6 +126,21 @@ Changes must be *forced* pushed.
 
 ## Recipes
 Solutions to common problems.
+
+### Adding aliases
+You can add an alias to git using the configuration options: for example, a common use case would be to alias the command
+```
+alias.logadog=log --all --decorate --oneline --graph
+```
+which can either be done by adding the above to your git configuration file, or using
+```bash
+git config --add alias.logadog "log --all --decorate --oneline --graph"
+```
+
+To unset aliases, simply remove the line from the config file, or use 
+```bash
+git config --unset alias.[aliasname]
+```
 
 ### Reverting to a given commit
 Reverting a single file (or the whole branch) can be done with `checkout`, see [docs](https://git-scm.com/docs/git-checkout). It may be used
@@ -229,14 +254,14 @@ git config --global user.email "email@addr.com"
 ## Using SSH
 Overview of using SSH for Git(Hub) interaction.
 
-#### Generating keypairs
+### Generating keypairs
 Using the email associated with your Git identity:
 ```bash
 ssh-keygen -t ed25519 -C "your@email.com"
 ```
 You may wish to name this file along the lines of `id_git` so that it's easy to remember what it's for.
 
-#### Uploading public keys
+### Uploading public keys
 - GitHub
 Under Account Settings, SSH and GPG keys, add a new SSH, give it a memorable name, and then copy the contents of 
 ```bash
@@ -244,7 +269,7 @@ Under Account Settings, SSH and GPG keys, add a new SSH, give it a memorable nam
 ```
 i.e. your public key, into the text field and save.
 
-#### Changing repository origin
+### Changing repository origin
 To change your git client to use SSH over HTTP(s), simply change the origin url to the general format
 ```bash
 git remote set-url origin git@github.com:<uname>/<repository>.git
