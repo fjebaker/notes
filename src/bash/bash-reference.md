@@ -1,3 +1,7 @@
+# Bash reference
+
+Reference notes for all things related to the Bourne Again Shell.
+
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [Special variables](#special-variables)
@@ -5,7 +9,6 @@
 2. [IFS](#ifs)
 
 <!--END TOC-->
-# Bash reference
 
 ## Special variables
 Most of these are taken from [an advanced scripting guide](https://tldp.org/LDP/abs/html/internalvariables.html).
