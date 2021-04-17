@@ -13,14 +13,26 @@ Reference notes for all things related to the Bourne Again Shell.
 ## Special variables
 Most of these are taken from [an advanced scripting guide](https://tldp.org/LDP/abs/html/internalvariables.html).
 
-- **`$$`**: process ID, often the same as `$BASHPID`
-- **`$MACHTYPE`**: machine hardware type (i386, x86_64, ...)
+- **`$$`**: process ID, often the same as `$BASHPID`, contextually of the executing script.
+- **`$MACHTYPE`**: machine hardware type (i386, x86_64, ...).
+- **`$_`**: set to the final argument of the previously executed command.
+
+For `$_`, consider
+```bash
+du > /dev/null
+echo $_
+# du
+
+ls -l > /dev/null
+echo $_
+# -l
+```
 
 ### Positional parameters
 Only avaible in function calls
 
-- **`$#`**: the number of arguments passed
-- **`$*`**: all positional parameters as a single word
+- **`$#`**: the number of arguments passed.
+- **`$*`**: all positional parameters as a single word.
 - **`$@`**: `$*` but with each parameter being seen as a seperate word.
 
 
