@@ -1,12 +1,13 @@
 # Bash reference
 
-Reference notes for all things related to the Bourne Again Shell.
+Reference notes for all things related to the Bourne Again Shell, and derivatives.
 
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [Special variables](#special-variables)
     1. [Positional parameters](#positional-parameters)
 2. [IFS](#ifs)
+3. [Useful resources](#useful-resources)
 
 <!--END TOC-->
 
@@ -70,3 +71,10 @@ bash -c 'set a b c d; IFS=":;-"; echo "$*" '
 bash -c 'set a b c d; IFS="-:;"; echo "$*" '
 # a-b-c-d
 ```
+
+
+## Useful resources
+
+Resources for writing bash scripts, and general bash guides:
+
+- Mendel Cooper's *Advanced Bash-Scription Guide* (site, available [here](https://tldp.org/LDP/abs/html/index.html)).
