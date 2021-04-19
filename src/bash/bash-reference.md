@@ -73,6 +73,75 @@ bash -c 'set a b c d; IFS="-:;"; echo "$*" '
 ```
 
 
+## Parameter manipulation
+Reference for manipulating parameters/variables with bash; for more, see [parameter substitution](https://tldp.org/LDP/abs/html/parameter-substitution.html#EXPREPL1).
+
+### Default
+When accessing a variable `$var`, which may or may not be set.
+
+Note, in all of these, the modification `:` in the syntax will also use apply the default value *if* `$var` is declared, but set to `null`.
+
+
+#### Use default
+For default values, there are two syntax options
+```bash
+${var-$var2}
+${var:-$var2}
+```
+which can also be used with command substitutions
+```bash
+${var-`pwd`}
+```
+
+
+#### Set to default
+```bash
+${var=default_value}
+${var:=default_value}
+
+
+### Replace
+For a local replacement
+```bash
+${var/pattern/replacement}
+```
+Or globally
+```bash
+${var//pattern/replacement}
+```
+
+#### Error
+To print an error message if a variable is not set, use
+```bash
+${var?err_message}
+${var:?err_message}
+```
+
+### Trimming
+Example for trimming *known characters* from the end of a string
+```bash
+${var%.mp4}   # removes .mp4
+${var%.*}     # removes any filename suffix
+```
+
+The `%` operator removes a suffix, and the `#` operator removes a prefix.
+
+### String length
+For a character count, use
+```bash
+${#var}
+```
+
+### Substring extraction
+For all but the last 4 characters:
+```bash
+${var:0:${#var}-4}
+# note the 0 is implicit; the above is equivalent to
+${var::${#var}-4}
+# and on many bash derivatives, the string length is also implicit
+${var::-4}
+```
+
 ## Useful resources
 
 Resources for writing bash scripts, and general bash guides:
