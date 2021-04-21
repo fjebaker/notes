@@ -72,6 +72,16 @@ bash -c 'set a b c d; IFS="-:;"; echo "$*" '
 # a-b-c-d
 ```
 
+## Environment contexts
+Environment variables set during the context of a command may be passed with
+```bash
+SOME_VAR=some_val ./script.sh
+```
+or using `exec` and `env` to run the program in a modified environment
+```bash
+exec env SOME_VAR=some_val ./script.sh
+```
+
 
 ## Parameter manipulation
 Reference for manipulating parameters/variables with bash; for more, see [parameter substitution](https://tldp.org/LDP/abs/html/parameter-substitution.html#EXPREPL1).
