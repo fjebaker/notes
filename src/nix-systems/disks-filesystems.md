@@ -195,6 +195,46 @@ Note, from the manual:
 > Note  that  -a does not preserve hardlinks, because finding multiply-linked files is ex‐
 pensive.  You must separately specify -H.
 
+## `find`
+The `find` command has numerous very useful features.
+
+### `not` conditional
+To find files not matching a certain predicate, `find` supports the `-not` argument: for example,
+```bash
+find . -name "*.md" -not -name "index.md"
+```
+to find files ending in `.md` but not files called `index.md`.
+
+### `-exec` options
+The `-exec` flag supports two terminations:
+
+- serial
+
+
+```bash
+find . -exec echo {} \;
+```
+to execute, in this case, `echo` on each file, calling the command once per file.
+
+
+- group
+
+```bash
+find . -exec echo {} +
+```
+to execute echo on all of the output combined together as words, calling the command once per file.
+
+#### Piping
+If `-exec` needs to pipe the output of a command to another, there are two useful ways of achieving this.
+
+The first is by (ab)using `sh`
+```bash
+find . -exec sh -c "cat {} | grep Example" \;
+```
+Or otherwise by piping the output through `xargs` seperated by new lines:
+```bash
+find . | xargs -d\\n cat | grep Example
+```
 
 ## On storing binaries
 There are multiple different locations for binaries on Linux, however there is [an etiquette](https://unix.stackexchange.com/a/8658) which ought to be abided by. In general, the prefix `s` denotes system, and thus is for binaries and executables managed by the system for root (i.e. not for ordinary users).
