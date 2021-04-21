@@ -196,7 +196,7 @@ Note, from the manual:
 pensive.  You must separately specify -H.
 
 ## `find`
-The `find` command has numerous very useful features.
+The [`find` command](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/find.html) has numerous very useful features.
 
 ### `not` conditional
 To find files not matching a certain predicate, `find` supports the `-not` argument: for example,
