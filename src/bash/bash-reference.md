@@ -7,7 +7,13 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
 1. [Special variables](#special-variables)
     1. [Positional parameters](#positional-parameters)
 2. [IFS](#ifs)
-3. [Useful resources](#useful-resources)
+3. [Environment contexts](#environment-contexts)
+4. [Parameter manipulation](#parameter-manipulation)
+    1. [Default](#default)
+        1. [Use default](#use-default)
+        2. [Set to default](#set-to-default)
+    2. [note the 0 is implicit; the above is equivalent to](#note-the-0-is-implicit;-the-above-is-equivalent-to)
+    3. [and on many bash derivatives, the string length is also implicit](#and-on-many-bash-derivatives,-the-string-length-is-also-implicit)
 
 <!--END TOC-->
 

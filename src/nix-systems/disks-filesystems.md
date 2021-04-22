@@ -13,9 +13,13 @@
     8. [Mounting HFS/HFS+ on Linux](#mounting-hfs/hfs+-on-linux)
 2. [`rsync`](#rsync)
     1. [Merging file trees](#merging-file-trees)
-3. [On storing binaries](#on-storing-binaries)
-4. [On `.desktop` files](#on--desktop-files)
-5. [On securely erasing disks](#on-securely-erasing-disks)
+3. [`find`](#find)
+    1. [`not` conditional](#not-conditional)
+    2. [`-exec` options](#-exec-options)
+        1. [Piping](#piping)
+4. [On storing binaries](#on-storing-binaries)
+5. [On `.desktop` files](#on--desktop-files)
+6. [On securely erasing disks](#on-securely-erasing-disks)
 
 <!--END TOC-->
 
