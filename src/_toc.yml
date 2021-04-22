@@ -12,6 +12,7 @@
       - file: nix-systems/disks-filesystems
 
     - file: osx-reference
+    - file: bash/bash-reference
 
 - part: "Programming Languages"
   chapters:
