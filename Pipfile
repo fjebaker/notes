@@ -4,8 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [scripts]
-build = "jb build"
-clean = "jb clean --all"
+build = "jb build src"
+clean = "jb clean --all src"
+toc = "find src -type f -name '*.md' -not -name 'index.md' -exec mdtoc --no-tags {} +"
 
 [packages]
 jupyter-book = "*"
