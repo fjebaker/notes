@@ -37,7 +37,7 @@ The following are commonly used redirection operators. These operations work on 
 2   - stderr
 ``` 
 
-#### Output operators:
+#### Output operators
 
 Example use:
 ```bash
@@ -56,7 +56,7 @@ Specific output operators; note, for each there exists the `>>` variant:
 - `J> FILENAME` pipe file descriptor `J` (default 1 if not present) to file
 - `J>&K` pipe file descriptor `J` to file descriptor `K`
 
-#### Input operators:
+#### Input operators
 
 Example use:
 ```bash
@@ -67,7 +67,7 @@ grep Error < logfile.txt
 - `< FILENAME` accept input as coming from file, sometimes also `0<`
 - `<&J` accept input as coming from file descriptor `J`
 
-#### Opening and closing file descriptors:
+#### Opening and closing file descriptors
 
 Example use: 
 ```bash
