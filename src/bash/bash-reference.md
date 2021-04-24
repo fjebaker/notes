@@ -4,17 +4,19 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Operators and redirections](#operators-and-redirections)
+1. [Redirections](#redirections)
     1. [I/O redirection](#i/o-redirection)
-        1. [Output operators:](#output-operators:)
-        2. [Input operators:](#input-operators:)
-        3. [Opening and closing file descriptors:](#opening-and-closing-file-descriptors:)
+        1. [Output operators](#output-operators)
+        2. [Input operators](#input-operators)
+        3. [Opening and closing file descriptors](#opening-and-closing-file-descriptors)
     2. [Operation ordering](#operation-ordering)
-2. [Special variables](#special-variables)
+2. [Operators](#operators)
+    1. [Numerical comparison operators](#numerical-comparison-operators)
+3. [Special variables](#special-variables)
     1. [Positional parameters](#positional-parameters)
-3. [IFS](#ifs)
-4. [Environment contexts](#environment-contexts)
-5. [Parameter manipulation](#parameter-manipulation)
+4. [IFS](#ifs)
+5. [Environment contexts](#environment-contexts)
+6. [Parameter manipulation](#parameter-manipulation)
     1. [Default](#default)
         1. [Use default](#use-default)
         2. [Set to default](#set-to-default)
@@ -23,11 +25,11 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
     3. [Trimming](#trimming)
     4. [String length](#string-length)
     5. [Substring extraction](#substring-extraction)
-6. [Useful resources](#useful-resources)
+7. [Useful resources](#useful-resources)
 
 <!--END TOC-->
 
-## Operators and redirections
+## Redirections
 
 ### I/O redirection
 The following are commonly used redirection operators. These operations work on file descriptors:
@@ -93,6 +95,27 @@ exec 3>&1                               # open fd 3 to `stdout`
 ls -l >&3 3>&- | grep bad >&3           # close fd 3 for `grep` but not for `ls` 
 exec 3>&- 
 ```
+
+## Operators
+
+The following operators use single square bracket notation (unless otherwise indicated), as in the example:
+```bash
+if [ $a -eq $b ]; then
+    echo "a and b are numerically equal!"
+fi
+```
+
+### Numerical comparison operators
+
+
+- `-eq` is equal to
+- `-ne` is not equal to
+- `-gt` is greater than, alternatively `>` in double parentheses
+- `-ge` is greater than or equal to, alternatively `>=` in double parentheses
+- `-lt` is less than, alternatively `<` in double parentheses
+- `-le` is less than or equal to, alternatively `<=` in double parentheses
+
+
 
 ## Special variables
 Most of these are taken from [an advanced scripting guide](https://tldp.org/LDP/abs/html/internalvariables.html).
