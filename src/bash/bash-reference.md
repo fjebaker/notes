@@ -12,10 +12,15 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
     1. [Default](#default)
         1. [Use default](#use-default)
         2. [Set to default](#set-to-default)
-    2. [note the 0 is implicit; the above is equivalent to](#note-the-0-is-implicit;-the-above-is-equivalent-to)
-    3. [and on many bash derivatives, the string length is also implicit](#and-on-many-bash-derivatives,-the-string-length-is-also-implicit)
+    2. [Replace](#replace)
+        1. [Error](#error)
+    3. [Trimming](#trimming)
+    4. [String length](#string-length)
+    5. [Substring extraction](#substring-extraction)
+5. [Useful resources](#useful-resources)
 
 <!--END TOC-->
+
 
 ## Special variables
 Most of these are taken from [an advanced scripting guide](https://tldp.org/LDP/abs/html/internalvariables.html).
@@ -114,7 +119,7 @@ ${var-`pwd`}
 ```bash
 ${var=default_value}
 ${var:=default_value}
-
+```
 
 ### Replace
 For a local replacement
