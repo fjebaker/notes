@@ -12,6 +12,7 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
     2. [Operation ordering](#operation-ordering)
 2. [Operators](#operators)
     1. [Numerical comparison operators](#numerical-comparison-operators)
+    2. [String comparison operators](#string-comparison-operators)
 3. [Special variables](#special-variables)
     1. [Positional parameters](#positional-parameters)
 4. [IFS](#ifs)
@@ -115,6 +116,22 @@ fi
 - `-lt` is less than, alternatively `<` in double parentheses
 - `-le` is less than or equal to, alternatively `<=` in double parentheses
 
+
+### String comparison operators
+
+It is a good practice to always quote a tested string, unless the pattern matching behaviours are desired.
+
+- `=` is equal to
+- `==` is equal to, with different behaviour when framed in double brackets
+```bash
+[[ $a == b* ]]   # pattern matching, with wildcard
+[[ $a == "b*" ]] # literal matching, i.e. `$a` equal to exactly z*
+```
+- `!=` is not equal to
+- `<` is less than in ASCII alphabetical ordering
+- `>` is greater than in ASCII alphabetical ordering
+- `-z` string is null (zero length)
+- `-n` string is not null
 
 
 ## Special variables
