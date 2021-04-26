@@ -106,7 +106,13 @@ if [ $a -eq $b ]; then
     echo "a and b are numerically equal!"
 fi
 ```
+As they are presented, these operators are true when the accompanying statement is true. In general, any given operator may be reversed with the `!` (not) operator:
 
+```bash
+if ! [ $a -eq $b ]; then
+    echo "a and b are *not* numerically equal!"
+fi
+```
 
 ### Numerical comparison operators
 
