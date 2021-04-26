@@ -22,8 +22,8 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
     1. [Default](#default)
         1. [Use default](#use-default)
         2. [Set to default](#set-to-default)
+        3. [Error](#error)
     2. [Replace](#replace)
-        1. [Error](#error)
     3. [Trimming](#trimming)
     4. [String length](#string-length)
     5. [Substring extraction](#substring-extraction)
@@ -270,6 +270,14 @@ ${var=default_value}
 ${var:=default_value}
 ```
 
+
+#### Error
+To print an error message if a variable is not set, use
+```bash
+${var?err_message}
+${var:?err_message}
+```
+
 ### Replace
 For a local replacement
 ```bash
@@ -278,13 +286,6 @@ ${var/pattern/replacement}
 Or globally
 ```bash
 ${var//pattern/replacement}
-```
-
-#### Error
-To print an error message if a variable is not set, use
-```bash
-${var?err_message}
-${var:?err_message}
 ```
 
 ### Trimming
