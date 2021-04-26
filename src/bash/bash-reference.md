@@ -13,6 +13,7 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
 2. [Operators](#operators)
     1. [Numerical comparison operators](#numerical-comparison-operators)
     2. [String comparison operators](#string-comparison-operators)
+    3. [File test operators](#file-test-operators)
 3. [Special variables](#special-variables)
     1. [Positional parameters](#positional-parameters)
 4. [IFS](#ifs)
@@ -106,6 +107,7 @@ if [ $a -eq $b ]; then
 fi
 ```
 
+
 ### Numerical comparison operators
 
 
@@ -130,9 +132,38 @@ It is a good practice to always quote a tested string, unless the pattern matchi
 - `!=` is not equal to
 - `<` is less than in ASCII alphabetical ordering
 - `>` is greater than in ASCII alphabetical ordering
+
+The following are unary operators:
+
 - `-z` string is null (zero length)
 - `-n` string is not null
 
+### File test operators
+These operators act on file paths, either as strings or on expanded variables. They are all unary operators, unless otherwise stated.
+
+- `-e` exists
+- `-f` is regular (not a directory or device file)
+- `-s` is non-zero size
+- `-d` is a directory
+- `-h` is a symbolic link, alternatively `-L`
+- `-S` is a socket
+- `-g` sgid (set-group-id) flag is set -- file belongs to the group that owns the directory
+- `-u` suid (set-user-id) flag is set -- file will execute as root (provided owned by root); shows an `s` in permissions.
+
+
+The following are evaluated in the context of the script's executing user
+
+- `-r` has read permissions
+- `-w` has write permissions
+- `-x` has execute permissions
+- `-O` user owns this file
+- `-G` GID of file is the same as user's
+
+The following are binary operators
+
+- `-nt` left file is newer than right file
+- `-ot` left file is older than right file
+- `-ef` left file and right file are hard links to the same file
 
 ## Special variables
 Most of these are taken from [an advanced scripting guide](https://tldp.org/LDP/abs/html/internalvariables.html).
