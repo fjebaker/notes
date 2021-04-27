@@ -1,7 +1,7 @@
 # based off of:
 # https://github.com/choldgraf/deploy_configurations/blob/master/.github/workflows/main.yml
 
-name: "Publish using Jupyter Book on GH Pages"
+name: "Pages"
 
 on:
   push:
