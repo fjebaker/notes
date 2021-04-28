@@ -17,9 +17,11 @@
     1. [`not` conditional](#not-conditional)
     2. [`-exec` options](#-exec-options)
         1. [Piping](#piping)
-4. [On storing binaries](#on-storing-binaries)
-5. [On `.desktop` files](#on--desktop-files)
-6. [On securely erasing disks](#on-securely-erasing-disks)
+4. [Permissions](#permissions)
+    1. [Applying default permissions](#applying-default-permissions)
+5. [On storing binaries](#on-storing-binaries)
+6. [On `.desktop` files](#on--desktop-files)
+7. [On securely erasing disks](#on-securely-erasing-disks)
 
 <!--END TOC-->
 
@@ -239,6 +241,29 @@ Or otherwise by piping the output through `xargs` seperated by new lines:
 ```bash
 find . | xargs -d\\n cat | grep Example
 ```
+
+## Permissions
+Pretty much everything in Linux is a file, and has associated permissions, access controls, and flags. Most of the time, `chown` and `chmod` are sufficient tools for managing these attributes, but occasionally more complex behaviour is desired.
+
+### Applying default permissions
+Applying a set of default permissions recursively to a directory, such that new files created will inherit the directory's permissions.
+
+We set the group id flag, such that subsequent files created in the directory inherit the group id
+```bash
+chmod g+s ./dir
+```
+Then we adjust the Access Control Lists (ACLs) so that group members have e.g. `rwx` and others only `rx`
+```bash
+setfacl -d -m g::rwx ./dir
+setfacl -d -m o::rx ./dir
+```
+which can be verified with `getfacl`. Here we use the `-d` default switch and `-m` modify only the default, leave the existing permissions intact.
+
+*Link:* on the difference between `setfacl` and `chmod`, see [this SO question](https://unix.stackexchange.com/q/364517). In essense, `setfacl` will operate on the POSIX and default level, whereas `chmod` on the top level.
+
+*Link:* on the difference between `umask` and `chmod` see [this SO answer](https://superuser.com/a/1358725). In essense, `umask` acts on the process, `chmod` on the files.
+
+*Link:* `umask` codes, see [this wikipedia entry](https://en.wikipedia.org/wiki/Umask#Shell_command).
 
 ## On storing binaries
 There are multiple different locations for binaries on Linux, however there is [an etiquette](https://unix.stackexchange.com/a/8658) which ought to be abided by. In general, the prefix `s` denotes system, and thus is for binaries and executables managed by the system for root (i.e. not for ordinary users).
