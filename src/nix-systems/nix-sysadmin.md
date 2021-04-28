@@ -17,23 +17,24 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
     3. [Debugging networks](#debugging-networks)
 4. [SSH Overview](#ssh-overview)
 5. [Installing `sudo`](#installing-sudo)
-6. [Hardware](#hardware)
+6. [System introspection](#system-introspection)
+7. [Hardware](#hardware)
     1. [Graphics cards](#graphics-cards)
     2. [Sound cards](#sound-cards)
-7. [Useful commands](#useful-commands)
+8. [Useful commands](#useful-commands)
     1. [`STOP` and `CONT` a process](#stop-and-cont-a-process)
     2. [SSL with `curl`](#ssl-with-curl)
     3. [`curl` proxies](#curl-proxies)
-8. [Installing Docker on Debian](#installing-docker-on-debian)
+9. [Installing Docker on Debian](#installing-docker-on-debian)
     1. [docker-compose](#docker-compose)
-9. [Package management](#package-management)
-10. [Python installations](#python-installations)
-11. [Path alternatives](#path-alternatives)
-12. [Versions](#versions)
+10. [Package management](#package-management)
+11. [Python installations](#python-installations)
+12. [Path alternatives](#path-alternatives)
+13. [Versions](#versions)
     1. [Debian](#debian)
-13. [Installing VSCode on Debian](#installing-vscode-on-debian)
-14. [Modifying keymaps with `xmodmap`](#modifying-keymaps-with-xmodmap)
-15. [Other:](#other:)
+14. [Installing VSCode on Debian](#installing-vscode-on-debian)
+15. [Modifying keymaps with `xmodmap`](#modifying-keymaps-with-xmodmap)
+16. [Other:](#other)
 
 <!--END TOC-->
 
@@ -228,6 +229,18 @@ which needs to include the line
 to allow members of group sudo to execute any command.
 
 To commit changes, a reboot is required.
+
+## System introspection
+
+Useful tools
+- `neofetch` for graphical system overview
+
+The default tool for printing system information is `uname`. The most common use is probably for printing the machine hardware name (similar to `arch`)
+```bash
+uname -m
+# x86_64
+```
+Another flag to remember is `-a`, which prints all information.
 
 ## Hardware
 Listing all of the PCI devices can be achieved with
