@@ -16,9 +16,10 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
     3. [File test operators](#file-test-operators)
 3. [Special variables](#special-variables)
     1. [Positional parameters](#positional-parameters)
-4. [IFS](#ifs)
-5. [Environment contexts](#environment-contexts)
-6. [Parameter manipulation](#parameter-manipulation)
+4. [POSIX character classes](#posix-character-classes)
+5. [IFS](#ifs)
+6. [Environment contexts](#environment-contexts)
+7. [Parameter manipulation](#parameter-manipulation)
     1. [Default](#default)
         1. [Use default](#use-default)
         2. [Set to default](#set-to-default)
@@ -27,7 +28,7 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
     3. [Trimming](#trimming)
     4. [String length](#string-length)
     5. [Substring extraction](#substring-extraction)
-7. [Useful resources](#useful-resources)
+8. [Useful resources](#useful-resources)
 
 <!--END TOC-->
 
@@ -138,6 +139,7 @@ It is a good practice to always quote a tested string, unless the pattern matchi
 - `!=` is not equal to
 - `<` is less than in ASCII alphabetical ordering
 - `>` is greater than in ASCII alphabetical ordering
+- `=~` regex match, requires double brackets. Uses [POSIX character classes](#posix-character-classes).
 
 The following are unary operators:
 
@@ -207,6 +209,32 @@ echo "$@"    # 2 3 4 5
 shift
 echo "$@"    # 3 4 5
 ```
+
+## POSIX character classes
+
+POSIX character classes are groups of similar characters used in POSIX regex expressions, amongst other places. They may be typed in either completely lower or uppercase; that is, `[:alpha:]` and `[:ALPHA:]` are equivalent.
+
+
+POSIX Class | Meaning
+-|-
+`[:lower:`] | lowercase letters
+`[:upper:`] | uppercase letters
+`[:alpha:`] | alphabetic characters 
+`[:alnum:`] | alphanumeric characters 
+`[:digit:`] | digits 
+`[:xdigit:`] | hex digits 
+`[:blank:`] | spaces and tabs 
+`[:space:`] | all white space characters, incl. `\n` 
+`[:cntrl:`] | control characters 
+`[:punct:`] | punctuation symbols   
+`[:print:`] | visible characters and spaces
+`[:graph:`] | visible characters
+`[:ascii:`] | ASCII characters
+`[:word:`] | alphanumeric and underscore (i.e. regex `\w`)
+
+There are two special classes for denoting the beginning `[:<:]` and end `[:>:]` of a word.
+
+*Link:* for more information, see [regular expressions info](http://www.regular-expressions.info/posixbrackets.html).
 
 ## IFS
 The *internal field seperator* is used by many shell commands to work out how to do word splitting in the input.
