@@ -10,9 +10,13 @@
       - file: nix-systems/nix-sysadmin
       - file: nix-systems/systemd
       - file: nix-systems/disks-filesystems
+    
+    - file: bash/index
+      sections:
+      - file: bash/bash-reference
+      - file: bash/bash-cookbook
 
     - file: osx-reference
-    - file: bash/bash-reference
 
 - part: "Programming Languages"
   chapters:
