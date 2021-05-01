@@ -13,7 +13,7 @@ The Simplified Wrapper and Interface Generator (SWIG) is a tool for wrapping C/C
     2. [Structures](#structures)
     3. [Classes](#classes)
 4. [numpy](#numpy)
-5. [A worked example: Python](#a-worked-example:-python)
+5. [A worked example: Python](#a-worked-example-python)
     1. [SWIG CLI](#swig-cli)
     2. [Distutils](#distutils)
 

@@ -5,7 +5,7 @@ I recently reinstalled my machine without properly backing up custom extensions,
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [Problem Description](#problem-description)
-2. [Solution:](#solution:)
+2. [Solution:](#solution)
     1. [Layout and Manifest](#layout-and-manifest)
     2. [Creating a message](#creating-a-message)
     3. [Receiving the message (Python)](#receiving-the-message-python)

@@ -5,7 +5,7 @@ I recently bought a new SD card for my years-old pi, and wanted to reformat and 
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [Formatting an SD card for Raspbian](#formatting-an-sd-card-for-raspbian)
-    1. [OSX: using `diskutil`](#osx:-using-diskutil)
+    1. [OSX: using `diskutil`](#osx-using-diskutil)
 2. [Backing up disk images](#backing-up-disk-images)
 3. [Some quality of life tips](#some-quality-of-life-tips)
     1. [Getting Docker](#getting-docker)

@@ -5,7 +5,7 @@ Notes, recipes, and useful snippets relating to all things OSX.
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Changing hostnames:](#changing-hostnames:)
+1. [Changing hostnames:](#changing-hostnames)
 
 <!--END TOC-->
 

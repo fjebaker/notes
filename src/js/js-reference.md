@@ -27,12 +27,12 @@ Series of notes adapted from different books and blogs so that I can easily refe
     6. [Getters and setters](#getters-and-setters)
     7. [Proxies and access control](#proxies-and-access-control)
 4. [Array methods](#array-methods)
-    1. [`.forEach()`](#foreach)
-    2. [`.map()`](#map)
+    1. [`.forEach()`](#-foreach)
+    2. [`.map()`](#-map)
     3. [Logical checks](#logical-checks)
     4. [Searching](#searching)
     5. [Sorting arrays](#sorting-arrays)
-    6. [`.reduce()`](#reduce)
+    6. [`.reduce()`](#-reduce)
 
 <!--END TOC-->
 

@@ -6,7 +6,7 @@ Note, there is a discussion as to the security of different WiFi chips, and whet
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [WiFi(Nina) Toolkit](#wifi-nina-toolkit)
+1. [WiFi(Nina) Toolkit](#wifinina-toolkit)
     1. [Brief discussion of the library state](#brief-discussion-of-the-library-state)
 2. [Using the shipped Toolkit with custom CA certificates](#using-the-shipped-toolkit-with-custom-ca-certificates)
     1. [Wireshark](#wireshark)
