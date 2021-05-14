@@ -26,3 +26,11 @@ To run several replacements with `sed` use
 ```bash
 sed 's/ptrn1/replcm1/g; s/ptrn2/replcm2/g; ...'
 ```
+
+## `nohup` with `sudo`
+
+A common design pattern is to background (`&`) a command with `sudo` with `nohup`. Naively sticking `sudo` as a prefix means that `sudo` will be run in the background, and not the `nohup` process. Instead, use the *run as background process* flag `-b`:
+
+```bash
+sudo -b nohup MY COMMAND 
+```
