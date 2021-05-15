@@ -52,3 +52,5 @@ Alternatively, background the termination process using a subshell
 ```bash
 MY_COMMAND & pid=$! ; ( sleep 1m && kill $pid ) &
 ```
+
+See [this Stack Overflow answer](https://serverfault.com/a/903631) for obtaining PIDs ahead of time.
