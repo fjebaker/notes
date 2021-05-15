@@ -15,6 +15,7 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
         1. [DHCP](#dhcp)
         2. [Static IP](#static-ip)
     3. [Debugging networks](#debugging-networks)
+    4. [Proxies](#proxies)
 4. [SSH Overview](#ssh-overview)
 5. [Installing `sudo`](#installing-sudo)
 6. [System introspection](#system-introspection)
@@ -194,6 +195,20 @@ domain example.com
 
 ### Debugging networks
 See [this guide on port overviews](https://linuxize.com/post/check-listening-ports-linux/).
+
+### Proxies
+
+To configure proxies for the currently running shell, simply define the environment variables
+```bash
+export http_proxy=""
+export https_proxy=""
+```
+These are read by most common command line programs, such as `curl`, or `wget`.
+
+*NB:* other environment variables include `ftp_proxy`, `socks_proxy`, or `all_proxy`. The format for the url is
+```
+protocol://user:password@host:port
+```
 
 ## SSH Overview
 Useful commands are
