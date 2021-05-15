@@ -6,6 +6,8 @@ Solutions to common problems.
 ## Table of Contents
 1. [Replacing newline characters](#replacing-newline-characters)
 2. [Multi-pattern with `sed`](#multi-pattern-with-sed)
+3. [`nohup` with `sudo`](#nohup-with-sudo)
+4. [Command after time](#command-after-time)
 
 <!--END TOC-->
 
