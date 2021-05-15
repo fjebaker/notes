@@ -32,5 +32,21 @@ sed 's/ptrn1/replcm1/g; s/ptrn2/replcm2/g; ...'
 A common design pattern is to background (`&`) a command with `sudo` with `nohup`. Naively sticking `sudo` as a prefix means that `sudo` will be run in the background, and not the `nohup` process. Instead, use the *run as background process* flag `-b`:
 
 ```bash
-sudo -b nohup MY COMMAND 
+sudo -b nohup MY_COMMAND 
+```
+
+## Command after time
+To run a command after a certain time interval
+```bash
+sleep 60s && MY_COMMAND
+```
+*Note:* the use of `&&` instead of e.g. `;` is so that cancelling the sleep command also cancells `MY_COMMAND`.
+
+To run a process and kill it after a certain amount of time, use
+```bash
+MY_COMMAND & pid=$! ; sleep 1m && kill $pid
+```
+Alternatively, background the termination process using a subshell
+```bash
+MY_COMMAND & pid=$! ; ( sleep 1m && kill $pid ) &
 ```
