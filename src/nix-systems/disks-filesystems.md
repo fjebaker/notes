@@ -13,15 +13,11 @@
     8. [Mounting HFS/HFS+ on Linux](#mounting-hfs/hfs+-on-linux)
 2. [`rsync`](#rsync)
     1. [Merging file trees](#merging-file-trees)
-3. [`find`](#find)
-    1. [`not` conditional](#not-conditional)
-    2. [`-exec` options](#-exec-options)
-        1. [Piping](#piping)
-4. [Permissions](#permissions)
+3. [Permissions](#permissions)
     1. [Applying default permissions](#applying-default-permissions)
-5. [On storing binaries](#on-storing-binaries)
-6. [On `.desktop` files](#on--desktop-files)
-7. [On securely erasing disks](#on-securely-erasing-disks)
+4. [On storing binaries](#on-storing-binaries)
+5. [On `.desktop` files](#on--desktop-files)
+6. [On securely erasing disks](#on-securely-erasing-disks)
 
 <!--END TOC-->
 
@@ -201,46 +197,6 @@ Note, from the manual:
 > Note  that  -a does not preserve hardlinks, because finding multiply-linked files is ex‐
 pensive.  You must separately specify -H.
 
-## `find`
-The [`find` command](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/find.html) has numerous very useful features.
-
-### `not` conditional
-To find files not matching a certain predicate, `find` supports the `-not` argument: for example,
-```bash
-find . -name "*.md" -not -name "index.md"
-```
-to find files ending in `.md` but not files called `index.md`.
-
-### `-exec` options
-The `-exec` flag supports two terminations:
-
-- serial
-
-
-```bash
-find . -exec echo {} \;
-```
-to execute, in this case, `echo` on each file, calling the command once per file.
-
-
-- group
-
-```bash
-find . -exec echo {} +
-```
-to execute echo on all of the output combined together as words, calling the command once per file.
-
-#### Piping
-If `-exec` needs to pipe the output of a command to another, there are two useful ways of achieving this.
-
-The first is by (ab)using `sh`
-```bash
-find . -exec sh -c "cat {} | grep Example" \;
-```
-Or otherwise by piping the output through `xargs` seperated by new lines:
-```bash
-find . | xargs -d\\n cat | grep Example
-```
 
 ## Permissions
 Pretty much everything in Linux is a file, and has associated permissions, access controls, and flags. Most of the time, `chown` and `chmod` are sufficient tools for managing these attributes, but occasionally more complex behaviour is desired.

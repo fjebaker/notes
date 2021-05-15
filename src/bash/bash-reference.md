@@ -28,7 +28,11 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
     3. [Trimming](#trimming)
     4. [String length](#string-length)
     5. [Substring extraction](#substring-extraction)
-8. [Useful resources](#useful-resources)
+8. [`find`](#find)
+    1. [`not` conditional](#not-conditional)
+    2. [`-exec` options](#-exec-options)
+        1. [Piping](#piping)
+9. [Useful resources](#useful-resources)
 
 <!--END TOC-->
 
@@ -339,6 +343,47 @@ ${var:0:${#var}-4}
 ${var::${#var}-4}
 # and on many bash derivatives, the string length is also implicit
 ${var::-4}
+```
+
+## `find`
+The [`find` command](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/find.html) has numerous very useful features.
+
+### `not` conditional
+To find files not matching a certain predicate, `find` supports the `-not` argument: for example,
+```bash
+find . -name "*.md" -not -name "index.md"
+```
+to find files ending in `.md` but not files called `index.md`.
+
+### `-exec` options
+The `-exec` flag supports two terminations:
+
+- serial
+
+
+```bash
+find . -exec echo {} \;
+```
+to execute, in this case, `echo` on each file, calling the command once per file.
+
+
+- group
+
+```bash
+find . -exec echo {} +
+```
+to execute echo on all of the output combined together as words, calling the command once per file.
+
+#### Piping
+If `-exec` needs to pipe the output of a command to another, there are two useful ways of achieving this.
+
+The first is by (ab)using `sh`
+```bash
+find . -exec sh -c "cat {} | grep Example" \;
+```
+Or otherwise by piping the output through `xargs` seperated by new lines:
+```bash
+find . | xargs -d\\n cat | grep Example
 ```
 
 ## Useful resources
