@@ -37,6 +37,7 @@
 
     - file: python/index
       sections:
+        - file: python/py-recipes
         - file: python/jupyter-ipython
         - file: python/regex
         - file: python/py-serial
