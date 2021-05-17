@@ -10,6 +10,7 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
         2. [Input operators](#input-operators)
         3. [Opening and closing file descriptors](#opening-and-closing-file-descriptors)
     2. [Operation ordering](#operation-ordering)
+    3. [Here documents](#here-documents)
 2. [Operators](#operators)
     1. [Numerical comparison operators](#numerical-comparison-operators)
     2. [String comparison operators](#string-comparison-operators)
@@ -101,6 +102,38 @@ The order in which I/O operations are used can affect their behaviour. Consider 
 exec 3>&1                               # open fd 3 to `stdout`
 ls -l >&3 3>&- | grep bad >&3           # close fd 3 for `grep` but not for `ls` 
 exec 3>&- 
+```
+
+### Here documents
+Full examples and documentation is available [here](https://tldp.org/LDP/abs/html/here-docs.html). The basic use replaces `stdin` in the preceding command:
+```bash
+cat <<EOF
+...
+EOF
+```
+*Note:* the symbol need not be `EOF`, but any unique character string, and the terminating symbol must exist on a new line with no preceding characters (whitespace, or otherwise).
+
+Supressing tabs (output will be flush left)
+```bash
+cat <<-EOF
+    ...
+EOF
+```
+
+By default, here documents support parameter substitution. To disable it
+```bash
+cat <<'EOF' # alternatively \EOF or "EOF"
+...
+EOF
+```
+
+Here documents create temporary files that are deleted after opening, and not available to other processes: this can be demonstrated
+```bash
+bash -c 'lsof -a -p $$ -d0' << EOF
+EOF
+
+# COMMAND  PID    USER   FD   TYPE DEVICE SIZE/OFF    NODE NAME
+# lsof    4375 aelfric    0r   REG   8,18        0 9962257 /tmp/zshc3dfTh (deleted)
 ```
 
 ## Operators
