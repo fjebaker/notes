@@ -11,16 +11,19 @@ As everyone with git, there is a tendency to use the same idioms over and over. 
 5. [`rebase`](#rebase)
     1. [Changing Author](#changing-author)
     2. [Merging commits with `rebase`](#merging-commits-with-rebase)
-6. [Recipes](#recipes)
+6. [`cherry-pick`](#cherry-pick)
+    1. [Keeping commit references](#keeping-commit-references)
+    2. [Multi-branch operations](#multi-branch-operations)
+7. [Recipes](#recipes)
     1. [Adding aliases](#adding-aliases)
     2. [Reverting to a given commit](#reverting-to-a-given-commit)
-7. [Tagging](#tagging)
-8. [GitHub action recipes](#github-action-recipes)
-9. [Triangular workflow](#triangular-workflow)
-10. [Configuration](#configuration)
+8. [Tagging](#tagging)
+9. [GitHub action recipes](#github-action-recipes)
+10. [Triangular workflow](#triangular-workflow)
+11. [Configuration](#configuration)
     1. [Editor configuration](#editor-configuration)
     2. [Authentication](#authentication)
-11. [Using SSH](#using-ssh)
+12. [Using SSH](#using-ssh)
     1. [Generating keypairs](#generating-keypairs)
     2. [Uploading public keys](#uploading-public-keys)
     3. [Changing repository origin](#changing-repository-origin)
@@ -123,6 +126,44 @@ git rebase -i HEAD~3
 to modify information relating to the last 3 commits, and use either `squash` or `fixup` to merge commits, depending whether we want to hold onto the commit message or not.
 
 Changes must be *forced* pushed.
+
+## `cherry-pick`
+Used to pick commits from one branch to another (see [documentation page](https://git-scm.com/docs/git-cherry-pick)).
+
+Cherry pick takes commits and applies them to the `HEAD`. As such, checkout the branch of interest:
+- to pick a single commit (by hash, or from the tip of another branch)
+```bash
+git cherry-pick <commit|branch>
+```
+- to pick a range of commits `A` through `B`, not including `A`
+```bash
+git cherry-pick A..B
+```
+To include `A` use `A^`.
+- apply the e.g. 4th commit from a branch
+```bash
+git cherry-pick A~3
+```
+
+### Keeping commit references
+By default, `cherry-pick` will create a new commit in the current branch. To keep the commit reference, use the `-x` flag
+```bash
+git cherry-pick -x <commit>
+```
+
+### Multi-branch operations
+To apply commits from `branch1` or `branch2` but not if they are present in `branch3`
+```bash
+git cherry-pick branch1 branch2 ^branch3
+```
+In the case
+```
+branch1   branch2   branch3
+A         A         A
+B         D         B
+C         E         E
+```
+the above command will only apply `C` and `D`.
 
 ## Recipes
 Solutions to common problems.
