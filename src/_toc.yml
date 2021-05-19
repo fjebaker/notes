@@ -10,6 +10,7 @@
       - file: nix-systems/nix-sysadmin
       - file: nix-systems/systemd
       - file: nix-systems/disks-filesystems
+      - file: nix-systems/nix-networks
     
     - file: bash/index
       sections:
