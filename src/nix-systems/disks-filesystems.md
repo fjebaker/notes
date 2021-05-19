@@ -15,6 +15,7 @@
     1. [Merging file trees](#merging-file-trees)
 3. [Permissions](#permissions)
     1. [Applying default permissions](#applying-default-permissions)
+    2. [Execute permissions](#execute-permissions)
 4. [On storing binaries](#on-storing-binaries)
 5. [On `.desktop` files](#on--desktop-files)
 6. [On securely erasing disks](#on-securely-erasing-disks)
@@ -201,7 +202,18 @@ pensive.  You must separately specify -H.
 ## Permissions
 Pretty much everything in Linux is a file, and has associated permissions, access controls, and flags. Most of the time, `chown` and `chmod` are sufficient tools for managing these attributes, but occasionally more complex behaviour is desired.
 
+Most general permissions are viewed with `ls -l`, and are interpreted in the following way:
+```
+-rwxr-xr--
+1           - directory flag
+ 421        - user
+    421     - group
+       421  - other
+```
+The above example is equivalent to `754`.
+
 ### Applying default permissions
+
 Applying a set of default permissions recursively to a directory, such that new files created will inherit the directory's permissions.
 
 We set the group id flag, such that subsequent files created in the directory inherit the group id
@@ -220,6 +232,29 @@ which can be verified with `getfacl`. Here we use the `-d` default switch and `-
 *Link:* on the difference between `umask` and `chmod` see [this SO answer](https://superuser.com/a/1358725). In essense, `umask` acts on the process, `chmod` on the files.
 
 *Link:* `umask` codes, see [this wikipedia entry](https://en.wikipedia.org/wiki/Umask#Shell_command).
+
+### Execute permissions
+To set the user id on execute, we use the `setuid` feature -- changing the owner of a file to the desired user, and then setting the `setuid` bit
+```bash
+chmod u+s /path/to/binary
+```
+
+*Note:* this does not work on interpreted scripts, but only on direct executables. If `root` priveleges is desired, it is better to create a new user, with restricted / needed permissions, and use `setuid` for that user. It is also always worth noting that `setuid` can be quite a dangerous thing to do.
+
+The `setuid` flag appears in the following way in `ls -l`:
+- `suid` with user and group execute permissions
+```
+rwsr-xr--
+```
+- `suid` without user but with group execute permissions
+```
+rwSr-xr--
+```
+
+The `suid` value is  `4`, sometimes denoted `4000`. Useful for e.g. finding files with the `suid` set:
+```bash
+find . -perm +4000
+```
 
 ## On storing binaries
 There are multiple different locations for binaries on Linux, however there is [an etiquette](https://unix.stackexchange.com/a/8658) which ought to be abided by. In general, the prefix `s` denotes system, and thus is for binaries and executables managed by the system for root (i.e. not for ordinary users).
