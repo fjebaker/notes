@@ -9,33 +9,25 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 2. [Users and groups](#users-and-groups)
     1. [Shells](#shells)
     2. [`bindkey`](#bindkey)
-3. [Debian network configuration](#debian-network-configuration)
-    1. [Controlling interfaces](#controlling-interfaces)
-    2. [Configuring interfaces](#configuring-interfaces)
-        1. [DHCP](#dhcp)
-        2. [Static IP](#static-ip)
-    3. [Debugging networks](#debugging-networks)
-    4. [Proxies](#proxies)
-4. [SSH Overview](#ssh-overview)
-5. [Installing `sudo`](#installing-sudo)
-6. [System introspection](#system-introspection)
-7. [Hardware](#hardware)
+3. [Installing `sudo`](#installing-sudo)
+4. [System introspection](#system-introspection)
+5. [Hardware](#hardware)
     1. [Graphics cards](#graphics-cards)
     2. [Sound cards](#sound-cards)
-8. [Useful commands](#useful-commands)
+6. [Useful commands](#useful-commands)
     1. [`STOP` and `CONT` a process](#stop-and-cont-a-process)
     2. [SSL with `curl`](#ssl-with-curl)
     3. [`curl` proxies](#curl-proxies)
-9. [Installing Docker on Debian](#installing-docker-on-debian)
+7. [Installing Docker on Debian](#installing-docker-on-debian)
     1. [docker-compose](#docker-compose)
-10. [Package management](#package-management)
-11. [Python installations](#python-installations)
-12. [Path alternatives](#path-alternatives)
-13. [Versions](#versions)
+8. [Package management](#package-management)
+9. [Python installations](#python-installations)
+10. [Path alternatives](#path-alternatives)
+11. [Versions](#versions)
     1. [Debian](#debian)
-14. [Installing VSCode on Debian](#installing-vscode-on-debian)
-15. [Modifying keymaps with `xmodmap`](#modifying-keymaps-with-xmodmap)
-16. [Other:](#other)
+12. [Installing VSCode on Debian](#installing-vscode-on-debian)
+13. [Modifying keymaps with `xmodmap`](#modifying-keymaps-with-xmodmap)
+14. [Other:](#other)
 
 <!--END TOC-->
 
@@ -116,112 +108,6 @@ bindkey -e
 for emacs mapping.
 
 **NB**: new and alternative shells may be installed via the relevant package managers.
-
-## Debian network configuration
-Whilst installing Debian 9 on an old machine, which had a faulty NIC, I learned a few things about network configurations on that specific OS, most of which is documented [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html).
-
-The legacy `ifconfig` is being replaced with the newer `ip` suite, and an overview of the translation can be quickly seen in this post by [ComputingForGeeks](https://computingforgeeks.com/ifconfig-vs-ip-usage-guide-on-linux/). Two very useful commands I use a lot for debugging are
-```bash
-ip a 	# output similar to the standard ifconfig
-
-ip -s link show [interface]	# outputs interface statistics
-```
-
-
-### Controlling interfaces
-Toggling specific interface states can be done using either `ip`
-```bash
-ip link set [interface] up
-```
-or `ifup`/`ifdown`
-```bash
-ifup [interface]
-ifdown [interface]
-```
-**NB:** `ifup` and `ifdown` can only interact with interfaces defined in `/etc/network/interfaces`. Add a simple configuration, such as
-```
-iface [enoXYZ] inet dhcp
-```
-More detail on this in the next section.
-
-The whole network interface may be interacted with using the `init.d` service
-```bash
-sudo /etc/init.d/networking [start, stop, restart, status]
-```
-or with `systemd` using
-```bash
-sudo systemctl [start, stop, restart, status] networking
-```
-
-
-### Configuring interfaces
-A post on [nixCraft](https://www.cyberciti.biz/faq/howto-configuring-network-interface-cards-on-debian/) provides a good overview of Debian network configuration, and the configuration syntax can be seen [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_basic_syntax_of_etc_network_interfaces).
-
-The main interfaces configuration can be edited in
-```bash
-/etc/network/interfaces
-```
-and typically includes just a necessary (?) local configuration
-```
-auto lo
-iface lo inet loopback
-```
-
-#### DHCP
-For a DHCP interface, we can use a simple configuration such as
-```
-auto eth0
-iface eth0 inet dhcp
-```
-
-#### Static IP
-Static IP addresses can be assigned with
-```
-auto eth0
-iface eth0 inet static
-	address 192.168.xxx.yyy
-	netmask 255.255.255.0
-	gateway 192.168.1.1
-	# dns-domain example.com
-	# dns-nameserver 192.168.1.1
-```
-As pointed out [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_network_interface_with_the_static_ip), if `resolvconf` package is not installed, the DNS configuration is done by editing the `/etc/resolv.conf` file with, for example
-```
-nameserver 192.168.1.1
-domain example.com
-```
-
-**NB:** The modern `systemd` configuration is considerably more elegant, and also documented [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_modern_network_configuration_without_gui).
-
-### Debugging networks
-See [this guide on port overviews](https://linuxize.com/post/check-listening-ports-linux/).
-
-### Proxies
-
-To configure proxies for the currently running shell, simply define the environment variables
-```bash
-export http_proxy=""
-export https_proxy=""
-```
-These are read by most common command line programs, such as `curl`, or `wget`.
-
-*NB:* other environment variables include `ftp_proxy`, `socks_proxy`, or `all_proxy`. The format for the url is
-```
-protocol://user:password@host:port
-```
-
-## SSH Overview
-Useful commands are
-
-Copy login key to remote:
-
-```bash
-ssh-copy-id user@host
-```
-Remove host key from chain:
-```bash
-ssh-keygen -R host
-```
 
 ## Installing `sudo`
 Some distributions, such as lightweight Debian, do not include `sudo` by default. We can install it with root privileges
