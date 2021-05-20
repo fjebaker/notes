@@ -1,4 +1,4 @@
-# Systemd recipes 
+# `systemd` recipes 
 
 <!--BEGIN TOC-->
 ## Table of Contents

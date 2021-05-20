@@ -4,13 +4,12 @@
   chapters:
     - file: nix-systems/index
       sections:
-      - file: nix-systems/debian-gpu
-      - file: nix-systems/boot-bios
-      - file: nix-systems/debian-soundcards
       - file: nix-systems/nix-sysadmin
-      - file: nix-systems/systemd
       - file: nix-systems/disks-filesystems
       - file: nix-systems/nix-networks
+      - file: nix-systems/nix-hardware
+      - file: nix-systems/boot-bios
+      - file: nix-systems/systemd
     
     - file: bash/index
       sections:

@@ -1,4 +1,4 @@
-# Linux and OSX networks
+# Networks
 
 <!--BEGIN TOC-->
 ## Table of Contents

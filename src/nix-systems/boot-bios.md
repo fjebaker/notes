@@ -1,4 +1,4 @@
-# Notes on Boots, Boot Loaders and BIOS control
+# Boot Loaders and BIOS control
 
 Loose collection of notes and predominantly case studies for solutions to problems that develop before the operating system starts.
 

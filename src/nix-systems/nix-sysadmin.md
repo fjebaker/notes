@@ -1,4 +1,4 @@
-# \*nix system administration cookbook
+# System administration
 
 Recipes and writeups of solutions from problems on different \*nix operating systems.
 

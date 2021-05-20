@@ -1,4 +1,4 @@
-# The Linux Disk and Filesystem
+# Disk and filesystem
 
 <!--BEGIN TOC-->
 ## Table of Contents
