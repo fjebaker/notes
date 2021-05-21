@@ -33,7 +33,9 @@ Reference notes for all things related to the Bourne Again Shell, and derivative
     1. [`not` conditional](#not-conditional)
     2. [`-exec` options](#-exec-options)
         1. [Piping](#piping)
-9. [Useful resources](#useful-resources)
+9. [`grep`](#grep)
+    1. [Mutliple patterns](#mutliple-patterns)
+10. [Useful resources](#useful-resources)
 
 <!--END TOC-->
 

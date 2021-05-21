@@ -5,7 +5,8 @@ Solutions to common problems.
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [Replacing newline characters](#replacing-newline-characters)
-2. [Multi-pattern with `sed`](#multi-pattern-with-sed)
+2. [`sed`](#sed)
+    1. [Multi-pattern with `sed`](#multi-pattern-with-sed)
 3. [`nohup` with `sudo`](#nohup-with-sudo)
 4. [Command after time](#command-after-time)
 
@@ -22,7 +23,9 @@ tr '\n' ' ' < FILENAME
 
 Tools like `sed` will not work, as they are fed line-by-line, and therefore never see newline characters.
 
-## Multi-pattern with `sed`
+## `sed`
+
+### Multi-pattern with `sed`
 
 To run several replacements with `sed` use
 ```bash
