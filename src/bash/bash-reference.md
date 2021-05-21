@@ -419,6 +419,21 @@ Or otherwise by piping the output through `xargs` seperated by new lines:
 find . | xargs -d\\n cat | grep Example
 ```
 
+## `grep`
+
+### Mutliple patterns
+
+To read multiple patterns with `grep`, either
+```bash
+grep 'ptr1|ptr2'
+```
+or
+```
+grep -e ptr1 -e ptr2
+```
+may be used.
+
+
 ## Useful resources
 
 Resources for writing bash scripts, and general bash guides:
