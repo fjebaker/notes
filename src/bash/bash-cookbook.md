@@ -6,7 +6,8 @@ Solutions to common problems.
 ## Table of Contents
 1. [Replacing newline characters](#replacing-newline-characters)
 2. [`sed`](#sed)
-    1. [Multi-pattern with `sed`](#multi-pattern-with-sed)
+    1. [Dealing with special characters](#dealing-with-special-characters)
+    2. [Multi-pattern with `sed`](#multi-pattern-with-sed)
 3. [`nohup` with `sudo`](#nohup-with-sudo)
 4. [Command after time](#command-after-time)
 
@@ -24,6 +25,20 @@ tr '\n' ' ' < FILENAME
 Tools like `sed` will not work, as they are fed line-by-line, and therefore never see newline characters.
 
 ## `sed`
+
+### Alternative and escaped seperators 
+When using `sed` on e.g. urls, string characters like `/` can be bothersome, especially when stored in a variable. `sed` provides, however, the functionality to change the seperator.
+
+In standard operations, this looks like
+```bash
+sed 's%ptrn1%replcm1%g'
+```
+where the character immediately after `s` denotes the seperator.
+
+In other operations, such as delete, the same can be accomplished by escaping the first seperator:
+```bash
+sed '\|pattern to delete|d'
+```
 
 ### Multi-pattern with `sed`
 
