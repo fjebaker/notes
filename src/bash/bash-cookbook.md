@@ -6,10 +6,11 @@ Solutions to common problems.
 ## Table of Contents
 1. [Replacing newline characters](#replacing-newline-characters)
 2. [`sed`](#sed)
-    1. [Dealing with special characters](#dealing-with-special-characters)
+    1. [Alternative and escaped seperators](#alternative-and-escaped-seperators)
     2. [Multi-pattern with `sed`](#multi-pattern-with-sed)
 3. [`nohup` with `sudo`](#nohup-with-sudo)
 4. [Command after time](#command-after-time)
+5. [Handling JSON](#handling-json)
 
 <!--END TOC-->
 
@@ -26,7 +27,7 @@ Tools like `sed` will not work, as they are fed line-by-line, and therefore neve
 
 ## `sed`
 
-### Alternative and escaped seperators 
+### Alternative and escaped seperators
 When using `sed` on e.g. urls, string characters like `/` can be bothersome, especially when stored in a variable. `sed` provides, however, the functionality to change the seperator.
 
 In standard operations, this looks like
@@ -72,3 +73,15 @@ MY_COMMAND & pid=$! ; ( sleep 1m && kill $pid ) &
 ```
 
 See [this Stack Overflow answer](https://serverfault.com/a/903631) for obtaining PIDs ahead of time.
+
+## Handling JSON
+A very useful tool for handling JSON data in bash is [the `jq` processor](https://stedolan.github.io/jq/).
+
+To extract a specific field, use
+```bash
+cat data.json | jq .nested.property
+```
+
+To index arrays use `.[i]` notation, where `i` is the index.
+
+A full tutorial is available [in the docs](https://stedolan.github.io/jq/tutorial/) for more advanced usage.
