@@ -1,155 +1,143 @@
-- file: titlepage
+format: jb-book
 
-- part: "Systems"
+root: titlepage
+
+parts:
+- caption: Systems
   chapters:
-    - file: nix-systems/index
-      sections:
-      - file: nix-systems/nix-sysadmin
-      - file: nix-systems/disks-filesystems
-      - file: nix-systems/nix-networks
-      - file: nix-systems/nix-hardware
-      - file: nix-systems/boot-bios
-      - file: nix-systems/systemd
-    
-    - file: bash/index
-      sections:
-      - file: bash/bash-reference
-      - file: bash/bash-cookbook
+  - file: nix-systems/index
+    sections:
+    - file: nix-systems/nix-sysadmin
+    - file: nix-systems/disks-filesystems
+    - file: nix-systems/nix-networks
+    - file: nix-systems/nix-hardware
+    - file: nix-systems/boot-bios
+    - file: nix-systems/systemd
+  - file: bash/index
+    sections:
+    - file: bash/bash-reference
+    - file: bash/bash-cookbook
+  - file: osx-reference
 
-    - file: osx-reference
-
-- part: "Programming Languages"
+- caption: Programming Languages
   chapters:
-    - file: cpp/index
-      sections:
-        - file: cpp/declarations
-        - file: cpp/conan
-        - file: cpp/unit-testing
-        - file: cpp/swig-cmake
-        - file: cpp/cmake
-        - file: cpp/member-functions
+  - file: cpp/index
+    sections:
+    - file: cpp/declarations
+    - file: cpp/conan
+    - file: cpp/unit-testing
+    - file: cpp/swig-cmake
+    - file: cpp/cmake
+    - file: cpp/member-functions
+  - file: julia/index
+    sections:
+    - file: julia/julia-intro
+    - file: julia/advent-notes/README
+    - file: julia/advent-notes/scopes
+  - file: python/index
+    sections:
+    - file: python/py-recipes
+    - file: python/jupyter-ipython
+    - file: python/regex
+    - file: python/py-serial
+    - file: python/high-perf
+    - file: python/c-wrapping
+    - file: python/pypi-distribution
+    - file: python/cpp-c-swig
+    - file: python/requests
+    - file: python/flask/using-flask
+    - file: python/flask/rethink-db-with-flask
+    - file: python/flask/jinja-templating
+    - file: python/fast-api/using-fast-api
+    - file: python/mkdocs-notes
+  - file: js/index
+    sections:
+    - file: js/jest-testing
+    - file: js/js-reference
+    - file: js/swig-nodejs
+    - file: js/request-parsing
+    - file: js/extensions/native-messaging
+    - file: js/vue/over-vue
+  - file: tex/index
+    sections:
+    - file: tex/latex-documents
+    - file: tex/latexmk
+    - file: tex/presentations
+    - file: tex/posters
 
-    - file: julia/index
-      sections:
-        - file: julia/julia-intro  
-        - file: julia/advent-notes/README
-        - file: julia/advent-notes/scopes
-
-    - file: python/index
-      sections:
-        - file: python/py-recipes
-        - file: python/jupyter-ipython
-        - file: python/regex
-        - file: python/py-serial
-        - file: python/high-perf
-        - file: python/c-wrapping
-        - file: python/pypi-distribution
-        - file: python/cpp-c-swig
-        - file: python/requests
-        - file: python/flask/using-flask
-        - file: python/flask/rethink-db-with-flask
-        - file: python/flask/jinja-templating
-        - file: python/fast-api/using-fast-api
-        - file: python/mkdocs-notes
-
-    - file: js/index
-      sections:
-        - file: js/jest-testing
-        - file: js/js-reference
-        - file: js/swig-nodejs
-        - file: js/request-parsing
-        - file: js/extensions/native-messaging
-        - file: js/vue/over-vue
-
-    - file: tex/index
-      sections:
-        - file: tex/latex-documents
-        - file: tex/latexmk
-        - file: tex/presentations
-        - file: tex/posters
-
-- part: "DevOps"
+- caption: DevOps
   chapters:
-    - file: docker/index
-      sections:
-        - file: docker/minio-registry
-        - file: docker/docker-cheatsheet
-        - file: docker/systemd-with-docker
-        - file: docker/docker-compose
-        - file: docker/dockerfile-recipes
-        - file: docker/docker-swarm
+  - file: docker/index
+    sections:
+    - file: docker/minio-registry
+    - file: docker/docker-cheatsheet
+    - file: docker/systemd-with-docker
+    - file: docker/docker-compose
+    - file: docker/dockerfile-recipes
+    - file: docker/docker-swarm
+  - file: aws/index
+    sections:
+    - file: aws/vpc-overview
+    - file: aws/setting-up
+    - file: aws/ec2-with-docker
+    - file: aws/goofys-s3
+  - file: vms/index
+    sections:
+    - file: vms/osx-host
+    - file: vms/linux-guest-extensions
+  - file: databases/index
+    sections:
+    - file: databases/node-red
+    - file: databases/mongo-db
+    - file: databases/rethink-db
+    - file: databases/lang-drivers/py-mongo
 
-    - file: aws/index
-      sections:
-        - file: aws/vpc-overview
-        - file: aws/setting-up
-        - file: aws/ec2-with-docker
-        - file: aws/goofys-s3
-
-    - file: vms/index
-      sections:
-        - file: vms/osx-host
-        - file: vms/linux-guest-extensions
-
-    - file: databases/index
-      sections:
-        - file: databases/node-red
-        - file: databases/mongo-db
-        - file: databases/rethink-db
-        - file: databases/lang-drivers/py-mongo
-
-- part: "Machine Learning"
+- caption: Machine Learning
   chapters:
-    - file: machine-learning/index
-    - file: machine-learning/tf-install
+  - file: machine-learning/index
+  - file: machine-learning/tf-install
 
-- part: "Raspi & Arduino"
+- caption: Raspi & Arduino
   chapters:
-    - file: raspi/index
-      sections:
-        - file: raspi/raspi-config
-        - file: raspi/raspi-bit-torrent
-        - file: raspi/pyaudio
+  - file: raspi/index
+    sections:
+    - file: raspi/raspi-config
+    - file: raspi/raspi-bit-torrent
+    - file: raspi/pyaudio
+  - file: arduino/index
+    sections:
+    - file: arduino/platformio
+    - file: arduino/ca-certs-nano
+    - file: arduino/arduino-cookbook
+    - file: arduino/crypto-auth
+    - file: mq-mqtt/mqtt-specs
+    - file: mq-mqtt/nginx-load-balancing
 
-    - file: arduino/index
-      sections:
-        - file: arduino/platformio
-        - file: arduino/ca-certs-nano
-        - file: arduino/arduino-cookbook
-        - file: arduino/crypto-auth
-        - file: mq-mqtt/mqtt-specs
-        - file: mq-mqtt/nginx-load-balancing
-
-- part: "Tools"
+- caption: Tools
   chapters:
-    - file: vim/index
-      sections:
-        - file: vim/recipes
-        - file: vim/vundle
-        - file: vim/batch-rename
+  - file: vim/index
+    sections:
+    - file: vim/recipes
+    - file: vim/vundle
+    - file: vim/batch-rename
+  - file: discord/index
+    sections:
+    - file: discord/making-bots-python
+    - file: discord/discord-music-hook
+  - file: git/index
+    sections:
+    - file: git/git-reference
+    - file: git/gitea-mariadb
 
-    - file: discord/index
-      sections:
-        - file: discord/making-bots-python
-        - file: discord/discord-music-hook
-
-    - file: git/index
-      sections:
-        - file: git/git-reference
-        - file: git/gitea-mariadb
-
-
-- part: "Miscellaneous"
+- caption: Miscellaneous
   chapters:
-    - file: recommended-talks
-    
-    - file: software-design-principles
-    - file: ffmpeg-cheatsheet
-    - file: iptables-and-firewalls
-    - file: ci-cd/jenkins-recipes
-    - file: security/openssl-cookbook
-    - file: configurations/shell-rc-profiles
-    - file: visualisation/blender-learning
-    - file: java/gradle-cookbook
-    - file: automation/mycroft-osx
-
+  - file: recommended-talks
+  - file: software-design-principles
+  - file: ffmpeg-cheatsheet
+  - file: iptables-and-firewalls
+  - file: ci-cd/jenkins-recipes
+  - file: security/openssl-cookbook
+  - file: configurations/shell-rc-profiles
+  - file: visualisation/blender-learning
+  - file: java/gradle-cookbook
+  - file: automation/mycroft-osx
