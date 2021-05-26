@@ -127,6 +127,20 @@ For this, it is easy to use `wodim` in [Disk-At-Once mode](https://en.wikipedia.
 wodim -v dev=/dev/rs0 -dao /path/to/my.iso
 ```
 
+- Ripping Audio CDs
+
+The easiest tool to use is [`abcde`](http://manpages.ubuntu.com/manpages/xenial/man1/abcde.1.html), which can read and export an entire CD in a variety of formats, automatically makes database queries to populate metadata, and more.
+
+The most basic usage, which exports the CD into mp3 tracks and ejects on done is
+```bash
+abcde -d /dev/sr0 -o mp3 -x
+```
+Note this is interactive with respective to managing metadata. Permanent configuration files can be modified from the example
+```bash
+cp /etc/abcde.conf ~/.abcde.conf && sudo chown $USER:$USER ~/.abcde.conf
+```
+
+
 - DVDs
 
 The standard disk formatting is [`ISO9660`](https://wiki.osdev.org/ISO_9660) for `.iso` files.
@@ -143,6 +157,11 @@ though personally I have encountered many errors in doing so (you're best of rip
 
 There is a short discussion in [this arch linux forum](https://bbs.archlinux.org/viewtopic.php?id=131299) on mounting disks.
 
+Note, you can easily eject CDs with 
+```bash
+eject /dev/rs0
+```
+or other relevant device.
 
 ### Mounting a filesystem with SSH
 For ease of development on a remote platform, tools like `sshfs` can mount directories on the local file-system as if they were a disk. On **OSX**, you'll require `osxfuse` for Linux filesystems also. Both tools can easily be installed with brew:
