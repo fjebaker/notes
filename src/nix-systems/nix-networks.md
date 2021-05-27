@@ -10,6 +10,8 @@
     3. [Debugging networks](#debugging-networks)
     4. [Proxies](#proxies)
 2. [SSH recipes](#ssh-recipes)
+3. [Network reconnaissance](#network-reconnaissance)
+    1. [Checking open ports](#checking-open-ports)
 
 <!--END TOC-->
 
@@ -118,4 +120,28 @@ ssh-copy-id user@host
 Remove host key from chain:
 ```bash
 ssh-keygen -R host
+```
+
+## Network reconnaissance
+
+### Checking open ports
+Using the `netstat` command
+```bash
+netstat -puntl
+```
+with the flags for `-p` process id associated, `-u` udp connections, `-n` display numerical port range, `-t` tcp connections, and `-l` to show listening sockets.
+
+This can also be accomplished using the `lsof` to list open files
+```bash
+lsof -i
+```
+where we use the `-i` flag to select listings with internet addresses. This can be further specified e.g. `-i tcp`.
+
+Or with `nmap`, TCP
+```bash
+nmap -sT -O localhost
+```
+or, for UDP
+```bash
+nmap -sU localhost
 ```
