@@ -11,6 +11,7 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
     2. [`bindkey`](#bindkey)
 3. [Installing `sudo`](#installing-sudo)
 4. [System introspection](#system-introspection)
+    1. [Debian minor versioning](#debian-minor-versioning)
 5. [Hardware](#hardware)
     1. [Graphics cards](#graphics-cards)
     2. [Sound cards](#sound-cards)
@@ -142,6 +143,12 @@ uname -m
 # x86_64
 ```
 Another flag to remember is `-a`, which prints all information.
+
+### Debian minor versioning
+Although minor versions are a convenience measure (and thus, not included in e.g. `uname` or `/etc/os-release`), it can still be useful to know. The full debian version can be found with
+```bash
+cat /etc/debian_version
+```
 
 ## Hardware
 Listing all of the PCI devices can be achieved with
