@@ -12,6 +12,7 @@
 2. [SSH recipes](#ssh-recipes)
 3. [Network reconnaissance](#network-reconnaissance)
     1. [Checking open ports](#checking-open-ports)
+    2. [ARP](#arp)
 
 <!--END TOC-->
 
@@ -145,3 +146,26 @@ or, for UDP
 ```bash
 nmap -sU localhost
 ```
+
+### ARP
+ARP, or Address Resolution Protocol, maps IP addresses to MAC addresses in a LAN, allowing devices to find one another.
+
+To interact with the ARP cache (known IP-MAC resolutions), we use [`arp`](https://manpages.debian.org/buster/net-tools/arp.8.en.html), which is installed as part of the [`net-tools` package](https://manpages.debian.org/buster/net-tools/index.html).
+
+- viewing the full ARP cache
+```bash
+arp -a
+
+# saturn.home (192.168.1.136) at 00:00:00:00:00:01 [ether] on enp4s0
+# internetbox.home (192.168.1.1) at 00:00:00:00:00:02 [ether] on enp4s0
+```
+- find MAC for specific IP
+```bash
+arp -a 192.168.1.136
+
+# saturn.home (192.168.1.136) at 00:00:00:00:00:01 [ether] on enp4s0
+```
+
+*Note*: there is BSD and Linux output style (`-a` vs `-e`).
+
+ARP cache entries can either be *static* or *dynamic*, i.e. user-added, or automatically resolved. 
