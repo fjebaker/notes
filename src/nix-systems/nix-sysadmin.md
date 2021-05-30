@@ -7,9 +7,11 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 1. [General tricks and tips](#general-tricks-and-tips)
     1. [Installing without ethernet](#installing-without-ethernet)
 2. [Users and groups](#users-and-groups)
-    1. [Shells](#shells)
-    2. [`bindkey`](#bindkey)
-3. [Installing `sudo`](#installing-sudo)
+    1. [Creating new users](#creating-new-users)
+    2. [Configuring shells](#configuring-shells)
+    3. [`bindkey`](#bindkey)
+    4. [Execute as user](#execute-as-user)
+3. [Installing `sudo` on Debian](#installing-sudo-on-debian)
 4. [System introspection](#system-introspection)
     1. [Debian minor versioning](#debian-minor-versioning)
 5. [Hardware](#hardware)
@@ -41,6 +43,14 @@ When installing a \*nix system without an ethernet connection, it can be general
 The solution to this is, if you own an android phone, use **USB tethering** to add a network interface so you can complete the installation and find the necessary firmware.
 
 ## Users and groups
+
+Listing all known users and groups
+```bash
+cat /etc/group
+cat /etc/passwd
+```
+
+### Creating new users
 Creating a **new user**, managing startup shell and directory
 ```bash
 sudo useradd -d /home/[homedir] [username]
@@ -79,7 +89,7 @@ sudo userdel -r [username]
 # -r removes home directory aswell
 ```
 
-### Shells
+### Configuring shells
 You can discover what shell your terminal is currently running by examining the `$SHELL` environment variable.
 
 To see the available shells on your machine, use
@@ -110,7 +120,26 @@ for emacs mapping.
 
 **NB**: new and alternative shells may be installed via the relevant package managers.
 
-## Installing `sudo`
+### Execute as user
+We can run commands as another user or with another group ID using `su`. For example, to run a command as another user
+```bash
+su someuser -c whoami
+# someuser
+```
+
+Sometimes a user will not have a login shell defined, in which case `su` can spawn a specific shell as needed
+```bash
+su someuser -s /bin/bash -c "echo $SHELL"
+# /bin/bash
+```
+
+The command can also be used to switch user. For example, to become root 
+```bash
+su -
+```
+
+
+## Installing `sudo` on Debian
 Some distributions, such as lightweight Debian, do not include `sudo` by default. We can install it with root privileges
 ```bash
 su -
