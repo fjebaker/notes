@@ -4,43 +4,31 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
 
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [General tricks and tips](#general-tricks-and-tips)
-    1. [Installing without ethernet](#installing-without-ethernet)
-2. [Users and groups](#users-and-groups)
+1. [Users and groups](#users-and-groups)
     1. [Creating new users](#creating-new-users)
     2. [Configuring shells](#configuring-shells)
     3. [`bindkey`](#bindkey)
     4. [Execute as user](#execute-as-user)
-3. [Installing `sudo` on Debian](#installing-sudo-on-debian)
-4. [System introspection](#system-introspection)
-    1. [Debian minor versioning](#debian-minor-versioning)
-5. [Hardware](#hardware)
-    1. [Graphics cards](#graphics-cards)
-    2. [Sound cards](#sound-cards)
-6. [Useful commands](#useful-commands)
+2. [Installing `sudo` on Debian](#installing-sudo-on-debian)
+3. [Useful commands](#useful-commands)
     1. [`STOP` and `CONT` a process](#stop-and-cont-a-process)
     2. [SSL with `curl`](#ssl-with-curl)
     3. [`curl` proxies](#curl-proxies)
-7. [Installing Docker on Debian](#installing-docker-on-debian)
+4. [Installing Docker on Debian](#installing-docker-on-debian)
     1. [docker-compose](#docker-compose)
-8. [Package management](#package-management)
-9. [Python installations](#python-installations)
-10. [Path alternatives](#path-alternatives)
-11. [Versions](#versions)
+5. [Package management](#package-management)
+6. [Python installations](#python-installations)
+7. [Path alternatives](#path-alternatives)
+8. [Versions](#versions)
     1. [Debian](#debian)
-12. [Installing VSCode on Debian](#installing-vscode-on-debian)
-13. [Modifying keymaps with `xmodmap`](#modifying-keymaps-with-xmodmap)
-14. [Other:](#other)
+    2. [Debian minor versioning](#debian-minor-versioning)
+9. [Installing VSCode on Debian](#installing-vscode-on-debian)
+10. [Modifying keymaps with `xmodmap`](#modifying-keymaps-with-xmodmap)
+11. [Other:](#other)
+12. [General tricks and tips](#general-tricks-and-tips)
+    1. [Installing without ethernet](#installing-without-ethernet)
 
 <!--END TOC-->
-
-## General tricks and tips
-Here are some general ideas that I think are vitally important to remember when handling \*nix systems.
-
-### Installing without ethernet
-When installing a \*nix system without an ethernet connection, it can be generally quite difficult to ensure the right drivers are at hand for the wifi hardware. Sometimes using just the non-free firmware versions of e.g. Debian can be enough to allow the system to enable the hardware, but at other times, you'll have to install the firmware through `apt`, which won't be available without an internet connection.
-
-The solution to this is, if you own an android phone, use **USB tethering** to add a network interface so you can complete the installation and find the necessary firmware.
 
 ## Users and groups
 
@@ -161,41 +149,6 @@ to allow members of group sudo to execute any command.
 
 To commit changes, a reboot is required.
 
-## System introspection
-
-Useful tools
-- `neofetch` for graphical system overview
-
-The default tool for printing system information is `uname`. The most common use is probably for printing the machine hardware name (similar to `arch`)
-```bash
-uname -m
-# x86_64
-```
-Another flag to remember is `-a`, which prints all information.
-
-### Debian minor versioning
-Although minor versions are a convenience measure (and thus, not included in e.g. `uname` or `/etc/os-release`), it can still be useful to know. The full debian version can be found with
-```bash
-cat /etc/debian_version
-```
-
-## Hardware
-Listing all of the PCI devices can be achieved with
-```bash
-lspci
-```
-You may need to update the PCI database
-```bash
-update-pciids
-```
-
-On [HowToGeek](https://www.howtogeek.com/508993/how-to-check-which-gpu-is-installed-on-linux/) is a Ubuntu overview for listing hardware.
-
-### Graphics cards
-For graphics cards on Debian, I have created [separate notes](https://github.com/Dustpancake/Dust-Notes/blob/master/nix-systems/debian-gpu.md).
-
-### Sound cards
-For sound cards on Debian, I have created [separate notes](https://github.com/Dustpancake/Dust-Notes/blob/master/nix-systems/debian-soundcards.md)
 
 ## Useful commands
 In this section I will document useful commands, which, for brevity, don't merit a full chapter of their own.
@@ -375,6 +328,22 @@ cat /etc/os-release
 # BUG_REPORT_URL="https://bugs.debian.org/"
 ```
 
+Useful tools
+- `neofetch` for graphical system overview
+
+The default tool for printing system information is `uname`. The most common use is probably for printing the machine hardware name (similar to `arch`)
+```bash
+uname -m
+# x86_64
+```
+Another flag to remember is `-a`, which prints all information.
+
+### Debian minor versioning
+Although minor versions are a convenience measure (and thus, not included in e.g. `uname` or `/etc/os-release`), it can still be useful to know. The full debian version can be found with
+```bash
+cat /etc/debian_version
+```
+
 ## Installing VSCode on Debian
 From a [Linuxize](https://linuxize.com/post/how-to-install-visual-studio-code-on-debian-10/) tutorial:
 
@@ -440,3 +409,11 @@ CPU temperature:
 ```
 /sys/class/thermal/thermal_zone0/temp
 ```
+
+## General tricks and tips
+Here are some general ideas that I think are vitally important to remember when handling \*nix systems.
+
+### Installing without ethernet
+When installing a \*nix system without an ethernet connection, it can be generally quite difficult to ensure the right drivers are at hand for the wifi hardware. Sometimes using just the non-free firmware versions of e.g. Debian can be enough to allow the system to enable the hardware, but at other times, you'll have to install the firmware through `apt`, which won't be available without an internet connection.
+
+The solution to this is, if you own an android phone, use **USB tethering** to add a network interface so you can complete the installation and find the necessary firmware.

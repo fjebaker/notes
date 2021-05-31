@@ -1,21 +1,33 @@
 # Hardware
 
+Listing all of the PCI devices can be achieved with
+```bash
+lspci
+```
+You may need to update the PCI database
+```bash
+update-pciids
+```
+
+On [HowToGeek](https://www.howtogeek.com/508993/how-to-check-which-gpu-is-installed-on-linux/) is a Ubuntu overview for listing hardware.
+
 <!--BEGIN TOC-->
 ## Table of Contents
-1. [Graphics card installation](#graphics-card-installation)
+1. [Graphics cards](#graphics-cards)
     1. [PCI wattage](#pci-wattage)
     2. [nVidia](#nvidia)
-2. [CUDA and cuDNN](#cuda-and-cudnn)
-    1. [Troubleshooting](#troubleshooting)
-3. [Sound Configuration](#sound-configuration)
+    3. [CUDA and cuDNN](#cuda-and-cudnn)
+        1. [Troubleshooting](#troubleshooting)
+2. [Sound Configuration](#sound-configuration)
     1. [ALSA](#alsa)
         1. [ALSA auto-configuration](#alsa-auto-configuration)
         2. [CMUS with ALSA](#cmus-with-alsa)
     2. [Hardware specifications](#hardware-specifications)
+
 <!--END TOC-->
 
 
-## Graphics card installation
+## Graphics cards
 The official [Debian wiki](https://wiki.debian.org/GraphicsCard) has a great overview of graphic driver installations depending on the hardware you are using.
 
 ### PCI wattage
@@ -53,7 +65,7 @@ sudo apt update && sudo apt install -t buster-backports nvidia-driver
 ```
 This performs upstream device detection to fetch the correct driver for your card. Finally, **reboot your system**to complete the installation.
 
-## CUDA and cuDNN
+### CUDA and cuDNN
 Installing CUDA is directed in the [wiki](https://wiki.debian.org/NvidiaGraphicsDrivers#CUDA). In short, we can install CUDA 10 with backports
 ```bash
 sudo apt -t buster-backports install nvidia-cuda-dev nvidia-cuda-toolkit
@@ -65,7 +77,7 @@ For cuDNN, we need to create a development account on the [nVidia website](https
 The full installation process is documented [on the nVidia site](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#overview).
 
 
-### Troubleshooting
+#### Troubleshooting
 When installing the `nvidia-driver`, I encountered this issue
 ```bash
 sudo apt install -t buster-backports nvidia-driver
