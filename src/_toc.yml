@@ -141,3 +141,4 @@ parts:
   - file: visualisation/blender-learning
   - file: java/gradle-cookbook
   - file: automation/mycroft-osx
+  - file: nix-systems/clamav
