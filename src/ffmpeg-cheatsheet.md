@@ -36,6 +36,7 @@ ffmpeg -i video.mp4 -ab 160k -ac 2 -ar 44100 -vn audio.wav
 # -ar is audio sample rate
 ```
 
+
 ## Converting streams
 Downloading from `.m3u8` files
 ```
@@ -84,8 +85,29 @@ For a given `.srt` file, the subtitles can be embedded into an `.mp4` using
 ```
 ffmpeg -i [videos].mp4 -i [subtitles].srt -c:v copy -c:a copy -c:s mov_text -metadata:s:s:0 language=eng out.mp4
 ```
+Here we are copying the video and audio channels from the input video, and copying subtitles with `-c:s mov_text`. We also use the metadata mapper to change the subtitle stream (`:s:s:0`, c.f. e.g. audio `:s:a:1`) language to `eng`.
 
-## Concatenating images into videos
+## Concatenation
+
+### Concatenating videos
+To concatenate videos, create a file containing an ordered list of videos to be concatenated
+```
+file 'part1.mp4'
+file 'part2.mp4'
+...
+```
+Then pass this file to `ffmpeg` with
+```bash
+ffmpeg -f concat -safe 0 -i infile.txt output.mp4
+```
+The safe options is disable the unsafe filename error. From the docs:
+
+> safe 
+> If set to 1, reject unsafe file paths. A file path is considered safe if it does not contain a protocol specification and is relative and all components only contain characters from the portable character set (letters, digits, period, underscore and hyphen) and have no period at the beginning of a component.
+> 
+> If set to 0, any file name is accepted.
+
+### Concatenating images into videos
 There are many commands that can achieve this result. For the problem I was solving, I wanted to concatenate PNG images, numbered `1.png`, `2.png`, `...`, into a `.mp4` video at a specific frame rate
 ```
 ffmpeg -f image2 -r [framerate] -i %d.png -vcodec mpeg4 -y out.mp4
