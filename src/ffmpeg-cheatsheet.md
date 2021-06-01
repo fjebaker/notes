@@ -15,7 +15,9 @@ For HTTP proxies, use the `-http_proxy [addr]` flag.
 2. [Converting streams](#converting-streams)
 3. [The `-map` flag](#the--map-flag)
 4. [Embedding subtitles](#embedding-subtitles)
-5. [Concatenating images into videos](#concatenating-images-into-videos)
+5. [Concatenation](#concatenation)
+    1. [Concatenating videos](#concatenating-videos)
+    2. [Concatenating images into videos](#concatenating-images-into-videos)
 
 <!--END TOC-->
 
