@@ -1,6 +1,17 @@
-# Clam Anti Virus
+# Clam Anti-Virus
 
 [ClamAV](https://docs.clamav.net/) is an open source anti virus program licensed under GPLv2. It installs on nearly all systems, and provides a direct and daemon scanning mode.
+
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Installation](#installation)
+    1. [Configuration](#configuration)
+2. [Scanning](#scanning)
+    1. [`clamscan`](#clamscan)
+    2. [`clamd/clamdscan`](#clamd/clamdscan)
+    3. [Recipes](#recipes)
+
+<!--END TOC-->
 
 ## Installation
 Installing ClamAV with the `clamd` daemon with `apt`:
