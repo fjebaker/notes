@@ -18,6 +18,7 @@ For HTTP proxies, use the `-http_proxy [addr]` flag.
 5. [Concatenation](#concatenation)
     1. [Concatenating videos](#concatenating-videos)
     2. [Concatenating images into videos](#concatenating-images-into-videos)
+6. [Splicing files](#splicing-files)
 
 <!--END TOC-->
 
@@ -113,4 +114,10 @@ The safe options is disable the unsafe filename error. From the docs:
 There are many commands that can achieve this result. For the problem I was solving, I wanted to concatenate PNG images, numbered `1.png`, `2.png`, `...`, into a `.mp4` video at a specific frame rate
 ```
 ffmpeg -f image2 -r [framerate] -i %d.png -vcodec mpeg4 -y out.mp4
+```
+
+## Splicing files
+To extract media from a given time stamp
+```bash
+ffmpeg -i source.mp4 -ss START_TIME -t DURATION output.mp4
 ```
