@@ -128,7 +128,7 @@ ssh-keygen -R host
 ### Checking open ports
 Using the `netstat` command
 ```bash
-netstat -puntl
+netstat -tunlp
 ```
 with the flags for `-p` process id associated, `-u` udp connections, `-n` display numerical port range, `-t` tcp connections, and `-l` to show listening sockets.
 
@@ -146,6 +146,16 @@ or, for UDP
 ```bash
 nmap -sU localhost
 ```
+
+To discover which process is listening on a specific port, e.g. `4242`, we can use
+```bash
+lsof -nP -iTCP:4242 -sTCP:LISTEN
+```
+
+Finally, there is also `ss`, another socket investigating utility. To list listening ports with `ss`, similar to `netstat`, use
+```bash
+ss -tunlp
+``` 
 
 ### ARP
 ARP, or Address Resolution Protocol, maps IP addresses to MAC addresses in a LAN, allowing devices to find one another.
