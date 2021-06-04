@@ -7,23 +7,25 @@ As everyone with git, there is a tendency to use the same idioms over and over. 
 1. [`format-patch`](#format-patch)
 2. [`am`](#am)
 3. [`apply`](#apply)
-4. [`stash`](#stash)
-5. [`rebase`](#rebase)
+4. [`archive`](#archive)
+5. [`bundle`](#bundle)
+6. [`stash`](#stash)
+7. [`rebase`](#rebase)
     1. [Changing Author](#changing-author)
     2. [Merging commits with `rebase`](#merging-commits-with-rebase)
-6. [`cherry-pick`](#cherry-pick)
+8. [`cherry-pick`](#cherry-pick)
     1. [Keeping commit references](#keeping-commit-references)
     2. [Multi-branch operations](#multi-branch-operations)
-7. [Recipes](#recipes)
+9. [Recipes](#recipes)
     1. [Adding aliases](#adding-aliases)
     2. [Reverting to a given commit](#reverting-to-a-given-commit)
-8. [Tagging](#tagging)
-9. [GitHub action recipes](#github-action-recipes)
-10. [Triangular workflow](#triangular-workflow)
-11. [Configuration](#configuration)
+10. [Tagging](#tagging)
+11. [GitHub action recipes](#github-action-recipes)
+12. [Triangular workflow](#triangular-workflow)
+13. [Configuration](#configuration)
     1. [Editor configuration](#editor-configuration)
     2. [Authentication](#authentication)
-12. [Using SSH](#using-ssh)
+14. [Using SSH](#using-ssh)
     1. [Generating keypairs](#generating-keypairs)
     2. [Uploading public keys](#uploading-public-keys)
     3. [Changing repository origin](#changing-repository-origin)
@@ -64,6 +66,23 @@ In contrast to [`apply`](#apply), `am` adds the commits into the working tree.
 [Applies](https://git-scm.com/docs/git-apply) patches onto the current working directory, but does not add the commits to the tree
 ```bash
 git apply [patchfile]
+```
+
+## `archive`
+To create archives of the git file tree (note, this does not include commit history -- see [`bundle`](#bundle)) we can use [`archive`](http://www.git-scm.com/docs/git-archive)
+```bash
+git archive --format=zip --output latest.zip HEAD
+```
+
+## `bundle`
+[`bundle`](http://www.git-scm.com/docs/git-bundle) allows you to export `.git` bundles. To create a bundle
+```bash
+git bundle create tree.git HEAD
+```
+
+This archive repositories can then be interacted with using `git pull` or `git fetch`, provisional to there being a repository to act on. As such, to unbundle the archive, use
+```bash
+git init && git pull tree.git
 ```
 
 ## `stash`
