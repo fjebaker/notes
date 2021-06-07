@@ -12,6 +12,7 @@ Guides to installing various softwares on different operating systems.
     3. [Docker-compose](#docker-compose)
     4. [VSCode](#vscode)
     5. [Python](#python)
+    6. [OpenJDK](#openjdk)
 
 <!--END TOC-->
 
@@ -155,4 +156,27 @@ sudo make altinstall
 and validate with
 ```bash
 python3.8 --version
+```
+
+### OpenJDK
+On the differences between the JRE and JDK, see [this SO answer](https://stackoverflow.com/a/1906642).
+
+Download the latest ready-for-use JDK from [jdk.java.net](https://jdk.java.net/), and un-archive with
+```bash
+tar xzf openjdk-16.0.1_linux-x64_bin.tar.gz
+```
+
+The JVM is usually installed into `/usr/lib/jvm`, and installing java through `apt` will install it to this location. We'll also move the directory to this location and change the ownership
+```bash
+sudo mv jdk-16.0.1 /usr/lib/jvm/ && sudo chown root:root -R /usr/lib/jvm/jdk-16.0.1
+```
+
+Finally, we configure the paths for the user: in an environment startup file, include
+```bash
+# .zshenv
+
+# append java bin to path
+PATH="$PATH:/usr/lib/jvm/jdk-16.0.1/bin"
+# set JAVA_HOME if not set
+JAVA_HOME="${JAVA_HOME:-/usr/lib/jvm/jdk-16.0.1}"
 ```
