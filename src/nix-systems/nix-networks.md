@@ -10,7 +10,7 @@
     3. [Debugging networks](#debugging-networks)
     4. [Proxies](#proxies)
 2. [SSH recipes](#ssh-recipes)
-3. [Network reconnaissance](#network-reconnaissance)
+3. [Network introspection](#network-introspection)
     1. [Checking open ports](#checking-open-ports)
     2. [ARP](#arp)
 
@@ -123,7 +123,7 @@ Remove host key from chain:
 ssh-keygen -R host
 ```
 
-## Network reconnaissance
+## Network introspection
 
 ### Checking open ports
 Using the `netstat` command

@@ -1,5 +1,33 @@
 # Hardware
 
+<!--BEGIN TOC-->
+## Table of Contents
+1. [Hardware introspection](#hardware-introspection)
+    1. [CPU temperature](#cpu-temperature)
+    2. [Listing hardware devices](#listing-hardware-devices)
+2. [Graphics cards](#graphics-cards)
+    1. [PCI wattage](#pci-wattage)
+    2. [nVidia](#nvidia)
+    3. [CUDA and cuDNN](#cuda-and-cudnn)
+        1. [Troubleshooting](#troubleshooting)
+3. [Sound Configuration](#sound-configuration)
+    1. [ALSA](#alsa)
+        1. [ALSA auto-configuration](#alsa-auto-configuration)
+        2. [CMUS with ALSA](#cmus-with-alsa)
+    2. [Hardware specifications](#hardware-specifications)
+
+<!--END TOC-->
+
+## Hardware introspection
+
+### CPU temperature
+CPU temperature:
+```
+/sys/class/thermal/thermal_zone0/temp
+```
+
+### Listing hardware devices
+
 Listing all of the PCI devices can be achieved with
 ```bash
 lspci
@@ -10,21 +38,6 @@ update-pciids
 ```
 
 On [HowToGeek](https://www.howtogeek.com/508993/how-to-check-which-gpu-is-installed-on-linux/) is a Ubuntu overview for listing hardware.
-
-<!--BEGIN TOC-->
-## Table of Contents
-1. [Graphics cards](#graphics-cards)
-    1. [PCI wattage](#pci-wattage)
-    2. [nVidia](#nvidia)
-    3. [CUDA and cuDNN](#cuda-and-cudnn)
-        1. [Troubleshooting](#troubleshooting)
-2. [Sound Configuration](#sound-configuration)
-    1. [ALSA](#alsa)
-        1. [ALSA auto-configuration](#alsa-auto-configuration)
-        2. [CMUS with ALSA](#cmus-with-alsa)
-    2. [Hardware specifications](#hardware-specifications)
-
-<!--END TOC-->
 
 
 ## Graphics cards

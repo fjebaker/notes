@@ -7,6 +7,7 @@ parts:
   chapters:
   - file: nix-systems/index
     sections:
+    - file: nix-systems/nix-installations
     - file: nix-systems/nix-sysadmin
     - file: nix-systems/disks-filesystems
     - file: nix-systems/nix-networks
