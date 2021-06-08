@@ -85,7 +85,7 @@ parts:
   - file: vms/index
     sections:
     - file: vms/osx-host
-    - file: vms/linux-guest-extensions
+    - file: vms/kvm
   - file: databases/index
     sections:
     - file: databases/node-red
