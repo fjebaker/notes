@@ -5,6 +5,7 @@
 1. [Overview of Linux Logging](#overview-of-linux-logging)
 2. [Recipes](#recipes)
     1. [Using service files with mounts](#using-service-files-with-mounts)
+    2. [Listing services](#listing-services)
 
 <!--END TOC-->
 
@@ -39,3 +40,13 @@ After=path-to-mnt.mount
 ```
 
 The `Requires` ensures that the service file fails elegantly if the filesystem encountered a problem during mount.
+
+### Listing services
+Examples
+```bash
+systemctl list-units --type=service --state=running
+```
+For all services
+```bash
+systemctl list-units --type=service --all
+```
