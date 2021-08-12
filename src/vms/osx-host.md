@@ -69,4 +69,8 @@ and check the installation with
 ```bash
 lsmod | grep vboxguest
 ```
+<<<<<<< Updated upstream
 The output should list the `vboxguest` extension if all went to plan.
+=======
+The output should list the `vboxguest` extension if all went to plan.
+>>>>>>> Stashed changes
