@@ -7,6 +7,13 @@ KVM provides full virtualisation at near native performance on a given architect
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [KVM details](#kvm-details)
+    1. [Intel VT](#intel-vt)
+    2. [AMD-V](#amd-v)
+2. [Installing KVM](#installing-kvm)
+3. [Using KVM](#using-kvm)
+4. [Other applications](#other-applications)
+    1. [](#)
+    2. [Android Virtual Device](#android-virtual-device)
 
 <!--END TOC-->
 
