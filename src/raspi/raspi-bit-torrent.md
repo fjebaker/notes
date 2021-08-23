@@ -1,12 +1,16 @@
-# Setting up a Raspberry-Pi for secure bit torrenting.
+# Setting up a Raspberry-Pi for secure bit torrenting
 
 The method for configuring the raspi as a torrenting node over vpn is based off of a 'trial and error' approach. It necessitates the use of `openvpn`, requiring itself valid `.ovpn` configuration files, which may require a premium service (successfully tested with NordVPN).
+
+A recommended alternative is to use a docker managed `transmission` container, such as the [linuxserver/transmission](https://registry.hub.docker.com/r/linuxserver/transmission/) container. I have included instructions for this at the end of these notes.
 
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [Installing pre-requisites](#installing-pre-requisites)
 2. [Configuring OpenVPN](#configuring-openvpn)
 3. [Configuring Transmission](#configuring-transmission)
+    1. [Native](#native)
+    2. [With Docker](#with-docker)
 4. [`elinks` for browsing torrent databases](#elinks-for-browsing-torrent-databases)
 5. [Allowing SSH behind OpenVPN](#allowing-ssh-behind-openvpn)
     1. [Configure firewall on startup](#configure-firewall-on-startup)
@@ -80,6 +84,10 @@ pi@eidolon:~ $ curl ipinfo.io
 Something I've noticed with the automated start of OpenVPN is that having multiple `.conf` files in `/etc/openvpn/` can cause some anomalous behaviour, especially on more recent versions of linux, including a highly annoying systemd password manager writing to `Wall` sporadically; make sure you only have **one** in the directory!
 
 ## Configuring Transmission
+You can either use transmission natively, or through a docker container. The benefits of using a docker container, beyond the usual benefits, include built-in web UI and more stateful control of torrenting environment.
+
+
+### Native
 The configuration settings for the transmission daemon can be found in `/etc/transmission-daemon/settings.json`. Lines of importance are
 ```
 {
@@ -107,7 +115,7 @@ You can change the download directory here aswell, and it's worth changing `spee
 
 You can also change the seeding speed limits here -- if you do, remember to change the `speed-limit-up-enabled` to `true`.
 
-Finally `umask` is set to `18`, as transmission creates a new user with `uid 18`, which owns all of the downloaded files in order to sandbox them. If you want to be a bit risky, change it to your `uid` (probably `2`) so you don't have to `sudo chown pi:pi` all the time.
+Finally `umask` is set to `2` for all new files, setting read/write permissions for other (`777-775=2`)
 
 Restart the service `sudo service transmission-daemon start`. You can control the daemon using `transmission-remote {args}`, but, unless you disabled authentication, you'll always have to provide a login flag. As such, I recommend aliasing
 ```
@@ -126,6 +134,42 @@ tsm -t all -r 			# remove all torrents
 NB: removing all torrents only removes their index from the daemon; the downloaded files will have to manually deleted.
 
 With this you're now all set to start torrenting securely over a VPN.
+
+### With Docker
+We will use the [linuxserver/transmission](https://registry.hub.docker.com/r/linuxserver/transmission/) docker image
+```bash
+docker pull linuxserver/transmission
+```
+
+We require three volumes for the mounts, namely `downloads`, `config`, and `watch`.
+
+The startup command for the container is then 
+```bash
+docker run --rm -d \
+	--name=transmission \
+	-e PUID=1000 -e PGID=1000 \
+	-e TZ="Europe/London" \
+	-e TRANSMISSION_WEB_HOME="/flood-for-transmission/" \
+	-e USER=transmission -e PASS=transmission \
+	-p 9091:9091 \
+	-p 51413:51413 -p 51413:51413/udp \
+	-v ~/config:/config \
+	-v ~/downloads:/downloads \
+	-v ~/watch:/watch \
+	linuxserver/transmission
+```
+Note the `USER` and `PASS` are used for both the web UI and the transmission remote.
+
+The `TRANSMISSION_WEB_HOME` may also be left blank, in which case no web UI is started.
+
+The configuration file in `config/settings.json` may then be configured as in the native case
+
+Note, if using `elinks` with docker, prefix the regular commands with
+```bash
+docker exec transmission-remote ...
+```
+
+The web UI is then exposed at port `9091`.
 
 ## `elinks` for browsing torrent databases
 You'll be able to access websites normally blocked by your ISP just by using `elinks` through the VPN, but to make torrenting a little easier it's worth creating a script for passing magnet URIs directly to transmission with a keybinding.
