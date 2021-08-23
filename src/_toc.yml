@@ -52,6 +52,7 @@ parts:
     - file: python/flask/jinja-templating
     - file: python/fast-api/using-fast-api
     - file: python/mkdocs-notes
+    - file: python/scrapy
   - file: js/index
     sections:
     - file: js/jest-testing

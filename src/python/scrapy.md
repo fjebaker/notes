@@ -9,6 +9,7 @@
     1. [`follow` and `follow_all`](#follow-and-follow_all)
     2. [Downloading images](#downloading-images)
 3. [Command line arguments](#command-line-arguments)
+4. [Useful resources](#useful-resources)
 
 <!--END TOC-->
 
@@ -120,3 +121,8 @@ When launching the spider from the command line, we can now pass in the argument
 ```py
 scrapy crawl [spidername] -a page=10
 ```
+
+
+## Useful resources
+
+- [XPath Cheatsheet](https://devhints.io/xpath)

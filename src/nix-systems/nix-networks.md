@@ -7,12 +7,14 @@
     2. [Configuring interfaces](#configuring-interfaces)
         1. [DHCP](#dhcp)
         2. [Static IP](#static-ip)
+        3. [DNS](#dns)
     3. [Debugging networks](#debugging-networks)
     4. [Proxies](#proxies)
 2. [SSH recipes](#ssh-recipes)
 3. [Network introspection](#network-introspection)
     1. [Checking open ports](#checking-open-ports)
     2. [ARP](#arp)
+    3. [DNS interrogation](#dns-interrogation)
 
 <!--END TOC-->
 
@@ -92,6 +94,16 @@ domain example.com
 
 **NB:** The modern `systemd` configuration is considerably more elegant, and also documented [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_modern_network_configuration_without_gui).
 
+#### DNS
+The DNS servers are configured (on `systemd` distributions) through `dhcpcd`, and thus may be amended by editing
+```
+/etc/dhcpcd.conf
+```
+and adding the line
+```
+static domain_name_servers=address [address, ...]
+```
+
 ### Debugging networks
 See [this guide on port overviews](https://linuxize.com/post/check-listening-ports-linux/).
 
@@ -131,6 +143,8 @@ Using the `netstat` command
 netstat -tunlp
 ```
 with the flags for `-p` process id associated, `-u` udp connections, `-n` display numerical port range, `-t` tcp connections, and `-l` to show listening sockets.
+
+*NB:* `netstat` is increasingly deprecated in favour of `ss`.
 
 This can also be accomplished using the `lsof` to list open files
 ```bash
@@ -179,3 +193,27 @@ arp -a 192.168.1.136
 *Note*: there is BSD and Linux output style (`-a` vs `-e`).
 
 ARP cache entries can either be *static* or *dynamic*, i.e. user-added, or automatically resolved. 
+
+### DNS interrogation
+A tool for investigating DNS lookups is [`dig`](https://linux.die.net/man/1/dig), part of the `dnsutil` package.
+
+To trace a DNS lookup, use
+```bash
+dig [server]
+```
+
+To trace a specific DNS server, use 
+```bash
+dig @192.168.1.254 [server]
+```
+
+The same may be accomplished using [the `nslookup` program](https://man.cx/nslookup(1)) (included as part of `distutils`):
+```bash
+nslookup [server]
+```
+
+You can also view the current DNS configuration by viewing
+```bash
+cat /etc/resolv.conf
+```
+
