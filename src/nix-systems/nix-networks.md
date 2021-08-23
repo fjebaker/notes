@@ -13,6 +13,7 @@
 3. [Network introspection](#network-introspection)
     1. [Checking open ports](#checking-open-ports)
     2. [ARP](#arp)
+    3. [DNS interrogation](#dns-interrogation)
 
 <!--END TOC-->
 
@@ -132,6 +133,8 @@ netstat -tunlp
 ```
 with the flags for `-p` process id associated, `-u` udp connections, `-n` display numerical port range, `-t` tcp connections, and `-l` to show listening sockets.
 
+*NB:* `netstat` is increasingly deprecated in favour of `ss`.
+
 This can also be accomplished using the `lsof` to list open files
 ```bash
 lsof -i
@@ -179,3 +182,16 @@ arp -a 192.168.1.136
 *Note*: there is BSD and Linux output style (`-a` vs `-e`).
 
 ARP cache entries can either be *static* or *dynamic*, i.e. user-added, or automatically resolved. 
+
+### DNS interrogation
+A tool for investigating DNS lookups is `dig`, part of the `dnsutil` package.
+
+To trace a DNS lookup, use
+```bash
+dig [server]
+```
+
+To trace a specific DNS server, use 
+```bash
+dig @192.168.1.254 [server]
+```
