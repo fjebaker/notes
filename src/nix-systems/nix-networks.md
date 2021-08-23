@@ -7,6 +7,7 @@
     2. [Configuring interfaces](#configuring-interfaces)
         1. [DHCP](#dhcp)
         2. [Static IP](#static-ip)
+        3. [DNS](#dns)
     3. [Debugging networks](#debugging-networks)
     4. [Proxies](#proxies)
 2. [SSH recipes](#ssh-recipes)
@@ -92,6 +93,16 @@ domain example.com
 ```
 
 **NB:** The modern `systemd` configuration is considerably more elegant, and also documented [in the manual](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_modern_network_configuration_without_gui).
+
+#### DNS
+The DNS servers are configured (on `systemd` distributions) through `dhcpcd`, and thus may be amended by editing
+```
+/etc/dhcpcd.conf
+```
+and adding the line
+```
+static domain_name_servers=address [address, ...]
+```
 
 ### Debugging networks
 See [this guide on port overviews](https://linuxize.com/post/check-listening-ports-linux/).
@@ -195,3 +206,14 @@ To trace a specific DNS server, use
 ```bash
 dig @192.168.1.254 [server]
 ```
+
+The same may be accomplished using [the `nslookup` program](https://man.cx/nslookup(1)):
+```bash
+nslookup [server]
+```
+
+You can also view the current DNS configuration by viewing
+```bash
+cat /etc/resolv.conf
+```
+
