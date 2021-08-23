@@ -195,7 +195,7 @@ arp -a 192.168.1.136
 ARP cache entries can either be *static* or *dynamic*, i.e. user-added, or automatically resolved. 
 
 ### DNS interrogation
-A tool for investigating DNS lookups is `dig`, part of the `dnsutil` package.
+A tool for investigating DNS lookups is [`dig`](https://linux.die.net/man/1/dig), part of the `dnsutil` package.
 
 To trace a DNS lookup, use
 ```bash
@@ -207,7 +207,7 @@ To trace a specific DNS server, use
 dig @192.168.1.254 [server]
 ```
 
-The same may be accomplished using [the `nslookup` program](https://man.cx/nslookup(1)):
+The same may be accomplished using [the `nslookup` program](https://man.cx/nslookup(1)) (included as part of `distutils`):
 ```bash
 nslookup [server]
 ```
