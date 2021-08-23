@@ -8,6 +8,7 @@ One-liners and other useful tricks for Vim.
 2. [Filetype specific settings](#filetype-specific-settings)
 3. [To uppercase](#to-uppercase)
 4. [Vim Regex](#vim-regex)
+5. [Useful plugins](#useful-plugins)
 
 <!--END TOC-->
 
@@ -47,3 +48,9 @@ Here
 
 ## Vim Regex
 Useful overview is provided on [Vimregex](http://www.vimregex.com/).
+
+## Useful plugins
+
+- DrawIt for creating ASCII diagrams [link](https://www.vim.org/scripts/script.php?script_id=40)
+
+- Renamer for batch renaming files [link](https://www.vim.org/scripts/script.php?script_id=1721)
