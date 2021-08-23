@@ -90,6 +90,13 @@ and you're away! Test it all with
 docker run hello-world
 ```
 
+#### `docker-compose`
+Docker composed is easiest to install through the Python package manager
+```bash
+sudo apt-get install python3-pip
+sudo pip3 install docker-compose
+```
+
 ### Enabling WiFi before boot
 You can configure the pi to connect to a wifi router before you boot the device; mount the SD card, and in the `boot` volume, create a new file with the contents:
 ```
