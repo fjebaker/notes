@@ -9,6 +9,7 @@ I recently bought a new SD card for my years-old pi, and wanted to reformat and 
 2. [Backing up disk images](#backing-up-disk-images)
 3. [Some quality of life tips](#some-quality-of-life-tips)
     1. [Getting Docker](#getting-docker)
+        1. [`docker-compose`](#docker-compose)
     2. [Enabling WiFi before boot](#enabling-wifi-before-boot)
     3. [Enabling WiFi after boot](#enabling-wifi-after-boot)
     4. [SSH enable in headless mode](#ssh-enable-in-headless-mode)
