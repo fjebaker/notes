@@ -11,6 +11,8 @@
     3. [Debugging networks](#debugging-networks)
     4. [Proxies](#proxies)
 2. [SSH recipes](#ssh-recipes)
+    1. [Configuration files](#configuration-files)
+    2. [Debugging access rights](#debugging-access-rights)
 3. [Network introspection](#network-introspection)
     1. [Checking open ports](#checking-open-ports)
     2. [ARP](#arp)
@@ -123,16 +125,46 @@ protocol://user:password@host:port
 
 
 ## SSH recipes
-Useful commands are
+A handful of useful tips and tricks when using SSH.
 
 Copy login key to remote:
 
 ```bash
 ssh-copy-id user@host
 ```
+
 Remove host key from chain:
 ```bash
 ssh-keygen -R host
+```
+
+### Configuration files
+Configuration files can help assign different SSH identities or options to different hosts. The global configuration file is located in `/etc/ssh/ssh_config`, and the per user in `~/.ssh/config`.
+
+The configuration files are of the format
+```
+Host hostname1
+    SSH_OPTION value
+    SSH_OPTION value
+    ...
+
+Host hostname2
+    ...
+```
+
+A full overview of the configuration files can be found [on the SSH website](https://www.ssh.com/academy/ssh/config).
+
+An example configuration for using a specific identity with a specific host
+```
+Host github.com
+    IdentityFile ~/.ssh/id_github
+    IdentitiesOnly yes
+```
+
+### Debugging access rights
+The best way to understand what is going wrong is just to trace a verbose test connection
+```bash
+ssh -T user@domain -v
 ```
 
 ## Network introspection
