@@ -86,8 +86,9 @@ parts:
     - file: aws/goofys-s3
   - file: vms/index
     sections:
-    - file: vms/osx-host
+    - file: vms/sun-virtual-box
     - file: vms/kvm
+    - file: vms/qemu
   - file: databases/index
     sections:
     - file: databases/node-red

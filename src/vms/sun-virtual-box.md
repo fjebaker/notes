@@ -1,4 +1,6 @@
-# Virtual Box (OSX)
+# Oracle Virtual Box
+
+*Notes for OSX*.
 
 Using [Oracle VirtualBox](https://www.virtualbox.org/), installed using brew with extensions:
 
@@ -69,8 +71,4 @@ and check the installation with
 ```bash
 lsmod | grep vboxguest
 ```
-<<<<<<< Updated upstream
 The output should list the `vboxguest` extension if all went to plan.
-=======
-The output should list the `vboxguest` extension if all went to plan.
->>>>>>> Stashed changes
