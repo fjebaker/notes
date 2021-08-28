@@ -10,7 +10,6 @@ One-liners and other useful tricks for Vim.
 4. [Vim Regex](#vim-regex)
 5. [Useful plugins](#useful-plugins)
 
-
 <!--END TOC-->
 
 ## Installing `.vba` / vimball plugins
