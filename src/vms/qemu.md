@@ -5,6 +5,7 @@
 1. [Useful flags](#useful-flags)
 2. [Creating snapshots from a fresh `.iso`](#creating-snapshots-from-a-fresh--iso)
 3. [Drive formats](#drive-formats)
+
 <!--END TOC-->
 
 ## Useful flags
