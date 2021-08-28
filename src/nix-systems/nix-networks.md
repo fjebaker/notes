@@ -161,6 +161,25 @@ Host github.com
     IdentitiesOnly yes
 ```
 
+Another example for creating an alias
+```
+Host *pi
+    HostName huginn.local
+    User pi
+    Port 22
+```
+Now using any of the following
+```bash
+ssh pi
+ssh raspberrypi
+ssh mypi
+```
+will all use the above configuration and alias to
+```bash
+ssh pi@huginn.local -p 22
+```
+
+
 ### Debugging access rights
 The best way to understand what is going wrong is just to trace a verbose test connection
 ```bash
