@@ -19,6 +19,7 @@ Recipes and writeups of solutions from problems on different \*nix operating sys
     1. [Debian](#debian)
     2. [Debian minor versioning](#debian-minor-versioning)
 6. [Modifying keymaps with `xmodmap`](#modifying-keymaps-with-xmodmap)
+7. [Modifying GNOME](#modifying-gnome)
 
 <!--END TOC-->
 
@@ -262,4 +263,11 @@ echo 'xmodmap ~/.Xmodmap' >> ~/.xinitrc
 To undo a keyboard mapping, use
 ```bash
 setxkbmap -option
+```
+
+## Modifying GNOME
+
+Changing the overlay toggle key (default: super):
+```bash
+gsettings set org.gnome.mutter overlay-key 'XF86LaunchB'
 ```
