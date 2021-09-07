@@ -138,7 +138,8 @@ Remove host key from chain:
 ssh-keygen -R host
 ```
 
-### Configuration files
+### Configuration files
+
 Configuration files can help assign different SSH identities or options to different hosts. The global configuration file is located in `/etc/ssh/ssh_config`, and the per user in `~/.ssh/config`.
 
 The configuration files are of the format
