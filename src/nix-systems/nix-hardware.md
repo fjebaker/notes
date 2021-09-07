@@ -3,8 +3,9 @@
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [Hardware introspection](#hardware-introspection)
-    1. [CPU temperature](#cpu-temperature)
-    2. [Listing hardware devices](#listing-hardware-devices)
+    1. [Printing keystrokes](#printing-keystrokes)
+    2. [CPU temperature](#cpu-temperature)
+    3. [Listing hardware devices](#listing-hardware-devices)
 2. [Graphics cards](#graphics-cards)
     1. [PCI wattage](#pci-wattage)
     2. [nVidia](#nvidia)
@@ -19,6 +20,11 @@
 <!--END TOC-->
 
 ## Hardware introspection
+
+### Printing keystrokes
+This is conventionally handled by the window manager, such as X or recently Wayland.
+
+In both cases `xev` or `showkey` can be used to monitor input events and print them to the terminal, along with the key name and scan or key codes respectively.
 
 ### CPU temperature
 CPU temperature:
