@@ -31,7 +31,7 @@ using Pkg
 Pkg.add("PkgTemplates")
 using PkgTemplates
 
-template = Template(; user="dustpancake")
+template = Template(; user="febk")
 ```
 
 And generate the project structure with

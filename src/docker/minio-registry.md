@@ -74,7 +74,7 @@ and then create it again with the updated file. There doesn't seem to be an upda
 
 ## Starting the registry service
 
-As documented in [another of my notes on Docker Swarm](https://github.com/dustpancake/dust-notes/blob/master/docker/docker-swarm.md), we can deploy a registry service with
+As documented in [another of my notes on Docker Swarm](https://github.com/febk/dust-notes/blob/master/docker/docker-swarm.md), we can deploy a registry service with
 ```bash
 docker service create -p 5000:5000 -d \
   --name registry \
