@@ -1,4 +1,4 @@
-# dust-notes
+# notes
 
 A collection of notes I've been continuously keeping whilst learning topics in Computer Science. 
 

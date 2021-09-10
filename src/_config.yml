@@ -1,4 +1,4 @@
-title: "dust-notes"
+title: "notes"
 author: "Fergus Baker"
 logo: "logo.jpg"
 
@@ -9,7 +9,7 @@ execute:
   execute_notebooks: "off"
 
 repository:
-  url:  "https://github.com/febk/dust-notes"
+  url:  "https://github.com/febk/notes"
   branch: master
 
 
