@@ -4,7 +4,7 @@ Some poster packages and templates can be found [here](https://www.latextemplate
 
 The skeletal poster structure templates will be available here
 
-- [A0 baposter](https://github.com/Dustpancake/Dust-Notes/blob/master/tex/templates/baposter.tex)
+- [A0 baposter](https://github.com/febk/notes/blob/master/tex/templates/baposter.tex)
 
 <!--BEGIN TOC-->
 ## Table of Contents

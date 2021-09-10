@@ -109,7 +109,7 @@ emailAddress                    = Email Address
 ```
 The remaining sections specify different flags when signing certificates, such as `v3_ca` for X509s.
 
-The full configuration file is available [in my notes](https://github.com/Dustpancake/Dust-Notes/blob/master/security/openssl.cnf).
+The full configuration file is available [in my notes](https://github.com/febk/notes/blob/master/security/openssl.cnf).
 
 ### Creating the Root key and certificate
 The root key (private) and root certificate (public) can be created with a passphrase; in the root directory, run

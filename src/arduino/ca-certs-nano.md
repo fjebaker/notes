@@ -117,7 +117,7 @@ issuer=/C=US/O=Let's Encrypt/CN=Let's Encrypt Authority X3
 ```
 Here `s:` is the subject line, and `i:` informs us about the issuing authority. In the final lines of the output, we also see explicitly again that the issuer is `Let's Encrypt`. Presumably then, if we can construct a server where OpenSSL is able to fetch a certificate chain with our own certificate as the root, then the Toolkit should also be able to fetch and pass the certificate to our arduino device.
 
-I will write more explicit [notes](https://github.com/Dustpancake/Dust-Notes/blob/master/security/ssl-tls-certificates.md) on certificate authorities, SSL/TLS, and how to configure custom certificate chains at a later date, which will elaborate on different analysis methods more completely.
+I will write more explicit [notes](https://github.com/febk/notes/blob/master/security/ssl-tls-certificates.md) on certificate authorities, SSL/TLS, and how to configure custom certificate chains at a later date, which will elaborate on different analysis methods more completely.
 
 ### Configuring a CA
 TODO
