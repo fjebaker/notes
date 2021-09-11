@@ -267,7 +267,7 @@ The search order for argsparse delves all the way through query structure, reque
 [raspi fix](https://stackoverflow.com/questions/48060354/configurationerror-server-at-127-0-0-127017-reports-wire-version-0-but-this-v)
 
 ### RethinkDB
-See my [writeup](https://github.com/febk/notes/blob/master/python/flask/rethink-db-with-flask.md).
+See my [writeup](https://github.com/furges/notes/blob/master/python/flask/rethink-db-with-flask.md).
 
 ### SQLAlchemy
 A heavy handed and verbose `sqlite3` approach can be seen in [the documentation](https://flask.palletsprojects.com/en/1.1.x/tutorial/database/). A more elegant way to use SQL based databases is using SQLAlchemy.

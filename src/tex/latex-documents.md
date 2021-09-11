@@ -17,8 +17,8 @@ For my degree, and generally, I write a lot of articles in LaTeX. Often I find m
 ## Templates
 List of templates for different LaTeX document types (this will grow as I update my notes)
 
-- [Scientific articles](https://github.com/febk/notes/blob/master/tex/templates/article.tex)
-- [Scientific `baposter`](https://github.com/febk/notes/blob/master/tex/templates/baposter.tex)
+- [Scientific articles](https://github.com/furges/notes/blob/master/tex/templates/article.tex)
+- [Scientific `baposter`](https://github.com/furges/notes/blob/master/tex/templates/baposter.tex)
 
 ## Listings
 Using code snippets is something often required in scientific writing. My general format for listings is
