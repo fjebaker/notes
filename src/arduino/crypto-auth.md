@@ -1,6 +1,6 @@
 # Using the ECC0X08 with Arduino devices
 
-Part of my ongoing IoT project is to utilize the ATECC608a embedded in the Arduino Nano 33 IoT micro controller. I outline my aims and list my guides in my [dedicated repository](https://github.com/furges/MQTT-with-TLS), and will use these notes to document the exploration process.
+Part of my ongoing IoT project is to utilize the ATECC608a embedded in the Arduino Nano 33 IoT micro controller. I outline my aims and list my guides in my [dedicated repository](https://github.com/fjebaker/MQTT-with-TLS), and will use these notes to document the exploration process.
 
 <!--BEGIN TOC-->
 ## Table of Contents
@@ -30,7 +30,7 @@ I searched on GitHub and found an Arduino library called [ArduinoECCX08](https:/
 - public/private key generation
 - SHA256 digests
 
-My particular interest lies in the secure boot, AES crypto, and key storage features in the ECC608, not currently present. *I have forked the repo* **[furges/ArduinoECCX08](https://github.com/furges/ArduinoECCX08)**, and intend to implement those features myself soon. As such, these notes will act as a development log as well as their overview purpose.
+My particular interest lies in the secure boot, AES crypto, and key storage features in the ECC608, not currently present. *I have forked the repo* **[fjebaker/ArduinoECCX08](https://github.com/fjebaker/ArduinoECCX08)**, and intend to implement those features myself soon. As such, these notes will act as a development log as well as their overview purpose.
 
 ### ECC608 data sheets
 After a lot of searching, I found two, more complete, data sheets for the ECC608
@@ -194,7 +194,7 @@ Byte 13:
 ```
 And true enough, we have AES functionality. Very little else needs to be changed in this configuration step to enable us to store an AES key in the Data zone, and have enough debug functionality to read/write even after the configuration is locked. **NB:** although you need to lock the configuration to write an AES key, you will not be able to unlock the device again afterwards. Finish your full configuration, before committing.
 
-I have included in my fork a configuration that extends the default TLS config to use and enables AES key storage under [`utility/ECCX08DefaultAESConfig.h`](https://github.com/furges/ArduinoECCX08/blob/master/src/utility/ECCX08DefaultAESConfig.h). This configuration enables slot 9 for debug AES keys, by setting the slot config bytes to
+I have included in my fork a configuration that extends the default TLS config to use and enables AES key storage under [`utility/ECCX08DefaultAESConfig.h`](https://github.com/fjebaker/ArduinoECCX08/blob/master/src/utility/ECCX08DefaultAESConfig.h). This configuration enables slot 9 for debug AES keys, by setting the slot config bytes to
 ```c
 0x07, 0x0F
 ```

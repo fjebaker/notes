@@ -23,7 +23,7 @@ I tend to like doing things on the command line, so I will be using the [Platfor
 <!--END TOC-->
 
 ## Configuring PlatformIO <a name="toc-sub-tag-0"></a>
-I will probably end up making another document on using PlatformIO, but for the sake of getting started (edit: indeed I did; section moved to [PlatformIO notes](https://github.com/furges/notes/blob/master/arduino/platformio.md)).s
+I will probably end up making another document on using PlatformIO, but for the sake of getting started (edit: indeed I did; section moved to [PlatformIO notes](https://github.com/fjebaker/notes/blob/master/arduino/platformio.md)).s
 
 ## Interacting with pins
 Different recipes for interacting with pins. All of these scripts will require the

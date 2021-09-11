@@ -194,7 +194,7 @@ In practice, a full module implementing dynamic device numbering and device node
 #define DRIVER_NAME "exampledriver"
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("furges");
+MODULE_AUTHOR("fjebaker");
 MODULE_DESCRIPTION("Example dynamic device number and automatic device registering.");
 
 static dev_t device_number;

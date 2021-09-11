@@ -20,7 +20,7 @@ pip install tensorflow
 ## GPU installation
 For GPU, you'll require at the very least CUDA. To see which TensorFlow your OS is compatible with, be sure to [check this list](https://www.tensorflow.org/install/source#tested_build_configurations).
 
-For a native installation you will also require cuDNN, which I've written notes for [Debian here](https://github.com/furges/notes/blob/master/hardware/debian-gpu.md).
+For a native installation you will also require cuDNN, which I've written notes for [Debian here](https://github.com/fjebaker/notes/blob/master/hardware/debian-gpu.md).
 
 If everything is correctly set up, you can just use
 ```bash

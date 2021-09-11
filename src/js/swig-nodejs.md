@@ -85,7 +85,7 @@ As usual with SWIG, we have our `.cpp` and `.hpp` files (*note* that pure C is n
 %}
 %include "example.hpp"
 ```
-SWIG with NodeJS requires no additional include statements (*CF:* [SWIG with Python](https://github.com/furges/notes/blob/master/python/cpp-c-swig.md)). We can process and generate the wrapper code with
+SWIG with NodeJS requires no additional include statements (*CF:* [SWIG with Python](https://github.com/fjebaker/notes/blob/master/python/cpp-c-swig.md)). We can process and generate the wrapper code with
 ```bash
 swig -c++ -javascript -node example.i
 ```

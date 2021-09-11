@@ -9,7 +9,7 @@ execute:
   execute_notebooks: "off"
 
 repository:
-  url:  "https://github.com/furges/notes"
+  url:  "https://github.com/fjebaker/notes"
   branch: master
 
 
