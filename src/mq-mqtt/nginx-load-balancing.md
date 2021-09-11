@@ -59,7 +59,7 @@ Here are defined the log formats, the upstream cluster (the `zone` directive def
 
 In the commercial version of NGiNX, health checks can be implemented, but the relevant packages are not included in the free version.
 
-**NB:** I would personally recommend copying these files from the docker image, editing them in a more friendly text editor, and then copying them back over. The commands to copy can be found in my [Docker Cheatsheet](https://github.com/febk/notes/blob/master/docker/docker-cheatsheet.md).
+**NB:** I would personally recommend copying these files from the docker image, editing them in a more friendly text editor, and then copying them back over. The commands to copy can be found in my [Docker Cheatsheet](https://github.com/furges/notes/blob/master/docker/docker-cheatsheet.md).
 
 ### Verifying
 We can verify that the configuration files are acceptable by running the test command

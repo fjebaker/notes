@@ -202,7 +202,7 @@ Aim for very simple runtime logic, **compilers optimize simple code the best**. 
 ## MongoDB
 
 ### Data Modeling with MongoDB - Yulia Genkina [MongoDB 2020]
-[YouTube link](https://www.youtube.com/watch?v=yuPjoC3jmPA&ab_channel=MongoDB). I've covered this talk in detail in [my MonogDB notes](https://github.com/febk/notes/blob/master/databases/mongo-db.md).
+[YouTube link](https://www.youtube.com/watch?v=yuPjoC3jmPA&ab_channel=MongoDB). I've covered this talk in detail in [my MonogDB notes](https://github.com/furges/notes/blob/master/databases/mongo-db.md).
 
 ## Go
 

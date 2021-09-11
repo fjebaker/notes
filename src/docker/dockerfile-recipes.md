@@ -38,7 +38,7 @@ EXPOSE 8080
 Here, the `node:current-alpine3.11` container is aliased `installer` and is not bundled into our final `python:3.8.5-slim-buster` container, reducing the final size, and not shipping unneeded executables.
 
 ## Running multiple processes in a single container
-This follows from a suggestion in the [docker documentation](https://docs.docker.com/config/containers/multi-service_container/). I personally have had most success with `supervisord`, which I will write separate notes for available [here](https://github.com/febk/notes/blob/master/automation/supervisor-d.md).
+This follows from a suggestion in the [docker documentation](https://docs.docker.com/config/containers/multi-service_container/). I personally have had most success with `supervisord`, which I will write separate notes for available [here](https://github.com/furges/notes/blob/master/automation/supervisor-d.md).
 
 The dockerfile only requires to copy in configurations and then set the entry-point
 ```Dockerfile

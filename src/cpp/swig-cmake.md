@@ -77,7 +77,7 @@ source venv/bin/activate
 ```
 before proceeding with the build.
 
-The `find_packages` command will set common variables for us, including `<package>_FOUND` to check if cmake was able to successfully find the package. I have [written more notes on this directive](https://github.com/febk/notes/blob/master/cpp/cmake.md) for more details.
+The `find_packages` command will set common variables for us, including `<package>_FOUND` to check if cmake was able to successfully find the package. I have [written more notes on this directive](https://github.com/furges/notes/blob/master/cpp/cmake.md) for more details.
 
 ```cmake
 # examplesrc/swig/CMakeLists.txt
