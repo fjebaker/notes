@@ -132,6 +132,9 @@ parts:
     sections:
     - file: git/git-reference
     - file: git/gitea-mariadb
+  - file: vscode/index
+    sections:
+    - file: vscode/publishing
 
 - caption: Miscellaneous
   chapters:
