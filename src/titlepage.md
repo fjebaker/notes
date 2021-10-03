@@ -7,3 +7,9 @@ I've tried my best to create some organization and genericism in each entry, how
 I don't anticipate these notes being of particular use en-masse to anyone other than myself, but maybe here and there is something that may be useful for you.
 
 The notes are primarly kept so that I have a quick reference, that I know inside out, wherever I am.
+
+
+**Overview**:
+
+```{tableofcontents}
+```
