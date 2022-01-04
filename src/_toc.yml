@@ -96,6 +96,10 @@ parts:
     - file: databases/rethink-db
     - file: databases/lang-drivers/py-mongo
 
+- caption: Configurations
+  chapters:
+    - file: configurations/shell-rc-profiles
+
 - caption: Machine Learning
   chapters:
   - file: machine-learning/index
@@ -144,7 +148,6 @@ parts:
   - file: iptables-and-firewalls
   - file: ci-cd/jenkins-recipes
   - file: security/openssl-cookbook
-  - file: configurations/shell-rc-profiles
   - file: visualisation/blender-learning
   - file: java/gradle-cookbook
   - file: automation/mycroft-osx
