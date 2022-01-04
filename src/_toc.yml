@@ -9,7 +9,7 @@ parts:
     sections:
     - file: nix-systems/nix-installations
     - file: nix-systems/nix-sysadmin
-    - file: nix-systems/nix-filesystems
+    - file: nix-systems/nix-filesystem
     - file: nix-systems/nix-networks
     - file: nix-systems/nix-hardware
     - file: nix-systems/boot-bios
@@ -96,6 +96,11 @@ parts:
     - file: databases/rethink-db
     - file: databases/lang-drivers/py-mongo
 
+- caption: Configurations
+  chapters:
+    - file: configurations/shell-rc-profiles
+    - file: configurations/jupyter-notebook
+
 - caption: Machine Learning
   chapters:
   - file: machine-learning/index
@@ -144,7 +149,6 @@ parts:
   - file: iptables-and-firewalls
   - file: ci-cd/jenkins-recipes
   - file: security/openssl-cookbook
-  - file: configurations/shell-rc-profiles
   - file: visualisation/blender-learning
   - file: java/gradle-cookbook
   - file: automation/mycroft-osx
