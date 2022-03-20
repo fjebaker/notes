@@ -6,7 +6,9 @@ Notes, recipes, and useful snippets relating to all things OSX.
 <!--BEGIN TOC-->
 ## Table of Contents
 1. [Mounting Linux filesystems](#mounting-linux-filesystems)
-2. [Changing hostnames:](#changing-hostnames)
+2. [Changing hostnames](#changing-hostnames)
+3. [Useful fixes](#useful-fixes)
+    1. [Flushing DNS](#flushing-dns)
 
 <!--END TOC-->
 
@@ -45,7 +47,7 @@ or
 sudo umount /path/to/mnt
 ```
 
-## Changing hostnames:
+## Changing hostnames
 Use `scutil`, a program from managing system configuration parameters.
 
 To change primary hostname
@@ -67,3 +69,12 @@ dscacheutil -flushcache
 ```
 
 and reboot.
+
+## Useful fixes
+
+### Flushing DNS
+
+```bash
+sudo killall -HUP mDNSResponder
+```
+sending `-HUP` for "hangup" to request stopping and re-starting. For more on signal codes, [see this SE answer](https://apple.stackexchange.com/a/103614).
