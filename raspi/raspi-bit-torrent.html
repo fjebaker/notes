@@ -1,0 +1,1470 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setting up a Raspberry-Pi for secure bit torrenting &#8212; notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/vollkorn.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/_static/styles.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing PyAudio on Raspberry Pi" href="pyaudio.html" />
+    <link rel="prev" title="Configuring a Raspberry Pi from fresh install" href="raspi-config.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../titlepage.html">
+   notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../nix-systems/index.html">
+   *nix Systems
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-installations.html">
+     Software installation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-sysadmin.html">
+     System administration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-filesystem.html">
+     Disk and filesystem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-networks.html">
+     Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-hardware.html">
+     Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/boot-bios.html">
+     Boot Loaders and BIOS control
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/systemd.html">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       journald
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/kernel.html">
+     Linux Kernel Modules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bash/index.html">
+   Bash scripting
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-reference.html">
+     Bash reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-cookbook.html">
+     Bash cookbook
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../osx-reference.html">
+   OSX Reference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/index.html">
+   C++ and C
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/declarations.html">
+     Declarations in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/conan.html">
+     Conan package manager
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/unit-testing.html">
+     Unit testing with Catch2! and Trompeloeil
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/swig-cmake.html">
+     Using SWIG with CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cmake.html">
+     CMake notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/member-functions.html">
+     On using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       std::function
+      </span>
+     </code>
+     for member functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../julia/index.html">
+   Julia Notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/julia-intro.html">
+     Julia learning notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/README.html">
+     Advent of Code notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/scopes.html">
+     Julia Scopes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/index.html">
+   Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-recipes.html">
+     Python recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/jupyter-ipython.html">
+     Jupyter and iPython cheat sheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/regex.html">
+     Regex in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-serial.html">
+     Serial communication with Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/high-perf.html">
+     High performance Python techniques and paradigms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/c-wrapping.html">
+     Wrapping C and C++ into Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/pypi-distribution.html">
+     Making a project available on pypi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/cpp-c-swig.html">
+     Wrapping C/C++ code using SWIG
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/requests.html">
+     Python
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       requests
+      </span>
+     </code>
+     cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/using-flask.html">
+     Using Python Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/rethink-db-with-flask.html">
+     Using RethinkDB with Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/jinja-templating.html">
+     Templating HTML pages with jinja
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/fast-api/using-fast-api.html">
+     Using FastAPI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/mkdocs-notes.html">
+     Notes on mkdocs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/scrapy.html">
+     Scrapy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../js/index.html">
+   JavaScript
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/jest-testing.html">
+     Using Jest testing framework
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/js-reference.html">
+     JavaScript language reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/swig-nodejs.html">
+     Using SWIG with NodeJS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/request-parsing.html">
+     Making HTTP requests and parsing in JS and node.js
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/extensions/native-messaging.html">
+     Native Messaging for Browser Extensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/vue/over-vue.html">
+     Vue Overview
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tex/index.html">
+   LaTeX
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latex-documents.html">
+     Writing LaTeX documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latexmk.html">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       latexmk
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/presentations.html">
+     Making presentations in LaTeX
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/posters.html">
+     Creating posters in LaTeX
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DevOps
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../docker/index.html">
+   Docker
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/minio-registry.html">
+     Creating a persistent local registry with S3/MinIO
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-cheatsheet.html">
+     Docker cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/systemd-with-docker.html">
+     Using Docker as
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     services
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-compose.html">
+     The magical world of Docker-Compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/dockerfile-recipes.html">
+     Dockerfile cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-swarm.html">
+     Docker Swarm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../aws/index.html">
+   Amazon Web Services
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/vpc-overview.html">
+     VPC overview
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/setting-up.html">
+     AWS Settup
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/ec2-with-docker.html">
+     EC2 with Docker
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/goofys-s3.html">
+     Using Goofys with S3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vms/index.html">
+   Virtual Machines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/sun-virtual-box.html">
+     Oracle Virtual Box
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/kvm.html">
+     Kernel-based Virtual Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/qemu.html">
+     QEMU
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../databases/index.html">
+   Databases
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/node-red.html">
+     NodeRed Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/mongo-db.html">
+     Using MongoDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/rethink-db.html">
+     RethinkDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/lang-drivers/py-mongo.html">
+     Using MongoDB and Python
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/shell-rc-profiles.html">
+   Shell
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*rc
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*profile
+    </span>
+   </code>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/jupyter-notebook.html">
+   Jupyter notebook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/index.html">
+   Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/tf-install.html">
+   Installing TensorFlow 2.0
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Raspi &amp; Arduino
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Raspberry Pi
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="raspi-config.html">
+     Configuring a Raspberry Pi from fresh install
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Setting up a Raspberry-Pi for secure bit torrenting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pyaudio.html">
+     Installing PyAudio on Raspberry Pi
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../arduino/index.html">
+   Arduino
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/platformio.html">
+     PlatformIO notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/ca-certs-nano.html">
+     Copying (root) CA certificates onto Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/arduino-cookbook.html">
+     Arduino cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/crypto-auth.html">
+     Using the ECC0X08 with Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/mqtt-specs.html">
+     MQTT Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/nginx-load-balancing.html">
+     Using NGiNX with Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vim/index.html">
+   VIM
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/recipes.html">
+     Vim Recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/vundle.html">
+     Vundle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/batch-rename.html">
+     Batch renaming in Vim
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../discord/index.html">
+   Discord
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/making-bots-python.html">
+     Making Discord bots in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/discord-music-hook.html">
+     Creating a Discord music feed using webhooks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../git/index.html">
+   Git and VCs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/git-reference.html">
+     Git Reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/gitea-mariadb.html">
+     Using Gitea with MariaDB
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vscode/index.html">
+   VSCode
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vscode/publishing.html">
+     Publishing a VSCode extension
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Miscellaneous
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recommended-talks.html">
+   Recommended talks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../software-design-principles.html">
+   Software Design Principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ffmpeg-cheatsheet.html">
+   FFMPEG Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../iptables-and-firewalls.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     iptables
+    </span>
+   </code>
+   and firewall configuration reference.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ci-cd/jenkins-recipes.html">
+   Jenkins Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../security/openssl-cookbook.html">
+   OpenSSL Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visualisation/blender-learning.html">
+   Learning Blender
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../java/gradle-cookbook.html">
+   Gradle build-tool cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../automation/mycroft-osx.html">
+   Using Mycroft Docker images on OSX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nix-systems/clamav.html">
+   Clam Anti-Virus
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/raspi/raspi-bit-torrent.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/fjebaker/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/fjebaker/notes/issues/new?title=Issue%20on%20page%20%2Fraspi/raspi-bit-torrent.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/fjebaker/notes/edit/master/raspi/raspi-bit-torrent.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-pre-requisites">
+   Installing pre-requisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configuring-openvpn">
+   Configuring OpenVPN
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configuring-transmission">
+   Configuring Transmission
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#native">
+     Native
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#with-docker">
+     With Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#elinks-for-browsing-torrent-databases">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     elinks
+    </span>
+   </code>
+   for browsing torrent databases
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#allowing-ssh-behind-openvpn">
+   Allowing SSH behind OpenVPN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-firewall-on-startup">
+     Configure firewall on startup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-scripts">
+   Useful scripts
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Setting up a Raspberry-Pi for secure bit torrenting</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-pre-requisites">
+   Installing pre-requisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configuring-openvpn">
+   Configuring OpenVPN
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configuring-transmission">
+   Configuring Transmission
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#native">
+     Native
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#with-docker">
+     With Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#elinks-for-browsing-torrent-databases">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     elinks
+    </span>
+   </code>
+   for browsing torrent databases
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#allowing-ssh-behind-openvpn">
+   Allowing SSH behind OpenVPN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-firewall-on-startup">
+     Configure firewall on startup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-scripts">
+   Useful scripts
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="setting-up-a-raspberry-pi-for-secure-bit-torrenting">
+<h1>Setting up a Raspberry-Pi for secure bit torrenting<a class="headerlink" href="#setting-up-a-raspberry-pi-for-secure-bit-torrenting" title="Permalink to this headline">¶</a></h1>
+<p>The method for configuring the raspi as a torrenting node over vpn is based off of a ‘trial and error’ approach. It necessitates the use of <code class="docutils literal notranslate"><span class="pre">openvpn</span></code>, requiring itself valid <code class="docutils literal notranslate"><span class="pre">.ovpn</span></code> configuration files, which may require a premium service (successfully tested with NordVPN).</p>
+<p>A recommended alternative is to use a docker managed <code class="docutils literal notranslate"><span class="pre">transmission</span></code> container, such as the <a class="reference external" href="https://registry.hub.docker.com/r/linuxserver/transmission/">linuxserver/transmission</a> container. I have included instructions for this at the end of these notes.</p>
+<!--BEGIN TOC-->
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#installing-pre-requisites">Installing pre-requisites</a></p></li>
+<li><p><a class="reference external" href="#configuring-openvpn">Configuring OpenVPN</a></p></li>
+<li><p><a class="reference external" href="#configuring-transmission">Configuring Transmission</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#native">Native</a></p></li>
+<li><p><a class="reference external" href="#with-docker">With Docker</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#elinks-for-browsing-torrent-databases"><code class="docutils literal notranslate"><span class="pre">elinks</span></code> for browsing torrent databases</a></p></li>
+<li><p><a class="reference external" href="#allowing-ssh-behind-openvpn">Allowing SSH behind OpenVPN</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#configure-firewall-on-startup">Configure firewall on startup</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#useful-scripts">Useful scripts</a></p></li>
+</ol>
+<!--END TOC-->
+</div>
+<div class="section" id="installing-pre-requisites">
+<h2>Installing pre-requisites<a class="headerlink" href="#installing-pre-requisites" title="Permalink to this headline">¶</a></h2>
+<p>All of the prerequisites are installed with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get update
+sudo apt-get install openvpn transmission-daemon transmission-common transmission-cli
+<span class="c1"># for the URI forwarding terminal browser, also need</span>
+sudo apt-get install elinks
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuring-openvpn">
+<h2>Configuring OpenVPN<a class="headerlink" href="#configuring-openvpn" title="Permalink to this headline">¶</a></h2>
+<p>We configure <code class="docutils literal notranslate"><span class="pre">openvpn</span></code> first, by editing/creating <code class="docutils literal notranslate"><span class="pre">/etc/openvpn/client.conf</span></code>, from some template <code class="docutils literal notranslate"><span class="pre">.ovpn</span></code> file provided by the VPN server. The starup routine of OpenVPN will configure the VPN according to this file, which often means a little editing is required, namely including <code class="docutils literal notranslate"><span class="pre">auth-user-pass</span></code> as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
+
+<span class="n">auth</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="k">pass</span> <span class="o">.</span><span class="n">secrets</span>
+
+<span class="o">&lt;</span><span class="n">ca</span><span class="o">&gt;</span>
+<span class="o">-----</span><span class="n">BEGIN</span> <span class="n">CERTIFICATE</span><span class="o">-----</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+<p>and thus, create a <code class="docutils literal notranslate"><span class="pre">.secrets</span></code> file in <code class="docutils literal notranslate"><span class="pre">/etc/openvpn/</span></code>, storing the login details for the VPN server. This should be formatted</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">username</span><span class="p">]</span>
+<span class="p">[</span><span class="n">password</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>NB: the line break is essential, and you’ll probably want to <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">400</span> <span class="pre">.secrets</span></code> as well. With this, OpenVPN will automatically login and start routing all (except LAN) traffic through the VPN on startup.</p>
+<p>Next, we need to enable the <code class="docutils literal notranslate"><span class="pre">AUTOSTART=&quot;all&quot;</span></code> flag in</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">openvpn</span>
+</pre></div>
+</div>
+<p>You’ll need root privileges again to edit this.</p>
+<p>Finally we need to configure the new DNS servers. Chances are, your VPN provider either has statically assigned name servers in their <code class="docutils literal notranslate"><span class="pre">.ovpn</span></code> files, or <a class="reference external" href="https://support.nordvpn.com/Other/1047409702/What-are-your-DNS-server-addresses.htm">provides you with relevant IP addresses</a>; if not, a simple Google search will yield free public DNS servers.</p>
+<p>On some distributions, editing <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> is enough to reconfigure the DNS servers (note this has to be done as root, first executing <code class="docutils literal notranslate"><span class="pre">chattr</span> <span class="pre">-i</span> <span class="pre">/etc/resolv.conf</span></code>); but that does not seem to work for me anymore. The configuration file gets rewritten by some network daemon, thus doesn’t hold permanently (if at all). Instead, we edit</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/dhcpcd.conf
+</pre></div>
+</div>
+<p>and add the line</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">domain_name_servers</span><span class="o">=</span><span class="n">DNS_IP1</span> <span class="p">[</span><span class="n">DNS_IP2</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>with the relevant DNS IP addresses. Finally, restart the DHCP service and (re)start OpenVPN</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo service dhcpcd restart
+sudo service openvpn <span class="o">(</span>re<span class="o">)</span>start
+</pre></div>
+</div>
+<p>You can verify the VPN is working using, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pi@eidolon:~ $ curl ipinfo.io
+{
+  &quot;ip&quot;: &quot;5.253.206.172&quot;,
+  &quot;city&quot;: &quot;Włochy&quot;,
+  &quot;region&quot;: &quot;Mazovia&quot;,
+  &quot;country&quot;: &quot;PL&quot;,
+  &quot;loc&quot;: &quot;52.1961,20.9323&quot;,
+  &quot;org&quot;: &quot;AS9009 M247 Ltd&quot;,
+  &quot;postal&quot;: &quot;02-231&quot;,
+  &quot;timezone&quot;: &quot;Europe/Warsaw&quot;,
+  &quot;readme&quot;: &quot;https://ipinfo.io/missingauth&quot;
+}
+</pre></div>
+</div>
+<p>Something I’ve noticed with the automated start of OpenVPN is that having multiple <code class="docutils literal notranslate"><span class="pre">.conf</span></code> files in <code class="docutils literal notranslate"><span class="pre">/etc/openvpn/</span></code> can cause some anomalous behaviour, especially on more recent versions of linux, including a highly annoying systemd password manager writing to <code class="docutils literal notranslate"><span class="pre">Wall</span></code> sporadically; make sure you only have <strong>one</strong> in the directory!</p>
+</div>
+<div class="section" id="configuring-transmission">
+<h2>Configuring Transmission<a class="headerlink" href="#configuring-transmission" title="Permalink to this headline">¶</a></h2>
+<p>You can either use transmission natively, or through a docker container. The benefits of using a docker container, beyond the usual benefits, include built-in web UI and more stateful control of torrenting environment.</p>
+<div class="section" id="native">
+<h3>Native<a class="headerlink" href="#native" title="Permalink to this headline">¶</a></h3>
+<p>The configuration settings for the transmission daemon can be found in <code class="docutils literal notranslate"><span class="pre">/etc/transmission-daemon/settings.json</span></code>. Lines of importance are</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+	<span class="o">//</span> <span class="o">...</span>
+	<span class="s2">&quot;download-dir&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/lib/transmission-daemon/downloads&quot;</span><span class="p">,</span>
+	<span class="o">//</span> <span class="o">...</span>
+	<span class="s2">&quot;rpc-password&quot;</span><span class="p">:</span> <span class="s2">&quot;{20eb240695a406a6c62c80db858c4558eaea2146xL3ZaOo.&quot;</span><span class="p">,</span>
+	<span class="o">//</span> <span class="o">...</span>
+	<span class="s2">&quot;rpc-username&quot;</span><span class="p">:</span> <span class="s2">&quot;transmission&quot;</span><span class="p">,</span>
+	<span class="o">//</span> <span class="o">...</span>
+	<span class="s2">&quot;speed-limit-down&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+	<span class="s2">&quot;speed-limit-down-enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+	<span class="s2">&quot;speed-limit-up&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+	<span class="s2">&quot;speed-limit-up-enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+	<span class="o">//</span> <span class="o">...</span>
+	<span class="s2">&quot;umask&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+	<span class="o">//</span> <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Before editing, ensure the daemon is not running <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">transmission-daemon</span> <span class="pre">stop</span></code>, else the changes will be reverted on reload.</p>
+<p>Change username and password to whatever your preference is (alternative disable authentication entirely); the password will be changed to a hash value once the daemon is reloaded. Default username:password is <code class="docutils literal notranslate"><span class="pre">transmission:transmission</span></code>.</p>
+<p>You can change the download directory here aswell, and it’s worth changing <code class="docutils literal notranslate"><span class="pre">speed-limit-down</span></code> to something a little more convenient, e.g. 100. I would not recommend disabling it, as anyone watching your traffic would suddenly become aware of a bandwidth spike and probably suspect torrenting behaviour! Similarly, you’ll be a bit of a cunt to your housemates.</p>
+<p>You can also change the seeding speed limits here – if you do, remember to change the <code class="docutils literal notranslate"><span class="pre">speed-limit-up-enabled</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>Finally <code class="docutils literal notranslate"><span class="pre">umask</span></code> is set to <code class="docutils literal notranslate"><span class="pre">2</span></code> for all new files, setting read/write permissions for other (<code class="docutils literal notranslate"><span class="pre">777-775=2</span></code>)</p>
+<p>Restart the service <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">transmission-daemon</span> <span class="pre">start</span></code>. You can control the daemon using <code class="docutils literal notranslate"><span class="pre">transmission-remote</span> <span class="pre">{args}</span></code>, but, unless you disabled authentication, you’ll always have to provide a login flag. As such, I recommend aliasing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">tsm</span><span class="o">=</span><span class="s1">&#39;transmission-remote --auth [transmission-user]:[transmission-pw]&#39;</span>
+</pre></div>
+</div>
+<p>to save your fingers.</p>
+<p>You can easily find a reference manual on the available commands. I found the most useful are</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tsm</span> <span class="o">-</span><span class="n">a</span> <span class="s2">&quot;[uri]&quot;</span>			<span class="c1"># append uri to queue</span>
+<span class="n">tsm</span> <span class="o">-</span><span class="n">l</span> 				<span class="c1"># list current torrents</span>
+<span class="n">tsm</span> <span class="o">-</span><span class="n">t</span> <span class="p">{</span><span class="nb">id</span><span class="p">}</span>	<span class="o">-</span><span class="n">s</span><span class="o">/</span><span class="n">S</span> 		<span class="c1"># torrent with {id} should be {-s}topped or {-S}tarted.</span>
+<span class="n">tsm</span> <span class="o">-</span><span class="n">t</span> <span class="nb">all</span> <span class="p">{</span><span class="n">command</span><span class="p">}</span>		<span class="c1"># apply command to all torrents in list</span>
+<span class="n">tsm</span> <span class="o">-</span><span class="n">t</span> <span class="nb">all</span> <span class="o">-</span><span class="n">r</span> 			<span class="c1"># remove all torrents</span>
+</pre></div>
+</div>
+<p>NB: removing all torrents only removes their index from the daemon; the downloaded files will have to manually deleted.</p>
+<p>With this you’re now all set to start torrenting securely over a VPN.</p>
+</div>
+<div class="section" id="with-docker">
+<h3>With Docker<a class="headerlink" href="#with-docker" title="Permalink to this headline">¶</a></h3>
+<p>We will use the <a class="reference external" href="https://registry.hub.docker.com/r/linuxserver/transmission/">linuxserver/transmission</a> docker image</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker pull linuxserver/transmission
+</pre></div>
+</div>
+<p>We require three volumes for the mounts, namely <code class="docutils literal notranslate"><span class="pre">downloads</span></code>, <code class="docutils literal notranslate"><span class="pre">config</span></code>, and <code class="docutils literal notranslate"><span class="pre">watch</span></code>.</p>
+<p>The startup command for the container is then</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm -d <span class="se">\</span>
+	--name<span class="o">=</span>transmission <span class="se">\</span>
+	-e <span class="nv">PUID</span><span class="o">=</span><span class="m">1000</span> -e <span class="nv">PGID</span><span class="o">=</span><span class="m">1000</span> <span class="se">\</span>
+	-e <span class="nv">TZ</span><span class="o">=</span><span class="s2">&quot;Europe/London&quot;</span> <span class="se">\</span>
+	-e <span class="nv">TRANSMISSION_WEB_HOME</span><span class="o">=</span><span class="s2">&quot;/flood-for-transmission/&quot;</span> <span class="se">\</span>
+	-e <span class="nv">USER</span><span class="o">=</span>transmission -e <span class="nv">PASS</span><span class="o">=</span>transmission <span class="se">\</span>
+	-p <span class="m">9091</span>:9091 <span class="se">\</span>
+	-p <span class="m">51413</span>:51413 -p <span class="m">51413</span>:51413/udp <span class="se">\</span>
+	-v ~/config:/config <span class="se">\</span>
+	-v ~/downloads:/downloads <span class="se">\</span>
+	-v ~/watch:/watch <span class="se">\</span>
+	linuxserver/transmission
+</pre></div>
+</div>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">USER</span></code> and <code class="docutils literal notranslate"><span class="pre">PASS</span></code> are used for both the web UI and the transmission remote.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">TRANSMISSION_WEB_HOME</span></code> may also be left blank, in which case no web UI is started.</p>
+<p>The configuration file in <code class="docutils literal notranslate"><span class="pre">config/settings.json</span></code> may then be configured as in the native case</p>
+<p>Note, if using <code class="docutils literal notranslate"><span class="pre">elinks</span></code> with docker, prefix the regular commands with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker <span class="nb">exec</span> transmission-remote ...
+</pre></div>
+</div>
+<p>The web UI is then exposed at port <code class="docutils literal notranslate"><span class="pre">9091</span></code>.</p>
+</div>
+</div>
+<div class="section" id="elinks-for-browsing-torrent-databases">
+<h2><code class="docutils literal notranslate"><span class="pre">elinks</span></code> for browsing torrent databases<a class="headerlink" href="#elinks-for-browsing-torrent-databases" title="Permalink to this headline">¶</a></h2>
+<p>You’ll be able to access websites normally blocked by your ISP just by using <code class="docutils literal notranslate"><span class="pre">elinks</span></code> through the VPN, but to make torrenting a little easier it’s worth creating a script for passing magnet URIs directly to transmission with a keybinding.</p>
+<p>To do so, we create a bash script e.g. <code class="docutils literal notranslate"><span class="pre">~/scripts/magnet</span></code>, with contents</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+patrn=&#39;\/(magnet.*)&#39;		# regex for extracting magnet from a URI
+[[ $1 =~ $patrn ]]
+transmission-remote --auth [transmission-user]:[transmission-pw] -a &quot;${BASH_REMATCH[1]}&quot;
+</pre></div>
+</div>
+<p>Then <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">~/scripts/magnet</span></code> to make it executable.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">elinks</span></code>, press <code class="docutils literal notranslate"><span class="pre">esc</span></code> once followed by <code class="docutils literal notranslate"><span class="pre">o</span></code> to bring up the configuration menu. Navigate to <code class="docutils literal notranslate"><span class="pre">Document</span></code>, hit <code class="docutils literal notranslate"><span class="pre">space</span></code>, and then under <code class="docutils literal notranslate"><span class="pre">URI-passing</span></code> add a new option with value</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">magnet</span> <span class="o">%</span><span class="n">c</span>
+</pre></div>
+</div>
+<p>save, and then close. Press <code class="docutils literal notranslate"><span class="pre">k</span></code> to open up keybindings, and now under <code class="docutils literal notranslate"><span class="pre">Main</span> <span class="pre">mapping</span></code> scroll down until you find <code class="docutils literal notranslate"><span class="pre">Pass</span> <span class="pre">URI</span> <span class="pre">of</span> <span class="pre">current</span> <span class="pre">link</span> <span class="pre">to</span> <span class="pre">external</span> <span class="pre">command</span></code> (careful, there are a few similarly named options which you may mistake – I did). Add any key combination you like, e.g. just <code class="docutils literal notranslate"><span class="pre">p</span></code>, save and close. Exit <code class="docutils literal notranslate"><span class="pre">elinks</span></code> by pressing <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p>
+<p>You’re now all set to automatically add magnet URIs to transmission without having to leave the browser, by hovering over a magnet URI and pressing your key binding (<code class="docutils literal notranslate"><span class="pre">p</span></code>).</p>
+</div>
+<div class="section" id="allowing-ssh-behind-openvpn">
+<h2>Allowing SSH behind OpenVPN<a class="headerlink" href="#allowing-ssh-behind-openvpn" title="Permalink to this headline">¶</a></h2>
+<p>If you want remote (i.e. not LAN) access to the raspi, you’ll have to reroute network traffic correctly, such that external traffic coming to the <code class="docutils literal notranslate"><span class="pre">eth0</span></code> interface is correctly rerouted back through <code class="docutils literal notranslate"><span class="pre">eth0</span></code>. If this isn’t done, the pi tries to send back responses across <code class="docutils literal notranslate"><span class="pre">tun0</span></code>, since OpenVPN completely reconfigures the pi’s networking when active.</p>
+<p>The fix for this is a little hacky, but it works well enough. Barebones, all that is required is a script</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+
+(date; set; echo) &gt;&gt; /tmp/firewall.log
+
+# check if openvpn is already active, if so stop and restart
+ptrn=&quot;Active: active&quot;
+startvpn=0
+if [[ $(sudo service openvpn status |grep Active:) =~ $ptrn ]]; then
+	echo &quot;vpn online&quot; &gt;&gt; /tmp/firewall-preup.log
+	startvpn=1
+fi
+sudo service openvpn stop
+
+sudo ip rule add fwmark 66 table 666
+sudo ip route add default via 192.168.0.1 dev eth0 table 666
+sudo ip route flush cache
+sudo iptables -t mangle -A OUTPUT -p tcp --sport 22 -j MARK --set-mark 66
+sudo iptables -A INPUT -i tun0 -p tcp -m tcp --dport 22 -j DROP
+
+if [[ &quot;$startvpn&quot; == &quot;1&quot; ]]; then
+	sudo service openvpn start
+fi
+</pre></div>
+</div>
+<p>which you can save as e.g. <code class="docutils literal notranslate"><span class="pre">~/scripts/firewall-config</span></code> and make executable as root with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">chown</span> <span class="n">root</span><span class="p">:</span><span class="n">root</span> <span class="o">~/</span><span class="n">scripts</span><span class="o">/</span><span class="n">firewall</span><span class="o">-</span><span class="n">config</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">chmod</span> <span class="mi">4755</span> <span class="o">~/</span><span class="n">scripts</span><span class="o">/</span><span class="n">firewall</span><span class="o">-</span><span class="n">config</span>
+</pre></div>
+</div>
+<p>Note, you don’t need those echoes; I use them just to make sure the script is being executed correctly.</p>
+<p>What this script does is disable OpenVPN, create a new table for traffic with marker <code class="docutils literal notranslate"><span class="pre">66</span></code>, and configure the firewall. The new table uses the gateway of your home router, normally <code class="docutils literal notranslate"><span class="pre">192.168.0.1</span></code> for <code class="docutils literal notranslate"><span class="pre">eth0</span></code>, instead of the OpenVPN gateway. We then flush the arp cache to have an unambigious gateway setup.</p>
+<p>As incoming traffic on the native interface is unaffected by the OpenVPN, we mark the outgoing traffic with marker <code class="docutils literal notranslate"><span class="pre">66</span></code> on the SSH port, and drop all incoming SSH <code class="docutils literal notranslate"><span class="pre">tcp</span></code> traffic on <code class="docutils literal notranslate"><span class="pre">tun0</span></code> to prevent interface confusion.</p>
+<p>If the OpenVPN service was already started (which it probably was), the last check starts the service again now that the traffic is correctly configured.</p>
+<p>If you port forward on your home router now to the raspi, you’ll have remote access.</p>
+<div class="section" id="configure-firewall-on-startup">
+<h3>Configure firewall on startup<a class="headerlink" href="#configure-firewall-on-startup" title="Permalink to this headline">¶</a></h3>
+<p>I tried making this script run in <code class="docutils literal notranslate"><span class="pre">/etc/network/if-pre-up.d/</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/network/if-up.d/</span></code> but it was unable to correctly configure before OpenVPN spawns its service, so required one manual stop/start of the VPN before remote connection was allowed.</p>
+<p>The solution I settled on was to create a <code class="docutils literal notranslate"><span class="pre">systemd</span></code> service, by creating the file <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/firewall-config.service</span></code>, with the following content</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Unit</span><span class="p">]</span>
+<span class="n">Description</span><span class="o">=</span><span class="n">Firewall</span> <span class="n">configuration</span> <span class="k">for</span> <span class="n">SSH</span> <span class="n">behind</span> <span class="n">VPN</span>
+<span class="n">After</span><span class="o">=</span><span class="n">network</span><span class="o">.</span><span class="n">target</span>
+
+<span class="p">[</span><span class="n">Service</span><span class="p">]</span>
+<span class="n">Type</span><span class="o">=</span><span class="n">simple</span>
+<span class="n">User</span><span class="o">=</span><span class="n">pi</span>
+<span class="n">ExecStart</span><span class="o">=/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">firewall</span><span class="o">-</span><span class="n">config</span>
+
+<span class="p">[</span><span class="n">Install</span><span class="p">]</span>
+<span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="n">user</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+<p>and then executing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">enable</span> <span class="n">firewall</span><span class="o">-</span><span class="n">config</span>
+</pre></div>
+</div>
+<p>to ensure the service is executed on startup.</p>
+<p>If you followed to here, just reboot and your raspi is all set and ready.</p>
+</div>
+</div>
+<div class="section" id="useful-scripts">
+<h2>Useful scripts<a class="headerlink" href="#useful-scripts" title="Permalink to this headline">¶</a></h2>
+<p>This is specifically for the NordVPN <code class="docutils literal notranslate"><span class="pre">.ovpn</span></code> configuration files for <code class="docutils literal notranslate"><span class="pre">tcp</span></code> VPN. To make changing country a little bit easier, without leaving the transmission daemon torrenting in the background, I created this little script as <code class="docutils literal notranslate"><span class="pre">~/scripts/cvpn</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+checkIP=0
+
+while getopts &quot;c&quot; opt
+do
+	case &quot;$opt&quot; in
+		c)
+			checkIP=1
+			;;
+		?)
+			echo &quot;Usage: cvpn [-c] server-extension&quot;
+			exit 1
+	esac
+done
+
+TSM=&#39;transmission-remote --auth [transmission-user]:[transmission-pw]&#39;
+shift $(expr $OPTIND - 1 )
+
+echo &quot;Stopping active transmissions...&quot;
+$TSM -t all -S
+echo &quot;Copying $1 configuration file...&quot;
+sudo /etc/openvpn/copy.sh $1
+echo &quot;Restarting openvpn service...&quot;
+sudo service openvpn restart 
+
+if [ $checkIP -eq 1 ]; then
+	echo &quot;Fetching IP information...&quot;
+	sleep 6									# approx how long it takes for vpn to setup
+	curl ipinfo.io
+	echo &quot;&quot;
+fi
+
+echo &quot;(Re)Starting active transmissions...&quot;
+$TSM -t all -s
+</pre></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">-c</span></code> will print the location of the VPN server so you can be sure it worked correctly, and the <code class="docutils literal notranslate"><span class="pre">server-extension</span></code> for NordVPN would be e.g. <code class="docutils literal notranslate"><span class="pre">uk18</span></code>.</p>
+<p>This script also requires <code class="docutils literal notranslate"><span class="pre">copy.sh</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc/openvpn/</span></code>, and the <code class="docutils literal notranslate"><span class="pre">.ovpn</span></code> files in the directory <code class="docutils literal notranslate"><span class="pre">/etc/openvpn/nordtcp/</span></code>. The script is as follows</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+cp /etc/openvpn/nordtcp/$1.nordvpn.com.tcp.ovpn /etc/openvpn/client.conf
+sed -i -e &#39;s/auth-user-pass/auth-user-pass .secrets/g&#39; /etc/openvpn/client.conf
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./raspi"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="raspi-config.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Configuring a Raspberry Pi from fresh install</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="pyaudio.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Installing PyAudio on Raspberry Pi</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Fergus Baker<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

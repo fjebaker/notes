@@ -1,0 +1,1528 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wrapping C and C++ into Python &#8212; notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/vollkorn.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/_static/styles.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Making a project available on pypi" href="pypi-distribution.html" />
+    <link rel="prev" title="High performance Python techniques and paradigms" href="high-perf.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../titlepage.html">
+   notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../nix-systems/index.html">
+   *nix Systems
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-installations.html">
+     Software installation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-sysadmin.html">
+     System administration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-filesystem.html">
+     Disk and filesystem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-networks.html">
+     Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-hardware.html">
+     Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/boot-bios.html">
+     Boot Loaders and BIOS control
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/systemd.html">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       journald
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/kernel.html">
+     Linux Kernel Modules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bash/index.html">
+   Bash scripting
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-reference.html">
+     Bash reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-cookbook.html">
+     Bash cookbook
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../osx-reference.html">
+   OSX Reference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/index.html">
+   C++ and C
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/declarations.html">
+     Declarations in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/conan.html">
+     Conan package manager
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/unit-testing.html">
+     Unit testing with Catch2! and Trompeloeil
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/swig-cmake.html">
+     Using SWIG with CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cmake.html">
+     CMake notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/member-functions.html">
+     On using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       std::function
+      </span>
+     </code>
+     for member functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../julia/index.html">
+   Julia Notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/julia-intro.html">
+     Julia learning notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/README.html">
+     Advent of Code notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/scopes.html">
+     Julia Scopes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Python
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="py-recipes.html">
+     Python recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="jupyter-ipython.html">
+     Jupyter and iPython cheat sheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regex.html">
+     Regex in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="py-serial.html">
+     Serial communication with Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="high-perf.html">
+     High performance Python techniques and paradigms
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Wrapping C and C++ into Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pypi-distribution.html">
+     Making a project available on pypi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cpp-c-swig.html">
+     Wrapping C/C++ code using SWIG
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="requests.html">
+     Python
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       requests
+      </span>
+     </code>
+     cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="flask/using-flask.html">
+     Using Python Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="flask/rethink-db-with-flask.html">
+     Using RethinkDB with Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="flask/jinja-templating.html">
+     Templating HTML pages with jinja
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="fast-api/using-fast-api.html">
+     Using FastAPI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="mkdocs-notes.html">
+     Notes on mkdocs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scrapy.html">
+     Scrapy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../js/index.html">
+   JavaScript
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/jest-testing.html">
+     Using Jest testing framework
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/js-reference.html">
+     JavaScript language reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/swig-nodejs.html">
+     Using SWIG with NodeJS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/request-parsing.html">
+     Making HTTP requests and parsing in JS and node.js
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/extensions/native-messaging.html">
+     Native Messaging for Browser Extensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/vue/over-vue.html">
+     Vue Overview
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tex/index.html">
+   LaTeX
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latex-documents.html">
+     Writing LaTeX documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latexmk.html">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       latexmk
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/presentations.html">
+     Making presentations in LaTeX
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/posters.html">
+     Creating posters in LaTeX
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DevOps
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../docker/index.html">
+   Docker
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/minio-registry.html">
+     Creating a persistent local registry with S3/MinIO
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-cheatsheet.html">
+     Docker cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/systemd-with-docker.html">
+     Using Docker as
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     services
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-compose.html">
+     The magical world of Docker-Compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/dockerfile-recipes.html">
+     Dockerfile cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-swarm.html">
+     Docker Swarm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../aws/index.html">
+   Amazon Web Services
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/vpc-overview.html">
+     VPC overview
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/setting-up.html">
+     AWS Settup
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/ec2-with-docker.html">
+     EC2 with Docker
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/goofys-s3.html">
+     Using Goofys with S3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vms/index.html">
+   Virtual Machines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/sun-virtual-box.html">
+     Oracle Virtual Box
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/kvm.html">
+     Kernel-based Virtual Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/qemu.html">
+     QEMU
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../databases/index.html">
+   Databases
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/node-red.html">
+     NodeRed Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/mongo-db.html">
+     Using MongoDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/rethink-db.html">
+     RethinkDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/lang-drivers/py-mongo.html">
+     Using MongoDB and Python
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/shell-rc-profiles.html">
+   Shell
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*rc
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*profile
+    </span>
+   </code>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/jupyter-notebook.html">
+   Jupyter notebook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/index.html">
+   Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/tf-install.html">
+   Installing TensorFlow 2.0
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Raspi &amp; Arduino
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../raspi/index.html">
+   Raspberry Pi
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-config.html">
+     Configuring a Raspberry Pi from fresh install
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-bit-torrent.html">
+     Setting up a Raspberry-Pi for secure bit torrenting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/pyaudio.html">
+     Installing PyAudio on Raspberry Pi
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../arduino/index.html">
+   Arduino
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/platformio.html">
+     PlatformIO notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/ca-certs-nano.html">
+     Copying (root) CA certificates onto Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/arduino-cookbook.html">
+     Arduino cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/crypto-auth.html">
+     Using the ECC0X08 with Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/mqtt-specs.html">
+     MQTT Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/nginx-load-balancing.html">
+     Using NGiNX with Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vim/index.html">
+   VIM
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/recipes.html">
+     Vim Recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/vundle.html">
+     Vundle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/batch-rename.html">
+     Batch renaming in Vim
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../discord/index.html">
+   Discord
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/making-bots-python.html">
+     Making Discord bots in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/discord-music-hook.html">
+     Creating a Discord music feed using webhooks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../git/index.html">
+   Git and VCs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/git-reference.html">
+     Git Reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/gitea-mariadb.html">
+     Using Gitea with MariaDB
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vscode/index.html">
+   VSCode
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vscode/publishing.html">
+     Publishing a VSCode extension
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Miscellaneous
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recommended-talks.html">
+   Recommended talks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../software-design-principles.html">
+   Software Design Principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ffmpeg-cheatsheet.html">
+   FFMPEG Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../iptables-and-firewalls.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     iptables
+    </span>
+   </code>
+   and firewall configuration reference.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ci-cd/jenkins-recipes.html">
+   Jenkins Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../security/openssl-cookbook.html">
+   OpenSSL Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visualisation/blender-learning.html">
+   Learning Blender
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../java/gradle-cookbook.html">
+   Gradle build-tool cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../automation/mycroft-osx.html">
+   Using Mycroft Docker images on OSX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nix-systems/clamav.html">
+   Clam Anti-Virus
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/python/c-wrapping.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/fjebaker/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/fjebaker/notes/issues/new?title=Issue%20on%20page%20%2Fpython/c-wrapping.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/fjebaker/notes/edit/master/python/c-wrapping.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-the-build-environment">
+   Creating the build environment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#writing-pythonic-c-code">
+   Writing Pythonic C code
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sum-of-squares-example">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       sum_of_squares
+      </span>
+     </code>
+     example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#making-the-extension-accessible">
+     Making the extension accessible
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-api-notes">
+   Some API notes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-kwargs">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       **kwargs
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#raising-exceptions">
+     Raising exceptions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-static-prefix">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       static
+      </span>
+     </code>
+     prefix
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-python-objects-in-clang">
+   Using Python objects in Clang
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-callbacks">
+     Using callbacks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-iterators">
+     Using iterators
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#on-reference-counting">
+   On reference counting
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Wrapping C and C++ into Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-the-build-environment">
+   Creating the build environment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#writing-pythonic-c-code">
+   Writing Pythonic C code
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sum-of-squares-example">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       sum_of_squares
+      </span>
+     </code>
+     example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#making-the-extension-accessible">
+     Making the extension accessible
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-api-notes">
+   Some API notes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-kwargs">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       **kwargs
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#raising-exceptions">
+     Raising exceptions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-static-prefix">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       static
+      </span>
+     </code>
+     prefix
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-python-objects-in-clang">
+   Using Python objects in Clang
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-callbacks">
+     Using callbacks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-iterators">
+     Using iterators
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#on-reference-counting">
+   On reference counting
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="wrapping-c-and-c-into-python">
+<h1>Wrapping C and C++ into Python<a class="headerlink" href="#wrapping-c-and-c-into-python" title="Permalink to this headline">¶</a></h1>
+<p>One of the many flexibilities that Python comes with is integration into many other languages. Since Python itself is compiled down into C bytecode, it is seen that Python and Clangs almost go hand-in-hand; indeed, many libraries such as numpy and scipy have primarily a C backend.</p>
+<p>The most primitive was of wrapping Clang into Python is using <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> and the <a class="reference external" href="https://docs.python.org/3/c-api/index.html">Python/C API</a>. Other libraries exist to make this task less verbose and more seamless, such as Cython, but here are my notes from reading a section on package-free Clang wrapping.</p>
+<!--BEGIN TOC-->
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#creating-the-build-environment">Creating the build environment</a></p></li>
+<li><p><a class="reference external" href="#writing-pythonic-c-code">Writing Pythonic C code</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#sum_of_squares-example"><code class="docutils literal notranslate"><span class="pre">sum_of_squares</span></code> example</a></p></li>
+<li><p><a class="reference external" href="#making-the-extension-accessible">Making the extension accessible</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#some-api-notes">Some API notes</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#using-**kwargs">Using <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code></a></p></li>
+<li><p><a class="reference external" href="#raising-exceptions">Raising exceptions</a></p></li>
+<li><p><a class="reference external" href="#the-static-prefix">The <code class="docutils literal notranslate"><span class="pre">static</span></code> prefix</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#using-python-objects-in-clang">Using Python objects in Clang</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#using-callbacks">Using callbacks</a></p></li>
+<li><p><a class="reference external" href="#using-iterators">Using iterators</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#on-reference-counting">On reference counting</a></p></li>
+</ol>
+<!--END TOC-->
+</div>
+<div class="section" id="creating-the-build-environment">
+<h2>Creating the build environment<a class="headerlink" href="#creating-the-build-environment" title="Permalink to this headline">¶</a></h2>
+<p>Fortunately, very little is required to compile the Clang, as the Python library <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> can take care of a lot of the heavy lifting for us. Using the directory structure</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="o">/</span>
+	<span class="n">setup</span><span class="o">.</span><span class="n">py</span>
+	<span class="n">test_module</span><span class="o">.</span><span class="n">c</span>
+</pre></div>
+</div>
+<p>we can define our C extension, and the relevant source files in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, as such</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">setuptools</span>
+
+<span class="n">test_module</span> <span class="o">=</span> <span class="n">setuptools</span><span class="o">.</span><span class="n">Extension</span><span class="p">(</span><span class="s1">&#39;test_module&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;test_module.c&#39;</span><span class="p">])</span>
+
+<span class="n">setuptools</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span>
+	<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Some ID name&#39;</span><span class="p">,</span>
+	<span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+	<span class="n">ext_modules</span> <span class="o">=</span> <span class="p">[</span><span class="n">test_module</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To then build / compile our code, we run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python setup.py build
+</pre></div>
+</div>
+<p>and to install it into our interpreter / environment (note: would recommend highly using venvs)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>We can then pop a python shell, or write a python script, and include our module as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">test_module</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-pythonic-c-code">
+<h2>Writing Pythonic C code<a class="headerlink" href="#writing-pythonic-c-code" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> environment links the <code class="docutils literal notranslate"><span class="pre">Python.h</span></code> header into the path, which itself defines the whole Python/C API.</p>
+<div class="section" id="sum-of-squares-example">
+<h3><code class="docutils literal notranslate"><span class="pre">sum_of_squares</span></code> example<a class="headerlink" href="#sum-of-squares-example" title="Permalink to this headline">¶</a></h3>
+<p>For a simple example, we will write a sum of squares function. A python implementation of this would be</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum_of_squares</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+		<span class="n">sq</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span>
+		<span class="k">if</span> <span class="n">sq</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+			<span class="nb">sum</span> <span class="o">+=</span> <span class="n">sq</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">break</span>
+	<span class="k">return</span> <span class="nb">sum</span>
+</pre></div>
+</div>
+<p>To recreate this in C requires a little overhead. We will use pointers to <code class="docutils literal notranslate"><span class="pre">PyObject</span></code> for the majority of our arguments; and indeed, the general practice of writing a Python function in C is to use the definition</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">PyObject</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note that it isn’t necessary to provide args and kwargs in the definition if they are not going to be used in the function.</p>
+<p>We could then write our sum of squares function as</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Python.h&gt;</span><span class="cp"></span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="nf">sum_of_squares</span><span class="p">(</span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">	</span><span class="c1">// default value</span>
+
+<span class="w">	</span><span class="c1">// parse python arguments</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">PyArg_ParseTuple</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;i&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">n</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">	</span><span class="c1">// &quot;i&quot; says we expect an integer</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"> 	</span><span class="c1">// throw error</span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">sq</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">(</span><span class="n">sq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">sq</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">PyLong_FromLong</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span><span class="w">	</span><span class="c1">// return a python object</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-the-extension-accessible">
+<h3>Making the extension accessible<a class="headerlink" href="#making-the-extension-accessible" title="Permalink to this headline">¶</a></h3>
+<p>Our function alone wont be of much use if not included into a module. To define the API of our module, a little extra work in C is required</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">PyMethodDef</span><span class="w"> </span><span class="n">test_methods</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">	</span><span class="c1">// define the available methods</span>
+<span class="w">	</span><span class="p">{</span><span class="w"> </span>
+<span class="w">		</span><span class="s">&quot;sum_of_squares&quot;</span><span class="p">,</span><span class="w">	</span><span class="c1">// python name</span>
+<span class="w">		</span><span class="n">sum_of_squares</span><span class="p">,</span><span class="w">		</span><span class="c1">// pointer to C function</span>
+<span class="w">		</span><span class="n">METH_VARARGS</span><span class="p">,</span><span class="w">		</span><span class="c1">// argument types</span>
+<span class="w">		</span><span class="s">&quot;Sum of the perfect squares below some n.&quot;</span><span class="w">	</span><span class="c1">// doc string</span>
+<span class="w">	</span><span class="p">},</span><span class="w"> </span>
+<span class="w">	</span><span class="p">{</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">},</span><span class="w">	</span><span class="c1">// list terminator</span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Above we have defined the functions we want to make available in our module through a nested array. We will then define a module</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">PyModuleDef</span><span class="w"> </span><span class="n">some_test_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">	</span><span class="c1">// define the module</span>
+<span class="w">	</span><span class="n">PyModuleDef_HEAD_INIT</span><span class="p">,</span><span class="w"></span>
+<span class="w">	</span><span class="s">&quot;test_module&quot;</span><span class="p">,</span><span class="w">	</span><span class="c1">// module name</span>
+<span class="w">	</span><span class="nb">NULL</span><span class="p">,</span><span class="w">			</span><span class="c1">// documentation</span>
+<span class="w">	</span><span class="mi">-1</span><span class="p">,</span><span class="w">				</span><span class="c1">// state (-1 is global); used by sub-interpreters</span>
+<span class="w">	</span><span class="n">test_methods</span><span class="w">	</span><span class="c1">// method array pointer</span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>which will have these methods available as member functions. Finally, we initialize the module (called upon <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">test_module</span></code>)</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">PyMODINIT_FUNC</span><span class="w"> </span><span class="nf">PyInit_test_module</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">PyModule_Create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">some_test_module</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>And we’re done! We can now create a little python script to try it out</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">test_module</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">test_module</span><span class="o">.</span><span class="n">sum_of_squares</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="c1"># 285</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="some-api-notes">
+<h2>Some API notes<a class="headerlink" href="#some-api-notes" title="Permalink to this headline">¶</a></h2>
+<p>I’ve encountered a few additional pieces of information whilst learning this API which I thought I would document here.</p>
+<div class="section" id="using-kwargs">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code><a class="headerlink" href="#using-kwargs" title="Permalink to this headline">¶</a></h3>
+<p>Using keyword arguments in our C code is fairly intuitive. We can implement a function that uses keywords as</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">kwargs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">some_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">some_prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">	</span><span class="k">static</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">keywords</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;var&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">};</span><span class="w">	</span><span class="c1">// empty denote positional only</span>
+<span class="w">	</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">PyArg_ParseTupleAndKeywords</span><span class="p">(</span><span class="w"></span>
+<span class="w">		</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">kwargs</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;i|i&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">keywords</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">some_prop</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">some_var</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// the | separates optional args</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="c1">// use variables, e.g.</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">PyLong_FromLong</span><span class="p">(</span><span class="n">some_var</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">some_prop</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We also need to change the <code class="docutils literal notranslate"><span class="pre">PyMethodDef</span></code> index to use <code class="docutils literal notranslate"><span class="pre">METH_VARARGS</span> <span class="pre">|</span> <span class="pre">METH_KEYWORDS</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">METH_VARARGS</span></code>.</p>
+<p>The arguments, if used without a keyword, are read in from left to right; e.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">function</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>		<span class="c1"># 5 -&gt; 2 = some_prop, 1 = some_var</span>
+<span class="n">function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>		<span class="c1"># 4 -&gt; 1 = some_prop, 2 = some_var</span>
+
+<span class="n">function</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>			<span class="c1"># 2 -&gt; 1 = some_prop, 0 = some_var i.e. default</span>
+
+<span class="n">function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>	<span class="c1"># 4 -&gt; 1 = some_prop, 2 = some_var</span>
+</pre></div>
+</div>
+<p>A few things to note; empty strings in <code class="docutils literal notranslate"><span class="pre">keywords[]</span></code> denote only positional arguments, and the <code class="docutils literal notranslate"><span class="pre">|</span></code> in the argument type specifier separates required from optional. The default values of optional arguments are the default values assigned to the variables, i.e.</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">some_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">some_prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>For full reference on the argument parsing capabilities of the Python/C API, see <a class="reference external" href="https://docs.python.org/3/c-api/arg.html#c.PyArg_ParseTupleAndKeywords">here</a>.</p>
+<p>A small technicality arises in specifying the argument types, namely the API introduces a <code class="docutils literal notranslate"><span class="pre">$</span></code>, which, to quote the documentation</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">PyArg_ParseTupleAndKeywords()</span></code> only: Indicates that the remaining arguments in the Python argument list are keyword-only. Currently, all keyword-only arguments must also be optional arguments, so | must always be specified before $ in the format string.</p>
+</div></blockquote>
+<p>So to keep up with the modern implementation details, we should have written our parser as</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">PyArg_ParseTupleAndKeywords</span><span class="p">(</span><span class="w"></span>
+<span class="w">		</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">kwargs</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;i|$i&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">keywords</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">some_prop</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">some_var</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This helps ensure we don’t accidentally use positional arguments as optionals. Note that the parser also implicitly does type conversion and <strong>checks</strong> for overflows! It is therefore important that the specifier matches the variable type exactly.</p>
+</div>
+<div class="section" id="raising-exceptions">
+<h3>Raising exceptions<a class="headerlink" href="#raising-exceptions" title="Permalink to this headline">¶</a></h3>
+<p>The Python/C API allows for all sorts of different exceptions to be raised in the Python interpreter. This is preferred over trying to handle them in Clang, since an uncaught exception will cause the entire environment to crash, and error messages are brief, if not cryptic.</p>
+<p>The general idiom is to define some error type, and then return <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. For example, a function which throws a runtime error with a custom message could be</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="nf">throw_error</span><span class="p">(</span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">PyObject</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="n">PyErr_SetString</span><span class="p">(</span><span class="n">PyExc_RuntimeError</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Custom error text.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Calling this function in Python results in a pleasant</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+	<span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">RuntimeError</span><span class="p">:</span> <span class="n">Custom</span> <span class="n">error</span> <span class="n">text</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>There are numerous exception manipulating functions in the Python/C Api (see <a class="reference external" href="https://docs.python.org/3/c-api/intro.html#exceptions">here</a>); some of the more general use cases are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PyErr_Clear()</span></code>: clears the current exception state so that e.g. a new state may be defined</p></li>
+</ul>
+<p>And common error types to be called in <code class="docutils literal notranslate"><span class="pre">PyErr_SetString</span></code> are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PyExc_TypeError</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PyExc_RuntimeError</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="the-static-prefix">
+<h3>The <code class="docutils literal notranslate"><span class="pre">static</span></code> prefix<a class="headerlink" href="#the-static-prefix" title="Permalink to this headline">¶</a></h3>
+<p>In these notes, all method definitions have been defined as <code class="docutils literal notranslate"><span class="pre">static</span></code>, since they are functions defined in a single scope (i.e. a single C file). However, when extending these recipes to mutiple header and source files, the static definition <em>must be dropped</em>, else conflicts in the header includes will prevent the module from compiling.</p>
+</div>
+</div>
+<div class="section" id="using-python-objects-in-clang">
+<h2>Using Python objects in Clang<a class="headerlink" href="#using-python-objects-in-clang" title="Permalink to this headline">¶</a></h2>
+<p>The malleability of Python can be a little difficult to translate into a strongly type language like C or C++, however the Python/C API helps to smooth out many difficulties.</p>
+<div class="section" id="using-callbacks">
+<h3>Using callbacks<a class="headerlink" href="#using-callbacks" title="Permalink to this headline">¶</a></h3>
+<p>To use a callback in Clang is surprisingly straight forward. Consider a function that just calls the callback on an integer argument; the implementation is</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="nf">act_callback</span><span class="p">(</span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">	</span><span class="c1">// nb: no kwargs</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">callback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">PyArg_ParseTuple</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;O|i&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">value</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="c1">// check is callback is okay</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">PyCallable_Check</span><span class="p">(</span><span class="n">callback</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">PyErr_SetString</span><span class="p">(</span><span class="n">PyExc_TypeError</span><span class="p">,</span><span class="w"></span>
+<span class="w">			</span><span class="s">&quot;Callback is not callable.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyLong_AsLong</span><span class="p">(</span><span class="n">PyObject_CallFunction</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;i&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">));</span><span class="w"></span>
+<span class="w">	</span><span class="n">Py_DECREF</span><span class="p">(</span><span class="n">callback</span><span class="p">);</span><span class="w">	</span><span class="c1">// reduce reference count so that C doesn&#39;t hold on to the object</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">PyLong_FromLong</span><span class="p">(</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We check that the callback is okay, we parse our argument into the callback, and then, since the callback is executing Python code, must cast the return object back into a C object. Since we expect only one return item, we can use the <code class="docutils literal notranslate"><span class="pre">PyLong_AsLong</span></code> to facilitate this conversion (bad conversion throws a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>).</p>
+</div>
+<div class="section" id="using-iterators">
+<h3>Using iterators<a class="headerlink" href="#using-iterators" title="Permalink to this headline">¶</a></h3>
+<p>A common idiom in python is to pass a list or iterator to a function. We can use these in Clang too; consider a iterator sum accumulator</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="nf">sum_itt</span><span class="p">(</span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">iterator</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">item</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">PyArg_ParseTuple</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;O&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">iterator</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">PyIter_Check</span><span class="p">(</span><span class="n">iterator</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyObject_GetIter</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w">	</span><span class="c1">// make iterator if not already an iterator</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">iterator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="n">PyErr_SetString</span><span class="p">(</span><span class="n">PyExc_TypeError</span><span class="p">,</span><span class="w"></span>
+<span class="w">				</span><span class="s">&quot;Argument is not iterable!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyIter_Next</span><span class="p">(</span><span class="n">iterator</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">PyLong_AsLong</span><span class="p">(</span><span class="n">item</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">Py_DECREF</span><span class="p">(</span><span class="n">item</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="n">Py_DECREF</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">PyLong_FromLong</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we check if the object is already iterable, else try to create an iterator from it. We can then cycle calls to <code class="docutils literal notranslate"><span class="pre">PyIter_Next()</span></code>, which by extension is just calling <code class="docutils literal notranslate"><span class="pre">next()</span></code> in python, to cycle through the iterator until depleted. We have to dereference each item after we assign it, as to allow the GC in python to clean up properly.</p>
+<p>The above may be used</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sum_itt</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>		<span class="c1"># 15</span>
+<span class="n">sum_itt</span><span class="p">(</span><span class="nb">iter</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>	<span class="c1"># 15</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="on-reference-counting">
+<h2>On reference counting<a class="headerlink" href="#on-reference-counting" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/c-api/refcounting.html">notes</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="high-perf.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">High performance Python techniques and paradigms</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="pypi-distribution.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Making a project available on pypi</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Fergus Baker<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,1975 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bash reference &#8212; notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/vollkorn.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/_static/styles.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bash cookbook" href="bash-cookbook.html" />
+    <link rel="prev" title="Bash scripting" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../titlepage.html">
+   notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Systems
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../nix-systems/index.html">
+   *nix Systems
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-installations.html">
+     Software installation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-sysadmin.html">
+     System administration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-filesystem.html">
+     Disk and filesystem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-networks.html">
+     Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-hardware.html">
+     Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/boot-bios.html">
+     Boot Loaders and BIOS control
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/systemd.html">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       journald
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/kernel.html">
+     Linux Kernel Modules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Bash scripting
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Bash reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="bash-cookbook.html">
+     Bash cookbook
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../osx-reference.html">
+   OSX Reference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/index.html">
+   C++ and C
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/declarations.html">
+     Declarations in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/conan.html">
+     Conan package manager
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/unit-testing.html">
+     Unit testing with Catch2! and Trompeloeil
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/swig-cmake.html">
+     Using SWIG with CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cmake.html">
+     CMake notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/member-functions.html">
+     On using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       std::function
+      </span>
+     </code>
+     for member functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../julia/index.html">
+   Julia Notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/julia-intro.html">
+     Julia learning notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/README.html">
+     Advent of Code notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/scopes.html">
+     Julia Scopes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/index.html">
+   Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-recipes.html">
+     Python recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/jupyter-ipython.html">
+     Jupyter and iPython cheat sheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/regex.html">
+     Regex in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-serial.html">
+     Serial communication with Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/high-perf.html">
+     High performance Python techniques and paradigms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/c-wrapping.html">
+     Wrapping C and C++ into Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/pypi-distribution.html">
+     Making a project available on pypi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/cpp-c-swig.html">
+     Wrapping C/C++ code using SWIG
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/requests.html">
+     Python
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       requests
+      </span>
+     </code>
+     cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/using-flask.html">
+     Using Python Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/rethink-db-with-flask.html">
+     Using RethinkDB with Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/jinja-templating.html">
+     Templating HTML pages with jinja
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/fast-api/using-fast-api.html">
+     Using FastAPI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/mkdocs-notes.html">
+     Notes on mkdocs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/scrapy.html">
+     Scrapy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../js/index.html">
+   JavaScript
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/jest-testing.html">
+     Using Jest testing framework
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/js-reference.html">
+     JavaScript language reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/swig-nodejs.html">
+     Using SWIG with NodeJS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/request-parsing.html">
+     Making HTTP requests and parsing in JS and node.js
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/extensions/native-messaging.html">
+     Native Messaging for Browser Extensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/vue/over-vue.html">
+     Vue Overview
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tex/index.html">
+   LaTeX
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latex-documents.html">
+     Writing LaTeX documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latexmk.html">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       latexmk
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/presentations.html">
+     Making presentations in LaTeX
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/posters.html">
+     Creating posters in LaTeX
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DevOps
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../docker/index.html">
+   Docker
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/minio-registry.html">
+     Creating a persistent local registry with S3/MinIO
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-cheatsheet.html">
+     Docker cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/systemd-with-docker.html">
+     Using Docker as
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     services
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-compose.html">
+     The magical world of Docker-Compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/dockerfile-recipes.html">
+     Dockerfile cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-swarm.html">
+     Docker Swarm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../aws/index.html">
+   Amazon Web Services
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/vpc-overview.html">
+     VPC overview
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/setting-up.html">
+     AWS Settup
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/ec2-with-docker.html">
+     EC2 with Docker
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/goofys-s3.html">
+     Using Goofys with S3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vms/index.html">
+   Virtual Machines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/sun-virtual-box.html">
+     Oracle Virtual Box
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/kvm.html">
+     Kernel-based Virtual Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/qemu.html">
+     QEMU
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../databases/index.html">
+   Databases
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/node-red.html">
+     NodeRed Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/mongo-db.html">
+     Using MongoDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/rethink-db.html">
+     RethinkDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/lang-drivers/py-mongo.html">
+     Using MongoDB and Python
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/shell-rc-profiles.html">
+   Shell
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*rc
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*profile
+    </span>
+   </code>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/jupyter-notebook.html">
+   Jupyter notebook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/index.html">
+   Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/tf-install.html">
+   Installing TensorFlow 2.0
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Raspi &amp; Arduino
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../raspi/index.html">
+   Raspberry Pi
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-config.html">
+     Configuring a Raspberry Pi from fresh install
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-bit-torrent.html">
+     Setting up a Raspberry-Pi for secure bit torrenting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/pyaudio.html">
+     Installing PyAudio on Raspberry Pi
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../arduino/index.html">
+   Arduino
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/platformio.html">
+     PlatformIO notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/ca-certs-nano.html">
+     Copying (root) CA certificates onto Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/arduino-cookbook.html">
+     Arduino cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/crypto-auth.html">
+     Using the ECC0X08 with Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/mqtt-specs.html">
+     MQTT Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/nginx-load-balancing.html">
+     Using NGiNX with Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vim/index.html">
+   VIM
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/recipes.html">
+     Vim Recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/vundle.html">
+     Vundle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/batch-rename.html">
+     Batch renaming in Vim
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../discord/index.html">
+   Discord
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/making-bots-python.html">
+     Making Discord bots in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/discord-music-hook.html">
+     Creating a Discord music feed using webhooks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../git/index.html">
+   Git and VCs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/git-reference.html">
+     Git Reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/gitea-mariadb.html">
+     Using Gitea with MariaDB
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vscode/index.html">
+   VSCode
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vscode/publishing.html">
+     Publishing a VSCode extension
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Miscellaneous
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recommended-talks.html">
+   Recommended talks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../software-design-principles.html">
+   Software Design Principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ffmpeg-cheatsheet.html">
+   FFMPEG Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../iptables-and-firewalls.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     iptables
+    </span>
+   </code>
+   and firewall configuration reference.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ci-cd/jenkins-recipes.html">
+   Jenkins Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../security/openssl-cookbook.html">
+   OpenSSL Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visualisation/blender-learning.html">
+   Learning Blender
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../java/gradle-cookbook.html">
+   Gradle build-tool cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../automation/mycroft-osx.html">
+   Using Mycroft Docker images on OSX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nix-systems/clamav.html">
+   Clam Anti-Virus
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/bash/bash-reference.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/fjebaker/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/fjebaker/notes/issues/new?title=Issue%20on%20page%20%2Fbash/bash-reference.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/fjebaker/notes/edit/master/bash/bash-reference.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#redirections">
+   Redirections
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#i-o-redirection">
+     I/O redirection
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#output-operators">
+       Output operators
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#input-operators">
+       Input operators
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#opening-and-closing-file-descriptors">
+       Opening and closing file descriptors
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operation-ordering">
+     Operation ordering
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#here-documents">
+     Here documents
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operators">
+   Operators
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numerical-comparison-operators">
+     Numerical comparison operators
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#string-comparison-operators">
+     String comparison operators
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-test-operators">
+     File test operators
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#special-variables">
+   Special variables
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#positional-parameters">
+     Positional parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#posix-character-classes">
+   POSIX character classes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ifs">
+   IFS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environment-contexts">
+   Environment contexts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameter-manipulation">
+   Parameter manipulation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#default">
+     Default
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-default">
+       Use default
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#set-to-default">
+       Set to default
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#error">
+       Error
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#replace">
+     Replace
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trimming">
+     Trimming
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#string-length">
+     String length
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#substring-extraction">
+     Substring extraction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#find">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     find
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#not-conditional">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       not
+      </span>
+     </code>
+     conditional
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exec-options">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       -exec
+      </span>
+     </code>
+     options
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#piping">
+       Piping
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grep">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     grep
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mutliple-patterns">
+     Mutliple patterns
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-resources">
+   Useful resources
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Bash reference</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#redirections">
+   Redirections
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#i-o-redirection">
+     I/O redirection
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#output-operators">
+       Output operators
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#input-operators">
+       Input operators
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#opening-and-closing-file-descriptors">
+       Opening and closing file descriptors
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operation-ordering">
+     Operation ordering
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#here-documents">
+     Here documents
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operators">
+   Operators
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numerical-comparison-operators">
+     Numerical comparison operators
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#string-comparison-operators">
+     String comparison operators
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-test-operators">
+     File test operators
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#special-variables">
+   Special variables
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#positional-parameters">
+     Positional parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#posix-character-classes">
+   POSIX character classes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ifs">
+   IFS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environment-contexts">
+   Environment contexts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameter-manipulation">
+   Parameter manipulation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#default">
+     Default
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-default">
+       Use default
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#set-to-default">
+       Set to default
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#error">
+       Error
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#replace">
+     Replace
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trimming">
+     Trimming
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#string-length">
+     String length
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#substring-extraction">
+     Substring extraction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#find">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     find
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#not-conditional">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       not
+      </span>
+     </code>
+     conditional
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exec-options">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       -exec
+      </span>
+     </code>
+     options
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#piping">
+       Piping
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grep">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     grep
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mutliple-patterns">
+     Mutliple patterns
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-resources">
+   Useful resources
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="bash-reference">
+<h1>Bash reference<a class="headerlink" href="#bash-reference" title="Permalink to this headline">¶</a></h1>
+<p>Reference notes for all things related to the Bourne Again Shell, and derivatives.</p>
+<!--BEGIN TOC-->
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#redirections">Redirections</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#i/o-redirection">I/O redirection</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#output-operators">Output operators</a></p></li>
+<li><p><a class="reference external" href="#input-operators">Input operators</a></p></li>
+<li><p><a class="reference external" href="#opening-and-closing-file-descriptors">Opening and closing file descriptors</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#operation-ordering">Operation ordering</a></p></li>
+<li><p><a class="reference external" href="#here-documents">Here documents</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#operators">Operators</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#numerical-comparison-operators">Numerical comparison operators</a></p></li>
+<li><p><a class="reference external" href="#string-comparison-operators">String comparison operators</a></p></li>
+<li><p><a class="reference external" href="#file-test-operators">File test operators</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#special-variables">Special variables</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#positional-parameters">Positional parameters</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#posix-character-classes">POSIX character classes</a></p></li>
+<li><p><a class="reference external" href="#ifs">IFS</a></p></li>
+<li><p><a class="reference external" href="#environment-contexts">Environment contexts</a></p></li>
+<li><p><a class="reference external" href="#parameter-manipulation">Parameter manipulation</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#default">Default</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#use-default">Use default</a></p></li>
+<li><p><a class="reference external" href="#set-to-default">Set to default</a></p></li>
+<li><p><a class="reference external" href="#error">Error</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#replace">Replace</a></p></li>
+<li><p><a class="reference external" href="#trimming">Trimming</a></p></li>
+<li><p><a class="reference external" href="#string-length">String length</a></p></li>
+<li><p><a class="reference external" href="#substring-extraction">Substring extraction</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#find"><code class="docutils literal notranslate"><span class="pre">find</span></code></a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#not-conditional"><code class="docutils literal notranslate"><span class="pre">not</span></code> conditional</a></p></li>
+<li><p><a class="reference external" href="#-exec-options"><code class="docutils literal notranslate"><span class="pre">-exec</span></code> options</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#piping">Piping</a></p></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#grep"><code class="docutils literal notranslate"><span class="pre">grep</span></code></a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#mutliple-patterns">Mutliple patterns</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#useful-resources">Useful resources</a></p></li>
+</ol>
+<!--END TOC-->
+</div>
+<div class="section" id="redirections">
+<h2>Redirections<a class="headerlink" href="#redirections" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="i-o-redirection">
+<h3>I/O redirection<a class="headerlink" href="#i-o-redirection" title="Permalink to this headline">¶</a></h3>
+<p>The following are commonly used redirection operators. These operations work on file descriptors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>   <span class="o">-</span> <span class="n">stdin</span>
+<span class="mi">1</span>   <span class="o">-</span> <span class="n">stdout</span>
+<span class="mi">2</span>   <span class="o">-</span> <span class="n">stderr</span>
+</pre></div>
+</div>
+<div class="section" id="output-operators">
+<h4>Output operators<a class="headerlink" href="#output-operators" title="Permalink to this headline">¶</a></h4>
+<p>Example use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># write &quot;Some Text&quot; to the file `output.txt`</span>
+<span class="nb">echo</span> <span class="s2">&quot;Some text&quot;</span> &gt; output.txt
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">FILENAME</span></code> pipe to file, will overwrite if present</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span> <span class="pre">FILENAME</span></code> pipe to file, appends if present</p></li>
+</ul>
+<p>Specific output operators; note, for each there exists the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code> variant:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1&gt;</span> <span class="pre">FILENAME</span></code> pipe <em>only</em> <code class="docutils literal notranslate"><span class="pre">stdout</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2&gt;</span> <span class="pre">FILENAME</span></code> pipe <em>only</em> <code class="docutils literal notranslate"><span class="pre">stderr</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&amp;&gt;</span> <span class="pre">FILENAME</span></code> pipe <em>both</em> <code class="docutils literal notranslate"><span class="pre">stdout</span></code> and <code class="docutils literal notranslate"><span class="pre">stderr</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">J&gt;</span> <span class="pre">FILENAME</span></code> pipe file descriptor <code class="docutils literal notranslate"><span class="pre">J</span></code> (default 1 if not present) to file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">J&gt;&amp;K</span></code> pipe file descriptor <code class="docutils literal notranslate"><span class="pre">J</span></code> to file descriptor <code class="docutils literal notranslate"><span class="pre">K</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="input-operators">
+<h4>Input operators<a class="headerlink" href="#input-operators" title="Permalink to this headline">¶</a></h4>
+<p>Example use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># same as `cat logfile | grep Error`</span>
+grep Error &lt; logfile.txt
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">FILENAME</span></code> accept input as coming from file, sometimes also <code class="docutils literal notranslate"><span class="pre">0&lt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;&amp;J</span></code> accept input as coming from file descriptor <code class="docutils literal notranslate"><span class="pre">J</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="opening-and-closing-file-descriptors">
+<h4>Opening and closing file descriptors<a class="headerlink" href="#opening-and-closing-file-descriptors" title="Permalink to this headline">¶</a></h4>
+<p>Example use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Hello World&quot;</span> &gt; file.txt
+<span class="nb">exec</span> <span class="m">3</span>&lt;&gt; file.txt                   <span class="c1"># open `file.txt` and assign file descriptor 3 to it</span>
+
+<span class="nb">read</span> -n <span class="m">5</span> &lt;<span class="p">&amp;</span><span class="m">3</span>                       <span class="c1"># read 4 characters of the file</span>
+<span class="nb">echo</span> -n , &gt;<span class="p">&amp;</span><span class="m">3</span>                       <span class="c1"># write a ,</span>
+<span class="nb">exec</span> <span class="m">3</span>&gt;<span class="p">&amp;</span>-                           <span class="c1"># close file descriptor</span>
+
+cat file.txt
+<span class="c1"># Hello, World</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">J&lt;&gt;</span> <span class="pre">FILENAME</span></code> open file for reading and writing assigned to file descriptor <code class="docutils literal notranslate"><span class="pre">J</span></code>. <code class="docutils literal notranslate"><span class="pre">J</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not present. If <code class="docutils literal notranslate"><span class="pre">FILENAME</span></code> does not exist, then it will be created</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">J&lt;&amp;-</span></code> close input file descriptor <code class="docutils literal notranslate"><span class="pre">J</span></code>. <code class="docutils literal notranslate"><span class="pre">J</span></code> defaults to 0 if not given</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">J&gt;&amp;-</span></code> close output file descriptor <code class="docutils literal notranslate"><span class="pre">J</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="operation-ordering">
+<h3>Operation ordering<a class="headerlink" href="#operation-ordering" title="Permalink to this headline">¶</a></h3>
+<p>The order in which I/O operations are used can affect their behaviour. Consider the following examples</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">exec</span> <span class="m">3</span>&gt;<span class="p">&amp;</span><span class="m">1</span>                               <span class="c1"># open fd 3 to `stdout`</span>
+ls -l &gt;<span class="p">&amp;</span><span class="m">3</span> <span class="m">3</span>&gt;<span class="p">&amp;</span>- <span class="p">|</span> grep bad &gt;<span class="p">&amp;</span><span class="m">3</span>           <span class="c1"># close fd 3 for `grep` but not for `ls` </span>
+<span class="nb">exec</span> <span class="m">3</span>&gt;<span class="p">&amp;</span>- 
+</pre></div>
+</div>
+</div>
+<div class="section" id="here-documents">
+<h3>Here documents<a class="headerlink" href="#here-documents" title="Permalink to this headline">¶</a></h3>
+<p>Full examples and documentation is available <a class="reference external" href="https://tldp.org/LDP/abs/html/here-docs.html">here</a>. The basic use replaces <code class="docutils literal notranslate"><span class="pre">stdin</span></code> in the preceding command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat <span class="s">&lt;&lt;EOF</span>
+<span class="s">...</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p><em>Note:</em> the symbol need not be <code class="docutils literal notranslate"><span class="pre">EOF</span></code>, but any unique character string, and the terminating symbol must exist on a new line with no preceding characters (whitespace, or otherwise).</p>
+<p>Supressing tabs (output will be flush left)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat <span class="s">&lt;&lt;-EOF</span>
+<span class="s">    ...</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>By default, here documents support parameter substitution. To disable it</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat <span class="s">&lt;&lt;&#39;EOF&#39; # alternatively \EOF</span> or <span class="s2">&quot;EOF&quot;</span>
+...
+EOF
+</pre></div>
+</div>
+<p>Here documents create temporary files that are deleted after opening, and not available to other processes: this can be demonstrated</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash -c <span class="s1">&#39;lsof -a -p $$ -d0&#39;</span> <span class="s">&lt;&lt; EOF</span>
+<span class="s">EOF</span>
+
+<span class="c1"># COMMAND  PID    USER   FD   TYPE DEVICE SIZE/OFF    NODE NAME</span>
+<span class="c1"># lsof    4375 aelfric    0r   REG   8,18        0 9962257 /tmp/zshc3dfTh (deleted)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<p>The following operators use single square bracket notation (unless otherwise indicated), as in the example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> <span class="nv">$a</span> -eq <span class="nv">$b</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;a and b are numerically equal!&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>As they are presented, these operators are true when the accompanying statement is true. In general, any given operator may be reversed with the <code class="docutils literal notranslate"><span class="pre">!</span></code> (not) operator:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> ! <span class="o">[</span> <span class="nv">$a</span> -eq <span class="nv">$b</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;a and b are *not* numerically equal!&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<div class="section" id="numerical-comparison-operators">
+<h3>Numerical comparison operators<a class="headerlink" href="#numerical-comparison-operators" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-eq</span></code> is equal to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-ne</span></code> is not equal to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-gt</span></code> is greater than, alternatively <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> in double parentheses</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-ge</span></code> is greater than or equal to, alternatively <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code> in double parentheses</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-lt</span></code> is less than, alternatively <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> in double parentheses</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-le</span></code> is less than or equal to, alternatively <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code> in double parentheses</p></li>
+</ul>
+</div>
+<div class="section" id="string-comparison-operators">
+<h3>String comparison operators<a class="headerlink" href="#string-comparison-operators" title="Permalink to this headline">¶</a></h3>
+<p>It is a good practice to always quote a tested string, unless the pattern matching behaviours are desired.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">=</span></code> is equal to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">==</span></code> is equal to, with different behaviour when framed in double brackets</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[[</span> <span class="nv">$a</span> <span class="o">==</span> b* <span class="o">]]</span>   <span class="c1"># pattern matching, with wildcard</span>
+<span class="o">[[</span> <span class="nv">$a</span> <span class="o">==</span> <span class="s2">&quot;b*&quot;</span> <span class="o">]]</span> <span class="c1"># literal matching, i.e. `$a` equal to exactly z*</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">!=</span></code> is not equal to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code> is less than in ASCII alphabetical ordering</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code> is greater than in ASCII alphabetical ordering</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">=~</span></code> regex match, requires double brackets. Uses <a class="reference external" href="#posix-character-classes">POSIX character classes</a>.</p></li>
+</ul>
+<p>The following are unary operators:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-z</span></code> string is null (zero length)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-n</span></code> string is not null</p></li>
+</ul>
+</div>
+<div class="section" id="file-test-operators">
+<h3>File test operators<a class="headerlink" href="#file-test-operators" title="Permalink to this headline">¶</a></h3>
+<p>These operators act on file paths, either as strings or on expanded variables. They are all unary operators, unless otherwise stated.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-e</span></code> exists</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code> is regular (not a directory or device file)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-s</span></code> is non-zero size</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-d</span></code> is a directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code> is a symbolic link, alternatively <code class="docutils literal notranslate"><span class="pre">-L</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-S</span></code> is a socket</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-g</span></code> sgid (set-group-id) flag is set – file belongs to the group that owns the directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-u</span></code> suid (set-user-id) flag is set – file will execute as root (provided owned by root); shows an <code class="docutils literal notranslate"><span class="pre">s</span></code> in permissions.</p></li>
+</ul>
+<p>The following are evaluated in the context of the script’s executing user</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span></code> has read permissions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-w</span></code> has write permissions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code> has execute permissions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-O</span></code> user owns this file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-G</span></code> GID of file is the same as user’s</p></li>
+</ul>
+<p>The following are binary operators</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-nt</span></code> left file is newer than right file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-ot</span></code> left file is older than right file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-ef</span></code> left file and right file are hard links to the same file</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="special-variables">
+<h2>Special variables<a class="headerlink" href="#special-variables" title="Permalink to this headline">¶</a></h2>
+<p>Most of these are taken from <a class="reference external" href="https://tldp.org/LDP/abs/html/internalvariables.html">an advanced scripting guide</a>.</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">$$</span></code></strong>: process ID, often the same as <code class="docutils literal notranslate"><span class="pre">$BASHPID</span></code>, contextually of the executing script.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">$MACHTYPE</span></code></strong>: machine hardware type (i386, x86_64, …).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">$_</span></code></strong>: set to the final argument of the previously executed command.</p></li>
+</ul>
+<p>For <code class="docutils literal notranslate"><span class="pre">$_</span></code>, consider</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>du &gt; /dev/null
+<span class="nb">echo</span> <span class="nv">$_</span>
+<span class="c1"># du</span>
+
+ls -l &gt; /dev/null
+<span class="nb">echo</span> <span class="nv">$_</span>
+<span class="c1"># -l</span>
+</pre></div>
+</div>
+<div class="section" id="positional-parameters">
+<h3>Positional parameters<a class="headerlink" href="#positional-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Only avaible in function calls</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">$#</span></code></strong>: the number of arguments passed.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">$*</span></code></strong>: all positional parameters as a single word.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">$&#64;</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">$*</span></code> but with each parameter being seen as a seperate word.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">$&#64;</span></code> variable responds to <code class="docutils literal notranslate"><span class="pre">shift</span></code> calls, which removes <code class="docutils literal notranslate"><span class="pre">$1</span></code> and decrements the positional index of every remaining variable by one.</p>
+<p>For example, a script which is passed <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4</span> <span class="pre">5</span></code> as input:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>    <span class="c1"># 1 2 3 4 5</span>
+<span class="nb">shift</span>
+<span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>    <span class="c1"># 2 3 4 5</span>
+<span class="nb">shift</span>
+<span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>    <span class="c1"># 3 4 5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="posix-character-classes">
+<h2>POSIX character classes<a class="headerlink" href="#posix-character-classes" title="Permalink to this headline">¶</a></h2>
+<p>POSIX character classes are groups of similar characters used in POSIX regex expressions, amongst other places. They may be typed in either completely lower or uppercase; that is, <code class="docutils literal notranslate"><span class="pre">[:alpha:]</span></code> and <code class="docutils literal notranslate"><span class="pre">[:ALPHA:]</span></code> are equivalent.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>POSIX Class</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[:lower:</span></code>]</p></td>
+<td><p>lowercase letters</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[:upper:</span></code>]</p></td>
+<td><p>uppercase letters</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[:alpha:</span></code>]</p></td>
+<td><p>alphabetic characters</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[:alnum:</span></code>]</p></td>
+<td><p>alphanumeric characters</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[:digit:</span></code>]</p></td>
+<td><p>digits</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[:xdigit:</span></code>]</p></td>
+<td><p>hex digits</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[:blank:</span></code>]</p></td>
+<td><p>spaces and tabs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[:space:</span></code>]</p></td>
+<td><p>all white space characters, incl. <code class="docutils literal notranslate"><span class="pre">\n</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[:cntrl:</span></code>]</p></td>
+<td><p>control characters</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[:punct:</span></code>]</p></td>
+<td><p>punctuation symbols</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[:print:</span></code>]</p></td>
+<td><p>visible characters and spaces</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[:graph:</span></code>]</p></td>
+<td><p>visible characters</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[:ascii:</span></code>]</p></td>
+<td><p>ASCII characters</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[:word:</span></code>]</p></td>
+<td><p>alphanumeric and underscore (i.e. regex <code class="docutils literal notranslate"><span class="pre">\w</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+<p>There are two special classes for denoting the beginning <code class="docutils literal notranslate"><span class="pre">[:&lt;:]</span></code> and end <code class="docutils literal notranslate"><span class="pre">[:&gt;:]</span></code> of a word.</p>
+<p><em>Link:</em> for more information, see <a class="reference external" href="http://www.regular-expressions.info/posixbrackets.html">regular expressions info</a>.</p>
+</div>
+<div class="section" id="ifs">
+<h2>IFS<a class="headerlink" href="#ifs" title="Permalink to this headline">¶</a></h2>
+<p>The <em>internal field seperator</em> is used by many shell commands to work out how to do word splitting in the input.</p>
+<p>A useful case to remember is that <em>new-line</em> characters are escaped</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">IFS</span><span class="o">=</span><span class="s1">$&#39;\n&#39;</span>
+</pre></div>
+</div>
+<p>The first character in the IFS definition also marks how common shell commands will bind words together. For example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">IFS</span><span class="o">=</span><span class="s2">&quot;:;-&quot;</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">IFS</span><span class="o">=</span><span class="s2">&quot;-:;&quot;</span>
+</pre></div>
+</div>
+<p>will both split words on any of <code class="docutils literal notranslate"><span class="pre">:</span></code>, <code class="docutils literal notranslate"><span class="pre">;</span></code>, or <code class="docutils literal notranslate"><span class="pre">-</span></code> characters – but when used with the <code class="docutils literal notranslate"><span class="pre">$*</span></code> special variable have a different effect:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash -c <span class="s1">&#39;set a b c d; IFS=&quot;:;-&quot;; echo &quot;$*&quot; &#39;</span>
+<span class="c1"># a:b:c:d</span>
+bash -c <span class="s1">&#39;set a b c d; IFS=&quot;-:;&quot;; echo &quot;$*&quot; &#39;</span>
+<span class="c1"># a-b-c-d</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="environment-contexts">
+<h2>Environment contexts<a class="headerlink" href="#environment-contexts" title="Permalink to this headline">¶</a></h2>
+<p>Environment variables set during the context of a command may be passed with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">SOME_VAR</span><span class="o">=</span>some_val ./script.sh
+</pre></div>
+</div>
+<p>or using <code class="docutils literal notranslate"><span class="pre">exec</span></code> and <code class="docutils literal notranslate"><span class="pre">env</span></code> to run the program in a modified environment</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">exec</span> env <span class="nv">SOME_VAR</span><span class="o">=</span>some_val ./script.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="parameter-manipulation">
+<h2>Parameter manipulation<a class="headerlink" href="#parameter-manipulation" title="Permalink to this headline">¶</a></h2>
+<p>Reference for manipulating parameters/variables with bash; for more, see <a class="reference external" href="https://tldp.org/LDP/abs/html/parameter-substitution.html#EXPREPL1">parameter substitution</a>.</p>
+<div class="section" id="default">
+<h3>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h3>
+<p>When accessing a variable <code class="docutils literal notranslate"><span class="pre">$var</span></code>, which may or may not be set.</p>
+<p>Note, in all of these, the modification <code class="docutils literal notranslate"><span class="pre">:</span></code> in the syntax will also use apply the default value <em>if</em> <code class="docutils literal notranslate"><span class="pre">$var</span></code> is declared, but set to <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<div class="section" id="use-default">
+<h4>Use default<a class="headerlink" href="#use-default" title="Permalink to this headline">¶</a></h4>
+<p>For default values, there are two syntax options</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">var</span><span class="p">-</span><span class="nv">$var2</span><span class="si">}</span>
+<span class="si">${</span><span class="nv">var</span><span class="k">:-</span><span class="nv">$var2</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>which can also be used with command substitutions</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">var</span><span class="p">-</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="si">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-to-default">
+<h4>Set to default<a class="headerlink" href="#set-to-default" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">var</span><span class="p">=default_value</span><span class="si">}</span>
+<span class="si">${</span><span class="nv">var</span><span class="p">:=default_value</span><span class="si">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error">
+<h4>Error<a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h4>
+<p>To print an error message if a variable is not set, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">var</span><span class="p">?err_message</span><span class="si">}</span>
+<span class="si">${</span><span class="nv">var</span><span class="p">:?err_message</span><span class="si">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="replace">
+<h3>Replace<a class="headerlink" href="#replace" title="Permalink to this headline">¶</a></h3>
+<p>For a local replacement</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">var</span><span class="p">/pattern/replacement</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>Or globally</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">var</span><span class="p">//pattern/replacement</span><span class="si">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="trimming">
+<h3>Trimming<a class="headerlink" href="#trimming" title="Permalink to this headline">¶</a></h3>
+<p>Example for trimming <em>known characters</em> from the end of a string</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">var</span><span class="p">%.mp4</span><span class="si">}</span>   <span class="c1"># removes .mp4</span>
+<span class="si">${</span><span class="nv">var</span><span class="p">%.*</span><span class="si">}</span>     <span class="c1"># removes any filename suffix</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">%</span></code> operator removes a suffix, and the <code class="docutils literal notranslate"><span class="pre">#</span></code> operator removes a prefix.</p>
+</div>
+<div class="section" id="string-length">
+<h3>String length<a class="headerlink" href="#string-length" title="Permalink to this headline">¶</a></h3>
+<p>For a character count, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${#</span><span class="nv">var</span><span class="si">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="substring-extraction">
+<h3>Substring extraction<a class="headerlink" href="#substring-extraction" title="Permalink to this headline">¶</a></h3>
+<p>For all but the last 4 characters:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">var</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="si">${#</span><span class="nv">var</span><span class="si">}</span><span class="p">-4</span><span class="si">}</span>
+<span class="c1"># note the 0 is implicit; the above is equivalent to</span>
+<span class="si">${</span><span class="nv">var</span><span class="p">::</span><span class="si">${#</span><span class="nv">var</span><span class="si">}</span><span class="p">-4</span><span class="si">}</span>
+<span class="c1"># and on many bash derivatives, the string length is also implicit</span>
+<span class="si">${</span><span class="nv">var</span><span class="p">:</span><span class="k">:-</span><span class="nv">4</span><span class="si">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="find">
+<h2><code class="docutils literal notranslate"><span class="pre">find</span></code><a class="headerlink" href="#find" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/find.html"><code class="docutils literal notranslate"><span class="pre">find</span></code> command</a> has numerous very useful features.</p>
+<div class="section" id="not-conditional">
+<h3><code class="docutils literal notranslate"><span class="pre">not</span></code> conditional<a class="headerlink" href="#not-conditional" title="Permalink to this headline">¶</a></h3>
+<p>To find files not matching a certain predicate, <code class="docutils literal notranslate"><span class="pre">find</span></code> supports the <code class="docutils literal notranslate"><span class="pre">-not</span></code> argument: for example,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find . -name <span class="s2">&quot;*.md&quot;</span> -not -name <span class="s2">&quot;index.md&quot;</span>
+</pre></div>
+</div>
+<p>to find files ending in <code class="docutils literal notranslate"><span class="pre">.md</span></code> but not files called <code class="docutils literal notranslate"><span class="pre">index.md</span></code>.</p>
+</div>
+<div class="section" id="exec-options">
+<h3><code class="docutils literal notranslate"><span class="pre">-exec</span></code> options<a class="headerlink" href="#exec-options" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">-exec</span></code> flag supports two terminations:</p>
+<ul class="simple">
+<li><p>serial</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find . -exec <span class="nb">echo</span> <span class="o">{}</span> <span class="se">\;</span>
+</pre></div>
+</div>
+<p>to execute, in this case, <code class="docutils literal notranslate"><span class="pre">echo</span></code> on each file, calling the command once per file.</p>
+<ul class="simple">
+<li><p>group</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find . -exec <span class="nb">echo</span> <span class="o">{}</span> +
+</pre></div>
+</div>
+<p>to execute echo on all of the output combined together as words, calling the command once per file.</p>
+<div class="section" id="piping">
+<h4>Piping<a class="headerlink" href="#piping" title="Permalink to this headline">¶</a></h4>
+<p>If <code class="docutils literal notranslate"><span class="pre">-exec</span></code> needs to pipe the output of a command to another, there are two useful ways of achieving this.</p>
+<p>The first is by (ab)using <code class="docutils literal notranslate"><span class="pre">sh</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find . -exec sh -c <span class="s2">&quot;cat {} | grep Example&quot;</span> <span class="se">\;</span>
+</pre></div>
+</div>
+<p>Or otherwise by piping the output through <code class="docutils literal notranslate"><span class="pre">xargs</span></code> seperated by new lines:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find . <span class="p">|</span> xargs -d<span class="se">\\</span>n cat <span class="p">|</span> grep Example
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="grep">
+<h2><code class="docutils literal notranslate"><span class="pre">grep</span></code><a class="headerlink" href="#grep" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mutliple-patterns">
+<h3>Mutliple patterns<a class="headerlink" href="#mutliple-patterns" title="Permalink to this headline">¶</a></h3>
+<p>To read multiple patterns with <code class="docutils literal notranslate"><span class="pre">grep</span></code>, either</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep <span class="s1">&#39;ptr1|ptr2&#39;</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span> <span class="o">-</span><span class="n">e</span> <span class="n">ptr1</span> <span class="o">-</span><span class="n">e</span> <span class="n">ptr2</span>
+</pre></div>
+</div>
+<p>may be used.</p>
+</div>
+</div>
+<div class="section" id="useful-resources">
+<h2>Useful resources<a class="headerlink" href="#useful-resources" title="Permalink to this headline">¶</a></h2>
+<p>Resources for writing bash scripts, and general bash guides:</p>
+<ul class="simple">
+<li><p>Mendel Cooper’s <em>Advanced Bash-Scription Guide</em> (site, available <a class="reference external" href="https://tldp.org/LDP/abs/html/index.html">here</a>).</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./bash"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Bash scripting</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bash-cookbook.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bash cookbook</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Fergus Baker<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

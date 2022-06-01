@@ -1,0 +1,1611 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Networks &#8212; notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/vollkorn.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/_static/styles.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hardware" href="nix-hardware.html" />
+    <link rel="prev" title="Disk and filesystem" href="nix-filesystem.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../titlepage.html">
+   notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Systems
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   *nix Systems
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nix-installations.html">
+     Software installation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nix-sysadmin.html">
+     System administration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nix-filesystem.html">
+     Disk and filesystem
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nix-hardware.html">
+     Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="boot-bios.html">
+     Boot Loaders and BIOS control
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="systemd.html">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       journald
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="kernel.html">
+     Linux Kernel Modules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bash/index.html">
+   Bash scripting
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-reference.html">
+     Bash reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-cookbook.html">
+     Bash cookbook
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../osx-reference.html">
+   OSX Reference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/index.html">
+   C++ and C
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/declarations.html">
+     Declarations in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/conan.html">
+     Conan package manager
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/unit-testing.html">
+     Unit testing with Catch2! and Trompeloeil
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/swig-cmake.html">
+     Using SWIG with CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cmake.html">
+     CMake notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/member-functions.html">
+     On using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       std::function
+      </span>
+     </code>
+     for member functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../julia/index.html">
+   Julia Notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/julia-intro.html">
+     Julia learning notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/README.html">
+     Advent of Code notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/scopes.html">
+     Julia Scopes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/index.html">
+   Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-recipes.html">
+     Python recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/jupyter-ipython.html">
+     Jupyter and iPython cheat sheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/regex.html">
+     Regex in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-serial.html">
+     Serial communication with Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/high-perf.html">
+     High performance Python techniques and paradigms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/c-wrapping.html">
+     Wrapping C and C++ into Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/pypi-distribution.html">
+     Making a project available on pypi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/cpp-c-swig.html">
+     Wrapping C/C++ code using SWIG
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/requests.html">
+     Python
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       requests
+      </span>
+     </code>
+     cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/using-flask.html">
+     Using Python Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/rethink-db-with-flask.html">
+     Using RethinkDB with Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/jinja-templating.html">
+     Templating HTML pages with jinja
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/fast-api/using-fast-api.html">
+     Using FastAPI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/mkdocs-notes.html">
+     Notes on mkdocs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/scrapy.html">
+     Scrapy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../js/index.html">
+   JavaScript
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/jest-testing.html">
+     Using Jest testing framework
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/js-reference.html">
+     JavaScript language reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/swig-nodejs.html">
+     Using SWIG with NodeJS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/request-parsing.html">
+     Making HTTP requests and parsing in JS and node.js
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/extensions/native-messaging.html">
+     Native Messaging for Browser Extensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/vue/over-vue.html">
+     Vue Overview
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tex/index.html">
+   LaTeX
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latex-documents.html">
+     Writing LaTeX documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latexmk.html">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       latexmk
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/presentations.html">
+     Making presentations in LaTeX
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/posters.html">
+     Creating posters in LaTeX
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DevOps
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../docker/index.html">
+   Docker
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/minio-registry.html">
+     Creating a persistent local registry with S3/MinIO
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-cheatsheet.html">
+     Docker cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/systemd-with-docker.html">
+     Using Docker as
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     services
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-compose.html">
+     The magical world of Docker-Compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/dockerfile-recipes.html">
+     Dockerfile cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-swarm.html">
+     Docker Swarm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../aws/index.html">
+   Amazon Web Services
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/vpc-overview.html">
+     VPC overview
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/setting-up.html">
+     AWS Settup
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/ec2-with-docker.html">
+     EC2 with Docker
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/goofys-s3.html">
+     Using Goofys with S3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vms/index.html">
+   Virtual Machines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/sun-virtual-box.html">
+     Oracle Virtual Box
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/kvm.html">
+     Kernel-based Virtual Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/qemu.html">
+     QEMU
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../databases/index.html">
+   Databases
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/node-red.html">
+     NodeRed Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/mongo-db.html">
+     Using MongoDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/rethink-db.html">
+     RethinkDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/lang-drivers/py-mongo.html">
+     Using MongoDB and Python
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/shell-rc-profiles.html">
+   Shell
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*rc
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*profile
+    </span>
+   </code>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/jupyter-notebook.html">
+   Jupyter notebook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/index.html">
+   Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/tf-install.html">
+   Installing TensorFlow 2.0
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Raspi &amp; Arduino
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../raspi/index.html">
+   Raspberry Pi
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-config.html">
+     Configuring a Raspberry Pi from fresh install
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-bit-torrent.html">
+     Setting up a Raspberry-Pi for secure bit torrenting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/pyaudio.html">
+     Installing PyAudio on Raspberry Pi
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../arduino/index.html">
+   Arduino
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/platformio.html">
+     PlatformIO notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/ca-certs-nano.html">
+     Copying (root) CA certificates onto Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/arduino-cookbook.html">
+     Arduino cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/crypto-auth.html">
+     Using the ECC0X08 with Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/mqtt-specs.html">
+     MQTT Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/nginx-load-balancing.html">
+     Using NGiNX with Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vim/index.html">
+   VIM
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/recipes.html">
+     Vim Recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/vundle.html">
+     Vundle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/batch-rename.html">
+     Batch renaming in Vim
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../discord/index.html">
+   Discord
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/making-bots-python.html">
+     Making Discord bots in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/discord-music-hook.html">
+     Creating a Discord music feed using webhooks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../git/index.html">
+   Git and VCs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/git-reference.html">
+     Git Reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/gitea-mariadb.html">
+     Using Gitea with MariaDB
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vscode/index.html">
+   VSCode
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vscode/publishing.html">
+     Publishing a VSCode extension
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Miscellaneous
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recommended-talks.html">
+   Recommended talks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../software-design-principles.html">
+   Software Design Principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ffmpeg-cheatsheet.html">
+   FFMPEG Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../iptables-and-firewalls.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     iptables
+    </span>
+   </code>
+   and firewall configuration reference.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ci-cd/jenkins-recipes.html">
+   Jenkins Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../security/openssl-cookbook.html">
+   OpenSSL Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visualisation/blender-learning.html">
+   Learning Blender
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../java/gradle-cookbook.html">
+   Gradle build-tool cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../automation/mycroft-osx.html">
+   Using Mycroft Docker images on OSX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="clamav.html">
+   Clam Anti-Virus
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nix-systems/nix-networks.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/fjebaker/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/fjebaker/notes/issues/new?title=Issue%20on%20page%20%2Fnix-systems/nix-networks.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/fjebaker/notes/edit/master/nix-systems/nix-networks.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#debian-network-configuration">
+   Debian network configuration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#controlling-interfaces">
+     Controlling interfaces
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-interfaces">
+     Configuring interfaces
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dhcp">
+       DHCP
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#static-ip">
+       Static IP
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dns">
+       DNS
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debugging-networks">
+     Debugging networks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proxies">
+     Proxies
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ssh-recipes">
+   SSH recipes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ssh-string-tokens">
+     SSH string tokens
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuration-files">
+     Configuration files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debugging-access-rights">
+     Debugging access rights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connection-pooling">
+     Connection pooling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tunneling">
+     Tunneling
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#network-introspection">
+   Network introspection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#checking-open-ports">
+     Checking open ports
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#arp">
+     ARP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dns-interrogation">
+     DNS interrogation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Networks</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#debian-network-configuration">
+   Debian network configuration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#controlling-interfaces">
+     Controlling interfaces
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-interfaces">
+     Configuring interfaces
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dhcp">
+       DHCP
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#static-ip">
+       Static IP
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dns">
+       DNS
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debugging-networks">
+     Debugging networks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proxies">
+     Proxies
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ssh-recipes">
+   SSH recipes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ssh-string-tokens">
+     SSH string tokens
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuration-files">
+     Configuration files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debugging-access-rights">
+     Debugging access rights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connection-pooling">
+     Connection pooling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tunneling">
+     Tunneling
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#network-introspection">
+   Network introspection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#checking-open-ports">
+     Checking open ports
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#arp">
+     ARP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dns-interrogation">
+     DNS interrogation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="networks">
+<h1>Networks<a class="headerlink" href="#networks" title="Permalink to this headline">¶</a></h1>
+<!--BEGIN TOC-->
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#debian-network-configuration">Debian network configuration</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#controlling-interfaces">Controlling interfaces</a></p></li>
+<li><p><a class="reference external" href="#configuring-interfaces">Configuring interfaces</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#dhcp">DHCP</a></p></li>
+<li><p><a class="reference external" href="#static-ip">Static IP</a></p></li>
+<li><p><a class="reference external" href="#dns">DNS</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#debugging-networks">Debugging networks</a></p></li>
+<li><p><a class="reference external" href="#proxies">Proxies</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#ssh-recipes">SSH recipes</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#ssh-string-tokens">SSH string tokens</a></p></li>
+<li><p><a class="reference external" href="#configuration-files">Configuration files</a></p></li>
+<li><p><a class="reference external" href="#debugging-access-rights">Debugging access rights</a></p></li>
+<li><p><a class="reference external" href="#connection-pooling">Connection pooling</a></p></li>
+<li><p><a class="reference external" href="#tunneling">Tunneling</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#network-introspection">Network introspection</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#checking-open-ports">Checking open ports</a></p></li>
+<li><p><a class="reference external" href="#arp">ARP</a></p></li>
+<li><p><a class="reference external" href="#dns-interrogation">DNS interrogation</a></p></li>
+</ol>
+</li>
+</ol>
+<!--END TOC-->
+</div>
+<div class="section" id="debian-network-configuration">
+<h2>Debian network configuration<a class="headerlink" href="#debian-network-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Whilst installing Debian 9 on an old machine, which had a faulty NIC, I learned a few things about network configurations on that specific OS, most of which is documented <a class="reference external" href="https://www.debian.org/doc/manuals/debian-reference/ch05.en.html">in the manual</a>.</p>
+<p>The legacy <code class="docutils literal notranslate"><span class="pre">ifconfig</span></code> is being replaced with the newer <code class="docutils literal notranslate"><span class="pre">ip</span></code> suite, and an overview of the translation can be quickly seen in this post by <a class="reference external" href="https://computingforgeeks.com/ifconfig-vs-ip-usage-guide-on-linux/">ComputingForGeeks</a>. Two very useful commands I use a lot for debugging are</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ip a 	<span class="c1"># output similar to the standard ifconfig</span>
+
+ip -s link show <span class="o">[</span>interface<span class="o">]</span>	<span class="c1"># outputs interface statistics</span>
+</pre></div>
+</div>
+<div class="section" id="controlling-interfaces">
+<h3>Controlling interfaces<a class="headerlink" href="#controlling-interfaces" title="Permalink to this headline">¶</a></h3>
+<p>Toggling specific interface states can be done using either <code class="docutils literal notranslate"><span class="pre">ip</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ip link <span class="nb">set</span> <span class="o">[</span>interface<span class="o">]</span> up
+</pre></div>
+</div>
+<p>or <code class="docutils literal notranslate"><span class="pre">ifup</span></code>/<code class="docutils literal notranslate"><span class="pre">ifdown</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ifup <span class="o">[</span>interface<span class="o">]</span>
+ifdown <span class="o">[</span>interface<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>NB:</strong> <code class="docutils literal notranslate"><span class="pre">ifup</span></code> and <code class="docutils literal notranslate"><span class="pre">ifdown</span></code> can only interact with interfaces defined in <code class="docutils literal notranslate"><span class="pre">/etc/network/interfaces</span></code>. Add a simple configuration, such as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">iface</span> <span class="p">[</span><span class="n">enoXYZ</span><span class="p">]</span> <span class="n">inet</span> <span class="n">dhcp</span>
+</pre></div>
+</div>
+<p>More detail on this in the next section.</p>
+<p>The whole network interface may be interacted with using the <code class="docutils literal notranslate"><span class="pre">init.d</span></code> service</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo /etc/init.d/networking <span class="o">[</span>start, stop, restart, status<span class="o">]</span>
+</pre></div>
+</div>
+<p>or with <code class="docutils literal notranslate"><span class="pre">systemd</span></code> using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl <span class="o">[</span>start, stop, restart, status<span class="o">]</span> networking
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuring-interfaces">
+<h3>Configuring interfaces<a class="headerlink" href="#configuring-interfaces" title="Permalink to this headline">¶</a></h3>
+<p>A post on <a class="reference external" href="https://www.cyberciti.biz/faq/howto-configuring-network-interface-cards-on-debian/">nixCraft</a> provides a good overview of Debian network configuration, and the configuration syntax can be seen <a class="reference external" href="https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_basic_syntax_of_etc_network_interfaces">in the manual</a>.</p>
+<p>The main interfaces configuration can be edited in</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/network/interfaces
+</pre></div>
+</div>
+<p>and typically includes just a necessary (?) local configuration</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">auto</span> <span class="n">lo</span>
+<span class="n">iface</span> <span class="n">lo</span> <span class="n">inet</span> <span class="n">loopback</span>
+</pre></div>
+</div>
+<div class="section" id="dhcp">
+<h4>DHCP<a class="headerlink" href="#dhcp" title="Permalink to this headline">¶</a></h4>
+<p>For a DHCP interface, we can use a simple configuration such as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">auto</span> <span class="n">eth0</span>
+<span class="n">iface</span> <span class="n">eth0</span> <span class="n">inet</span> <span class="n">dhcp</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="static-ip">
+<h4>Static IP<a class="headerlink" href="#static-ip" title="Permalink to this headline">¶</a></h4>
+<p>Static IP addresses can be assigned with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">auto</span> <span class="n">eth0</span>
+<span class="n">iface</span> <span class="n">eth0</span> <span class="n">inet</span> <span class="n">static</span>
+	<span class="n">address</span> <span class="mf">192.168</span><span class="o">.</span><span class="n">xxx</span><span class="o">.</span><span class="n">yyy</span>
+	<span class="n">netmask</span> <span class="mf">255.255.255.0</span>
+	<span class="n">gateway</span> <span class="mf">192.168.1.1</span>
+	<span class="c1"># dns-domain example.com</span>
+	<span class="c1"># dns-nameserver 192.168.1.1</span>
+</pre></div>
+</div>
+<p>As pointed out <a class="reference external" href="https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_network_interface_with_the_static_ip">in the manual</a>, if <code class="docutils literal notranslate"><span class="pre">resolvconf</span></code> package is not installed, the DNS configuration is done by editing the <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> file with, for example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nameserver</span> <span class="mf">192.168.1.1</span>
+<span class="n">domain</span> <span class="n">example</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+<p><strong>NB:</strong> The modern <code class="docutils literal notranslate"><span class="pre">systemd</span></code> configuration is considerably more elegant, and also documented <a class="reference external" href="https://www.debian.org/doc/manuals/debian-reference/ch05.en.html#_the_modern_network_configuration_without_gui">in the manual</a>.</p>
+</div>
+<div class="section" id="dns">
+<h4>DNS<a class="headerlink" href="#dns" title="Permalink to this headline">¶</a></h4>
+<p>The DNS servers are configured (on <code class="docutils literal notranslate"><span class="pre">systemd</span></code> distributions) through <code class="docutils literal notranslate"><span class="pre">dhcpcd</span></code>, and thus may be amended by editing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>and adding the line</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">domain_name_servers</span><span class="o">=</span><span class="n">address</span> <span class="p">[</span><span class="n">address</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="debugging-networks">
+<h3>Debugging networks<a class="headerlink" href="#debugging-networks" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference external" href="https://linuxize.com/post/check-listening-ports-linux/">this guide on port overviews</a>.</p>
+</div>
+<div class="section" id="proxies">
+<h3>Proxies<a class="headerlink" href="#proxies" title="Permalink to this headline">¶</a></h3>
+<p>To configure proxies for the currently running shell, simply define the environment variables</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>These are read by most common command line programs, such as <code class="docutils literal notranslate"><span class="pre">curl</span></code>, or <code class="docutils literal notranslate"><span class="pre">wget</span></code>.</p>
+<p><em>NB:</em> other environment variables include <code class="docutils literal notranslate"><span class="pre">ftp_proxy</span></code>, <code class="docutils literal notranslate"><span class="pre">socks_proxy</span></code>, or <code class="docutils literal notranslate"><span class="pre">all_proxy</span></code>. The format for the url is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">protocol</span><span class="p">:</span><span class="o">//</span><span class="n">user</span><span class="p">:</span><span class="n">password</span><span class="nd">@host</span><span class="p">:</span><span class="n">port</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="ssh-recipes">
+<h2>SSH recipes<a class="headerlink" href="#ssh-recipes" title="Permalink to this headline">¶</a></h2>
+<p>A handful of useful tips and tricks when using SSH.</p>
+<p>Copy login key to remote:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-copy-id user@host
+</pre></div>
+</div>
+<p>Remove host key from chain:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen -R host
+</pre></div>
+</div>
+<div class="section" id="ssh-string-tokens">
+<h3>SSH string tokens<a class="headerlink" href="#ssh-string-tokens" title="Permalink to this headline">¶</a></h3>
+<p>These tokens are expanded from strings at runtime. From <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">ssh_config</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>%%    A literal ‘%’.
+%C    Hash of %l%h%p%r.
+%d    Local user&#39;s home directory.
+%h    The remote hostname.
+%i    The local user ID.
+%k    The host key alias if specified, otherwise the orignal remote
+        hostname given on the command line.
+%L    The local hostname.
+%l    The local hostname, including the domain name.
+%n    The original remote hostname, as given on the command line.
+%p    The remote port.
+%r    The remote username.
+%T    The local tun(4) or tap(4) network interface assigned if tun‐
+        nel forwarding was requested, or &quot;NONE&quot; otherwise.
+%u    The local username.
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration-files">
+<h3>Configuration files<a class="headerlink" href="#configuration-files" title="Permalink to this headline">¶</a></h3>
+<p>Configuration files can help assign different SSH identities or options to different hosts. The global configuration file is located in <code class="docutils literal notranslate"><span class="pre">/etc/ssh/ssh_config</span></code>, and the per user in <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code>.</p>
+<p>The configuration files are of the format</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">hostname1</span>
+    <span class="n">SSH_OPTION</span> <span class="n">value</span>
+    <span class="n">SSH_OPTION</span> <span class="n">value</span>
+    <span class="o">...</span>
+
+<span class="n">Host</span> <span class="n">hostname2</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>A full overview of the configuration files can be found <a class="reference external" href="https://www.ssh.com/academy/ssh/config">on the SSH website</a>.</p>
+<p>An example configuration for using a specific identity with a specific host</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span>
+    <span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_github</span>
+    <span class="n">IdentitiesOnly</span> <span class="n">yes</span>
+</pre></div>
+</div>
+<p>Another example for creating an alias</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="o">*</span><span class="n">pi</span>
+    <span class="n">HostName</span> <span class="n">huginn</span><span class="o">.</span><span class="n">local</span>
+    <span class="n">User</span> <span class="n">pi</span>
+    <span class="n">Port</span> <span class="mi">22</span>
+</pre></div>
+</div>
+<p>Now using any of the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh pi
+ssh raspberrypi
+ssh mypi
+</pre></div>
+</div>
+<p>will all use the above configuration and alias to</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh pi@huginn.local -p <span class="m">22</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging-access-rights">
+<h3>Debugging access rights<a class="headerlink" href="#debugging-access-rights" title="Permalink to this headline">¶</a></h3>
+<p>The best way to understand what is going wrong is just to trace a verbose test connection</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh -T user@domain -v
+</pre></div>
+</div>
+</div>
+<div class="section" id="connection-pooling">
+<h3>Connection pooling<a class="headerlink" href="#connection-pooling" title="Permalink to this headline">¶</a></h3>
+<p>To avoid having to execute a full SSH handshake, or if connections are being rate-limited, we can use the <code class="docutils literal notranslate"><span class="pre">ControlMaster</span></code> and <code class="docutils literal notranslate"><span class="pre">ControlPath</span></code> options of SSH. From <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">ssh_config</span></code>:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ControlMaster
+        Enables the sharing of multiple sessions over a single network
+        connection.  
+...
+ControlPath
+        Specify the path to the control socket used for connection shar‐
+        ing as described in the ControlMaster section above or the string
+        none to disable connection sharing.  
+</pre></div>
+</div>
+</div></blockquote>
+<p>In practice, we can open a socket, e.g. <code class="docutils literal notranslate"><span class="pre">.conn.sock</span></code>, via a master connection, and then direct other SSH commands to use this socket:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh -S .conn.sock -M host
+</pre></div>
+</div>
+<p>Then, in a second terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">S</span> <span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">sock</span> <span class="n">host</span> <span class="s2">&quot;echo Hello World&quot;</span>
+</pre></div>
+</div>
+<p>To avoid having to ensure sockets have a sane name and are cleaned up, it may also be worth adding</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ControlPath</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">control</span><span class="o">-%</span><span class="n">h</span><span class="o">-%</span><span class="n">p</span><span class="o">-%</span><span class="n">r</span>
+</pre></div>
+</div>
+<p>into your SSH configuration file</p>
+</div>
+<div class="section" id="tunneling">
+<h3>Tunneling<a class="headerlink" href="#tunneling" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ssh</span></code> program supports <em>tunneling</em>, which allows a machine to forward ports via SSH to another machine. This can be used to make e.g. secure web-connection, or just to forward SSH traffic.</p>
+<p>From the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> manual, the <code class="docutils literal notranslate"><span class="pre">-L</span></code> flag allows us to forward, or <em>tunnel</em>, traffic from one machine through to another.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">L</span> <span class="p">[</span><span class="n">bind_address</span><span class="p">:]</span><span class="n">port</span><span class="p">:</span><span class="n">host</span><span class="p">:</span><span class="n">hostport</span>
+<span class="o">-</span><span class="n">L</span> <span class="p">[</span><span class="n">bind_address</span><span class="p">:]</span><span class="n">port</span><span class="p">:</span><span class="n">remote_socket</span>
+<span class="o">-</span><span class="n">L</span> <span class="n">local_socket</span><span class="p">:</span><span class="n">host</span><span class="p">:</span><span class="n">hostport</span>
+<span class="o">-</span><span class="n">L</span> <span class="n">local_socket</span><span class="p">:</span><span class="n">remote_socket</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Our aim then is to expose a port on our local machine (PC), which will send traffic via <code class="docutils literal notranslate"><span class="pre">ssh</span></code> to <code class="docutils literal notranslate"><span class="pre">remote1</span></code>, which will in turn forward this traffic to <code class="docutils literal notranslate"><span class="pre">remote2</span></code>. We can do this with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh -N -L localhost:12001:remote2:22 USER@remote1
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-N</span></code>: Do not execute a remote command on Aquila.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-L</span> <span class="pre">localhost:12001:remote2:22</span></code> bind port <code class="docutils literal notranslate"><span class="pre">12001</span></code> on our local machine (PC), such that when a connection is made to this port, it will be forwarded, via</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="network-introspection">
+<h2>Network introspection<a class="headerlink" href="#network-introspection" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="checking-open-ports">
+<h3>Checking open ports<a class="headerlink" href="#checking-open-ports" title="Permalink to this headline">¶</a></h3>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">netstat</span></code> command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>netstat -tunlp
+</pre></div>
+</div>
+<p>with the flags for <code class="docutils literal notranslate"><span class="pre">-p</span></code> process id associated, <code class="docutils literal notranslate"><span class="pre">-u</span></code> udp connections, <code class="docutils literal notranslate"><span class="pre">-n</span></code> display numerical port range, <code class="docutils literal notranslate"><span class="pre">-t</span></code> tcp connections, and <code class="docutils literal notranslate"><span class="pre">-l</span></code> to show listening sockets.</p>
+<p><em>NB:</em> <code class="docutils literal notranslate"><span class="pre">netstat</span></code> is increasingly deprecated in favour of <code class="docutils literal notranslate"><span class="pre">ss</span></code>.</p>
+<p>This can also be accomplished using the <code class="docutils literal notranslate"><span class="pre">lsof</span></code> to list open files</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lsof -i
+</pre></div>
+</div>
+<p>where we use the <code class="docutils literal notranslate"><span class="pre">-i</span></code> flag to select listings with internet addresses. This can be further specified e.g. <code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">tcp</span></code>.</p>
+<p>Or with <code class="docutils literal notranslate"><span class="pre">nmap</span></code>, TCP</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nmap -sT -O localhost
+</pre></div>
+</div>
+<p>or, for UDP</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nmap -sU localhost
+</pre></div>
+</div>
+<p>To discover which process is listening on a specific port, e.g. <code class="docutils literal notranslate"><span class="pre">4242</span></code>, we can use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lsof -nP -iTCP:4242 -sTCP:LISTEN
+</pre></div>
+</div>
+<p>Finally, there is also <code class="docutils literal notranslate"><span class="pre">ss</span></code>, another socket investigating utility. To list listening ports with <code class="docutils literal notranslate"><span class="pre">ss</span></code>, similar to <code class="docutils literal notranslate"><span class="pre">netstat</span></code>, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ss -tunlp
+</pre></div>
+</div>
+</div>
+<div class="section" id="arp">
+<h3>ARP<a class="headerlink" href="#arp" title="Permalink to this headline">¶</a></h3>
+<p>ARP, or Address Resolution Protocol, maps IP addresses to MAC addresses in a LAN, allowing devices to find one another.</p>
+<p>To interact with the ARP cache (known IP-MAC resolutions), we use <a class="reference external" href="https://manpages.debian.org/buster/net-tools/arp.8.en.html"><code class="docutils literal notranslate"><span class="pre">arp</span></code></a>, which is installed as part of the <a class="reference external" href="https://manpages.debian.org/buster/net-tools/index.html"><code class="docutils literal notranslate"><span class="pre">net-tools</span></code> package</a>.</p>
+<ul class="simple">
+<li><p>viewing the full ARP cache</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>arp -a
+
+<span class="c1"># saturn.home (192.168.1.136) at 00:00:00:00:00:01 [ether] on enp4s0</span>
+<span class="c1"># internetbox.home (192.168.1.1) at 00:00:00:00:00:02 [ether] on enp4s0</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>find MAC for specific IP</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>arp -a <span class="m">192</span>.168.1.136
+
+<span class="c1"># saturn.home (192.168.1.136) at 00:00:00:00:00:01 [ether] on enp4s0</span>
+</pre></div>
+</div>
+<p><em>Note</em>: there is BSD and Linux output style (<code class="docutils literal notranslate"><span class="pre">-a</span></code> vs <code class="docutils literal notranslate"><span class="pre">-e</span></code>).</p>
+<p>ARP cache entries can either be <em>static</em> or <em>dynamic</em>, i.e. user-added, or automatically resolved.</p>
+</div>
+<div class="section" id="dns-interrogation">
+<h3>DNS interrogation<a class="headerlink" href="#dns-interrogation" title="Permalink to this headline">¶</a></h3>
+<p>A tool for investigating DNS lookups is <a class="reference external" href="https://linux.die.net/man/1/dig"><code class="docutils literal notranslate"><span class="pre">dig</span></code></a>, part of the <code class="docutils literal notranslate"><span class="pre">dnsutil</span></code> package.</p>
+<p>To trace a DNS lookup, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dig <span class="o">[</span>server<span class="o">]</span>
+</pre></div>
+</div>
+<p>To trace a specific DNS server, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dig @192.168.1.254 <span class="o">[</span>server<span class="o">]</span>
+</pre></div>
+</div>
+<p>The same may be accomplished using <a class="reference external" href="https://man.cx/nslookup(1)">the <code class="docutils literal notranslate"><span class="pre">nslookup</span></code> program</a> (included as part of <code class="docutils literal notranslate"><span class="pre">distutils</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nslookup <span class="o">[</span>server<span class="o">]</span>
+</pre></div>
+</div>
+<p>You can also view the current DNS configuration by viewing</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat /etc/resolv.conf
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./nix-systems"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="nix-filesystem.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Disk and filesystem</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="nix-hardware.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Hardware</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Fergus Baker<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

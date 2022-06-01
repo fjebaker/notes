@@ -1,0 +1,1756 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Git Reference &#8212; notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/vollkorn.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/_static/styles.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using Gitea with MariaDB" href="gitea-mariadb.html" />
+    <link rel="prev" title="Git and VCs" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../titlepage.html">
+   notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../nix-systems/index.html">
+   *nix Systems
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-installations.html">
+     Software installation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-sysadmin.html">
+     System administration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-filesystem.html">
+     Disk and filesystem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-networks.html">
+     Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-hardware.html">
+     Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/boot-bios.html">
+     Boot Loaders and BIOS control
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/systemd.html">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       journald
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/kernel.html">
+     Linux Kernel Modules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bash/index.html">
+   Bash scripting
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-reference.html">
+     Bash reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-cookbook.html">
+     Bash cookbook
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../osx-reference.html">
+   OSX Reference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/index.html">
+   C++ and C
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/declarations.html">
+     Declarations in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/conan.html">
+     Conan package manager
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/unit-testing.html">
+     Unit testing with Catch2! and Trompeloeil
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/swig-cmake.html">
+     Using SWIG with CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cmake.html">
+     CMake notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/member-functions.html">
+     On using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       std::function
+      </span>
+     </code>
+     for member functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../julia/index.html">
+   Julia Notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/julia-intro.html">
+     Julia learning notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/README.html">
+     Advent of Code notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/scopes.html">
+     Julia Scopes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/index.html">
+   Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-recipes.html">
+     Python recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/jupyter-ipython.html">
+     Jupyter and iPython cheat sheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/regex.html">
+     Regex in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-serial.html">
+     Serial communication with Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/high-perf.html">
+     High performance Python techniques and paradigms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/c-wrapping.html">
+     Wrapping C and C++ into Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/pypi-distribution.html">
+     Making a project available on pypi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/cpp-c-swig.html">
+     Wrapping C/C++ code using SWIG
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/requests.html">
+     Python
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       requests
+      </span>
+     </code>
+     cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/using-flask.html">
+     Using Python Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/rethink-db-with-flask.html">
+     Using RethinkDB with Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/jinja-templating.html">
+     Templating HTML pages with jinja
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/fast-api/using-fast-api.html">
+     Using FastAPI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/mkdocs-notes.html">
+     Notes on mkdocs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/scrapy.html">
+     Scrapy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../js/index.html">
+   JavaScript
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/jest-testing.html">
+     Using Jest testing framework
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/js-reference.html">
+     JavaScript language reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/swig-nodejs.html">
+     Using SWIG with NodeJS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/request-parsing.html">
+     Making HTTP requests and parsing in JS and node.js
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/extensions/native-messaging.html">
+     Native Messaging for Browser Extensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/vue/over-vue.html">
+     Vue Overview
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tex/index.html">
+   LaTeX
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latex-documents.html">
+     Writing LaTeX documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latexmk.html">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       latexmk
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/presentations.html">
+     Making presentations in LaTeX
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/posters.html">
+     Creating posters in LaTeX
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DevOps
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../docker/index.html">
+   Docker
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/minio-registry.html">
+     Creating a persistent local registry with S3/MinIO
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-cheatsheet.html">
+     Docker cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/systemd-with-docker.html">
+     Using Docker as
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     services
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-compose.html">
+     The magical world of Docker-Compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/dockerfile-recipes.html">
+     Dockerfile cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-swarm.html">
+     Docker Swarm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../aws/index.html">
+   Amazon Web Services
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/vpc-overview.html">
+     VPC overview
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/setting-up.html">
+     AWS Settup
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/ec2-with-docker.html">
+     EC2 with Docker
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/goofys-s3.html">
+     Using Goofys with S3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vms/index.html">
+   Virtual Machines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/sun-virtual-box.html">
+     Oracle Virtual Box
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/kvm.html">
+     Kernel-based Virtual Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/qemu.html">
+     QEMU
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../databases/index.html">
+   Databases
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/node-red.html">
+     NodeRed Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/mongo-db.html">
+     Using MongoDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/rethink-db.html">
+     RethinkDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/lang-drivers/py-mongo.html">
+     Using MongoDB and Python
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/shell-rc-profiles.html">
+   Shell
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*rc
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*profile
+    </span>
+   </code>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/jupyter-notebook.html">
+   Jupyter notebook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/index.html">
+   Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/tf-install.html">
+   Installing TensorFlow 2.0
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Raspi &amp; Arduino
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../raspi/index.html">
+   Raspberry Pi
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-config.html">
+     Configuring a Raspberry Pi from fresh install
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-bit-torrent.html">
+     Setting up a Raspberry-Pi for secure bit torrenting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/pyaudio.html">
+     Installing PyAudio on Raspberry Pi
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../arduino/index.html">
+   Arduino
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/platformio.html">
+     PlatformIO notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/ca-certs-nano.html">
+     Copying (root) CA certificates onto Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/arduino-cookbook.html">
+     Arduino cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/crypto-auth.html">
+     Using the ECC0X08 with Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/mqtt-specs.html">
+     MQTT Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/nginx-load-balancing.html">
+     Using NGiNX with Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vim/index.html">
+   VIM
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/recipes.html">
+     Vim Recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/vundle.html">
+     Vundle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/batch-rename.html">
+     Batch renaming in Vim
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../discord/index.html">
+   Discord
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/making-bots-python.html">
+     Making Discord bots in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/discord-music-hook.html">
+     Creating a Discord music feed using webhooks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Git and VCs
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Git Reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="gitea-mariadb.html">
+     Using Gitea with MariaDB
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vscode/index.html">
+   VSCode
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vscode/publishing.html">
+     Publishing a VSCode extension
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Miscellaneous
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recommended-talks.html">
+   Recommended talks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../software-design-principles.html">
+   Software Design Principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ffmpeg-cheatsheet.html">
+   FFMPEG Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../iptables-and-firewalls.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     iptables
+    </span>
+   </code>
+   and firewall configuration reference.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ci-cd/jenkins-recipes.html">
+   Jenkins Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../security/openssl-cookbook.html">
+   OpenSSL Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visualisation/blender-learning.html">
+   Learning Blender
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../java/gradle-cookbook.html">
+   Gradle build-tool cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../automation/mycroft-osx.html">
+   Using Mycroft Docker images on OSX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nix-systems/clamav.html">
+   Clam Anti-Virus
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/git/git-reference.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/fjebaker/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/fjebaker/notes/issues/new?title=Issue%20on%20page%20%2Fgit/git-reference.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/fjebaker/notes/edit/master/git/git-reference.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#format-patch">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     format-patch
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#am">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     am
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apply">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     apply
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#archive">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     archive
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bundle">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     bundle
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stash">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     stash
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rebase">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     rebase
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#changing-author">
+     Changing Author
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cherry-pick">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     cherry-pick
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#keeping-commit-references">
+     Keeping commit references
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-branch-operations">
+     Multi-branch operations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recipes">
+   Recipes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-aliases">
+     Adding aliases
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reverting-to-a-given-commit">
+     Reverting to a given commit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tagging">
+   Tagging
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#github-action-recipes">
+   GitHub action recipes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#triangular-workflow">
+   Triangular workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configuration">
+   Configuration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#editor-configuration">
+     Editor configuration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#authentication">
+     Authentication
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-ssh">
+   Using SSH
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-keypairs">
+     Generating keypairs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uploading-public-keys">
+     Uploading public keys
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#changing-repository-origin">
+     Changing repository origin
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Git Reference</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#format-patch">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     format-patch
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#am">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     am
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apply">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     apply
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#archive">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     archive
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bundle">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     bundle
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stash">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     stash
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rebase">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     rebase
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#changing-author">
+     Changing Author
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cherry-pick">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     cherry-pick
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#keeping-commit-references">
+     Keeping commit references
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-branch-operations">
+     Multi-branch operations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recipes">
+   Recipes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-aliases">
+     Adding aliases
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reverting-to-a-given-commit">
+     Reverting to a given commit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tagging">
+   Tagging
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#github-action-recipes">
+   GitHub action recipes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#triangular-workflow">
+   Triangular workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configuration">
+   Configuration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#editor-configuration">
+     Editor configuration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#authentication">
+     Authentication
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-ssh">
+   Using SSH
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-keypairs">
+     Generating keypairs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uploading-public-keys">
+     Uploading public keys
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#changing-repository-origin">
+     Changing repository origin
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="git-reference">
+<h1>Git Reference<a class="headerlink" href="#git-reference" title="Permalink to this headline">¶</a></h1>
+<p>As everyone with git, there is a tendency to use the same idioms over and over. Here are some of the ones I don’t use frequently enough to have committed to memmory, but still use frequently enough that researching how to do them again is a nuisance.</p>
+<!--BEGIN TOC-->
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#format-patch"><code class="docutils literal notranslate"><span class="pre">format-patch</span></code></a></p></li>
+<li><p><a class="reference external" href="#am"><code class="docutils literal notranslate"><span class="pre">am</span></code></a></p></li>
+<li><p><a class="reference external" href="#apply"><code class="docutils literal notranslate"><span class="pre">apply</span></code></a></p></li>
+<li><p><a class="reference external" href="#archive"><code class="docutils literal notranslate"><span class="pre">archive</span></code></a></p></li>
+<li><p><a class="reference external" href="#bundle"><code class="docutils literal notranslate"><span class="pre">bundle</span></code></a></p></li>
+<li><p><a class="reference external" href="#stash"><code class="docutils literal notranslate"><span class="pre">stash</span></code></a></p></li>
+<li><p><a class="reference external" href="#rebase"><code class="docutils literal notranslate"><span class="pre">rebase</span></code></a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#changing-author">Changing Author</a></p></li>
+<li><p><a class="reference external" href="#merging-commits-with-rebase">Merging commits with <code class="docutils literal notranslate"><span class="pre">rebase</span></code></a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#cherry-pick"><code class="docutils literal notranslate"><span class="pre">cherry-pick</span></code></a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#keeping-commit-references">Keeping commit references</a></p></li>
+<li><p><a class="reference external" href="#multi-branch-operations">Multi-branch operations</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#recipes">Recipes</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#adding-aliases">Adding aliases</a></p></li>
+<li><p><a class="reference external" href="#reverting-to-a-given-commit">Reverting to a given commit</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#tagging">Tagging</a></p></li>
+<li><p><a class="reference external" href="#github-action-recipes">GitHub action recipes</a></p></li>
+<li><p><a class="reference external" href="#triangular-workflow">Triangular workflow</a></p></li>
+<li><p><a class="reference external" href="#configuration">Configuration</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#editor-configuration">Editor configuration</a></p></li>
+<li><p><a class="reference external" href="#authentication">Authentication</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#using-ssh">Using SSH</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#generating-keypairs">Generating keypairs</a></p></li>
+<li><p><a class="reference external" href="#uploading-public-keys">Uploading public keys</a></p></li>
+<li><p><a class="reference external" href="#changing-repository-origin">Changing repository origin</a></p></li>
+</ol>
+</li>
+</ol>
+<!--END TOC-->
+</div>
+<div class="section" id="format-patch">
+<h2><code class="docutils literal notranslate"><span class="pre">format-patch</span></code><a class="headerlink" href="#format-patch" title="Permalink to this headline">¶</a></h2>
+<p>Used for exporting commits to send as text. This command has a whole <a class="reference external" href="https://git-scm.com/docs/git-format-patch">series of options</a>, including automated patch delivery via email.</p>
+<p>The simplest application is</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git format-patch <span class="o">[</span>commit_hash<span class="o">]</span>
+</pre></div>
+</div>
+<p>with the argument <code class="docutils literal notranslate"><span class="pre">-[n]</span></code> for number of commits to include (e.g. for 3 commits, <code class="docutils literal notranslate"><span class="pre">-3</span></code>).</p>
+<p>Another useful variant is</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git format-patch origin
+</pre></div>
+</div>
+<p>for extracting all commits in the current branch but not in the origin repository.</p>
+<p>For extracting commits between two revisions</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git format-patch <span class="o">[</span>R1<span class="o">]</span>..<span class="o">[</span>R2<span class="o">]</span>
+</pre></div>
+</div>
+<p>If the intention is to apply with tools like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">am</span></code>, the <code class="docutils literal notranslate"><span class="pre">-k</span></code> flag can be used to keep the subject.</p>
+</div>
+<div class="section" id="am">
+<h2><code class="docutils literal notranslate"><span class="pre">am</span></code><a class="headerlink" href="#am" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://git-scm.com/docs/git-am">Applies from mailbox</a> patches onto the current tree, e.g.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git am *.patch
+</pre></div>
+</div>
+<p>In contrast to <a class="reference external" href="#apply"><code class="docutils literal notranslate"><span class="pre">apply</span></code></a>, <code class="docutils literal notranslate"><span class="pre">am</span></code> adds the commits into the working tree.</p>
+</div>
+<div class="section" id="apply">
+<h2><code class="docutils literal notranslate"><span class="pre">apply</span></code><a class="headerlink" href="#apply" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://git-scm.com/docs/git-apply">Applies</a> patches onto the current working directory, but does not add the commits to the tree</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git apply <span class="o">[</span>patchfile<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="archive">
+<h2><code class="docutils literal notranslate"><span class="pre">archive</span></code><a class="headerlink" href="#archive" title="Permalink to this headline">¶</a></h2>
+<p>To create archives of the git file tree (note, this does not include commit history – see <a class="reference external" href="#bundle"><code class="docutils literal notranslate"><span class="pre">bundle</span></code></a>) we can use <a class="reference external" href="http://www.git-scm.com/docs/git-archive"><code class="docutils literal notranslate"><span class="pre">archive</span></code></a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git archive --format<span class="o">=</span>zip --output latest.zip HEAD
+</pre></div>
+</div>
+</div>
+<div class="section" id="bundle">
+<h2><code class="docutils literal notranslate"><span class="pre">bundle</span></code><a class="headerlink" href="#bundle" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.git-scm.com/docs/git-bundle"><code class="docutils literal notranslate"><span class="pre">bundle</span></code></a> allows you to export <code class="docutils literal notranslate"><span class="pre">.git</span></code> bundles. To create a bundle</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git bundle create tree.git HEAD
+</pre></div>
+</div>
+<p>This archive repositories can then be interacted with using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code>, provisional to there being a repository to act on. As such, to unbundle the archive, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git init <span class="o">&amp;&amp;</span> git pull tree.git
+</pre></div>
+</div>
+</div>
+<div class="section" id="stash">
+<h2><code class="docutils literal notranslate"><span class="pre">stash</span></code><a class="headerlink" href="#stash" title="Permalink to this headline">¶</a></h2>
+<p>Temporarily storing modifications may be done with <a class="reference external" href="https://www.git-scm.com/docs/git-stash"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span></code></a>. To stash the changes made, and revert back to <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>, simply</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git stash
+</pre></div>
+</div>
+<p>which is equivalent to <code class="docutils literal notranslate"><span class="pre">stash</span> <span class="pre">push</span></code>.</p>
+<p>To pop these changes back onto the current <code class="docutils literal notranslate"><span class="pre">HEAD</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git stash apply
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">apply</span></code> is very similar to the <code class="docutils literal notranslate"><span class="pre">stash</span> <span class="pre">pop</span></code> command, except it doesn’t remove the item from the stash list.</p>
+<p>You can list all stashes with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git stash list
+</pre></div>
+</div>
+<p>and inspect details with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git stash show <span class="o">[</span>stash<span class="o">]</span>
+</pre></div>
+</div>
+<p>To remove a stash from the list, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git stash drop
+</pre></div>
+</div>
+<p>Stashing is best used when either pulling a conflicting branch, or handling an interrupted workflow.</p>
+</div>
+<div class="section" id="rebase">
+<h2><code class="docutils literal notranslate"><span class="pre">rebase</span></code><a class="headerlink" href="#rebase" title="Permalink to this headline">¶</a></h2>
+<p>Different recipes and use-cases for <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code>.</p>
+<div class="section" id="changing-author">
+<h3>Changing Author<a class="headerlink" href="#changing-author" title="Permalink to this headline">¶</a></h3>
+<p>Use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rebase -i -p <span class="o">[</span>commit hash<span class="o">]</span>
+</pre></div>
+</div>
+<p>where the commit hash is the last “good” commit. From there, preprend <code class="docutils literal notranslate"><span class="pre">edit</span></code> to the commits you want to alter, and follow the instructions:</p>
+<p>Use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit --amend --author <span class="s2">&quot;username &lt;email@addr.com&gt;&quot;</span>
+</pre></div>
+</div>
+<p>to change the author for the specific commit, followed by</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rebase --continue
+</pre></div>
+</div>
+<p>until you are back at the top of the tree. Check the changes were successful with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git log
+</pre></div>
+</div>
+<p>### Merging commits with <code class="docutils literal notranslate"><span class="pre">rebase</span></code>
+We can use e.g.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rebase -i HEAD~3
+</pre></div>
+</div>
+<p>to modify information relating to the last 3 commits, and use either <code class="docutils literal notranslate"><span class="pre">squash</span></code> or <code class="docutils literal notranslate"><span class="pre">fixup</span></code> to merge commits, depending whether we want to hold onto the commit message or not.</p>
+<p>Changes must be <em>forced</em> pushed.</p>
+</div>
+</div>
+<div class="section" id="cherry-pick">
+<h2><code class="docutils literal notranslate"><span class="pre">cherry-pick</span></code><a class="headerlink" href="#cherry-pick" title="Permalink to this headline">¶</a></h2>
+<p>Used to pick commits from one branch to another (see <a class="reference external" href="https://git-scm.com/docs/git-cherry-pick">documentation page</a>).</p>
+<p>Cherry pick takes commits and applies them to the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>. As such, checkout the branch of interest:</p>
+<ul class="simple">
+<li><p>to pick a single commit (by hash, or from the tip of another branch)</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git cherry-pick &lt;commit<span class="p">|</span>branch&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>to pick a range of commits <code class="docutils literal notranslate"><span class="pre">A</span></code> through <code class="docutils literal notranslate"><span class="pre">B</span></code>, not including <code class="docutils literal notranslate"><span class="pre">A</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git cherry-pick A..B
+</pre></div>
+</div>
+<p>To include <code class="docutils literal notranslate"><span class="pre">A</span></code> use <code class="docutils literal notranslate"><span class="pre">A^</span></code>.</p>
+<ul class="simple">
+<li><p>apply the e.g. 4th commit from a branch</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git cherry-pick A~3
+</pre></div>
+</div>
+<div class="section" id="keeping-commit-references">
+<h3>Keeping commit references<a class="headerlink" href="#keeping-commit-references" title="Permalink to this headline">¶</a></h3>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">cherry-pick</span></code> will create a new commit in the current branch. To keep the commit reference, use the <code class="docutils literal notranslate"><span class="pre">-x</span></code> flag</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git cherry-pick -x &lt;commit&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="multi-branch-operations">
+<h3>Multi-branch operations<a class="headerlink" href="#multi-branch-operations" title="Permalink to this headline">¶</a></h3>
+<p>To apply commits from <code class="docutils literal notranslate"><span class="pre">branch1</span></code> or <code class="docutils literal notranslate"><span class="pre">branch2</span></code> but not if they are present in <code class="docutils literal notranslate"><span class="pre">branch3</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git cherry-pick branch1 branch2 ^branch3
+</pre></div>
+</div>
+<p>In the case</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">branch1</span>   <span class="n">branch2</span>   <span class="n">branch3</span>
+<span class="n">A</span>         <span class="n">A</span>         <span class="n">A</span>
+<span class="n">B</span>         <span class="n">D</span>         <span class="n">B</span>
+<span class="n">C</span>         <span class="n">E</span>         <span class="n">E</span>
+</pre></div>
+</div>
+<p>the above command will only apply <code class="docutils literal notranslate"><span class="pre">C</span></code> and <code class="docutils literal notranslate"><span class="pre">D</span></code>.</p>
+</div>
+</div>
+<div class="section" id="recipes">
+<h2>Recipes<a class="headerlink" href="#recipes" title="Permalink to this headline">¶</a></h2>
+<p>Solutions to common problems.</p>
+<div class="section" id="adding-aliases">
+<h3>Adding aliases<a class="headerlink" href="#adding-aliases" title="Permalink to this headline">¶</a></h3>
+<p>You can add an alias to git using the configuration options: for example, a common use case would be to alias the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alias</span><span class="o">.</span><span class="n">logadog</span><span class="o">=</span><span class="n">log</span> <span class="o">--</span><span class="nb">all</span> <span class="o">--</span><span class="n">decorate</span> <span class="o">--</span><span class="n">oneline</span> <span class="o">--</span><span class="n">graph</span>
+</pre></div>
+</div>
+<p>which can either be done by adding the above to your git configuration file, or using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --add alias.logadog <span class="s2">&quot;log --all --decorate --oneline --graph&quot;</span>
+</pre></div>
+</div>
+<p>To unset aliases, simply remove the line from the config file, or use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --unset alias.<span class="o">[</span>aliasname<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reverting-to-a-given-commit">
+<h3>Reverting to a given commit<a class="headerlink" href="#reverting-to-a-given-commit" title="Permalink to this headline">¶</a></h3>
+<p>Reverting a single file (or the whole branch) can be done with <code class="docutils literal notranslate"><span class="pre">checkout</span></code>, see <a class="reference external" href="https://git-scm.com/docs/git-checkout">docs</a>. It may be used</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout <span class="o">[</span>commit/branch<span class="o">]</span> <span class="o">[</span>file, ...<span class="o">]</span>
+</pre></div>
+</div>
+<p>You can preview the changes with the <a class="reference external" href="https://git-scm.com/docs/git-diff"><code class="docutils literal notranslate"><span class="pre">diff</span></code> command</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git diff <span class="o">[</span>commit/branch<span class="o">]</span> <span class="o">[</span>file, ...<span class="o">]</span>
+</pre></div>
+</div>
+<p>You can also use the <a class="reference external" href="https://git-scm.com/docs/git-reset"><code class="docutils literal notranslate"><span class="pre">reset</span></code> command</a> to reset the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> to a specific commit, using different modes</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git reset <span class="o">[</span>--mode<span class="o">]</span> <span class="o">[</span>commit<span class="o">]</span>
+</pre></div>
+</div>
+<p>Commonly used modes are <code class="docutils literal notranslate"><span class="pre">--hard</span></code>, which discards all changes in the working tree, <code class="docutils literal notranslate"><span class="pre">--merge</span></code>, which will essentially perform a merge of the current tree into the destination tree, and <code class="docutils literal notranslate"><span class="pre">--keep</span></code>, which updates files in the working tree that differ.</p>
+</div>
+</div>
+<div class="section" id="tagging">
+<h2>Tagging<a class="headerlink" href="#tagging" title="Permalink to this headline">¶</a></h2>
+<p>We can add tags to our local repository with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git tag -a v1.0 -m <span class="s2">&quot;message&quot;</span>
+</pre></div>
+</div>
+<p>where we use the <code class="docutils literal notranslate"><span class="pre">-a</span></code> flag to annotate the tag. We have to push tags individually to the remote, which can be done with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push origin <span class="o">[</span>tag_name<span class="o">]</span>
+</pre></div>
+</div>
+<p>or, to push all</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push origin --tags
+</pre></div>
+</div>
+<p>For more information, <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Tagging">see the docs</a>.</p>
+</div>
+<div class="section" id="github-action-recipes">
+<h2>GitHub action recipes<a class="headerlink" href="#github-action-recipes" title="Permalink to this headline">¶</a></h2>
+<p>Building and deploying a vue static webpage to github pages can be achieved with use of the <a class="reference external" href="https://github.com/JamesIves/github-pages-deploy-action"><code class="docutils literal notranslate"><span class="pre">JamesIves/github-pages-deploy-action</span></code> action</a>. We can specify a artifact generator and consumer in a <code class="docutils literal notranslate"><span class="pre">build</span></code> and <code class="docutils literal notranslate"><span class="pre">deploy</span></code> approach:</p>
+<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    # install deps and build
+    - run: |
+        npm i
+        npm run build
+    - name: Caching dist directory
+      # upload as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist
+        path: dist
+        if-no-files-found: error
+
+  deploy:
+      needs: build # dependency / chaining
+      runs-on: ubuntu-latest
+      steps:
+
+      # consume artifact
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist
+
+      - name: Deploy to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: .
+          CLEAN: true
+          SINGLE_COMMMIT: true
+</pre></div>
+</div>
+<p>This is a little contrived, and maybe there is an argument to be made as making the deployment job part of the build. However, for posterity if nothing else, this method works as well.</p>
+</div>
+<div class="section" id="triangular-workflow">
+<h2>Triangular workflow<a class="headerlink" href="#triangular-workflow" title="Permalink to this headline">¶</a></h2>
+<p>When working on a fork of a project you wish to keep updated, it is useful to add the original repository as an upstream remote, so that you can update your master branch if you’ve left it stale for too long, without having to open a PR on your fork:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote add upstream <span class="o">[</span>upstream-url<span class="o">]</span>
+git fetch upstream/master
+
+<span class="c1"># and to rebase master HEAD; make sure you&#39;re on your local master  </span>
+git checkout master
+git rebase upstream/master
+
+
+<span class="c1"># and push changes to the remote fork</span>
+git push -f origin master
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Configuring <code class="docutils literal notranslate"><span class="pre">git</span></code>.</p>
+<div class="section" id="editor-configuration">
+<h3>Editor configuration<a class="headerlink" href="#editor-configuration" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global core.editor <span class="s2">&quot;vim&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="authentication">
+<h3>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h3>
+<p>To configure global authentication locally, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;username&quot;</span>
+
+git config --global user.email <span class="s2">&quot;email@addr.com&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-ssh">
+<h2>Using SSH<a class="headerlink" href="#using-ssh" title="Permalink to this headline">¶</a></h2>
+<p>Overview of using SSH for Git(Hub) interaction.</p>
+<div class="section" id="generating-keypairs">
+<h3>Generating keypairs<a class="headerlink" href="#generating-keypairs" title="Permalink to this headline">¶</a></h3>
+<p>Using the email associated with your Git identity:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen -t ed25519 -C <span class="s2">&quot;your@email.com&quot;</span>
+</pre></div>
+</div>
+<p>You may wish to name this file along the lines of <code class="docutils literal notranslate"><span class="pre">id_git</span></code> so that it’s easy to remember what it’s for.</p>
+</div>
+<div class="section" id="uploading-public-keys">
+<h3>Uploading public keys<a class="headerlink" href="#uploading-public-keys" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>GitHub
+Under Account Settings, SSH and GPG keys, add a new SSH, give it a memorable name, and then copy the contents of</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/.ssh/id_<span class="o">[</span>yourkey<span class="o">]</span>.pub
+</pre></div>
+</div>
+<p>i.e. your public key, into the text field and save.</p>
+</div>
+<div class="section" id="changing-repository-origin">
+<h3>Changing repository origin<a class="headerlink" href="#changing-repository-origin" title="Permalink to this headline">¶</a></h3>
+<p>To change your git client to use SSH over HTTP(s), simply change the origin url to the general format</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote set-url origin git@github.com:&lt;uname&gt;/&lt;repository&gt;.git
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./git"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Git and VCs</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="gitea-mariadb.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Using Gitea with MariaDB</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Fergus Baker<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

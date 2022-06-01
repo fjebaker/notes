@@ -1,0 +1,1581 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>System administration &#8212; notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/vollkorn.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/_static/styles.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Disk and filesystem" href="nix-filesystem.html" />
+    <link rel="prev" title="Software installation" href="nix-installations.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../titlepage.html">
+   notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Systems
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   *nix Systems
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nix-installations.html">
+     Software installation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     System administration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nix-filesystem.html">
+     Disk and filesystem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nix-networks.html">
+     Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nix-hardware.html">
+     Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="boot-bios.html">
+     Boot Loaders and BIOS control
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="systemd.html">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       journald
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="kernel.html">
+     Linux Kernel Modules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bash/index.html">
+   Bash scripting
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-reference.html">
+     Bash reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-cookbook.html">
+     Bash cookbook
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../osx-reference.html">
+   OSX Reference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/index.html">
+   C++ and C
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/declarations.html">
+     Declarations in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/conan.html">
+     Conan package manager
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/unit-testing.html">
+     Unit testing with Catch2! and Trompeloeil
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/swig-cmake.html">
+     Using SWIG with CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cmake.html">
+     CMake notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/member-functions.html">
+     On using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       std::function
+      </span>
+     </code>
+     for member functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../julia/index.html">
+   Julia Notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/julia-intro.html">
+     Julia learning notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/README.html">
+     Advent of Code notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/scopes.html">
+     Julia Scopes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/index.html">
+   Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-recipes.html">
+     Python recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/jupyter-ipython.html">
+     Jupyter and iPython cheat sheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/regex.html">
+     Regex in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-serial.html">
+     Serial communication with Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/high-perf.html">
+     High performance Python techniques and paradigms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/c-wrapping.html">
+     Wrapping C and C++ into Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/pypi-distribution.html">
+     Making a project available on pypi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/cpp-c-swig.html">
+     Wrapping C/C++ code using SWIG
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/requests.html">
+     Python
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       requests
+      </span>
+     </code>
+     cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/using-flask.html">
+     Using Python Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/rethink-db-with-flask.html">
+     Using RethinkDB with Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/jinja-templating.html">
+     Templating HTML pages with jinja
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/fast-api/using-fast-api.html">
+     Using FastAPI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/mkdocs-notes.html">
+     Notes on mkdocs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/scrapy.html">
+     Scrapy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../js/index.html">
+   JavaScript
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/jest-testing.html">
+     Using Jest testing framework
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/js-reference.html">
+     JavaScript language reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/swig-nodejs.html">
+     Using SWIG with NodeJS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/request-parsing.html">
+     Making HTTP requests and parsing in JS and node.js
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/extensions/native-messaging.html">
+     Native Messaging for Browser Extensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/vue/over-vue.html">
+     Vue Overview
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tex/index.html">
+   LaTeX
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latex-documents.html">
+     Writing LaTeX documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latexmk.html">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       latexmk
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/presentations.html">
+     Making presentations in LaTeX
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/posters.html">
+     Creating posters in LaTeX
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DevOps
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../docker/index.html">
+   Docker
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/minio-registry.html">
+     Creating a persistent local registry with S3/MinIO
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-cheatsheet.html">
+     Docker cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/systemd-with-docker.html">
+     Using Docker as
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     services
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-compose.html">
+     The magical world of Docker-Compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/dockerfile-recipes.html">
+     Dockerfile cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-swarm.html">
+     Docker Swarm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../aws/index.html">
+   Amazon Web Services
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/vpc-overview.html">
+     VPC overview
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/setting-up.html">
+     AWS Settup
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/ec2-with-docker.html">
+     EC2 with Docker
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/goofys-s3.html">
+     Using Goofys with S3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vms/index.html">
+   Virtual Machines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/sun-virtual-box.html">
+     Oracle Virtual Box
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/kvm.html">
+     Kernel-based Virtual Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/qemu.html">
+     QEMU
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../databases/index.html">
+   Databases
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/node-red.html">
+     NodeRed Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/mongo-db.html">
+     Using MongoDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/rethink-db.html">
+     RethinkDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/lang-drivers/py-mongo.html">
+     Using MongoDB and Python
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/shell-rc-profiles.html">
+   Shell
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*rc
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*profile
+    </span>
+   </code>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/jupyter-notebook.html">
+   Jupyter notebook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/index.html">
+   Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/tf-install.html">
+   Installing TensorFlow 2.0
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Raspi &amp; Arduino
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../raspi/index.html">
+   Raspberry Pi
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-config.html">
+     Configuring a Raspberry Pi from fresh install
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-bit-torrent.html">
+     Setting up a Raspberry-Pi for secure bit torrenting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/pyaudio.html">
+     Installing PyAudio on Raspberry Pi
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../arduino/index.html">
+   Arduino
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/platformio.html">
+     PlatformIO notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/ca-certs-nano.html">
+     Copying (root) CA certificates onto Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/arduino-cookbook.html">
+     Arduino cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/crypto-auth.html">
+     Using the ECC0X08 with Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/mqtt-specs.html">
+     MQTT Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/nginx-load-balancing.html">
+     Using NGiNX with Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vim/index.html">
+   VIM
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/recipes.html">
+     Vim Recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/vundle.html">
+     Vundle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/batch-rename.html">
+     Batch renaming in Vim
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../discord/index.html">
+   Discord
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/making-bots-python.html">
+     Making Discord bots in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/discord-music-hook.html">
+     Creating a Discord music feed using webhooks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../git/index.html">
+   Git and VCs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/git-reference.html">
+     Git Reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/gitea-mariadb.html">
+     Using Gitea with MariaDB
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vscode/index.html">
+   VSCode
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vscode/publishing.html">
+     Publishing a VSCode extension
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Miscellaneous
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recommended-talks.html">
+   Recommended talks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../software-design-principles.html">
+   Software Design Principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ffmpeg-cheatsheet.html">
+   FFMPEG Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../iptables-and-firewalls.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     iptables
+    </span>
+   </code>
+   and firewall configuration reference.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ci-cd/jenkins-recipes.html">
+   Jenkins Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../security/openssl-cookbook.html">
+   OpenSSL Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visualisation/blender-learning.html">
+   Learning Blender
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../java/gradle-cookbook.html">
+   Gradle build-tool cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../automation/mycroft-osx.html">
+   Using Mycroft Docker images on OSX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="clamav.html">
+   Clam Anti-Virus
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nix-systems/nix-sysadmin.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/fjebaker/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/fjebaker/notes/issues/new?title=Issue%20on%20page%20%2Fnix-systems/nix-sysadmin.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/fjebaker/notes/edit/master/nix-systems/nix-sysadmin.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#users-and-groups">
+   Users and groups
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-new-users">
+     Creating new users
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-shells">
+     Configuring shells
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bindkey">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       bindkey
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#execute-as-user">
+     Execute as user
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-commands">
+   Useful commands
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stop-and-cont-a-process">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       STOP
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       CONT
+      </span>
+     </code>
+     a process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ssl-with-curl">
+     SSL with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       curl
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#curl-proxies">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       curl
+      </span>
+     </code>
+     proxies
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#package-management">
+   Package management
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#path-alternatives">
+   Path alternatives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#versions">
+   Versions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debian">
+     Debian
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debian-minor-versioning">
+     Debian minor versioning
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modifying-keymaps-with-xmodmap">
+   Modifying keymaps with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     xmodmap
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modifying-gnome">
+   Modifying GNOME
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>System administration</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#users-and-groups">
+   Users and groups
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-new-users">
+     Creating new users
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-shells">
+     Configuring shells
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bindkey">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       bindkey
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#execute-as-user">
+     Execute as user
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-commands">
+   Useful commands
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stop-and-cont-a-process">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       STOP
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       CONT
+      </span>
+     </code>
+     a process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ssl-with-curl">
+     SSL with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       curl
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#curl-proxies">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       curl
+      </span>
+     </code>
+     proxies
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#package-management">
+   Package management
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#path-alternatives">
+   Path alternatives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#versions">
+   Versions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debian">
+     Debian
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debian-minor-versioning">
+     Debian minor versioning
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modifying-keymaps-with-xmodmap">
+   Modifying keymaps with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     xmodmap
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modifying-gnome">
+   Modifying GNOME
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="system-administration">
+<h1>System administration<a class="headerlink" href="#system-administration" title="Permalink to this headline">¶</a></h1>
+<p>Recipes and writeups of solutions from problems on different *nix operating systems.</p>
+<!--BEGIN TOC-->
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#users-and-groups">Users and groups</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#creating-new-users">Creating new users</a></p></li>
+<li><p><a class="reference external" href="#configuring-shells">Configuring shells</a></p></li>
+<li><p><a class="reference external" href="#bindkey"><code class="docutils literal notranslate"><span class="pre">bindkey</span></code></a></p></li>
+<li><p><a class="reference external" href="#execute-as-user">Execute as user</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#useful-commands">Useful commands</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#stop-and-cont-a-process"><code class="docutils literal notranslate"><span class="pre">STOP</span></code> and <code class="docutils literal notranslate"><span class="pre">CONT</span></code> a process</a></p></li>
+<li><p><a class="reference external" href="#ssl-with-curl">SSL with <code class="docutils literal notranslate"><span class="pre">curl</span></code></a></p></li>
+<li><p><a class="reference external" href="#curl-proxies"><code class="docutils literal notranslate"><span class="pre">curl</span></code> proxies</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#package-management">Package management</a></p></li>
+<li><p><a class="reference external" href="#path-alternatives">Path alternatives</a></p></li>
+<li><p><a class="reference external" href="#versions">Versions</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#debian">Debian</a></p></li>
+<li><p><a class="reference external" href="#debian-minor-versioning">Debian minor versioning</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#modifying-keymaps-with-xmodmap">Modifying keymaps with <code class="docutils literal notranslate"><span class="pre">xmodmap</span></code></a></p></li>
+<li><p><a class="reference external" href="#modifying-gnome">Modifying GNOME</a></p></li>
+</ol>
+<!--END TOC-->
+</div>
+<div class="section" id="users-and-groups">
+<h2>Users and groups<a class="headerlink" href="#users-and-groups" title="Permalink to this headline">¶</a></h2>
+<p>Listing all known users and groups</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat /etc/group
+cat /etc/passwd
+</pre></div>
+</div>
+<div class="section" id="creating-new-users">
+<h3>Creating new users<a class="headerlink" href="#creating-new-users" title="Permalink to this headline">¶</a></h3>
+<p>Creating a <strong>new user</strong>, managing startup shell and directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo useradd -d /home/<span class="o">[</span>homedir<span class="o">]</span> <span class="o">[</span>username<span class="o">]</span>
+<span class="c1"># -u for custom user id</span>
+
+sudo passwd <span class="o">[</span>username<span class="o">]</span>
+<span class="c1"># to change the password</span>
+
+sudo chsh -s /bin/bash <span class="o">[</span>username<span class="o">]</span>
+<span class="c1"># set startup shell</span>
+</pre></div>
+</div>
+<p><strong>NB:</strong> The whole user creation process is also streamlined with the</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo adduser <span class="o">[</span>username<span class="o">]</span>
+</pre></div>
+</div>
+<p>interactive program.</p>
+<p>For managing <strong>primary groups</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo usermod -g <span class="o">[</span>groupname<span class="o">]</span> <span class="o">[</span>username<span class="o">]</span>
+</pre></div>
+</div>
+<p>For managing <strong>secondary groups</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo usermod -a -G <span class="o">[</span>group1<span class="o">]</span>,<span class="o">[</span>group2<span class="o">]</span>,<span class="o">[</span>...<span class="o">]</span> <span class="o">[</span>username<span class="o">]</span>
+</pre></div>
+</div>
+<p>Removing a user from a group</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo gpasswd -d user group
+</pre></div>
+</div>
+<p>Deleting users</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo userdel -r <span class="o">[</span>username<span class="o">]</span>
+<span class="c1"># -r removes home directory aswell</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuring-shells">
+<h3>Configuring shells<a class="headerlink" href="#configuring-shells" title="Permalink to this headline">¶</a></h3>
+<p>You can discover what shell your terminal is currently running by examining the <code class="docutils literal notranslate"><span class="pre">$SHELL</span></code> environment variable.</p>
+<p>To see the available shells on your machine, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat /etc/shells
+</pre></div>
+</div>
+<p>You can then change the default shell using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chsh
+</pre></div>
+</div>
+<p>ran as the user you wish to change the shell for, or, alternatively</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo chsh -s /bin/zsh someUser
+</pre></div>
+</div>
+<p>to change the shell of <code class="docutils literal notranslate"><span class="pre">someUser</span></code> to <code class="docutils literal notranslate"><span class="pre">zsh</span></code>.</p>
+</div>
+<div class="section" id="bindkey">
+<h3><code class="docutils literal notranslate"><span class="pre">bindkey</span></code><a class="headerlink" href="#bindkey" title="Permalink to this headline">¶</a></h3>
+<p>Bindkey controls how keyboard shortcuts on the terminal are mapped. This can be set in the relevant shell <code class="docutils literal notranslate"><span class="pre">~/.*rc</span></code> file. Common mappings are</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bindkey -v
+</pre></div>
+</div>
+<p>for vi-like map, and</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bindkey -e
+</pre></div>
+</div>
+<p>for emacs mapping.</p>
+<p><strong>NB</strong>: new and alternative shells may be installed via the relevant package managers.</p>
+</div>
+<div class="section" id="execute-as-user">
+<h3>Execute as user<a class="headerlink" href="#execute-as-user" title="Permalink to this headline">¶</a></h3>
+<p>We can run commands as another user or with another group ID using <code class="docutils literal notranslate"><span class="pre">su</span></code>. For example, to run a command as another user</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>su someuser -c whoami
+<span class="c1"># someuser</span>
+</pre></div>
+</div>
+<p>Sometimes a user will not have a login shell defined, in which case <code class="docutils literal notranslate"><span class="pre">su</span></code> can spawn a specific shell as needed</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>su someuser -s /bin/bash -c <span class="s2">&quot;echo </span><span class="nv">$SHELL</span><span class="s2">&quot;</span>
+<span class="c1"># /bin/bash</span>
+</pre></div>
+</div>
+<p>The command can also be used to switch user. For example, to become root</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>su -
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="useful-commands">
+<h2>Useful commands<a class="headerlink" href="#useful-commands" title="Permalink to this headline">¶</a></h2>
+<p>In this section I will document useful commands, which, for brevity, don’t merit a full chapter of their own.</p>
+<div class="section" id="stop-and-cont-a-process">
+<h3><code class="docutils literal notranslate"><span class="pre">STOP</span></code> and <code class="docutils literal notranslate"><span class="pre">CONT</span></code> a process<a class="headerlink" href="#stop-and-cont-a-process" title="Permalink to this headline">¶</a></h3>
+<p>As an example, consider you wanted to use Wireshark to capture packets of a specific program, however other programs were being very chatty, and working out exactly what Wireshark filter to craft is proving tedious. A quick and dirty solution to this is just to halt the execution of the chatty program</p>
+<ul class="simple">
+<li><p>find the <code class="docutils literal notranslate"><span class="pre">pid</span></code>:
+We can find the process ID of any program using</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ps aux <span class="p">|</span> grep <span class="o">[</span>name<span class="o">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>send a <code class="docutils literal notranslate"><span class="pre">STOP</span></code> signal
+Interrupt and halt the program using</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">kill</span> -STOP <span class="o">[</span>pid<span class="o">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>resume with a <code class="docutils literal notranslate"><span class="pre">CONT</span></code> signal
+Using a very similar command, we run</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">kill</span> -CONT <span class="o">[</span>pid<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ssl-with-curl">
+<h3>SSL with <code class="docutils literal notranslate"><span class="pre">curl</span></code><a class="headerlink" href="#ssl-with-curl" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://stackoverflow.com/questions/10079707/https-connection-using-curl-from-command-line">https://stackoverflow.com/questions/10079707/https-connection-using-curl-from-command-line</a></p>
+</div>
+<div class="section" id="curl-proxies">
+<h3><code class="docutils literal notranslate"><span class="pre">curl</span></code> proxies<a class="headerlink" href="#curl-proxies" title="Permalink to this headline">¶</a></h3>
+<p>You can either set the environment variables</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">http_proxy</span><span class="o">=</span><span class="s2">&quot;http://uname:pw@addr:port&quot;</span>
+<span class="n">export</span> <span class="n">https_proxy</span><span class="o">=</span><span class="s2">&quot;https://uname:pw@addr:port&quot;</span>
+</pre></div>
+</div>
+<p>which <code class="docutils literal notranslate"><span class="pre">curl</span></code> automatically uses, or, pass in the flag <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">http://uname:pw&#64;addr:port</span></code>.</p>
+</div>
+</div>
+<div class="section" id="package-management">
+<h2>Package management<a class="headerlink" href="#package-management" title="Permalink to this headline">¶</a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">dpkg</span></code>, you can install with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dpkg -i <span class="o">[</span>package<span class="o">]</span>.deb
+</pre></div>
+</div>
+<p>list installations with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dpkg -l <span class="p">|</span> grep <span class="o">[</span>package_name<span class="o">]</span>
+</pre></div>
+</div>
+<p>Uninstall</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dpkg -r <span class="o">[</span>package_name<span class="o">]</span>
+</pre></div>
+</div>
+<p>and purge with <code class="docutils literal notranslate"><span class="pre">-P</span></code> instead of <code class="docutils literal notranslate"><span class="pre">-r</span></code>. Purge will also delete all configuration files.</p>
+</div>
+<div class="section" id="path-alternatives">
+<h2>Path alternatives<a class="headerlink" href="#path-alternatives" title="Permalink to this headline">¶</a></h2>
+<p>You can adjust the priority of conflicting program versions, commonly <a class="reference external" href="https://exitcode0.net/changing-the-default-python-version-in-debian/">python3 vs python2</a> using the <code class="docutils literal notranslate"><span class="pre">update-alternatives</span></code> command. The program linked with the highest priority will become the default</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>update-alternatives --install /usr/bin/python python /usr/bin/python3.8 <span class="m">2</span>
+
+update-alternatives --install /usr/bin/python python /usr/bin/python2.7 <span class="m">1</span>
+</pre></div>
+</div>
+<p>You can check the configuration with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>update-alternatives --config python
+</pre></div>
+</div>
+</div>
+<div class="section" id="versions">
+<h2>Versions<a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h2>
+<p>All sorts of valuable version information can be obtained with different commands, most of which are listed on <a class="reference external" href="https://linuxconfig.org/check-what-debian-version-you-are-running-on-your-linux-system">linuxconfig</a>.</p>
+<div class="section" id="debian">
+<h3>Debian<a class="headerlink" href="#debian" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lsb_release -cs
+<span class="c1"># buster</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat /etc/issue
+<span class="c1"># Debian GNU/Linux 10 \n \l</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat /etc/os-release
+<span class="c1"># PRETTY_NAME=&quot;Debian GNU/Linux 10 (buster)&quot;</span>
+<span class="c1"># NAME=&quot;Debian GNU/Linux&quot;</span>
+<span class="c1"># VERSION_ID=&quot;10&quot;</span>
+<span class="c1"># VERSION=&quot;10 (buster)&quot;</span>
+<span class="c1"># VERSION_CODENAME=buster</span>
+<span class="c1"># ID=debian</span>
+<span class="c1"># HOME_URL=&quot;https://www.debian.org/&quot;</span>
+<span class="c1"># SUPPORT_URL=&quot;https://www.debian.org/support&quot;</span>
+<span class="c1"># BUG_REPORT_URL=&quot;https://bugs.debian.org/&quot;</span>
+</pre></div>
+</div>
+<p>Useful tools</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">neofetch</span></code> for graphical system overview</p></li>
+</ul>
+<p>The default tool for printing system information is <code class="docutils literal notranslate"><span class="pre">uname</span></code>. The most common use is probably for printing the machine hardware name (similar to <code class="docutils literal notranslate"><span class="pre">arch</span></code>)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uname -m
+<span class="c1"># x86_64</span>
+</pre></div>
+</div>
+<p>Another flag to remember is <code class="docutils literal notranslate"><span class="pre">-a</span></code>, which prints all information.</p>
+</div>
+<div class="section" id="debian-minor-versioning">
+<h3>Debian minor versioning<a class="headerlink" href="#debian-minor-versioning" title="Permalink to this headline">¶</a></h3>
+<p>Although minor versions are a convenience measure (and thus, not included in e.g. <code class="docutils literal notranslate"><span class="pre">uname</span></code> or <code class="docutils literal notranslate"><span class="pre">/etc/os-release</span></code>), it can still be useful to know. The full debian version can be found with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat /etc/debian_version
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="modifying-keymaps-with-xmodmap">
+<h2>Modifying keymaps with <code class="docutils literal notranslate"><span class="pre">xmodmap</span></code><a class="headerlink" href="#modifying-keymaps-with-xmodmap" title="Permalink to this headline">¶</a></h2>
+<p>I don’t like specific default <a class="reference external" href="https://en.wikipedia.org/wiki/Dead_key">dead keys</a>, such as the backtick symbol. To modify the behaviour of keys, we use <code class="docutils literal notranslate"><span class="pre">xmodmap</span></code>.</p>
+<p>For my case, first identify the keycode using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmodmap -pke <span class="p">|</span> grep grave
+</pre></div>
+</div>
+<p>and look for the output like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">keycode</span>  <span class="mi">21</span> <span class="o">=</span> <span class="n">dead_circumflex</span> <span class="n">dead_grave</span> <span class="n">equal</span> <span class="n">plus</span> <span class="n">dead_tilde</span> <span class="n">dead_ogonek</span> <span class="n">dead_cedilla</span> <span class="n">dead_ogonek</span>
+</pre></div>
+</div>
+<p>This will commonly be 21 or 49, depending on the nationality of your Keyboard.</p>
+<p>We then copy the line, remove the <code class="docutils literal notranslate"><span class="pre">dead_</span></code> prefix from <code class="docutils literal notranslate"><span class="pre">grave</span></code>, and configure the mapping with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmodmap -e <span class="s1">&#39;keycode  21 = dead_circumflex grave equal plus dead_tilde dead_ogonek dead_cedilla dead_ogonek&#39;</span>
+</pre></div>
+</div>
+<p>To make this change permanent, we create a <code class="docutils literal notranslate"><span class="pre">~/.Xmodmap</span></code> dotfile with our modifications. Alternatively, to save an entire configuration, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmodmap -pke &gt;&gt; ~/.Xmodmap
+</pre></div>
+</div>
+<p>We load the changes with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmodmap ~/.Xmodmap
+</pre></div>
+</div>
+<p>or to ensure the changes are ran when the X server inits, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;xmodmap ~/.Xmodmap&#39;</span> &gt;&gt; ~/.xinitrc
+</pre></div>
+</div>
+<p>To undo a keyboard mapping, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>setxkbmap -option
+</pre></div>
+</div>
+</div>
+<div class="section" id="modifying-gnome">
+<h2>Modifying GNOME<a class="headerlink" href="#modifying-gnome" title="Permalink to this headline">¶</a></h2>
+<p>Changing the overlay toggle key (default: super):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gsettings <span class="nb">set</span> org.gnome.mutter overlay-key <span class="s1">&#39;XF86LaunchB&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./nix-systems"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="nix-installations.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Software installation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="nix-filesystem.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Disk and filesystem</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Fergus Baker<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

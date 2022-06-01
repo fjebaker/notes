@@ -1,0 +1,1730 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>High performance Python techniques and paradigms &#8212; notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/vollkorn.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/_static/styles.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Wrapping C and C++ into Python" href="c-wrapping.html" />
+    <link rel="prev" title="Serial communication with Python" href="py-serial.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../titlepage.html">
+   notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../nix-systems/index.html">
+   *nix Systems
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-installations.html">
+     Software installation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-sysadmin.html">
+     System administration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-filesystem.html">
+     Disk and filesystem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-networks.html">
+     Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-hardware.html">
+     Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/boot-bios.html">
+     Boot Loaders and BIOS control
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/systemd.html">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       journald
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/kernel.html">
+     Linux Kernel Modules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bash/index.html">
+   Bash scripting
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-reference.html">
+     Bash reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-cookbook.html">
+     Bash cookbook
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../osx-reference.html">
+   OSX Reference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/index.html">
+   C++ and C
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/declarations.html">
+     Declarations in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/conan.html">
+     Conan package manager
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/unit-testing.html">
+     Unit testing with Catch2! and Trompeloeil
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/swig-cmake.html">
+     Using SWIG with CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cmake.html">
+     CMake notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/member-functions.html">
+     On using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       std::function
+      </span>
+     </code>
+     for member functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../julia/index.html">
+   Julia Notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/julia-intro.html">
+     Julia learning notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/README.html">
+     Advent of Code notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/scopes.html">
+     Julia Scopes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   Python
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="py-recipes.html">
+     Python recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="jupyter-ipython.html">
+     Jupyter and iPython cheat sheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regex.html">
+     Regex in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="py-serial.html">
+     Serial communication with Python
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     High performance Python techniques and paradigms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="c-wrapping.html">
+     Wrapping C and C++ into Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pypi-distribution.html">
+     Making a project available on pypi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cpp-c-swig.html">
+     Wrapping C/C++ code using SWIG
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="requests.html">
+     Python
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       requests
+      </span>
+     </code>
+     cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="flask/using-flask.html">
+     Using Python Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="flask/rethink-db-with-flask.html">
+     Using RethinkDB with Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="flask/jinja-templating.html">
+     Templating HTML pages with jinja
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="fast-api/using-fast-api.html">
+     Using FastAPI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="mkdocs-notes.html">
+     Notes on mkdocs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="scrapy.html">
+     Scrapy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../js/index.html">
+   JavaScript
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/jest-testing.html">
+     Using Jest testing framework
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/js-reference.html">
+     JavaScript language reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/swig-nodejs.html">
+     Using SWIG with NodeJS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/request-parsing.html">
+     Making HTTP requests and parsing in JS and node.js
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/extensions/native-messaging.html">
+     Native Messaging for Browser Extensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../js/vue/over-vue.html">
+     Vue Overview
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tex/index.html">
+   LaTeX
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latex-documents.html">
+     Writing LaTeX documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latexmk.html">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       latexmk
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/presentations.html">
+     Making presentations in LaTeX
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/posters.html">
+     Creating posters in LaTeX
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DevOps
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../docker/index.html">
+   Docker
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/minio-registry.html">
+     Creating a persistent local registry with S3/MinIO
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-cheatsheet.html">
+     Docker cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/systemd-with-docker.html">
+     Using Docker as
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     services
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-compose.html">
+     The magical world of Docker-Compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/dockerfile-recipes.html">
+     Dockerfile cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-swarm.html">
+     Docker Swarm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../aws/index.html">
+   Amazon Web Services
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/vpc-overview.html">
+     VPC overview
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/setting-up.html">
+     AWS Settup
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/ec2-with-docker.html">
+     EC2 with Docker
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/goofys-s3.html">
+     Using Goofys with S3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vms/index.html">
+   Virtual Machines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/sun-virtual-box.html">
+     Oracle Virtual Box
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/kvm.html">
+     Kernel-based Virtual Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/qemu.html">
+     QEMU
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../databases/index.html">
+   Databases
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/node-red.html">
+     NodeRed Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/mongo-db.html">
+     Using MongoDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/rethink-db.html">
+     RethinkDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/lang-drivers/py-mongo.html">
+     Using MongoDB and Python
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/shell-rc-profiles.html">
+   Shell
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*rc
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*profile
+    </span>
+   </code>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/jupyter-notebook.html">
+   Jupyter notebook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/index.html">
+   Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/tf-install.html">
+   Installing TensorFlow 2.0
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Raspi &amp; Arduino
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../raspi/index.html">
+   Raspberry Pi
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-config.html">
+     Configuring a Raspberry Pi from fresh install
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-bit-torrent.html">
+     Setting up a Raspberry-Pi for secure bit torrenting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/pyaudio.html">
+     Installing PyAudio on Raspberry Pi
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../arduino/index.html">
+   Arduino
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/platformio.html">
+     PlatformIO notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/ca-certs-nano.html">
+     Copying (root) CA certificates onto Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/arduino-cookbook.html">
+     Arduino cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/crypto-auth.html">
+     Using the ECC0X08 with Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/mqtt-specs.html">
+     MQTT Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/nginx-load-balancing.html">
+     Using NGiNX with Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vim/index.html">
+   VIM
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/recipes.html">
+     Vim Recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/vundle.html">
+     Vundle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/batch-rename.html">
+     Batch renaming in Vim
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../discord/index.html">
+   Discord
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/making-bots-python.html">
+     Making Discord bots in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/discord-music-hook.html">
+     Creating a Discord music feed using webhooks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../git/index.html">
+   Git and VCs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/git-reference.html">
+     Git Reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/gitea-mariadb.html">
+     Using Gitea with MariaDB
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vscode/index.html">
+   VSCode
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vscode/publishing.html">
+     Publishing a VSCode extension
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Miscellaneous
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recommended-talks.html">
+   Recommended talks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../software-design-principles.html">
+   Software Design Principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ffmpeg-cheatsheet.html">
+   FFMPEG Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../iptables-and-firewalls.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     iptables
+    </span>
+   </code>
+   and firewall configuration reference.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ci-cd/jenkins-recipes.html">
+   Jenkins Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../security/openssl-cookbook.html">
+   OpenSSL Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visualisation/blender-learning.html">
+   Learning Blender
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../java/gradle-cookbook.html">
+   Gradle build-tool cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../automation/mycroft-osx.html">
+   Using Mycroft Docker images on OSX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nix-systems/clamav.html">
+   Clam Anti-Virus
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/python/high-perf.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/fjebaker/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/fjebaker/notes/issues/new?title=Issue%20on%20page%20%2Fpython/high-perf.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/fjebaker/notes/edit/master/python/high-perf.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#advanced-collections">
+   Advanced collections
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-chainmap">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.ChainMap
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-counter">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.Counter
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-deque">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.deque
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-defaultdict">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.defaultdict
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-namedtuple">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.namedtuple
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-enum">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.enum
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-ordereddict">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.OrderedDict
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#heapq">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       heapq
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bisect">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       bisect
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-notes-on-comprehensions">
+   Some notes on comprehensions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-peculiarities-of-lambda-functions">
+   Some peculiarities of lambda functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-itertools">
+   Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     itertools
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>High performance Python techniques and paradigms</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#advanced-collections">
+   Advanced collections
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-chainmap">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.ChainMap
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-counter">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.Counter
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-deque">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.deque
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-defaultdict">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.defaultdict
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-namedtuple">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.namedtuple
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-enum">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.enum
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collections-ordereddict">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       collections.OrderedDict
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#heapq">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       heapq
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bisect">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       bisect
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-notes-on-comprehensions">
+   Some notes on comprehensions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-peculiarities-of-lambda-functions">
+   Some peculiarities of lambda functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-itertools">
+   Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     itertools
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="high-performance-python-techniques-and-paradigms">
+<h1>High performance Python techniques and paradigms<a class="headerlink" href="#high-performance-python-techniques-and-paradigms" title="Permalink to this headline">¶</a></h1>
+<p>Python is a language that I find is easy to learn, but difficult to master. These notes are part of my ongoing task of becoming as proficient at this language as I can.</p>
+<!--BEGIN TOC-->
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#advanced-collections">Advanced collections</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#collections-chainmap"><code class="docutils literal notranslate"><span class="pre">collections.ChainMap</span></code></a></p></li>
+<li><p><a class="reference external" href="#collections-counter"><code class="docutils literal notranslate"><span class="pre">collections.Counter</span></code></a></p></li>
+<li><p><a class="reference external" href="#collections-deque"><code class="docutils literal notranslate"><span class="pre">collections.deque</span></code></a></p></li>
+<li><p><a class="reference external" href="#collections-defaultdict"><code class="docutils literal notranslate"><span class="pre">collections.defaultdict</span></code></a></p></li>
+<li><p><a class="reference external" href="#collections-namedtuple"><code class="docutils literal notranslate"><span class="pre">collections.namedtuple</span></code></a></p></li>
+<li><p><a class="reference external" href="#collections-enum"><code class="docutils literal notranslate"><span class="pre">collections.enum</span></code></a></p></li>
+<li><p><a class="reference external" href="#collections-ordereddict"><code class="docutils literal notranslate"><span class="pre">collections.OrderedDict</span></code></a></p></li>
+<li><p><a class="reference external" href="#heapq"><code class="docutils literal notranslate"><span class="pre">heapq</span></code></a></p></li>
+<li><p><a class="reference external" href="#bisect"><code class="docutils literal notranslate"><span class="pre">bisect</span></code></a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#some-notes-on-comprehensions">Some notes on comprehensions</a></p></li>
+<li><p><a class="reference external" href="#some-peculiarities-of-lambda-functions">Some peculiarities of lambda functions</a></p></li>
+<li><p><a class="reference external" href="#using-itertools">Using <code class="docutils literal notranslate"><span class="pre">itertools</span></code></a></p></li>
+</ol>
+<!--END TOC-->
+</div>
+<div class="section" id="advanced-collections">
+<h2>Advanced collections<a class="headerlink" href="#advanced-collections" title="Permalink to this headline">¶</a></h2>
+<p>Beyond lists, tuples and dicts, python also has several other built-in collections with their own uses and applications.</p>
+<div class="section" id="collections-chainmap">
+<h3><code class="docutils literal notranslate"><span class="pre">collections.ChainMap</span></code><a class="headerlink" href="#collections-chainmap" title="Permalink to this headline">¶</a></h3>
+<p>Useful for combining multiple dictionary mappings. When searching for a variable in the current scope, python first searches <code class="docutils literal notranslate"><span class="pre">locals()</span></code>, then <code class="docutils literal notranslate"><span class="pre">globals()</span></code>, and finally <code class="docutils literal notranslate"><span class="pre">builtins</span></code>. Commonly, the search pattern could be implemented</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">builtins</span>
+
+<span class="n">mappings</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">(),</span> <span class="nb">locals</span><span class="p">(),</span> <span class="nb">vars</span><span class="p">(</span><span class="n">builtins</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">mapping</span> <span class="ow">in</span> <span class="n">mappings</span><span class="p">:</span>
+	<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
+			<span class="n">value</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+			<span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>	<span class="c1"># only triggers if for loop not exited through break</span>
+	<span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;name </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> is not defined&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, since Python3.3, a more elegant solution is to use <code class="docutils literal notranslate"><span class="pre">collections.ChainMap</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">builtins</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">mappings</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">ChainMap</span><span class="p">(</span><span class="nb">globals</span><span class="p">(),</span> <span class="nb">locals</span><span class="p">(),</span> <span class="nb">vars</span><span class="p">(</span><span class="n">builtins</span><span class="p">))</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">mappings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="collections-counter">
+<h3><code class="docutils literal notranslate"><span class="pre">collections.Counter</span></code><a class="headerlink" href="#collections-counter" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Counter</span></code> is an excellent way of keeping track of the occurrences of an element</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">counter</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;abbcd&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="s1">&#39;abbcd&#39;</span><span class="p">:</span>
+	<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Count for </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">counter</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It uses <code class="docutils literal notranslate"><span class="pre">heapq</span></code> implementations for obtaining the most common elements, and as such scales beautifully even with large number of elements</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">counter</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+	<span class="n">counter</span><span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">//</span> <span class="mi">25</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">counter</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+	<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It also is able to use more complex operations, such as addition, subtraction, intersection, and unions, similar to <code class="docutils literal notranslate"><span class="pre">set</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="k">def</span> <span class="nf">print_counter</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">counter</span><span class="p">):</span>
+	<span class="n">sorted_characters</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">elements</span><span class="p">())</span>
+	<span class="nb">print</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sorted_characters</span><span class="p">))</span>
+
+<span class="n">eggs</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;eggs&#39;</span><span class="p">)</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;spam&#39;</span><span class="p">)</span>
+
+<span class="n">print_counter</span><span class="p">(</span><span class="s1">&#39;eggs:&#39;</span><span class="p">,</span> <span class="n">eggs</span><span class="p">)</span>	
+<span class="c1"># eggs: eggs</span>
+<span class="n">print_counter</span><span class="p">(</span><span class="s1">&#39;eggs &amp; spam:&#39;</span><span class="p">,</span> <span class="n">eggs</span> <span class="o">&amp;</span> <span class="n">spam</span><span class="p">)</span>
+<span class="c1"># eggs &amp; spam: s</span>
+<span class="n">print_counter</span><span class="p">(</span><span class="s1">&#39;eggs - smap:&#39;</span><span class="p">,</span> <span class="n">eggs</span> <span class="o">-</span> <span class="n">spam</span><span class="p">)</span>
+<span class="c1"># eggs - smap: egg</span>
+<span class="n">print_counter</span><span class="p">(</span><span class="s1">&#39;eggs + spam:&#39;</span><span class="p">,</span> <span class="n">eggs</span> <span class="o">+</span> <span class="n">spam</span><span class="p">)</span>
+<span class="c1"># eggs + spam: aeggmpss</span>
+<span class="n">print_counter</span><span class="p">(</span><span class="s1">&#39;eggs | spam:&#39;</span><span class="p">,</span> <span class="n">eggs</span> <span class="o">|</span> <span class="n">spam</span><span class="p">)</span>
+<span class="c1"># eggs | spam: aeggmps</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="collections-deque">
+<h3><code class="docutils literal notranslate"><span class="pre">collections.deque</span></code><a class="headerlink" href="#collections-deque" title="Permalink to this headline">¶</a></h3>
+<p>Double Ended Queue, or <code class="docutils literal notranslate"><span class="pre">deque</span></code>, is a very low-level collection, equivalent to a double linked list; every item in the list points to the next and the previous, with the list reference pointing to both the first and last elements. Thus, adding and subtracting elements from either side of the <code class="docutils literal notranslate"><span class="pre">deque</span></code> is an O(1) operation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">queue</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>		<span class="c1"># deque([1, 2])</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>			<span class="c1"># 2</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>		<span class="c1"># 1</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>		<span class="c1"># IndexError: pop from an empty deque</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">deque</span></code> also implements <code class="docutils literal notranslate"><span class="pre">maxlen</span></code> as a kwarg. Consider the example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">looper</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+	<span class="n">looper</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+	<span class="nb">print</span><span class="p">(</span><span class="n">looper</span><span class="p">)</span>
+
+<span class="c1"># deque([0], maxlen=2)</span>
+<span class="c1"># deque([0, 1], maxlen=2)</span>
+<span class="c1"># deque([1, 2], maxlen=2)</span>
+<span class="c1"># deque([2, 3], maxlen=2)</span>
+<span class="c1"># deque([3, 4], maxlen=2)</span>
+</pre></div>
+</div>
+<p>The threading <code class="docutils literal notranslate"><span class="pre">queue.Queue</span></code> wraps a <code class="docutils literal notranslate"><span class="pre">deque</span></code> but implements locks and checks to make it threadsafe. Similar, <code class="docutils literal notranslate"><span class="pre">asyncio.Queue</span></code> is specialized for asynchronous use, and <code class="docutils literal notranslate"><span class="pre">multiprocessing.Queue</span></code> for multiprocess operations (which I will write notes for later).</p>
+</div>
+<div class="section" id="collections-defaultdict">
+<h3><code class="docutils literal notranslate"><span class="pre">collections.defaultdict</span></code><a class="headerlink" href="#collections-defaultdict" title="Permalink to this headline">¶</a></h3>
+<p>To put it simply, a <code class="docutils literal notranslate"><span class="pre">defaultdict</span></code> is a dictionary with a default value. The benefit of such an item prevents having to check if a key exists before accessing it, and has great application in implementing in-memory databases. As an illustration, consider a graph structure</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span>
+	<span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>	
+<span class="p">]</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">from_</span><span class="p">,</span> <span class="n">to</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+	<span class="k">if</span> <span class="n">from_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+		<span class="n">graph</span><span class="p">[</span><span class="n">from_</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">graph</span><span class="p">[</span><span class="n">from_</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+<span class="c1"># {&#39;a&#39;: [&#39;b&#39;, &#39;c&#39;], &#39;b&#39;: [&#39;a&#39;, &#39;d&#39;], &#39;c&#39;: [&#39;a&#39;], &#39;d&#39;: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]}</span>
+</pre></div>
+</div>
+<p>This could be implemented more elegantly</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">from_</span><span class="p">,</span> <span class="n">to</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+	<span class="n">graph</span><span class="p">[</span><span class="n">from_</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
+
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+<span class="c1"># defaultdict(&lt;class &#39;list&#39;&gt;,</span>
+<span class="c1">#             {&#39;a&#39;: [&#39;b&#39;, &#39;c&#39;],</span>
+<span class="c1">#              &#39;b&#39;: [&#39;a&#39;, &#39;d&#39;],</span>
+<span class="c1">#              &#39;c&#39;: [&#39;a&#39;],</span>
+<span class="c1">#              &#39;d&#39;: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]})</span>
+</pre></div>
+</div>
+<p>It’s trivial to see how a <code class="docutils literal notranslate"><span class="pre">Counter</span></code> could be implemented with <code class="docutils literal notranslate"><span class="pre">defaultdict</span></code>, but the version included in <code class="docutils literal notranslate"><span class="pre">collections</span></code> is far more extensive. Note that the default value must be a callable object (e.g. <code class="docutils literal notranslate"><span class="pre">int</span></code>). This means trees could be very easily defined as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="k">def</span> <span class="nf">tree</span><span class="p">():</span>
+	<span class="k">return</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and used</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">colours</span> <span class="o">=</span> <span class="n">tree</span><span class="p">()</span>
+<span class="n">colours</span><span class="p">[</span><span class="s1">&#39;other&#39;</span><span class="p">][</span><span class="s1">&#39;black&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x000000</span>
+<span class="n">colours</span><span class="p">[</span><span class="s1">&#39;other&#39;</span><span class="p">][</span><span class="s1">&#39;white&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xFFFFFF</span>
+<span class="n">colours</span><span class="p">[</span><span class="s1">&#39;primary&#39;</span><span class="p">][</span><span class="s1">&#39;red&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xFF0000</span>
+<span class="n">colours</span><span class="p">[</span><span class="s1">&#39;primary&#39;</span><span class="p">][</span><span class="s1">&#39;red&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x00FF00</span>
+<span class="n">colours</span><span class="p">[</span><span class="s1">&#39;primary&#39;</span><span class="p">][</span><span class="s1">&#39;blue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x0000FF</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">colours</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># {</span>
+<span class="c1">#     &quot;other&quot;: {</span>
+<span class="c1">#         &quot;black&quot;: 0,</span>
+<span class="c1">#         &quot;white&quot;: 16777215</span>
+<span class="c1">#     },</span>
+<span class="c1">#     &quot;primary&quot;: {</span>
+<span class="c1">#         &quot;blue&quot;: 255,</span>
+<span class="c1">#         &quot;red&quot;: 65280</span>
+<span class="c1">#     }</span>
+<span class="c1"># }</span>
+</pre></div>
+</div>
+<p>Such a data structure is able to generate itself recursively.</p>
+</div>
+<div class="section" id="collections-namedtuple">
+<h3><code class="docutils literal notranslate"><span class="pre">collections.namedtuple</span></code><a class="headerlink" href="#collections-namedtuple" title="Permalink to this headline">¶</a></h3>
+<p>This collection is essentially a tuple with field names; it lends itself to describing coordinates well</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">Point</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">])</span>
+<span class="n">point_a</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">point_a</span><span class="p">)</span>
+<span class="c1"># Point(x=1, y=2, z=3)</span>
+
+<span class="n">point_b</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">point_b</span><span class="p">)</span>
+<span class="c1"># Point(x=4, y=6, z=5)</span>
+</pre></div>
+</div>
+<p>Properties can be accessed by index or by name</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">point_a</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">point_a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="collections-enum">
+<h3><code class="docutils literal notranslate"><span class="pre">collections.enum</span></code><a class="headerlink" href="#collections-enum" title="Permalink to this headline">¶</a></h3>
+<p>Essentially a Python implementation of Clang familiar <code class="docutils literal notranslate"><span class="pre">enum</span></code>, allowing constants without magic numbers. For example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">enum</span>
+
+<span class="k">class</span> <span class="nc">Colour</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+	<span class="n">red</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="n">green</span> <span class="o">=</span> <span class="mi">3</span>
+	<span class="n">blue</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Colour</span><span class="o">.</span><span class="n">red</span> <span class="o">==</span> <span class="n">Colour</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">])</span>	<span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Colour</span><span class="o">.</span><span class="n">red</span> <span class="o">==</span> <span class="n">Colour</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>		<span class="c1"># True</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Colour</span><span class="o">.</span><span class="n">red</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>				<span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Colour</span><span class="o">.</span><span class="n">red</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>		<span class="c1"># True</span>
+</pre></div>
+</div>
+<p>As you might expect, <code class="docutils literal notranslate"><span class="pre">enums</span></code> are iterable</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">colour</span> <span class="ow">in</span> <span class="n">Colour</span><span class="p">:</span>
+	<span class="nb">print</span><span class="p">(</span><span class="n">colour</span><span class="p">)</span>
+
+<span class="c1"># Colour.red</span>
+<span class="c1"># Colour.green</span>
+<span class="c1"># Colour.blue</span>
+</pre></div>
+</div>
+<p>and have value as well as text representation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">cols</span><span class="p">[</span><span class="n">Colour</span><span class="o">.</span><span class="n">green</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x00FF00</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Derived classes also support type inheritance, such as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">enum</span>
+
+<span class="k">class</span> <span class="nc">Simple</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+	<span class="n">PROP</span> <span class="o">=</span> <span class="s1">&#39;prop&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Simple</span><span class="o">.</span><span class="n">PROP</span> <span class="o">==</span> <span class="s1">&#39;prop&#39;</span><span class="p">)</span>	<span class="c1"># False</span>
+
+<span class="k">class</span> <span class="nc">Derived</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+	<span class="n">PROP</span> <span class="o">=</span> <span class="s1">&#39;prop&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Derived</span><span class="o">.</span><span class="n">PROP</span> <span class="o">==</span> <span class="s1">&#39;prop&#39;</span><span class="p">)</span>	<span class="c1"># True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="collections-ordereddict">
+<h3><code class="docutils literal notranslate"><span class="pre">collections.OrderedDict</span></code><a class="headerlink" href="#collections-ordereddict" title="Permalink to this headline">¶</a></h3>
+<p>To put simply, a dictionary where the insertion order is important. By contrast, <code class="docutils literal notranslate"><span class="pre">dict</span></code> will return keys in the order of hash, whereas <code class="docutils literal notranslate"><span class="pre">OrderedDict</span></code> returns the keys in order of insertion</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+<span class="n">spam</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">spam</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">spam</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spam</span><span class="p">)</span>
+<span class="c1"># OrderedDict([(&#39;a&#39;, 1), (&#39;c&#39;, 3), (&#39;b&#39;, 2)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">spam</span><span class="o">.</span><span class="n">items</span><span class="p">())))</span>
+<span class="c1"># OrderedDict([(&#39;a&#39;, 1), (&#39;b&#39;, 2), (&#39;c&#39;, 3)])</span>
+</pre></div>
+</div>
+<p>It is implemented by a <code class="docutils literal notranslate"><span class="pre">dict</span></code> in combination with a doubly linked list for keeping track of the order. Another <code class="docutils literal notranslate"><span class="pre">dict</span></code> is used to keep track of reverse relation. Within this, <code class="docutils literal notranslate"><span class="pre">set</span></code> and <code class="docutils literal notranslate"><span class="pre">get</span></code> are O(1) but the object requires more memory than conventional dictionaries, and as such don’t scale very efficiently.</p>
+</div>
+<div class="section" id="heapq">
+<h3><code class="docutils literal notranslate"><span class="pre">heapq</span></code><a class="headerlink" href="#heapq" title="Permalink to this headline">¶</a></h3>
+<p>Essentially an ordered list, and very useful for creating priority queues, able to make the smallest (or largest) item in the list easily obtainable</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">heapq</span>
+
+<span class="n">heap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+<span class="c1"># [1, 2, 3, 7, 3, 4, 4]</span>
+</pre></div>
+</div>
+<p>A heap is a binary tree for which the parent nodes has a value less than or equal to any of its children. We can visualize it by iterating through our object</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">heap</span><span class="p">:</span>
+	<span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">),</span> <span class="n">heap</span>
+
+<span class="c1"># 1 [2, 3, 3, 7, 4, 4]</span>
+<span class="c1"># 2 [3, 3, 4, 7, 4]</span>
+<span class="c1"># 3 [3, 4, 4, 7]</span>
+<span class="c1"># 3 [4, 4, 7]</span>
+<span class="c1"># 4 [4, 7]</span>
+<span class="c1"># 4 [7]</span>
+<span class="c1"># 7 []</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bisect">
+<h3><code class="docutils literal notranslate"><span class="pre">bisect</span></code><a class="headerlink" href="#bisect" title="Permalink to this headline">¶</a></h3>
+<p>A sorted list; where <code class="docutils literal notranslate"><span class="pre">heapq</span></code> makes obtaining the smallest (or largest) item easy, <code class="docutils literal notranslate"><span class="pre">bisect</span></code> inserts items so that the overall list stays sorted. As such, finding in <code class="docutils literal notranslate"><span class="pre">bisect</span></code> is fast, whereas adding and removing in <code class="docutils literal notranslate"><span class="pre">heapq</span></code> is fast. Adding new elements to a <code class="docutils literal notranslate"><span class="pre">bisect</span></code> is an O(n) operation, and creating a sorted list using bisect takes O(n^2), compared to e.g. <code class="docutils literal notranslate"><span class="pre">heapq</span></code> with O(n log(n)). The primary use of <code class="docutils literal notranslate"><span class="pre">bisect</span></code> is then to extend an already ordered structure, as opposed to creating a new one</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bisect</span>
+
+<span class="c1"># regular sort</span>
+<span class="n">sorted_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sorted_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">sorted_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">sorted_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sorted_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>	<span class="c1"># each operation so far is O(1)</span>
+<span class="n">sorted_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>		<span class="c1"># O(n * log(n)) = O(8)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">)</span>
+<span class="c1"># [1, 2, 3, 5]</span>
+
+<span class="c1"># bisect</span>
+<span class="n">sorted_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">bisect</span><span class="o">.</span><span class="n">insort</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>	<span class="c1"># O(n) = O(1)</span>
+<span class="n">bisect</span><span class="o">.</span><span class="n">insort</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>	<span class="c1"># O(2)</span>
+<span class="n">bisect</span><span class="o">.</span><span class="n">insort</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>	<span class="c1"># ...</span>
+<span class="n">bisect</span><span class="o">.</span><span class="n">insort</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>	<span class="c1"># O(4)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">)</span>
+<span class="c1"># [1, 2, 3, 5]</span>
+</pre></div>
+</div>
+<p>Searching in such a data structure is likewise very fast; e.g. <code class="docutils literal notranslate"><span class="pre">bisect_left</span></code> finds the position at which a number is supposed to be</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bisect</span>
+
+<span class="n">sorted_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="n">bisect</span><span class="o">.</span><span class="n">bisect_left</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sorted_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">value</span>
+
+<span class="n">contains</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>	<span class="c1"># True</span>
+<span class="n">contains</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>	<span class="c1"># False</span>
+</pre></div>
+</div>
+<p>The implementation details for such a search is a binary search algorithm.</p>
+</div>
+</div>
+<div class="section" id="some-notes-on-comprehensions">
+<h2>Some notes on comprehensions<a class="headerlink" href="#some-notes-on-comprehensions" title="Permalink to this headline">¶</a></h2>
+<p>Pythonic list and dictionary comprehension are powerful ways of generating complex data structures and algorithms, but at the cost of readability. They are analogous to simple for loops</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">some_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+	<span class="n">some_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">comp_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">some_list</span> <span class="o">==</span> <span class="n">comp_list</span><span class="p">)</span>		<span class="c1"># True</span>
+</pre></div>
+</div>
+<p>They can however very quickly become counter intuitive. For example, filtering can be applied</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>	<span class="c1"># odd numbers</span>
+</pre></div>
+</div>
+<p>functions may be executed within them, although complications arise if used with PRNGs</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">]</span>		<span class="c1"># may yield values less than 0.5</span>
+<span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">]</span>		<span class="c1"># may not produce 10 items</span>
+<span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()]</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">]</span>		<span class="c1"># obtains desired result</span>
+</pre></div>
+</div>
+<p>The last line in the above extract is analogous to nested for loops. For example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+		<span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>may be written with list comprehension as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The same syntax exists for dictionary comprehension too</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">}</span>		<span class="c1"># odd squares indexed by their root</span>
+</pre></div>
+</div>
+<p>The two may be used in one another also</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="p">[{</span><span class="n">i</span> <span class="p">:</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">)}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="c1"># [{}, {1: 0}, {2: 1}, {3: 2}, {4: 3}, {5: 4}, {6: 5}, {7: 6}, {8: 7}, {9: 8}]</span>
+</pre></div>
+</div>
+<p>God knows why you would want that, but you have it.</p>
+<p>Finally, you also have set comprehension</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)}</span>
+<span class="c1"># {0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 20}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="some-peculiarities-of-lambda-functions">
+<h2>Some peculiarities of lambda functions<a class="headerlink" href="#some-peculiarities-of-lambda-functions" title="Permalink to this headline">¶</a></h2>
+<p>Lambda functions can be nested, such as to provide quick methods for providing callback functions or even decorators. For example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">square_result</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">func</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x</span>
+<span class="n">func</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>			<span class="c1"># 12</span>
+
+<span class="nd">@square_result</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x</span>
+<span class="n">func</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>			<span class="c1"># 144</span>
+</pre></div>
+</div>
+<p>Lambda functions can also be called recursively</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">factorial</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>	<span class="c1"># 24</span>
+</pre></div>
+</div>
+<p>Finally, if you wanted to be a real snide prick, you can implement quicksort in a few lines using the famous Y from lambda-calculus</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">Y</span><span class="p">(</span><span class="n">f</span><span class="p">))(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<span class="n">quicksort</span> <span class="o">=</span> <span class="n">Y</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span>
+		<span class="n">f</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span> <span class="o">+</span>
+		<span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">]</span> <span class="o">+</span> 
+		<span class="n">f</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+	<span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="p">[]</span>
+<span class="p">)</span>
+
+<span class="n">quicksort</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="c1"># [1, 1, 2, 2, 2, 2, 3, 4, 5, 5, 6, 6, 7, 7, 8, 9]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-itertools">
+<h2>Using <code class="docutils literal notranslate"><span class="pre">itertools</span></code><a class="headerlink" href="#using-itertools" title="Permalink to this headline">¶</a></h2>
+<!-- PAUSED ON PAGE 89 (115 in previw) --></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="py-serial.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Serial communication with Python</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="c-wrapping.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Wrapping C and C++ into Python</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Fergus Baker<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,2205 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript language reference &#8212; notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/vollkorn.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/_static/styles.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using SWIG with NodeJS" href="swig-nodejs.html" />
+    <link rel="prev" title="Using Jest testing framework" href="jest-testing.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../titlepage.html">
+   notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Systems
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../nix-systems/index.html">
+   *nix Systems
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-installations.html">
+     Software installation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-sysadmin.html">
+     System administration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-filesystem.html">
+     Disk and filesystem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-networks.html">
+     Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/nix-hardware.html">
+     Hardware
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/boot-bios.html">
+     Boot Loaders and BIOS control
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/systemd.html">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       journald
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nix-systems/kernel.html">
+     Linux Kernel Modules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bash/index.html">
+   Bash scripting
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-reference.html">
+     Bash reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bash/bash-cookbook.html">
+     Bash cookbook
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../osx-reference.html">
+   OSX Reference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Programming Languages
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/index.html">
+   C++ and C
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/declarations.html">
+     Declarations in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/conan.html">
+     Conan package manager
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/unit-testing.html">
+     Unit testing with Catch2! and Trompeloeil
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/swig-cmake.html">
+     Using SWIG with CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cmake.html">
+     CMake notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/member-functions.html">
+     On using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       std::function
+      </span>
+     </code>
+     for member functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../julia/index.html">
+   Julia Notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/julia-intro.html">
+     Julia learning notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/README.html">
+     Advent of Code notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../julia/advent-notes/scopes.html">
+     Julia Scopes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/index.html">
+   Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-recipes.html">
+     Python recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/jupyter-ipython.html">
+     Jupyter and iPython cheat sheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/regex.html">
+     Regex in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/py-serial.html">
+     Serial communication with Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/high-perf.html">
+     High performance Python techniques and paradigms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/c-wrapping.html">
+     Wrapping C and C++ into Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/pypi-distribution.html">
+     Making a project available on pypi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/cpp-c-swig.html">
+     Wrapping C/C++ code using SWIG
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/requests.html">
+     Python
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       requests
+      </span>
+     </code>
+     cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/using-flask.html">
+     Using Python Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/rethink-db-with-flask.html">
+     Using RethinkDB with Flask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/flask/jinja-templating.html">
+     Templating HTML pages with jinja
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/fast-api/using-fast-api.html">
+     Using FastAPI
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/mkdocs-notes.html">
+     Notes on mkdocs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/scrapy.html">
+     Scrapy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   JavaScript
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="jest-testing.html">
+     Using Jest testing framework
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     JavaScript language reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="swig-nodejs.html">
+     Using SWIG with NodeJS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="request-parsing.html">
+     Making HTTP requests and parsing in JS and node.js
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="extensions/native-messaging.html">
+     Native Messaging for Browser Extensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vue/over-vue.html">
+     Vue Overview
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tex/index.html">
+   LaTeX
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latex-documents.html">
+     Writing LaTeX documents
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/latexmk.html">
+     Using
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       latexmk
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/presentations.html">
+     Making presentations in LaTeX
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tex/posters.html">
+     Creating posters in LaTeX
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DevOps
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../docker/index.html">
+   Docker
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/minio-registry.html">
+     Creating a persistent local registry with S3/MinIO
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-cheatsheet.html">
+     Docker cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/systemd-with-docker.html">
+     Using Docker as
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       systemd
+      </span>
+     </code>
+     services
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-compose.html">
+     The magical world of Docker-Compose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/dockerfile-recipes.html">
+     Dockerfile cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docker/docker-swarm.html">
+     Docker Swarm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../aws/index.html">
+   Amazon Web Services
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/vpc-overview.html">
+     VPC overview
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/setting-up.html">
+     AWS Settup
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/ec2-with-docker.html">
+     EC2 with Docker
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aws/goofys-s3.html">
+     Using Goofys with S3
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vms/index.html">
+   Virtual Machines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/sun-virtual-box.html">
+     Oracle Virtual Box
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/kvm.html">
+     Kernel-based Virtual Machine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vms/qemu.html">
+     QEMU
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../databases/index.html">
+   Databases
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/node-red.html">
+     NodeRed Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/mongo-db.html">
+     Using MongoDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/rethink-db.html">
+     RethinkDB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../databases/lang-drivers/py-mongo.html">
+     Using MongoDB and Python
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/shell-rc-profiles.html">
+   Shell
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*rc
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .*profile
+    </span>
+   </code>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../configurations/jupyter-notebook.html">
+   Jupyter notebook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/index.html">
+   Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../machine-learning/tf-install.html">
+   Installing TensorFlow 2.0
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Raspi &amp; Arduino
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../raspi/index.html">
+   Raspberry Pi
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-config.html">
+     Configuring a Raspberry Pi from fresh install
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/raspi-bit-torrent.html">
+     Setting up a Raspberry-Pi for secure bit torrenting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../raspi/pyaudio.html">
+     Installing PyAudio on Raspberry Pi
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../arduino/index.html">
+   Arduino
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/platformio.html">
+     PlatformIO notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/ca-certs-nano.html">
+     Copying (root) CA certificates onto Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/arduino-cookbook.html">
+     Arduino cookbook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../arduino/crypto-auth.html">
+     Using the ECC0X08 with Arduino devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/mqtt-specs.html">
+     MQTT Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mq-mqtt/nginx-load-balancing.html">
+     Using NGiNX with Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vim/index.html">
+   VIM
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/recipes.html">
+     Vim Recipes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/vundle.html">
+     Vundle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vim/batch-rename.html">
+     Batch renaming in Vim
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../discord/index.html">
+   Discord
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/making-bots-python.html">
+     Making Discord bots in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../discord/discord-music-hook.html">
+     Creating a Discord music feed using webhooks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../git/index.html">
+   Git and VCs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/git-reference.html">
+     Git Reference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../git/gitea-mariadb.html">
+     Using Gitea with MariaDB
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vscode/index.html">
+   VSCode
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vscode/publishing.html">
+     Publishing a VSCode extension
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Miscellaneous
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recommended-talks.html">
+   Recommended talks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../software-design-principles.html">
+   Software Design Principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ffmpeg-cheatsheet.html">
+   FFMPEG Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../iptables-and-firewalls.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     iptables
+    </span>
+   </code>
+   and firewall configuration reference.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ci-cd/jenkins-recipes.html">
+   Jenkins Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../security/openssl-cookbook.html">
+   OpenSSL Cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visualisation/blender-learning.html">
+   Learning Blender
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../java/gradle-cookbook.html">
+   Gradle build-tool cookbook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../automation/mycroft-osx.html">
+   Using Mycroft Docker images on OSX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nix-systems/clamav.html">
+   Clam Anti-Virus
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/js/js-reference.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/fjebaker/notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/fjebaker/notes/issues/new?title=Issue%20on%20page%20%2Fjs/js-reference.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/fjebaker/notes/edit/master/js/js-reference.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#functions-as-objects">
+     Functions as objects
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#function-declarations">
+     Function declarations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters-and-arguments">
+     Parameters and arguments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-this-implicit-argument">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       this
+      </span>
+     </code>
+     implicit argument
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#closures">
+     Closures
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mimicking-private-variables">
+       Mimicking private variables
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#closures-in-callbacks">
+       Closures in callbacks
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generators-and-promises">
+   Generators and promises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generators">
+     Generators
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#promises">
+     Promises
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#combining-generators-with-promises">
+     Combining generators with promises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#object-orientation-and-prototypes">
+   Object orientation and prototypes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inheritance-with-setprototypeof">
+     Inheritance with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .setPrototypeOf()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructors">
+     Constructors
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#instance-prototype-properties">
+       Instance prototype properties
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#object-typing-with-constructors">
+       Object typing with constructors
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#achieving-inheritance">
+     Achieving inheritance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-object-properties">
+     Configuring object properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#js-class-keyword">
+     JS
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       class
+      </span>
+     </code>
+     keyword
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getters-and-setters">
+     Getters and setters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proxies-and-access-control">
+     Proxies and access control
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#array-methods">
+   Array methods
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#foreach">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .forEach()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#map">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .map()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logical-checks">
+     Logical checks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#searching">
+     Searching
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sorting-arrays">
+     Sorting arrays
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reduce">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .reduce()
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>JavaScript language reference</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#functions-as-objects">
+     Functions as objects
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#function-declarations">
+     Function declarations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters-and-arguments">
+     Parameters and arguments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-this-implicit-argument">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       this
+      </span>
+     </code>
+     implicit argument
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#closures">
+     Closures
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mimicking-private-variables">
+       Mimicking private variables
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#closures-in-callbacks">
+       Closures in callbacks
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generators-and-promises">
+   Generators and promises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generators">
+     Generators
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#promises">
+     Promises
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#combining-generators-with-promises">
+     Combining generators with promises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#object-orientation-and-prototypes">
+   Object orientation and prototypes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inheritance-with-setprototypeof">
+     Inheritance with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .setPrototypeOf()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructors">
+     Constructors
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#instance-prototype-properties">
+       Instance prototype properties
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#object-typing-with-constructors">
+       Object typing with constructors
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#achieving-inheritance">
+     Achieving inheritance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-object-properties">
+     Configuring object properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#js-class-keyword">
+     JS
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       class
+      </span>
+     </code>
+     keyword
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getters-and-setters">
+     Getters and setters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proxies-and-access-control">
+     Proxies and access control
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#array-methods">
+   Array methods
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#foreach">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .forEach()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#map">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .map()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logical-checks">
+     Logical checks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#searching">
+     Searching
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sorting-arrays">
+     Sorting arrays
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reduce">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .reduce()
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="javascript-language-reference">
+<h1>JavaScript language reference<a class="headerlink" href="#javascript-language-reference" title="Permalink to this headline">¶</a></h1>
+<p>Series of notes adapted from different books and blogs so that I can easily refer back to new concepts until they become old.</p>
+<!--BEGIN TOC-->
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#functions">Functions</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#functions-as-objects">Functions as objects</a></p></li>
+<li><p><a class="reference external" href="#function-declarations">Function declarations</a></p></li>
+<li><p><a class="reference external" href="#parameters-and-arguments">Parameters and arguments</a></p></li>
+<li><p><a class="reference external" href="#the-this-implicit-argument">The <code class="docutils literal notranslate"><span class="pre">this</span></code> implicit argument</a></p></li>
+<li><p><a class="reference external" href="#closures">Closures</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#mimicking-private-variables">Mimicking private variables</a></p></li>
+<li><p><a class="reference external" href="#closures-in-callbacks">Closures in callbacks</a></p></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#generators-and-promises">Generators and promises</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#generators">Generators</a></p></li>
+<li><p><a class="reference external" href="#promises">Promises</a></p></li>
+<li><p><a class="reference external" href="#combining-generators-with-promises">Combining generators with promises</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#object-orientation-and-prototypes">Object orientation and prototypes</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#inheritance-with--setprototypeof">Inheritance with <code class="docutils literal notranslate"><span class="pre">.setPrototypeOf()</span></code></a></p></li>
+<li><p><a class="reference external" href="#constructors">Constructors</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#instance-prototype-properties">Instance prototype properties</a></p></li>
+<li><p><a class="reference external" href="#object-typing-with-constructors">Object typing with constructors</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#achieving-inheritance">Achieving inheritance</a></p></li>
+<li><p><a class="reference external" href="#configuring-object-properties">Configuring object properties</a></p></li>
+<li><p><a class="reference external" href="#js-class-keyword">JS <code class="docutils literal notranslate"><span class="pre">class</span></code> keyword</a></p></li>
+<li><p><a class="reference external" href="#getters-and-setters">Getters and setters</a></p></li>
+<li><p><a class="reference external" href="#proxies-and-access-control">Proxies and access control</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#array-methods">Array methods</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#-foreach"><code class="docutils literal notranslate"><span class="pre">.forEach()</span></code></a></p></li>
+<li><p><a class="reference external" href="#-map"><code class="docutils literal notranslate"><span class="pre">.map()</span></code></a></p></li>
+<li><p><a class="reference external" href="#logical-checks">Logical checks</a></p></li>
+<li><p><a class="reference external" href="#searching">Searching</a></p></li>
+<li><p><a class="reference external" href="#sorting-arrays">Sorting arrays</a></p></li>
+<li><p><a class="reference external" href="#-reduce"><code class="docutils literal notranslate"><span class="pre">.reduce()</span></code></a></p></li>
+</ol>
+</li>
+</ol>
+<!--END TOC-->
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>The following mostly stems from Secrets of the JavaScript Ninja (Resig, Bibeault and Maras).</p>
+<div class="section" id="functions-as-objects">
+<h3>Functions as objects<a class="headerlink" href="#functions-as-objects" title="Permalink to this headline">¶</a></h3>
+<p>Functions are first-class objects, and behave just as any other JS object. As such, they may even have stored state</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">someFunc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="nx">someFunc</span><span class="p">.</span><span class="nx">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;value&quot;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This allows function caching or memoization to be easily implemented</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">fibbonaci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="c1">// create cache</span><span class="w"></span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">fibbonaci</span><span class="p">.</span><span class="nx">_cache</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="nx">fibbonaci</span><span class="p">.</span><span class="nx">_cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fibbonaci</span><span class="p">.</span><span class="nx">_cache</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="nx">fibbonaci</span><span class="p">.</span><span class="nx">_cache</span><span class="p">[</span><span class="nx">n</span><span class="o">-</span><span class="mf">1</span><span class="p">];</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="nx">fibbonaci</span><span class="p">.</span><span class="nx">_cache</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">fibbonaci</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">fibbonaci</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mf">2</span><span class="p">));</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="nx">fibbonaci</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If the cache were an object, we check the existence of an index of in lieu of the array length</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fibbonaci</span><span class="p">.</span><span class="nx">_cache</span><span class="p">[</span><span class="nx">n</span><span class="p">]</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="c1">// ...</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="function-declarations">
+<h3>Function declarations<a class="headerlink" href="#function-declarations" title="Permalink to this headline">¶</a></h3>
+<p>There are multiple ways to define functions, simplest of which is the function literal <code class="docutils literal notranslate"><span class="pre">()</span> <span class="pre">=&gt;</span> <span class="pre">{}</span></code> (here in arrow notation). There are four groups of declarations in JS</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">function</span></code> declaration and expression</strong>, to the analogy of declaration and implementation in C-type languages</p></li>
+</ul>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">name</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>arrow function</strong> or <strong>lambda functions</strong>, which are syntactically succinct</p></li>
+</ul>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">someArg</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">someArg</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">someArgs</span><span class="p">;</span><span class="w"></span>
+<span class="p">(</span><span class="nx">arg1</span><span class="p">,</span><span class="w"> </span><span class="nx">arg2</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">ar1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">arg2</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Function</span></code> constructors</strong>, allowing new functions to be constructed with help of the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword, even dynamically</p></li>
+</ul>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="ow">new</span><span class="w"> </span><span class="nb">Function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;return a + b&#39;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>For more information on function constructors, see <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">here</a>.</p>
+<p>and finally</p>
+<ul class="simple">
+<li><p><strong>generator functions</strong>, much like Pythonic generators, and expressed</p></li>
+</ul>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="o">*</span><span class="w"> </span><span class="nx">generator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>There are also immediate one use functions, which can be declared with</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="cm">/* function implementation */</span><span class="p">)(</span><span class="nx">args</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>These types of evaluations are sometimes known as <em>immediately invoked function expressions</em> (IIFE). They are idiomatically also seen in unitary operations on functions, which here take the role of an expression</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="kd">function</span><span class="p">(){}();</span><span class="w"></span>
+<span class="o">-</span><span class="kd">function</span><span class="p">(){}();</span><span class="w"></span>
+<span class="o">!</span><span class="kd">function</span><span class="p">(){}();</span><span class="w"></span>
+<span class="o">~</span><span class="kd">function</span><span class="p">(){}();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parameters-and-arguments">
+<h3>Parameters and arguments<a class="headerlink" href="#parameters-and-arguments" title="Permalink to this headline">¶</a></h3>
+<p>JS does not throw errors on function calls with more or fewer arguments than accepted parameters. Instead, those arguments are not assigned to any namespace values in the function scope, or the parameters left <code class="docutils literal notranslate"><span class="pre">undefined</span></code></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">someFunc</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span><span class="w"> </span><span class="nx">arg2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w">  </span>
+
+<span class="nx">someFunc</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;there&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;world&quot;</span><span class="p">);</span><span class="w">	</span><span class="c1">// OK! no errors</span><span class="w"></span>
+<span class="nx">someFunc</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">);</span><span class="w">						</span><span class="c1">// OK! but arg2 is undefined</span><span class="w"></span>
+</pre></div>
+</div>
+<p>JS provides the keyword <code class="docutils literal notranslate"><span class="pre">argument</span></code> which stores the function argument details as an array. For the above case, the <code class="docutils literal notranslate"><span class="pre">argument</span></code> array is</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="nx">Arguments</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;hello&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;there&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;world&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">[</span><span class="nx">Arguments</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;hello&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>respectively.</p>
+<p>Similar to variadics in C++, JS has <em>rest parameters</em>, which stores all unnamed arguments in an array. Syntactically, this is expressed</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">someFunc</span><span class="p">(</span><span class="nx">arg</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="nx">otherArgs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>In lieu of overloading functions, JS has a method for providing succinct function defaults</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wordy solution</span><span class="w"></span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">someFunc</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">arg</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;undefined&quot;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">arg</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/* ... */</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span>
+<span class="c1">// ES6+</span><span class="w"></span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">someFunc</span><span class="p">(</span><span class="nx">arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/* ... */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-this-implicit-argument">
+<h3>The <code class="docutils literal notranslate"><span class="pre">this</span></code> implicit argument<a class="headerlink" href="#the-this-implicit-argument" title="Permalink to this headline">¶</a></h3>
+<p>Functions may be invoked on their own, as a method (<code class="docutils literal notranslate"><span class="pre">obj.func()</span></code>), through a constructor, as in <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Func()</span></code>, or through <code class="docutils literal notranslate"><span class="pre">apply</span></code> and <code class="docutils literal notranslate"><span class="pre">call</span></code> prototype methods.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">this</span></code> object provides the function context at face value. For example</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">loose</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w">		</span><span class="c1">// returns window</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">strict</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="s2">&quot;use strict&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w">		</span><span class="c1">// returns undefined</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If the function were a method of an object, the context becomes the object itself, as we are familiar with from other ObjOrtd languages.</p>
+<p>Arrow functions do not have an implicit <code class="docutils literal notranslate"><span class="pre">this</span></code>, but instead use the context at the point of definition, making them very suitable as callback functions</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">Button</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">this</span><span class="p">.</span><span class="nx">clicked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">		</span><span class="c1">// context is Button</span><span class="w"></span>
+<span class="w">	</span><span class="k">this</span><span class="p">.</span><span class="nx">click</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="nx">clicked</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="kc">true</span><span class="p">;</span><span class="w">	</span><span class="c1">// context is still Button</span><span class="w"></span>
+<span class="w">	</span><span class="p">};</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Button</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This has the caveat that if <code class="docutils literal notranslate"><span class="pre">Button</span></code>’s constructor were never called, as such were not instantiated to an object, the context of the lambda would default to global. To mitigate this, we define our button instead</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">clicked</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">	</span><span class="nx">click</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="nx">clicked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>and execute a script</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// button.clicked == false</span><span class="w"></span>
+<span class="nx">button</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// button.clicked == true</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note we can also use <code class="docutils literal notranslate"><span class="pre">bind</span></code> to create a <em>new</em> function, with its context bound to the object passed to it, e.g. trivially</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">button</span><span class="p">.</span><span class="nx">clicked</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span><span class="w">	</span><span class="c1">// context of this is now button</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="closures">
+<h3>Closures<a class="headerlink" href="#closures" title="Permalink to this headline">¶</a></h3>
+<p>The concept of <em>closure</em> allows a function to access the namespace in the scope of the function definition. The closure encompasses variables and definitions in the scope and ensures they are available if needed, even once program execution has left the scope.</p>
+<div class="section" id="mimicking-private-variables">
+<h4>Mimicking private variables<a class="headerlink" href="#mimicking-private-variables" title="Permalink to this headline">¶</a></h4>
+<p>Let us suppose we wanted to create read only access to a variable in a definition</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">Counter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w">						</span><span class="c1">// scoped variable</span><span class="w"></span>
+<span class="w">	</span><span class="k">this</span><span class="p">.</span><span class="nx">getCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="nx">count</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">};</span><span class="w"></span>
+<span class="w">	</span><span class="k">this</span><span class="p">.</span><span class="nx">nudge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="nx">count</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">};</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Counter</span><span class="p">();</span><span class="w"></span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">getCount</span><span class="p">());</span><span class="w">				</span><span class="c1">// 0</span><span class="w"></span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">nudge</span><span class="p">();</span><span class="w">								</span><span class="c1">// c.count++;</span><span class="w"></span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">getCount</span><span class="p">());</span><span class="w">				</span><span class="c1">// 1</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note, <code class="docutils literal notranslate"><span class="pre">Counter.getCount</span></code> and <code class="docutils literal notranslate"><span class="pre">Counter.nudge</span></code> could also be defined with arrow notation. It is crucial to use the function constructor, so that a new context for the object is created.</p>
+</div>
+<div class="section" id="closures-in-callbacks">
+<h4>Closures in callbacks<a class="headerlink" href="#closures-in-callbacks" title="Permalink to this headline">¶</a></h4>
+<p>Were a function called at an unspecified time later on, closures provide a intuitive way of avoiding nasty pitfalls.</p>
+<p>For example, were we to use the built-in <code class="docutils literal notranslate"><span class="pre">setInterval</span></code> to periodically call some callback function, we can use closure to provide the necessary control statements as to give the periodic function a simple interface</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">periodicLog</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">tick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">tick</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`- tick number </span><span class="si">${</span><span class="nx">tick</span><span class="o">++</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="nx">clearInterval</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">},</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="nx">periodicLog</span><span class="p">();</span><span class="w">	</span><span class="c1">// outputs a tick every 100 ms</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Or creating unique instances of the function also provides each instance with its own set of parameters, allowing complex properties to easily be abstracted.</p>
+</div>
+</div>
+</div>
+<div class="section" id="generators-and-promises">
+<h2>Generators and promises<a class="headerlink" href="#generators-and-promises" title="Permalink to this headline">¶</a></h2>
+<p>Leading into the notion of asynchronous programming, JS is a single threaded language, thus any waiting will deactivate the UI until the function call ends. Asynchronous function calls and callbacks can extend the function and interaction of our program considerably.</p>
+<div class="section" id="generators">
+<h3>Generators<a class="headerlink" href="#generators" title="Permalink to this headline">¶</a></h3>
+<p>Much like Pythonic generators, JS generators are state yielding functions</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="o">*</span><span class="w"> </span><span class="nx">generator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">yield</span><span class="w"> </span><span class="s2">&quot;+&quot;</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">generator</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The generator can be controlled through an iterator object</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">plusCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">generator</span><span class="p">();</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">plusCount</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">plusCount</span></code> iterator instance includes several properties, an important one is <code class="docutils literal notranslate"><span class="pre">plusCount.done</span></code> which returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the generator yields have been expired. Generators may also then be traversed with</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">item</span><span class="p">;</span><span class="w"></span>
+<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">plusCount</span><span class="p">.</span><span class="nx">next</span><span class="p">()).</span><span class="nx">done</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">item</span></code> is a JS object, with a <code class="docutils literal notranslate"><span class="pre">value</span></code> and a <code class="docutils literal notranslate"><span class="pre">done</span></code> attribute. The for-of loops are syntactic sugar over the above, in the same fashion as Python for-in loops, or C++ <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">(int</span> <span class="pre">i</span> <span class="pre">:</span> <span class="pre">array)</span></code>.</p>
+<p>Yield statements in JS can also be used to yield another generator. Consider the example</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="o">*</span><span class="w"> </span><span class="nx">generator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">yield</span><span class="w"> </span><span class="s2">&quot;+&quot;</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="k">yield</span><span class="o">*</span><span class="w"> </span><span class="nx">backGenerator</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">function</span><span class="o">*</span><span class="w"> </span><span class="nx">backGenerator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">yield</span><span class="w"> </span><span class="s2">&quot;+&quot;</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now, once <code class="docutils literal notranslate"><span class="pre">generator</span></code> has completed the for loop, it yields an instance of <code class="docutils literal notranslate"><span class="pre">backGenerator</span></code> which allows the iteration to continue seamlessly.</p>
+<p>Generators have great application for streaming data, yielding unique identification codes, or traversing the DOM.</p>
+<p>Generators may also have data send back to them, just like with Python’s <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">yield</span></code> statement and <code class="docutils literal notranslate"><span class="pre">send()</span></code> method.</p>
+<p>The sending syntax in JS is</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="o">*</span><span class="w"> </span><span class="nx">generator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="nx">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="s2">&quot;+&quot;</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nx">plusCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">generator</span><span class="p">();</span><span class="w"></span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">item</span><span class="p">;</span><span class="w"></span>
+<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">plusCount</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="mf">3</span><span class="p">)).</span><span class="nx">done</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">	</span><span class="c1">// here we send 3</span><span class="w"></span>
+<span class="w">	</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Or we can use <code class="docutils literal notranslate"><span class="pre">.throw(/*</span> <span class="pre">what</span> <span class="pre">*/)</span></code> to throw an exception in the iterator at <code class="docutils literal notranslate"><span class="pre">yield</span></code>.</p>
+<p>Note that generators still have access to the <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword, allowing them to give a value to their instance upon completion.</p>
+</div>
+<div class="section" id="promises">
+<h3>Promises<a class="headerlink" href="#promises" title="Permalink to this headline">¶</a></h3>
+<p>Promises are the main driver behind writing succinct asynchronous code. They provide an implementation for allowing function chains to be established off of the basis of a result or error case. A promise may be defined</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/* ... */</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+
+<span class="nx">p</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="w"></span>
+<span class="w">	</span><span class="p">(</span><span class="cm">/* results of Promise lambda */</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="p">},</span><span class="w"></span>
+<span class="w">	</span><span class="p">(</span><span class="cm">/* error case */</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="p">}</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The error callback of <code class="docutils literal notranslate"><span class="pre">p</span></code> may also be chained instead with <code class="docutils literal notranslate"><span class="pre">.catch(callback)</span></code> instead of providing a second argument to <code class="docutils literal notranslate"><span class="pre">.then()</span></code>.</p>
+<p>Promises also allow multiple asynchronous tasks to be fed together, using the <code class="docutils literal notranslate"><span class="pre">.all()</span></code> method. For, e.g. parallel gathering of information, we can write</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="w"></span>
+<span class="w">		</span><span class="nx">makeRequest</span><span class="p">(</span><span class="nx">url1</span><span class="p">),</span><span class="w"></span>
+<span class="w">		</span><span class="nx">makeRequest</span><span class="p">(</span><span class="nx">url2</span><span class="p">),</span><span class="w"></span>
+<span class="w">		</span><span class="c1">//...,</span><span class="w"></span>
+<span class="w">		</span><span class="nx">makeRequest</span><span class="p">(</span><span class="nx">urlN</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="p">])</span><span class="w"></span>
+<span class="w">	</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">results</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;url1 : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">results</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span><span class="w"></span>
+<span class="w">		</span><span class="cm">/* etc */</span><span class="w"></span>
+<span class="w">	</span><span class="p">})</span><span class="w"></span>
+<span class="w">	</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="cm">/* error handle */</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Similar syntax is also used to obtain the first result of a series of asynchronous tasks using <code class="docutils literal notranslate"><span class="pre">.race()</span></code>. The <code class="docutils literal notranslate"><span class="pre">result</span></code> argument is now just the result of a single function, instead of the list of inputs.</p>
+</div>
+<div class="section" id="combining-generators-with-promises">
+<h3>Combining generators with promises<a class="headerlink" href="#combining-generators-with-promises" title="Permalink to this headline">¶</a></h3>
+<p>We can combine generators with promises and the concept of closure to write strong asynchronous code. Note, this is <strong>not</strong> a production grade implementation, and indeed the <code class="docutils literal notranslate"><span class="pre">async()</span></code> demonstrated has default language implementations</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">async</span><span class="p">(</span><span class="kd">function</span><span class="o">*</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="kd">const</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="nx">somePromise</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="kd">const</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="nx">someIndex</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="c1">// all information received</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="c1">// error handling</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+
+<span class="kd">function</span><span class="w"> </span><span class="k">async</span><span class="p">(</span><span class="nx">generator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">itt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">generator</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">	</span><span class="kd">function</span><span class="w"> </span><span class="nx">handle</span><span class="p">(</span><span class="nx">ittResult</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">ittResult</span><span class="p">.</span><span class="nx">done</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">		</span><span class="kd">const</span><span class="w"> </span><span class="nx">ittVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ittResult</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">ittVal</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">Promise</span><span class="p">)</span><span class="w"></span>
+<span class="w">			</span><span class="nx">ittVal</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">handle</span><span class="p">(</span><span class="nx">itt</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="nx">res</span><span class="p">)))</span><span class="w"></span>
+<span class="w">				  </span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">itt</span><span class="p">.</span><span class="k">throw</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="nx">handle</span><span class="p">(</span><span class="nx">itt</span><span class="p">.</span><span class="nx">next</span><span class="p">())</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">itt</span><span class="p">.</span><span class="k">throw</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>JS introduces the <code class="docutils literal notranslate"><span class="pre">async</span></code> and <code class="docutils literal notranslate"><span class="pre">await</span></code> keywords to help integrate promises and generators, such that our above code may be rewritten using the new syntax</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="kd">const</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">somePromise</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="kd">const</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">someIndex</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="c1">// all information received</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="c1">// error handling</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">})();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="object-orientation-and-prototypes">
+<h2>Object orientation and prototypes<a class="headerlink" href="#object-orientation-and-prototypes" title="Permalink to this headline">¶</a></h2>
+<p>Prototypes in JS are objects to which the property lookup is delegated, allowing properties and functionality to automatically be accessible to other objects. They can be thought of as classes in other object orientated languages. Prototypes allow for inheritance within JS.</p>
+<div class="section" id="inheritance-with-setprototypeof">
+<h3>Inheritance with <code class="docutils literal notranslate"><span class="pre">.setPrototypeOf()</span></code><a class="headerlink" href="#inheritance-with-setprototypeof" title="Permalink to this headline">¶</a></h3>
+<p>We can mimic inheritance using the <code class="docutils literal notranslate"><span class="pre">Object.setPrototypeOf()</span></code> method</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">assert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;assert&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">athlete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">instruct</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">scientist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">research</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">politican</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">lie</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+
+<span class="nx">assert</span><span class="p">(</span><span class="s2">&quot;research&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">scientist</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Scientist can research.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="nx">assert</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="s2">&quot;research&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">athlete</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Athlete cannot research.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// set prototype</span><span class="w"></span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">setPrototypeOf</span><span class="p">(</span><span class="nx">athlete</span><span class="p">,</span><span class="w"> </span><span class="nx">scientist</span><span class="p">);</span><span class="w"></span>
+
+<span class="nx">assert</span><span class="p">(</span><span class="s2">&quot;research&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">athlete</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Athlete can now research.&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">setPrototypeOf</span><span class="p">(</span><span class="nx">athlete</span><span class="p">,</span><span class="w"> </span><span class="nx">politican</span><span class="p">);</span><span class="w"></span>
+<span class="nx">assert</span><span class="p">(</span><span class="s2">&quot;lie&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">athlete</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Athlete can now lie.&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The calling order in the case of same identifier is always the inheriting object’s attribute/method, then that of the prototype, and further up the chain.</p>
+</div>
+<div class="section" id="constructors">
+<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h3>
+<p>We can prototype methods using a function constructor and the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w">	</span><span class="c1">// no implementation</span><span class="w"></span>
+<span class="nx">SomeObject</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">();</span><span class="w"></span>
+<span class="nx">instance</span><span class="p">.</span><span class="nx">action</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="section" id="instance-prototype-properties">
+<h4>Instance prototype properties<a class="headerlink" href="#instance-prototype-properties" title="Permalink to this headline">¶</a></h4>
+<p>Here is an example of initialization precedence</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">this</span><span class="p">.</span><span class="nx">acted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="k">this</span><span class="p">.</span><span class="nx">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">acted</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">};</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="nx">SomeObject</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">acted</span><span class="p">);</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">();</span><span class="w"></span>
+<span class="nx">instance</span><span class="p">.</span><span class="nx">action</span><span class="p">();</span><span class="w">					</span>
+</pre></div>
+</div>
+<p>In this case, <code class="docutils literal notranslate"><span class="pre">.action()</span></code> will result in <code class="docutils literal notranslate"><span class="pre">true</span></code> being printed.</p>
+<p>Since JS is a dynamic language, prototype changes defined or altered after an object has been instantiated still apply to that instance. Consider the snippet following on from the last</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">SomeObject</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Altered action!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="nx">instance</span><span class="p">.</span><span class="nx">action</span><span class="p">();</span><span class="w">		</span><span class="c1">// Altered action!</span><span class="w"></span>
+
+<span class="c1">// Completely override the prototype object</span><span class="w"></span>
+<span class="nx">SomeObject</span><span class="p">.</span><span class="nx">prototype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">action</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;New prototype, who this?&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="nx">instance</span><span class="p">.</span><span class="nx">action</span><span class="p">();</span><span class="w">		</span><span class="c1">// still Altered action!</span><span class="w"></span>
+
+<span class="c1">// New instance has the new prototype</span><span class="w"></span>
+<span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">())</span><span class="w">		</span><span class="c1">// New prototype, who this?</span><span class="w"></span>
+<span class="w">	</span><span class="p">.</span><span class="nx">action</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">instance</span></code> still holds reference to the old prototype, but once the prototype has been overridden, becomes inaccessible.</p>
+</div>
+<div class="section" id="object-typing-with-constructors">
+<h4>Object typing with constructors<a class="headerlink" href="#object-typing-with-constructors" title="Permalink to this headline">¶</a></h4>
+<p>Prototypes also store information on how the instance was constructed. For instance, we can access the constructor function using the <code class="docutils literal notranslate"><span class="pre">.constructor</span></code> property of the instance</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">();</span><span class="w"></span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="kr">constructor</span><span class="p">);</span><span class="w">			</span><span class="c1">// [Function: SomeObject]</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The instance also returns true for <code class="docutils literal notranslate"><span class="pre">ininstanceof</span> <span class="pre">SomeObject</span></code> calls. We can also create new instances of <code class="docutils literal notranslate"><span class="pre">SomeObject</span></code> by calling</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">newInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">instance</span><span class="p">.</span><span class="kr">constructor</span><span class="p">();</span><span class="w"></span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newInstance</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">instance</span><span class="p">)</span><span class="w">		</span><span class="c1">// false</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="achieving-inheritance">
+<h3>Achieving inheritance<a class="headerlink" href="#achieving-inheritance" title="Permalink to this headline">¶</a></h3>
+<p>We already saw how inheritance can be mimicked using the <code class="docutils literal notranslate"><span class="pre">.setPrototypeOf()</span></code> method, but we can also achieve inheritance with objects or instances. The common idiom is to write</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">Super</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="nx">Super</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Action from Super.&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="nx">SomeObject</span><span class="p">.</span><span class="nx">prototype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Super</span><span class="p">();</span><span class="w"></span>
+<span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">).</span><span class="nx">action</span><span class="p">();</span><span class="w">				</span><span class="c1">// Action from Super.</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note if the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword were not used, the prototype is not properly endowed into Super, and similarly, as the constructor is an empty function, the prototype of the instance would be <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+<p>The problem with this implementation is that the check</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">).</span><span class="kr">constructor</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>will fail, as it will yield Super instead. We will come back to a solution to this later, but for now we need to examine the JS object properties in order to find an appropriate solution.</p>
+</div>
+<div class="section" id="configuring-object-properties">
+<h3>Configuring object properties<a class="headerlink" href="#configuring-object-properties" title="Permalink to this headline">¶</a></h3>
+<p>JS describes every object property with a descriptor, which is controlled with the keys</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">configurable</span></code>: if <code class="docutils literal notranslate"><span class="pre">true</span></code>, property’s descriptor can be changed or deleted. else cannot do either</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enumerable</span></code>: if <code class="docutils literal notranslate"><span class="pre">true</span></code>, property show up during <code class="docutils literal notranslate"><span class="pre">for-in</span></code> loops</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: specifies the value of the property (default is <code class="docutils literal notranslate"><span class="pre">undefined</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">writable</span></code>: if <code class="docutils literal notranslate"><span class="pre">true</span></code>, property can be changed using an assignment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get</span></code>: defines getter function (cannot be defined in conjunction with <code class="docutils literal notranslate"><span class="pre">value</span></code> and <code class="docutils literal notranslate"><span class="pre">writable</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span></code>: defines a setter function (same restrictions as <code class="docutils literal notranslate"><span class="pre">get</span></code>)</p></li>
+</ul>
+<p>A default property, such as</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">someInstance</span><span class="p">.</span><span class="nx">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;someValue&quot;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>has <code class="docutils literal notranslate"><span class="pre">configurable</span></code>, <code class="docutils literal notranslate"><span class="pre">enumerable</span></code>, and <code class="docutils literal notranslate"><span class="pre">writable</span></code> set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">someValue</span></code>, and the getter and setter functions would be <code class="docutils literal notranslate"><span class="pre">undefined</span></code>. We can fine tune properties using the <code class="docutils literal notranslate"><span class="pre">Object.defineProperty</span></code> method; for example</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">SomeObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">SomeObject</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prop&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">configurable</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">	</span><span class="nx">enumerable</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">	</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;someValue&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">	</span><span class="nx">writable</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+<p>To solve the issue of losing the original prototype (i.e. the constructor property), we can instead define the <code class="docutils literal notranslate"><span class="pre">constructor</span></code> value after altering the prototype; as above, we have</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">Super</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="nx">SomeObject</span><span class="p">.</span><span class="nx">prototype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Super</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>but now add</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">SomeObject</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;constructor&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">enumerable</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">	</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">,</span><span class="w"></span>
+<span class="w">	</span><span class="nx">writable</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">someInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now the check</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">).</span><span class="kr">constructor</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>will pass.</p>
+</div>
+<div class="section" id="js-class-keyword">
+<h3>JS <code class="docutils literal notranslate"><span class="pre">class</span></code> keyword<a class="headerlink" href="#js-class-keyword" title="Permalink to this headline">¶</a></h3>
+<p>Recent versions of JS also include the familiar <code class="docutils literal notranslate"><span class="pre">class</span></code> keyword to abstract a lot of the inheritance features. A traditional class may then be defined</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">SomeClass</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kr">constructor</span><span class="p">(</span><span class="nx">someProperty</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="nx">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">someProperty</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="nx">someMethod</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">prop</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">class</span></code> keyword acts to abstract the syntax of defining prototype attributes, i.e., the above is equivalent to</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">SomeClass</span><span class="w"> </span><span class="p">(</span><span class="nx">someProperty</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">this</span><span class="p">.</span><span class="nx">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">someProperty</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="nx">SomeClass</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">someMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">prop</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The JS classes open up use of <code class="docutils literal notranslate"><span class="pre">static</span></code> methods. We can declare a method as <code class="docutils literal notranslate"><span class="pre">static</span></code> by simply using it as a keyword</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">SomeClass</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kr">constructor</span><span class="w"> </span><span class="p">(</span><span class="nx">prop</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="nx">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">prop</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="k">static</span><span class="w"> </span><span class="nx">someStaticMethod</span><span class="p">(</span><span class="nx">instance1</span><span class="p">,</span><span class="w"> </span><span class="nx">instance2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="nx">instance1</span><span class="p">.</span><span class="nx">prop</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">instance2</span><span class="p">.</span><span class="nx">prop</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In JS, <code class="docutils literal notranslate"><span class="pre">static</span></code> methods are not ‘known’ by class instances, but instead accessed through the class object</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">someInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SomeClass</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w"></span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">someOtherInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SomeClass</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span><span class="w"></span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">SomeClass</span><span class="p">.</span><span class="nx">someStaticMethod</span><span class="p">(</span><span class="nx">someInstance</span><span class="p">,</span><span class="w"> </span><span class="nx">someOtherInstance</span><span class="p">);</span><span class="w">	</span><span class="c1">// 1</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Additionally, inheritance is a lot easier to implement. We can use the familiar Java <code class="docutils literal notranslate"><span class="pre">extends</span></code> keyword, such as</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">SomeExtendedClass</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">SomeClass</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kr">constructor</span><span class="p">(</span><span class="nx">prop</span><span class="p">,</span><span class="w"> </span><span class="nx">newprop</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">super</span><span class="p">(</span><span class="nx">prop</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="nx">newprop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newprop</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getters-and-setters">
+<h3>Getters and setters<a class="headerlink" href="#getters-and-setters" title="Permalink to this headline">¶</a></h3>
+<p>Also included in modern JS version are the keywords <code class="docutils literal notranslate"><span class="pre">get</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> used to define getters and setters for object properties. We can use them</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">someCollection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">anArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;value1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;value2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;value3&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">	</span><span class="nx">get</span><span class="w"> </span><span class="nx">firstItem</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">anArray</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="nx">set</span><span class="w"> </span><span class="nx">firstItem</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="nx">anArray</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This implementation also works for the <code class="docutils literal notranslate"><span class="pre">class</span></code> method. An alternative way to define getters and setters uses the <code class="docutils literal notranslate"><span class="pre">Object.defineProperty</span></code> method</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">SomeObject</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kd">let</span><span class="w"> </span><span class="nx">_counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">	</span><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;counter&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="nx">get</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="nx">_counter</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">},</span><span class="w"></span>
+<span class="w">		</span><span class="nx">set</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">val</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="nx">_counter</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">});</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="proxies-and-access-control">
+<h3>Proxies and access control<a class="headerlink" href="#proxies-and-access-control" title="Permalink to this headline">¶</a></h3>
+<p>Proxies allow us to execute additional routines when interacting with an object. They are, in many ways, generalizations of getters and setters. There exist many traps we can set up using the <code class="docutils literal notranslate"><span class="pre">Proxy</span></code> built in, such as</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">apply</span></code>, activated when calling a function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">construct</span></code>, activated when using the new operator</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code>, used as surrogates for getters and setters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getPrototypeOf</span></code>, <code class="docutils literal notranslate"><span class="pre">setPrototypeOf</span></code>, which are pretty self-explanatory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enumerate</span></code>, activated in <code class="docutils literal notranslate"><span class="pre">for-in</span></code> statements.</p></li>
+</ul>
+<p>A full list of traps can be found in the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Mozilla reference</a>.
+For example, using the <code class="docutils literal notranslate"><span class="pre">apply</span></code> trap, we can write</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span><span class="w"> </span><span class="nx">arg2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">arg1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">arg2</span><span class="p">;</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">proxySum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Proxy</span><span class="p">(</span><span class="nx">sum</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">apply</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">thisArg</span><span class="p">,</span><span class="w"> </span><span class="nx">argumentsList</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">proxySum</span><span class="p">);</span><span class="w">			</span><span class="c1">// [Function: sum]</span><span class="w"></span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">proxySum</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span><span class="w">	</span><span class="c1">// 0</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Proxies are a fantastic way of implementing logging or performance checking code. The cost of proxies is performance, however, and can incur a considerable speed decrease for the additional control.</p>
+</div>
+</div>
+<div class="section" id="array-methods">
+<h2>Array methods<a class="headerlink" href="#array-methods" title="Permalink to this headline">¶</a></h2>
+<p>Manipulating data in JS is facilitated by the extensive <code class="docutils literal notranslate"><span class="pre">Array</span></code> object. An array object may be manipulated dynamically with</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.push(item)</span></code>: add <code class="docutils literal notranslate"><span class="pre">item</span></code> to the end of the array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.unshift(item)</span></code>: add <code class="docutils literal notranslate"><span class="pre">item</span></code> to the start of the array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.pop()</span></code>: returns and removes the last item of array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.shift()</span></code>: returns and removes first item in array</p></li>
+</ul>
+<div class="section" id="foreach">
+<h3><code class="docutils literal notranslate"><span class="pre">.forEach()</span></code><a class="headerlink" href="#foreach" title="Permalink to this headline">¶</a></h3>
+<p>Iterating over arrays is also made easy with several built-in methods. A simple for loop, such as</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span><span class="w"></span>
+<span class="w">	</span><span class="c1">// operator on item</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>is more elegantly expressed with the asynchronous</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">array</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">item</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="c1">// operate on item</span><span class="w"></span>
+<span class="w">	</span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Full documentation can be found <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">here</a>.</p>
+</div>
+<div class="section" id="map">
+<h3><code class="docutils literal notranslate"><span class="pre">.map()</span></code><a class="headerlink" href="#map" title="Permalink to this headline">¶</a></h3>
+<p>Creating a new array from properties in an array of objects is a common idiom, known as a ‘map’. Verbosely, a map is equivalent to</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">newArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span><span class="w"></span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">item</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">newArray</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">prop</span><span class="p">);</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+<p>or, using the built-in</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">newArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">array</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">prop</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Full documentation can be found <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">here</a>.</p>
+</div>
+<div class="section" id="logical-checks">
+<h3>Logical checks<a class="headerlink" href="#logical-checks" title="Permalink to this headline">¶</a></h3>
+<p>Checking if <strong>every</strong> item in <code class="docutils literal notranslate"><span class="pre">array</span></code> has some specific property</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">allHaveProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">array</span><span class="p">.</span><span class="nx">ever</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s1">&#39;prop&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">i</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// true only if every i has i.prop</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Checking if <strong>some</strong> items in <code class="docutils literal notranslate"><span class="pre">array</span></code> have a specific property</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">someHaveProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">array</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s1">&#39;prop&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">i</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// true if at least one i has i.prop</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Not that <code class="docutils literal notranslate"><span class="pre">.some()</span></code> will act the callback on each item until some true case is found, and then return <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="searching">
+<h3>Searching<a class="headerlink" href="#searching" title="Permalink to this headline">¶</a></h3>
+<p>To find one and return one item with a given property, use</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">array</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s1">&#39;prop&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">i</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// returns undefined if no i with i.prop</span><span class="w"></span>
+</pre></div>
+</div>
+<p>To find all items with a given property</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">array</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s1">&#39;prop&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">i</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sorting-arrays">
+<h3>Sorting arrays<a class="headerlink" href="#sorting-arrays" title="Permalink to this headline">¶</a></h3>
+<p>Arrays can be sorted by returning numerical values, for example</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">array</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span></code> &gt; 0, <code class="docutils literal notranslate"><span class="pre">a</span></code> should come after <code class="docutils literal notranslate"><span class="pre">b</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span></code> &lt; 0, <code class="docutils literal notranslate"><span class="pre">a</span></code> should come before <code class="docutils literal notranslate"><span class="pre">b</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span></code> = 0, <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are on equal footing</p></li>
+</ul>
+<p>This means we can easily implement a reversal algorithm</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">array</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">a</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// [1, 2, 3] -&gt; [3, 2, 1]</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reduce">
+<h3><code class="docutils literal notranslate"><span class="pre">.reduce()</span></code><a class="headerlink" href="#reduce" title="Permalink to this headline">¶</a></h3>
+<p>Aggregating, e.g., a sum, would be conventionally expressed through</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"></span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="nx">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+<p>or, using the built-in method</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">array</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">aggr</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="nx">aggr</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">i</span><span class="p">;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">0</span></code> passed as the second argument is the starting value of the aggregate variable <code class="docutils literal notranslate"><span class="pre">aggr</span></code>.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./js"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="jest-testing.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Using Jest testing framework</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="swig-nodejs.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Using SWIG with NodeJS</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Fergus Baker<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
