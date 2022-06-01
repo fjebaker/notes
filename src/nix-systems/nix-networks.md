@@ -11,8 +11,11 @@
     3. [Debugging networks](#debugging-networks)
     4. [Proxies](#proxies)
 2. [SSH recipes](#ssh-recipes)
-    1. [Configuration files](#configuration-files)
-    2. [Debugging access rights](#debugging-access-rights)
+    1. [SSH string tokens](#ssh-string-tokens)
+    2. [Configuration files](#configuration-files)
+    3. [Debugging access rights](#debugging-access-rights)
+    4. [Connection pooling](#connection-pooling)
+    5. [Tunneling](#tunneling)
 3. [Network introspection](#network-introspection)
     1. [Checking open ports](#checking-open-ports)
     2. [ARP](#arp)
@@ -138,6 +141,28 @@ Remove host key from chain:
 ssh-keygen -R host
 ```
 
+### SSH string tokens
+
+These tokens are expanded from strings at runtime. From `man ssh_config`:
+
+```
+%%    A literal ‘%’.
+%C    Hash of %l%h%p%r.
+%d    Local user's home directory.
+%h    The remote hostname.
+%i    The local user ID.
+%k    The host key alias if specified, otherwise the orignal remote
+        hostname given on the command line.
+%L    The local hostname.
+%l    The local hostname, including the domain name.
+%n    The original remote hostname, as given on the command line.
+%p    The remote port.
+%r    The remote username.
+%T    The local tun(4) or tap(4) network interface assigned if tun‐
+        nel forwarding was requested, or "NONE" otherwise.
+%u    The local username.
+```
+
 ### Configuration files
 
 Configuration files can help assign different SSH identities or options to different hosts. The global configuration file is located in `/etc/ssh/ssh_config`, and the per user in `~/.ssh/config`.
@@ -186,6 +211,56 @@ The best way to understand what is going wrong is just to trace a verbose test c
 ```bash
 ssh -T user@domain -v
 ```
+
+### Connection pooling
+
+To avoid having to execute a full SSH handshake, or if connections are being rate-limited, we can use the `ControlMaster` and `ControlPath` options of SSH. From `man ssh_config`:
+
+> ```
+> ControlMaster
+>         Enables the sharing of multiple sessions over a single network
+>         connection.  
+> ...
+> ControlPath
+>         Specify the path to the control socket used for connection shar‐
+>         ing as described in the ControlMaster section above or the string
+>         none to disable connection sharing.  
+> ```
+
+In practice, we can open a socket, e.g. `.conn.sock`, via a master connection, and then direct other SSH commands to use this socket:
+```bash
+ssh -S .conn.sock -M host
+```
+Then, in a second terminal:
+```
+ssh -S .conn.sock host "echo Hello World"
+```
+
+To avoid having to ensure sockets have a sane name and are cleaned up, it may also be worth adding 
+```
+ControlPath ~/.ssh/control-%h-%p-%r
+```
+into your SSH configuration file
+
+### Tunneling
+
+The `ssh` program supports *tunneling*, which allows a machine to forward ports via SSH to another machine. This can be used to make e.g. secure web-connection, or just to forward SSH traffic.
+
+From the `ssh` manual, the `-L` flag allows us to forward, or *tunnel*, traffic from one machine through to another.
+> ```
+> -L [bind_address:]port:host:hostport
+> -L [bind_address:]port:remote_socket
+> -L local_socket:host:hostport
+> -L local_socket:remote_socket
+> ```
+
+Our aim then is to expose a port on our local machine (PC), which will send traffic via `ssh` to `remote1`, which will in turn forward this traffic to `remote2`. We can do this with
+
+```bash
+ssh -N -L localhost:12001:remote2:22 USER@remote1
+```
+- `-N`: Do not execute a remote command on Aquila.
+- `-L localhost:12001:remote2:22` bind port `12001` on our local machine (PC), such that when a connection is made to this port, it will be forwarded, via 
 
 ## Network introspection
 
